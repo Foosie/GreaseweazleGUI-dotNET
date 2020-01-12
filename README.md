@@ -4,6 +4,8 @@ GUI Wrapper for Keir Fraser's Greaseweazle
 
 Written in C# and .Net using Visual Studio 2015 Community
 
+Executables can be downloaded from https://desertsagesolutions.com/greaseweazlegui/
+
 Tools and USB interface for accessing a floppy drive at the raw flux level.
 
 wiki: https://github.com/keirf/Greaseweazle/wiki

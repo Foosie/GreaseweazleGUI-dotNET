@@ -70,7 +70,7 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GreaseweazleGUI " + m_sVersion + " - Host Tools v0.7";
+            this.Text = "GreaseweazleGUI " + m_sVersion + " - Host Tools v0.8";
             string sOops = "";
             rbReadDisk.Checked = true;
             txtWTDFilename.ReadOnly = true;
@@ -1111,7 +1111,7 @@ namespace Greaseweazle
             try
             {
                 int m = Int32.Parse(tb.Text);
-                if ((m < 0) || (m > 79))
+                if ((m < 0) || (m > 84))
                 {
                     tb.Text = iDefault.ToString();
                     tb.SelectAll();
