@@ -6,7 +6,7 @@
 //
 // MIT License
 //
-// See the file LICENSE more details, or visit <https://opensource.org/licenses/MIT>.
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
 
 using System;
 using System.IO;
@@ -70,9 +70,10 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GreaseweazleGUI " + m_sVersion + " - Host Tools v0.8";
+            this.Text = "GreaseweazleGUI " + m_sVersion + " - Host Tools v0.11";
             string sOops = "";
             rbReadDisk.Checked = true;
+            mnuUSBSupport.Checked = true;
             txtWTDFilename.ReadOnly = true;
             txtUFFilename.ReadOnly = true;
             btnStart.BackColor = Color.LightBlue;
@@ -129,7 +130,7 @@ namespace Greaseweazle
             // Get a list of serial port names.
             string[] ports = SerialPort.GetPortNames();
 
-            // Display each port name to the console
+            // clear port list
             lbUSBPorts.Items.Clear();
 
             // now rebuild the listbox
@@ -138,7 +139,7 @@ namespace Greaseweazle
 
             // set selected usb port if remembered
             int iIndex = lbUSBPorts.FindString(m_sUSBPort);
-            if (iIndex != -1)
+            if ((mnuUSBSupport.Checked == true) && (m_sUSBPort.Length > 0) && (iIndex != -1))
                 lbUSBPorts.SetSelected(iIndex, true);
             CreateCommandLine();
         }
@@ -155,7 +156,7 @@ namespace Greaseweazle
         #region lbUSBPorts_SelectedIndexChanged
         private void lbUSBPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbUSBPorts.SelectedIndex != -1)
+            if ((mnuUSBSupport.Checked == true) && (lbUSBPorts.SelectedIndex != -1))
             {
                 m_sUSBPort = lbUSBPorts.Items[lbUSBPorts.SelectedIndex].ToString();
                 CreateCommandLine();
@@ -197,7 +198,7 @@ namespace Greaseweazle
 
             if (rbUpdateFirmware.Checked == true)
             {
-                m_sCommandLine = m_sPythonPreface + " update " + "\"" + m_sUpdateFirmwareFolder + "\\" + txtUFFilename.Text + "\"" + " " + m_sUSBPort;
+                m_sCommandLine = m_sPythonPreface + " update " + "\"" + m_sUpdateFirmwareFolder + "\\" + txtUFFilename.Text + "\"";
                 txtCommandLine.Text = m_sCommandLine;
             }
             else if (rbSetDelays.Checked == true)
@@ -215,7 +216,6 @@ namespace Greaseweazle
                         m_sCommandLine += " --motor=" + txtDelayMotorOn.Text;
                     if (chkDelayAutoDeselect.Checked == true)
                         m_sCommandLine += " --auto-off=" + txtDelayAutoDeselect.Text;
-                    m_sCommandLine += " " + m_sUSBPort;
                 }
                 else
                     m_sCommandLine = "";
@@ -231,8 +231,9 @@ namespace Greaseweazle
                     m_sCommandLine += " --ecyl=" + txtReadLastCyl.Text;
                 if (rbReadSingleSided.Checked == true)
                     m_sCommandLine += " --single-sided";
-                m_sCommandLine += " " + "\"" + m_sReadDiskFolder + "\\" + txtRFDFilename.Text + "\"" + " " + m_sUSBPort;
-
+                if ((rbF7.Checked == true) && (chkDriveSelectRFD.Checked == true))
+                    m_sCommandLine += " --drive " + txtDriveSelectRFD.Text;
+                m_sCommandLine += " " + "\"" + m_sReadDiskFolder + "\\" + txtRFDFilename.Text + "\"";
             }
             else if (rbWriteDisk.Checked == true)
             {
@@ -245,8 +246,12 @@ namespace Greaseweazle
                     m_sCommandLine += " --single-sided";
                 if (chkWTDAdjustSpeed.Checked == true)
                     m_sCommandLine += " --adjust-speed";
-                m_sCommandLine += " " + "\"" + m_sWriteDiskFolder + "\\" + txtWTDFilename.Text + "\"" + " " + m_sUSBPort;
+                if ((rbF7.Checked == true) && (chkDriveSelectWTD.Checked == true))
+                    m_sCommandLine += " --drive=" + txtDriveSelectWTD.Text;
+                m_sCommandLine += " " + "\"" + m_sWriteDiskFolder + "\\" + txtWTDFilename.Text + "\"";
             }
+            if (mnuUSBSupport.Checked == true)
+                m_sCommandLine += " " + m_sUSBPort;
             txtCommandLine.Text = m_sCommandLine;
         }
         #endregion
@@ -268,6 +273,17 @@ namespace Greaseweazle
                 foreach (Control ctrl in gbUpdateFirmware.Controls)
                     ctrl.Enabled = false;
                 lblImageDisk.Text = "READ FROM DISK";
+                CreateCommandLine();
+                if (rbF1.Checked == true)
+                {
+                    chkDriveSelectRFD.Enabled = false;
+                    txtDriveSelectRFD.Enabled = false;
+                }
+                else
+                {
+                    chkDriveSelectRFD.Enabled = true;
+                    txtDriveSelectRFD.Enabled = true;
+                }
                 CreateCommandLine();
             }
         }
@@ -344,7 +360,6 @@ namespace Greaseweazle
         }
         #endregion
 
-
         #region gbReadFromDisk_Enter
         private void gbReadFromDisk_Enter(object sender, EventArgs e)
         {
@@ -382,6 +397,22 @@ namespace Greaseweazle
         }
         #endregion
 
+        #region chkDriveSelectRFD_CheckedChanged
+        private void chkDriveSelectRFD_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+        #endregion
+
+        #region txtDriveSelectRFD_TextChanged
+        private void txtDriveSelectRFD_TextChanged(object sender, EventArgs e)
+        {
+            ValidateDriveSelect(txtDriveSelectRFD, "0");
+            CreateCommandLine();
+        }
+        #endregion
+
+
         // ----> Write to Disk
 
         #region rbWrite_CheckedChanged
@@ -399,6 +430,16 @@ namespace Greaseweazle
                 foreach (Control ctrl in gbUpdateFirmware.Controls)
                     ctrl.Enabled = false;
                 lblImageDisk.Text = "WRITE TO DISK";
+                if (rbF1.Checked == true)
+                {
+                    chkDriveSelectWTD.Enabled = false;
+                    txtDriveSelectWTD.Enabled = false;
+                }
+                else
+                {
+                    chkDriveSelectWTD.Enabled = true;
+                    txtDriveSelectWTD.Enabled = true;
+                }
                 CreateCommandLine();
             }
         }
@@ -519,6 +560,21 @@ namespace Greaseweazle
                 lblImageDisk.Text = "UPDATE FIRMWARE";
                 CreateCommandLine();
             }
+        }
+        #endregion
+
+        #region chkDriveSelectWTD_CheckedChanged
+        private void chkDriveSelectWTD_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+        #endregion
+
+        #region txtDriveSelectWTD_TextChanged
+        private void txtDriveSelectWTD_TextChanged(object sender, EventArgs e)
+        {
+            ValidateDriveSelect(txtDriveSelectWTD, "0");
+            CreateCommandLine();
         }
         #endregion
 
@@ -654,12 +710,6 @@ namespace Greaseweazle
                 System.Windows.Forms.MessageBox.Show("You must select delay options first!", "Oops!");
             }
 
-            if (lbUSBPorts.SelectedIndex == -1)
-            {
-                bError = true;
-                System.Windows.Forms.MessageBox.Show("You must select a USB port first!", "Oops!");
-            }
-
             // good to go?
             if (bError == false)
             {
@@ -692,6 +742,41 @@ namespace Greaseweazle
             else
                 mnuPythonFolder.Checked = false;
 
+        }
+        #endregion
+
+        #region mnuUSBSupport_Click
+        private void mnuUSBSupport_Click(object sender, EventArgs e)
+        {
+            if (mnuUSBSupport.Checked != true)
+                mnuUSBSupport.Checked = true;
+            else
+                mnuUSBSupport.Checked = false;
+
+        }
+        #endregion
+
+        #region mnuUSBSupport_CheckChanged
+        private void mnuUSBSupport_CheckChanged(object sender, EventArgs e)
+        {
+            if (mnuUSBSupport.Checked == true)
+            {
+                // enable all the usb groupbox controls
+                foreach (Control ctrl in gbUSBPorts.Controls)
+                    ctrl.Enabled = true;
+                // set selected usb port if remembered
+                int iIndex = lbUSBPorts.FindString(m_sUSBPort);
+                if ((m_sUSBPort.Length > 0) && (iIndex != -1))
+                    lbUSBPorts.SetSelected(iIndex, true);
+            }
+            else
+            {
+                // disable all the usb groupbox controls
+                foreach (Control ctrl in gbUSBPorts.Controls)
+                    ctrl.Enabled = false;
+                lbUSBPorts.SelectedIndex = -1;
+            }
+            CreateCommandLine();
         }
         #endregion
 
@@ -827,6 +912,7 @@ namespace Greaseweazle
             startInfo.UseShellExecute = false;
             startInfo.FileName = "C:\\WINDOWS\\SYSTEM32\\cmd.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
+            m_sCommandLine = m_sCommandLine.Trim(); // remove empty usb port if it exists
             startInfo.Arguments = "/K " + "\"" + m_sCommandLine + "\"";
             try
             {
@@ -857,6 +943,10 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbAction", "rbSetDelays", (rbSetDelays.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbUpdateFirmware", (rbUpdateFirmware.Checked == true).ToString());
 
+            // type
+            m_Ini.IniWriteValue("gbType", "rbF1", (rbF1.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbType", "rbF7", (rbF7.Checked == true).ToString());
+
             // read disk
             m_Ini.IniWriteValue("gbReadFromDisk", "txtRFDFilename", txtRFDFilename.Text);
             m_Ini.IniWriteValue("gbReadFromDisk", "rbReadDoubleSided", (rbReadDoubleSided.Checked == true).ToString());
@@ -867,6 +957,8 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbReadFromDisk", "chkReadFirstCyl", (chkReadFirstCyl.Checked == true).ToString());
             m_Ini.IniWriteValue("gbReadFromDisk", "txtRevsPerTrack", txtRevsPerTrack.Text);
             m_Ini.IniWriteValue("gbReadFromDisk", "chkRevsPerTrack", (chkRevsPerTrack.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveSelectRFD", txtDriveSelectRFD.Text);
+            m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveSelectRFD", (chkDriveSelectRFD.Checked == true).ToString());
             m_Ini.IniWriteValue("gbReadFromDisk", "m_sReadDiskFolder", m_sReadDiskFolder);
 
             // write disk
@@ -878,6 +970,8 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbWriteToDisk", "chkWriteLastCyl", (chkWriteLastCyl.Checked == true).ToString());
             m_Ini.IniWriteValue("gbWriteToDisk", "txtWriteFirstCyl", txtWriteFirstCyl.Text);
             m_Ini.IniWriteValue("gbWriteToDisk", "chkWriteFirstCyl", (chkWriteFirstCyl.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbWriteToDisk", "txtDriveSelectWTD", txtDriveSelectWTD.Text);
+            m_Ini.IniWriteValue("gbWriteToDisk", "chkDriveSelectWTD", (chkDriveSelectWTD.Checked == true).ToString());
             m_Ini.IniWriteValue("gbWriteToDisk", "m_sWriteDiskFolder", m_sWriteDiskFolder);
 
             // set delays
@@ -897,6 +991,7 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbUpdateFirmware", "m_sUpdateFirmwareFolder", m_sUpdateFirmwareFolder);
 
             // usb port
+            m_Ini.IniWriteValue("gbUSBPorts", "mnuUSBSupport", (mnuUSBSupport.Checked == true).ToString());
             m_Ini.IniWriteValue("gbUSBPorts", "m_sUSBPort", m_sUSBPort);
 
             // CommandLine
@@ -941,6 +1036,17 @@ namespace Greaseweazle
                     rbUpdateFirmware.Checked = true;
             }
 
+            // type
+            if ((sRet = (m_Ini.IniReadValue("gbType", "rbF1", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbF1.Checked = true;
+            }
+            if ((sRet = (m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbF7.Checked = true;
+            }
 
             // read disk
             if ((sRet = (m_Ini.IniReadValue("gbReadFromDisk", "txtRFDFilename", "garbage").Trim())) != "garbage")
@@ -975,6 +1081,13 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkRevsPerTrack.Checked = true;
+            }
+            if ((sRet = (m_Ini.IniReadValue("gbReadFromDisk", "txtDriveSelectRFD", "garbage").Trim())) != "garbage")
+                txtDriveSelectRFD.Text = sRet;
+            if ((sRet = (m_Ini.IniReadValue("gbReadFromDisk", "chkDriveSelectRFD", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDriveSelectRFD.Checked = true;
             }
             if ((sRet = (m_Ini.IniReadValue("gbReadFromDisk", "m_sReadDiskFolder", "garbage").Trim())) != "garbage")
                 m_sReadDiskFolder = sRet;
@@ -1012,6 +1125,13 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkWriteFirstCyl.Checked = true;
+            }
+            if ((sRet = (m_Ini.IniReadValue("gbWriteToDisk", "txtDriveSelectWTD", "garbage").Trim())) != "garbage")
+                txtDriveSelectWTD.Text = sRet;
+            if ((sRet = (m_Ini.IniReadValue("gbWriteToDisk", "chkDriveSelectWTD", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDriveSelectWTD.Checked = true;
             }
             if ((sRet = (m_Ini.IniReadValue("gbWriteToDisk", "m_sWriteDiskFolder", "garbage").Trim())) != "garbage")
                 m_sWriteDiskFolder = sRet;
@@ -1062,6 +1182,28 @@ namespace Greaseweazle
             // usb port
             if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
+            if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                {
+                    // enable all the usb groupbox controls
+                    foreach (Control ctrl in gbUSBPorts.Controls)
+                        ctrl.Enabled = true;
+
+                    // set selected usb port if remembered
+                    int iIndex = lbUSBPorts.FindString(m_sUSBPort);
+                    if ((m_sUSBPort.Length > 0) && (iIndex != -1))
+                        lbUSBPorts.SetSelected(iIndex, true);
+                    mnuUSBSupport.Checked = true;
+                }
+                else
+                {
+                    // disable all the usb groupbox controls
+                    foreach (Control ctrl in gbUSBPorts.Controls)
+                        ctrl.Enabled = false;
+                    mnuUSBSupport.Checked = false;
+                }
+            }
 
             // CommandLine
             if ((sRet = (m_Ini.IniReadValue("gbCommandLine", "txtCommandLine", "garbage").Trim())) != "garbage")
@@ -1127,6 +1269,29 @@ namespace Greaseweazle
         }
         #endregion
 
+        #region ValidateDriveSelect
+        private void ValidateDriveSelect(TextBox tb, string iDefault)
+        {
+            string sAllowed = "AB012";
+            tb.Text = tb.Text.ToUpper();
+            try
+            {
+                if (!sAllowed.Contains(tb.Text))
+                {
+                    tb.Text = iDefault.ToString();
+                    tb.SelectAll();
+                    tb.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                tb.Text = iDefault.ToString();
+                tb.SelectAll();
+                tb.Focus();
+            }
+        }
+        #endregion
+
         #region WndProc
         protected override void WndProc(ref Message m) // capture close message so we can save our settings
         {
@@ -1144,6 +1309,57 @@ namespace Greaseweazle
 
         #endregion
 
+        #region Type
+        private void rbF1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbF1.Checked == true)
+            {
+                chkDriveSelectRFD.Enabled = false;
+                chkDriveSelectWTD.Enabled = false;
+                txtDriveSelectRFD.Enabled = false;
+                txtDriveSelectWTD.Enabled = false;
+            }
+            else
+            {
+                if (rbReadDisk.Checked == true)
+                {
+                    chkDriveSelectRFD.Enabled = true;
+                    txtDriveSelectRFD.Enabled = true;
+                }
+                if (rbWriteDisk.Checked == true)
+                {
+                    chkDriveSelectWTD.Enabled = true;
+                    txtDriveSelectWTD.Enabled = true;
+                }
+            }
+            CreateCommandLine();
+        }
+
+        private void rbF7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbF7.Checked == true)
+            {
+                if (rbReadDisk.Checked == true)
+                {
+                    chkDriveSelectRFD.Enabled = true;
+                    txtDriveSelectRFD.Enabled = true;
+                }
+                if (rbWriteDisk.Checked == true)
+                {
+                    chkDriveSelectWTD.Enabled = true;
+                    txtDriveSelectWTD.Enabled = true;
+                }            
+            }
+            else
+            {
+                chkDriveSelectRFD.Enabled = false;
+                chkDriveSelectWTD.Enabled = false;
+                txtDriveSelectRFD.Enabled = false;
+                txtDriveSelectWTD.Enabled = false;
+            }
+            CreateCommandLine();
+        }
+        #endregion
     }
 }
 
