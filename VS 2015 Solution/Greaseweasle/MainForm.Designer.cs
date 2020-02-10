@@ -43,6 +43,7 @@ namespace Greaseweazle
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPythonFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuUSBSupport = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.gbUSBPorts = new System.Windows.Forms.GroupBox();
             this.btnRefreshUSB = new System.Windows.Forms.Button();
@@ -105,7 +106,6 @@ namespace Greaseweazle
             this.gbCommandLine = new System.Windows.Forms.GroupBox();
             this.txtCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
-            this.mnuUSBSupport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSettings.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbLaunch.SuspendLayout();
@@ -156,6 +156,14 @@ namespace Greaseweazle
             this.mnuPythonFolder.Text = "Enable Python Folder";
             this.mnuPythonFolder.CheckedChanged += new System.EventHandler(this.mnuPythonFolder_CheckChanged);
             this.mnuPythonFolder.Click += new System.EventHandler(this.mnuPythonFolder_Click);
+            // 
+            // mnuUSBSupport
+            // 
+            this.mnuUSBSupport.Name = "mnuUSBSupport";
+            this.mnuUSBSupport.Size = new System.Drawing.Size(224, 26);
+            this.mnuUSBSupport.Text = "Enable USB Support";
+            this.mnuUSBSupport.CheckedChanged += new System.EventHandler(this.mnuUSBSupport_CheckChanged);
+            this.mnuUSBSupport.Click += new System.EventHandler(this.mnuUSBSupport_Click);
             // 
             // gbUSBPorts
             // 
@@ -375,7 +383,7 @@ namespace Greaseweazle
             this.txtDriveSelectRFD.Name = "txtDriveSelectRFD";
             this.txtDriveSelectRFD.Size = new System.Drawing.Size(54, 22);
             this.txtDriveSelectRFD.TabIndex = 18;
-            this.txtDriveSelectRFD.Text = "0";
+            this.txtDriveSelectRFD.Text = "A";
             this.txtDriveSelectRFD.TextChanged += new System.EventHandler(this.txtDriveSelectRFD_TextChanged);
             // 
             // chkDriveSelectRFD
@@ -384,9 +392,9 @@ namespace Greaseweazle
             this.chkDriveSelectRFD.Enabled = false;
             this.chkDriveSelectRFD.Location = new System.Drawing.Point(16, 112);
             this.chkDriveSelectRFD.Name = "chkDriveSelectRFD";
-            this.chkDriveSelectRFD.Size = new System.Drawing.Size(106, 21);
+            this.chkDriveSelectRFD.Size = new System.Drawing.Size(162, 21);
             this.chkDriveSelectRFD.TabIndex = 17;
-            this.chkDriveSelectRFD.Text = "Drive Select";
+            this.chkDriveSelectRFD.Text = "Drive Select (AB012)";
             this.chkDriveSelectRFD.UseVisualStyleBackColor = true;
             this.chkDriveSelectRFD.CheckedChanged += new System.EventHandler(this.chkDriveSelectRFD_CheckedChanged);
             // 
@@ -536,7 +544,7 @@ namespace Greaseweazle
             this.txtDriveSelectWTD.Name = "txtDriveSelectWTD";
             this.txtDriveSelectWTD.Size = new System.Drawing.Size(54, 22);
             this.txtDriveSelectWTD.TabIndex = 31;
-            this.txtDriveSelectWTD.Text = "0";
+            this.txtDriveSelectWTD.Text = "A";
             this.txtDriveSelectWTD.TextChanged += new System.EventHandler(this.txtDriveSelectWTD_TextChanged);
             // 
             // chkDriveSelectWTD
@@ -545,9 +553,9 @@ namespace Greaseweazle
             this.chkDriveSelectWTD.Enabled = false;
             this.chkDriveSelectWTD.Location = new System.Drawing.Point(15, 112);
             this.chkDriveSelectWTD.Name = "chkDriveSelectWTD";
-            this.chkDriveSelectWTD.Size = new System.Drawing.Size(106, 21);
+            this.chkDriveSelectWTD.Size = new System.Drawing.Size(162, 21);
             this.chkDriveSelectWTD.TabIndex = 30;
-            this.chkDriveSelectWTD.Text = "Drive Select";
+            this.chkDriveSelectWTD.Text = "Drive Select (AB012)";
             this.chkDriveSelectWTD.UseVisualStyleBackColor = true;
             this.chkDriveSelectWTD.CheckedChanged += new System.EventHandler(this.chkDriveSelectWTD_CheckedChanged);
             // 
@@ -844,20 +852,12 @@ namespace Greaseweazle
             this.lblStaticCL.TabIndex = 59;
             this.lblStaticCL.Text = "Command Line";
             // 
-            // mnuUSBSupport
-            // 
-            this.mnuUSBSupport.Name = "mnuUSBSupport";
-            this.mnuUSBSupport.Size = new System.Drawing.Size(224, 26);
-            this.mnuUSBSupport.Text = "Enable USB Support";
-            this.mnuUSBSupport.CheckedChanged += new System.EventHandler(this.mnuUSBSupport_CheckChanged);
-            this.mnuUSBSupport.Click += new System.EventHandler(this.mnuUSBSupport_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(992, 675);
+            this.ClientSize = new System.Drawing.Size(992, 718);
             this.Controls.Add(this.gbCommandLine);
             this.Controls.Add(this.gbUpdateFirmware);
             this.Controls.Add(this.gbSetDelays);

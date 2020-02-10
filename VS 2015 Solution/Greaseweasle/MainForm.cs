@@ -407,7 +407,7 @@ namespace Greaseweazle
         #region txtDriveSelectRFD_TextChanged
         private void txtDriveSelectRFD_TextChanged(object sender, EventArgs e)
         {
-            ValidateDriveSelect(txtDriveSelectRFD, "0");
+            ValidateDriveSelect(txtDriveSelectRFD, "A");
             CreateCommandLine();
         }
         #endregion
@@ -573,7 +573,7 @@ namespace Greaseweazle
         #region txtDriveSelectWTD_TextChanged
         private void txtDriveSelectWTD_TextChanged(object sender, EventArgs e)
         {
-            ValidateDriveSelect(txtDriveSelectWTD, "0");
+            ValidateDriveSelect(txtDriveSelectWTD, "A");
             CreateCommandLine();
         }
         #endregion
