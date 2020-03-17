@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ChooserForm.cs
+//
+// Greaseweazle GUI Wrapper
+//
+// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
+//
+// MIT License
+//
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
+
+using System;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
