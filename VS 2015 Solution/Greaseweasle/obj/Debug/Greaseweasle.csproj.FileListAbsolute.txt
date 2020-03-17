@@ -1,0 +1,9 @@
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\bin\Debug\Greaseweasle.exe.config
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\bin\Debug\Greaseweasle.exe
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\bin\Debug\Greaseweasle.pdb
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\obj\Debug\Greaseweasle.csprojResolveAssemblyReference.cache
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\obj\Debug\Greaseweasle.MainForm.resources
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\obj\Debug\Greaseweasle.Properties.Resources.resources
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\obj\Debug\Greaseweasle.csproj.GenerateResource.Cache
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\obj\Debug\Greaseweasle.exe
+c:\users\dlmanki\documents\visual studio 2015\Projects\Greaseweasle\Greaseweasle\obj\Debug\Greaseweasle.pdb

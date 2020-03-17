@@ -36,7 +36,7 @@ namespace Greaseweazle
         private void btnOK_Click(object sender, EventArgs e)
         {
             // brring up main applicaiton form
-            MainForm.m_frmMain.BringToFront();
+            ChooserForm.m_frmChooser.BringToFront();
             this.Close();
             this.Dispose();
         }
