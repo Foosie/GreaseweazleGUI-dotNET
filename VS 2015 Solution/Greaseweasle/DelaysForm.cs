@@ -1,14 +1,4 @@
-﻿// DelaysForm.cs
-//
-// Greaseweazle GUI Wrapper
-//
-// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
-//
-// MIT License
-//
-// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +16,7 @@ namespace Greaseweazle
     public partial class DelaysForm : Form
     {
         #region declarations
-        public const int WM_CLOSE = 0x0010;
+        private const int WM_CLOSE = 0x0010;
         private Form m_frmChooser = null;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
@@ -44,6 +34,9 @@ namespace Greaseweazle
         #region InitializeMyStuff
         private void InitializeMyStuff()
         {
+            // disable maximize box
+            this.MaximizeBox = false;
+
             // set working directory to executable directory
             string sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }
@@ -258,6 +251,21 @@ namespace Greaseweazle
                 string sMessage = e.Message.ToString();
                 MessageBox.Show(this, "An error has occured\n" + sMessage, "Oops!");
             }
+        }
+        #endregion
+
+        #region WndProc
+        protected override void WndProc(ref Message m) // capture close message so we can save our settings
+        {
+            if (m.Msg == WM_CLOSE)
+            {
+                // write inifile
+                iniWriteFile();
+
+                // show main form
+                ChooserForm.m_frmChooser.Show();
+            }
+            base.WndProc(ref m);
         }
         #endregion
     }

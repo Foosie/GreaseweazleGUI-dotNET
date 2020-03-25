@@ -55,7 +55,6 @@
             this.gbPin.Size = new System.Drawing.Size(543, 314);
             this.gbPin.TabIndex = 0;
             this.gbPin.TabStop = false;
-            this.gbPin.Text = "Floppy Pin";
             // 
             // gb1
             // 
@@ -155,11 +154,11 @@
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(572, 345);
             this.Controls.Add(this.gbPin);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PinForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PinForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Pin Level";
             this.Load += new System.EventHandler(this.PinForm_Load);
             this.gbPin.ResumeLayout(false);
             this.gbPin.PerformLayout();

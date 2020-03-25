@@ -68,7 +68,7 @@
             this.gbAction.Controls.Add(this.pbGWsmall);
             this.gbAction.Location = new System.Drawing.Point(12, 29);
             this.gbAction.Name = "gbAction";
-            this.gbAction.Size = new System.Drawing.Size(402, 453);
+            this.gbAction.Size = new System.Drawing.Size(410, 453);
             this.gbAction.TabIndex = 1;
             this.gbAction.TabStop = false;
             // 
@@ -78,14 +78,14 @@
             this.gbUSBPorts.Controls.Add(this.lbUSBPorts);
             this.gbUSBPorts.Location = new System.Drawing.Point(22, 233);
             this.gbUSBPorts.Name = "gbUSBPorts";
-            this.gbUSBPorts.Size = new System.Drawing.Size(357, 166);
+            this.gbUSBPorts.Size = new System.Drawing.Size(367, 166);
             this.gbUSBPorts.TabIndex = 13;
             this.gbUSBPorts.TabStop = false;
             this.gbUSBPorts.Text = "USB Ports";
             // 
             // btnRefreshUSB
             // 
-            this.btnRefreshUSB.Location = new System.Drawing.Point(124, 121);
+            this.btnRefreshUSB.Location = new System.Drawing.Point(129, 121);
             this.btnRefreshUSB.Name = "btnRefreshUSB";
             this.btnRefreshUSB.Size = new System.Drawing.Size(108, 29);
             this.btnRefreshUSB.TabIndex = 15;
@@ -98,7 +98,7 @@
             this.lbUSBPorts.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.lbUSBPorts.FormattingEnabled = true;
             this.lbUSBPorts.ItemHeight = 16;
-            this.lbUSBPorts.Location = new System.Drawing.Point(18, 26);
+            this.lbUSBPorts.Location = new System.Drawing.Point(23, 26);
             this.lbUSBPorts.Name = "lbUSBPorts";
             this.lbUSBPorts.Size = new System.Drawing.Size(320, 84);
             this.lbUSBPorts.TabIndex = 14;
@@ -106,7 +106,7 @@
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(59, 410);
+            this.btnSelect.Location = new System.Drawing.Point(62, 410);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(108, 29);
             this.btnSelect.TabIndex = 16;
@@ -116,7 +116,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(237, 410);
+            this.btnClose.Location = new System.Drawing.Point(240, 410);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(108, 29);
             this.btnClose.TabIndex = 17;
@@ -130,7 +130,7 @@
             this.gbType.Controls.Add(this.rbF1);
             this.gbType.Location = new System.Drawing.Point(269, 16);
             this.gbType.Name = "gbType";
-            this.gbType.Size = new System.Drawing.Size(110, 98);
+            this.gbType.Size = new System.Drawing.Size(120, 98);
             this.gbType.TabIndex = 3;
             this.gbType.TabStop = false;
             this.gbType.Text = "Type";
@@ -170,7 +170,7 @@
             this.gbActionSelect.Controls.Add(this.rbWriteDisk);
             this.gbActionSelect.Location = new System.Drawing.Point(22, 121);
             this.gbActionSelect.Name = "gbActionSelect";
-            this.gbActionSelect.Size = new System.Drawing.Size(357, 106);
+            this.gbActionSelect.Size = new System.Drawing.Size(367, 106);
             this.gbActionSelect.TabIndex = 6;
             this.gbActionSelect.TabStop = false;
             this.gbActionSelect.Text = "Action";
@@ -178,7 +178,7 @@
             // rbReset
             // 
             this.rbReset.AutoSize = true;
-            this.rbReset.Location = new System.Drawing.Point(183, 72);
+            this.rbReset.Location = new System.Drawing.Point(194, 72);
             this.rbReset.Name = "rbReset";
             this.rbReset.Size = new System.Drawing.Size(113, 21);
             this.rbReset.TabIndex = 12;
@@ -190,7 +190,7 @@
             // rbPin
             // 
             this.rbPin.AutoSize = true;
-            this.rbPin.Location = new System.Drawing.Point(183, 48);
+            this.rbPin.Location = new System.Drawing.Point(194, 48);
             this.rbPin.Name = "rbPin";
             this.rbPin.Size = new System.Drawing.Size(87, 21);
             this.rbPin.TabIndex = 11;
@@ -202,7 +202,7 @@
             // rbReadDisk
             // 
             this.rbReadDisk.AutoSize = true;
-            this.rbReadDisk.Location = new System.Drawing.Point(25, 21);
+            this.rbReadDisk.Location = new System.Drawing.Point(36, 21);
             this.rbReadDisk.Name = "rbReadDisk";
             this.rbReadDisk.Size = new System.Drawing.Size(126, 21);
             this.rbReadDisk.TabIndex = 7;
@@ -214,7 +214,7 @@
             // rbUpdateFirmware
             // 
             this.rbUpdateFirmware.AutoSize = true;
-            this.rbUpdateFirmware.Location = new System.Drawing.Point(183, 21);
+            this.rbUpdateFirmware.Location = new System.Drawing.Point(194, 21);
             this.rbUpdateFirmware.Name = "rbUpdateFirmware";
             this.rbUpdateFirmware.Size = new System.Drawing.Size(136, 21);
             this.rbUpdateFirmware.TabIndex = 10;
@@ -226,7 +226,7 @@
             // rbSetDelays
             // 
             this.rbSetDelays.AutoSize = true;
-            this.rbSetDelays.Location = new System.Drawing.Point(25, 72);
+            this.rbSetDelays.Location = new System.Drawing.Point(36, 72);
             this.rbSetDelays.Name = "rbSetDelays";
             this.rbSetDelays.Size = new System.Drawing.Size(97, 21);
             this.rbSetDelays.TabIndex = 9;
@@ -238,7 +238,7 @@
             // rbWriteDisk
             // 
             this.rbWriteDisk.AutoSize = true;
-            this.rbWriteDisk.Location = new System.Drawing.Point(25, 48);
+            this.rbWriteDisk.Location = new System.Drawing.Point(36, 48);
             this.rbWriteDisk.Name = "rbWriteDisk";
             this.rbWriteDisk.Size = new System.Drawing.Size(109, 21);
             this.rbWriteDisk.TabIndex = 8;
@@ -264,7 +264,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(426, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(434, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -298,7 +298,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(426, 492);
+            this.ClientSize = new System.Drawing.Size(434, 492);
             this.Controls.Add(this.gbAction);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

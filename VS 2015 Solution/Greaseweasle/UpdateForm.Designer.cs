@@ -89,7 +89,6 @@
             this.gbUpdateFirmware.Size = new System.Drawing.Size(545, 185);
             this.gbUpdateFirmware.TabIndex = 1;
             this.gbUpdateFirmware.TabStop = false;
-            this.gbUpdateFirmware.Text = "Update Firmware";
             // 
             // txtUpdateCommandLine
             // 
@@ -107,10 +106,10 @@
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(569, 209);
             this.Controls.Add(this.gbUpdateFirmware);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UpdateForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Update Firmware";
             this.Load += new System.EventHandler(this.UpdateForm_Load);
             this.gbUpdateFirmware.ResumeLayout(false);

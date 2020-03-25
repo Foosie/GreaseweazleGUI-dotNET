@@ -66,7 +66,6 @@
             this.gbReadFromDisk.Size = new System.Drawing.Size(555, 410);
             this.gbReadFromDisk.TabIndex = 0;
             this.gbReadFromDisk.TabStop = false;
-            this.gbReadFromDisk.Text = "Read from Disk";
             // 
             // groupBox1
             // 
@@ -274,10 +273,10 @@
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(597, 454);
             this.Controls.Add(this.gbReadFromDisk);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ReadForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Read From Disk";
             this.Load += new System.EventHandler(this.ReadForm_Load);
             this.gbReadFromDisk.ResumeLayout(false);
