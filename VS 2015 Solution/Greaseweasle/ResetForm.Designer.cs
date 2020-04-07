@@ -48,7 +48,6 @@
             this.gb1.Size = new System.Drawing.Size(543, 184);
             this.gb1.TabIndex = 0;
             this.gb1.TabStop = false;
-            this.gb1.Text = "Reset Controller";
             // 
             // btnBack
             // 
@@ -95,11 +94,11 @@
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(572, 214);
             this.Controls.Add(this.gb1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ResetForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ResetForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Reset Device";
             this.Load += new System.EventHandler(this.ResetForm_Load);
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();

@@ -1,14 +1,4 @@
-﻿// ChooserForm.cs
-//
-// Greaseweazle GUI Wrapper
-//
-// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
-//
-// MIT License
-//
-// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
-
-using System;
+﻿using System;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -91,7 +81,7 @@ namespace Greaseweazle
 
             // check for existance of gw.py
             if (!File.Exists(sExeDir + "\\gw.py"))
-                sOops = "GreaseweazleGUI.exe must be in the same folder as gw.py";
+                sOops = "GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.";
 
             // display error
             if (sOops.Length > 0)
@@ -391,7 +381,7 @@ namespace Greaseweazle
                     {
                         m_frmUpdate.Dispose();
                         m_frmUpdate = new UpdateForm(this);
-                        m_frmUpdate.Show();
+                        m_frmUpdate.ShowDialog(this);
                     }
                     break;
                 case "delays":
@@ -404,7 +394,7 @@ namespace Greaseweazle
                     {
                         m_frmDelays.Dispose();
                         m_frmDelays = new DelaysForm(this);
-                        m_frmDelays.Show();
+                        m_frmDelays.ShowDialog(this);
                     }
                     break;
                 case "read":
@@ -417,7 +407,7 @@ namespace Greaseweazle
                     {
                         m_frmRead.Dispose();
                         m_frmRead = new ReadForm(this);
-                        m_frmRead.Show();
+                        m_frmRead.ShowDialog(this);
                     }
                     break;
                 case "write":
@@ -430,7 +420,7 @@ namespace Greaseweazle
                     {
                         m_frmWrite.Dispose();
                         m_frmWrite = new WriteForm(this);
-                        m_frmWrite.Show();
+                        m_frmWrite.ShowDialog(this);
                     }
                     break;
                 case "pinlevel":
@@ -443,7 +433,7 @@ namespace Greaseweazle
                     {
                         m_frmPin.Dispose();
                         m_frmPin = new PinForm(this);
-                        m_frmPin.Show();
+                        m_frmPin.ShowDialog(this);
                     }
                     break;
                 case "reset":
@@ -456,7 +446,7 @@ namespace Greaseweazle
                     {
                         m_frmReset.Dispose();
                         m_frmReset = new ResetForm(this);
-                        m_frmReset.Show();
+                        m_frmReset.ShowDialog(this);
                     }
                     break;
             }

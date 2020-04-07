@@ -1,14 +1,4 @@
-﻿// AssemblyInfo.cs
-//
-// Greaseweazle GUI Wrapper
-//
-// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
-//
-// MIT License
-//
-// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
-
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -42,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.2.10")]
-[assembly: AssemblyFileVersion("0.0.2.10")]
+[assembly: AssemblyVersion("0.0.2.13")]
+[assembly: AssemblyFileVersion("0.0.2.13")]

@@ -1,14 +1,4 @@
-﻿// PinForm.cs
-//
-// Greaseweazle GUI Wrapper
-//
-// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
-//
-// MIT License
-//
-// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +13,7 @@ namespace Greaseweazle
 {
     public partial class PinForm : Form
     {
+        private const int WM_CLOSE = 0x0010;
         private Form m_frmChooser = null;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
@@ -31,6 +22,9 @@ namespace Greaseweazle
         {
             m_frmChooser = newForm;
             InitializeComponent();
+
+            // disable maximize box
+            this.MaximizeBox = false;
         }
 
         #region iniWriteFile
@@ -84,11 +78,13 @@ namespace Greaseweazle
         }
         #endregion
 
+        #region btnLaunch_Click
         private void btnLaunch_Click(object sender, EventArgs e)
         {
             CreateCommandLine();
             LaunchPython();
         }
+        #endregion
 
         #region LaunchPython
         private void LaunchPython()
@@ -162,6 +158,21 @@ namespace Greaseweazle
         private void txtPin_TextChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
+        }
+        #endregion
+
+        #region WndProc
+        protected override void WndProc(ref Message m) // capture close message so we can save our settings
+        {
+            if (m.Msg == WM_CLOSE)
+            {
+                // write inifile
+                iniWriteFile();
+
+                // show main form
+                ChooserForm.m_frmChooser.Show();
+            }
+            base.WndProc(ref m);
         }
         #endregion
     }

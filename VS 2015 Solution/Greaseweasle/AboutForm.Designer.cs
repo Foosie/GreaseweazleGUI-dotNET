@@ -43,6 +43,7 @@ namespace Greaseweazle
             this.btnOK = new System.Windows.Forms.Button();
             this.lblGuiBy = new System.Windows.Forms.Label();
             this.gbGW = new System.Windows.Forms.GroupBox();
+            this.gbLine1 = new System.Windows.Forms.GroupBox();
             this.lblKF1 = new System.Windows.Forms.Label();
             this.llFFFB = new System.Windows.Forms.LinkLabel();
             this.lblFF = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@ namespace Greaseweazle
             this.lblGW = new System.Windows.Forms.Label();
             this.lblText = new System.Windows.Forms.Label();
             this.llGWGH = new System.Windows.Forms.LinkLabel();
-            this.gbLine1 = new System.Windows.Forms.GroupBox();
             this.gbGW.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +103,14 @@ namespace Greaseweazle
             this.gbGW.Size = new System.Drawing.Size(292, 283);
             this.gbGW.TabIndex = 7;
             this.gbGW.TabStop = false;
+            // 
+            // gbLine1
+            // 
+            this.gbLine1.Location = new System.Drawing.Point(0, 159);
+            this.gbLine1.Name = "gbLine1";
+            this.gbLine1.Size = new System.Drawing.Size(292, 13);
+            this.gbLine1.TabIndex = 18;
+            this.gbLine1.TabStop = false;
             // 
             // lblKF1
             // 
@@ -201,14 +209,6 @@ namespace Greaseweazle
             this.llGWGH.Text = "Github";
             this.llGWGH.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llGWGH_LinkClicked);
             // 
-            // gbLine1
-            // 
-            this.gbLine1.Location = new System.Drawing.Point(0, 159);
-            this.gbLine1.Name = "gbLine1";
-            this.gbLine1.Size = new System.Drawing.Size(292, 13);
-            this.gbLine1.TabIndex = 18;
-            this.gbLine1.TabStop = false;
-            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -222,6 +222,7 @@ namespace Greaseweazle
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AboutForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.gbGW.ResumeLayout(false);
             this.gbGW.PerformLayout();
             this.ResumeLayout(false);
