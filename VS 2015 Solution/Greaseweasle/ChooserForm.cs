@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ChooserForm.cs
+//
+// Greaseweazle GUI Wrapper
+//
+// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
+//
+// MIT License
+//
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
+
+using System;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -280,6 +290,20 @@ namespace Greaseweazle
         {
             if (m.Msg == WM_CLOSE)
             {
+                // only allow one instance at a time
+                Process[] processlist = Process.GetProcesses();
+                foreach (Process theprocess in processlist)
+                {
+                    if (theprocess.Id > 0)
+                    {
+                        if (ChooserForm.m_ProcessId == theprocess.Id)
+                        {
+                            System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
+                            return;
+                        }
+                    }
+                }
+
                 // write inifile
                 iniWriteFile();
 
@@ -295,6 +319,20 @@ namespace Greaseweazle
         #region btnClose_Click
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // only allow one instance at a time
+            Process[] processlist = Process.GetProcesses();
+            foreach (Process theprocess in processlist)
+            {
+                if (theprocess.Id > 0)
+                {
+                    if (ChooserForm.m_ProcessId == theprocess.Id)
+                    {
+                        System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
+                        return;
+                    }
+                }
+            }
+
             iniWriteFile();
             Application.Exit();
         }

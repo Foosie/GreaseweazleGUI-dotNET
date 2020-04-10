@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ReadForm.cs
+//
+// Greaseweazle GUI Wrapper
+//
+// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
+//
+// MIT License
+//
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
