@@ -1,4 +1,14 @@
-﻿using System;
+﻿// WriteForm.cs
+//
+// Greaseweazle GUI Wrapper
+//
+// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
+//
+// MIT License
+//
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.using System;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -226,7 +236,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sWriteDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "SCP Files (*.scp)|*.scp" + "|" + "All Files (*.*)|*.*";
+            openDialog.Filter = "Formats (*.HFE; *.SCP; *.IPF;)| *.HFE; *.SCP; *.IPF; | All files(*.*) | *.*";
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 m_sWTDFilename = openDialog.SafeFileName;

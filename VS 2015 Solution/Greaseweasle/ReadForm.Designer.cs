@@ -1,4 +1,14 @@
-﻿namespace Greaseweazle
+﻿// ReadForm.Designer.cs
+//
+// Greaseweazle GUI Wrapper
+//
+// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
+//
+// MIT License
+//
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
+
+namespace Greaseweazle
 {
     partial class ReadForm
     {
@@ -28,6 +38,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadForm));
             this.gbReadFromDisk = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -48,6 +59,7 @@
             this.btnLaunch = new System.Windows.Forms.Button();
             this.btnRFDSelectFile = new System.Windows.Forms.Button();
             this.btnRFDSelectFolder = new System.Windows.Forms.Button();
+            this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
             this.gbReadFromDisk.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -94,6 +106,7 @@
             this.chkDoubleStep.Size = new System.Drawing.Size(109, 21);
             this.chkDoubleStep.TabIndex = 2;
             this.chkDoubleStep.Text = "Double-Step";
+            this.toolTipRFD.SetToolTip(this.chkDoubleStep, "Host Tools v0.12 or Later");
             this.chkDoubleStep.UseVisualStyleBackColor = true;
             this.chkDoubleStep.CheckedChanged += new System.EventHandler(this.chkDoubleStep_CheckedChanged);
             // 
@@ -180,6 +193,7 @@
             this.chkDriveSelectRFD.Size = new System.Drawing.Size(162, 21);
             this.chkDriveSelectRFD.TabIndex = 9;
             this.chkDriveSelectRFD.Text = "Drive Select (AB012)";
+            this.toolTipRFD.SetToolTip(this.chkDriveSelectRFD, "Host Tools v0.10 or Later");
             this.chkDriveSelectRFD.UseVisualStyleBackColor = true;
             this.chkDriveSelectRFD.CheckedChanged += new System.EventHandler(this.chkDriveSelectRFD_CheckedChanged);
             // 
@@ -253,6 +267,7 @@
             this.btnRFDSelectFile.Size = new System.Drawing.Size(108, 29);
             this.btnRFDSelectFile.TabIndex = 16;
             this.btnRFDSelectFile.Text = "Select File";
+            this.toolTipRFD.SetToolTip(this.btnRFDSelectFile, "HFE & IPF require Host Tools v0.13 or later");
             this.btnRFDSelectFile.UseVisualStyleBackColor = true;
             this.btnRFDSelectFile.Click += new System.EventHandler(this.btnRFDSelectFile_Click);
             // 
@@ -308,5 +323,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkDoubleStep;
+        private System.Windows.Forms.ToolTip toolTipRFD;
     }
 }

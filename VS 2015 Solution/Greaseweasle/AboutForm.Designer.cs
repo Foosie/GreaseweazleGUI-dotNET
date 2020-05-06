@@ -6,7 +6,7 @@
 //
 // MIT License
 //
-// See the file LICENSE more details, or visit <https://opensource.org/licenses/MIT>.
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
 
 namespace Greaseweazle
 {

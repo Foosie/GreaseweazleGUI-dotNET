@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ChooserForm.cs
+//
+// Greaseweazle GUI Wrapper
+//
+// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
+//
+// MIT License
+//
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
+
+using System;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -20,6 +30,8 @@ namespace Greaseweazle
         private Form m_frmUpdate = null;
         private Form m_frmPin = null;
         private Form m_frmReset = null;
+        private Form m_frmErase = null;
+        private Form m_frmBandwidth = null;
         public string sExeDir = "";
         public string m_action = "read";
         public const int WM_CLOSE = 0x0010;
@@ -61,12 +73,14 @@ namespace Greaseweazle
             m_frmUpdate = new UpdateForm(this);
             m_frmPin = new PinForm(this);
             m_frmReset = new ResetForm(this);
+            m_frmErase = new EraseForm(this);
+            m_frmBandwidth = new BandwidthForm(this);
 
             // get version from Project, GreaseweaselGUI Properties, Assembly Information
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v0.12";
+            this.Text = "GUI " + m_sVersion + " - Host Tools v0.14";
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
@@ -81,7 +95,7 @@ namespace Greaseweazle
 
             // check for existance of gw.py
             if (!File.Exists(sExeDir + "\\gw.py"))
-                sOops = "GreaseweazleGUI.exe must be in the same folder as gw.py";
+                sOops = "GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.";
 
             // display error
             if (sOops.Length > 0)
@@ -143,6 +157,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     rbWriteDisk.Checked = true;
             }
+            if ((sRet = (m_Ini.IniReadValue("gbAction", "rbEraseDisk", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbEraseDisk.Checked = true;
+            }
             if ((sRet = (m_Ini.IniReadValue("gbAction", "rbSetDelays", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -162,6 +181,11 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     rbReset.Checked = true;
+            }
+            if ((sRet = (m_Ini.IniReadValue("gbAction", "rbBandwidth", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbBandwidth.Checked = true;
             }
 
             // type
@@ -213,10 +237,12 @@ namespace Greaseweazle
             // action
             m_Ini.IniWriteValue("gbAction", "rbReadDisk", (rbReadDisk.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbWriteDisk", (rbWriteDisk.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbAction", "rbEraseDisk", (rbEraseDisk.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbSetDelays", (rbSetDelays.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbUpdateFirmware", (rbUpdateFirmware.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbPin", (rbPin.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbReset", (rbReset.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbAction", "rbBandwidth", (rbBandwidth.Checked == true).ToString());
 
             // type
             m_Ini.IniWriteValue("gbType", "rbF1", (rbF1.Checked == true).ToString());
@@ -280,6 +306,20 @@ namespace Greaseweazle
         {
             if (m.Msg == WM_CLOSE)
             {
+                // only allow one instance at a time
+                Process[] processlist = Process.GetProcesses();
+                foreach (Process theprocess in processlist)
+                {
+                    if (theprocess.Id > 0)
+                    {
+                        if (ChooserForm.m_ProcessId == theprocess.Id)
+                        {
+                            System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
+                            return;
+                        }
+                    }
+                }
+
                 // write inifile
                 iniWriteFile();
 
@@ -295,6 +335,20 @@ namespace Greaseweazle
         #region btnClose_Click
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // only allow one instance at a time
+            Process[] processlist = Process.GetProcesses();
+            foreach (Process theprocess in processlist)
+            {
+                if (theprocess.Id > 0)
+                {
+                    if (ChooserForm.m_ProcessId == theprocess.Id)
+                    {
+                        System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
+                        return;
+                    }
+                }
+            }
+
             iniWriteFile();
             Application.Exit();
         }
@@ -449,6 +503,32 @@ namespace Greaseweazle
                         m_frmReset.ShowDialog(this);
                     }
                     break;
+                case "erase":
+                    if (m_frmErase.Visible)
+                    {
+                        m_frmErase.WindowState = FormWindowState.Normal;
+                        m_frmErase.BringToFront();
+                    }
+                    else
+                    {
+                        m_frmErase.Dispose();
+                        m_frmErase = new EraseForm(this);
+                        m_frmErase.ShowDialog(this);
+                    }
+                    break;
+                case "bandwidth":
+                    if (m_frmBandwidth.Visible)
+                    {
+                        m_frmBandwidth.WindowState = FormWindowState.Normal;
+                        m_frmBandwidth.BringToFront();
+                    }
+                    else
+                    {
+                        m_frmBandwidth.Dispose();
+                        m_frmBandwidth = new BandwidthForm(this);
+                        m_frmBandwidth.ShowDialog(this);
+                    }
+                    break;
             }
         }
         #endregion
@@ -524,6 +604,22 @@ namespace Greaseweazle
         {
             Form m_frmAbout = new AboutForm();
             m_frmAbout.ShowDialog(m_frmChooser);
+        }
+        #endregion
+
+        #region rbBandwidth_CheckedChanged
+        private void rbBandwidth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbBandwidth.Checked == true)
+                m_action = "bandwidth";
+        }
+        #endregion
+
+        #region rbErase_CheckedChanged
+        private void rbErase_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbEraseDisk.Checked == true)
+                m_action = "erase";
         }
         #endregion
     }

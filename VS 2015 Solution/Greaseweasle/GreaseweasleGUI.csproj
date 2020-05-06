@@ -71,6 +71,12 @@
     <Compile Include="DelaysForm.Designer.cs">
       <DependentUpon>DelaysForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EraseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EraseForm.Designer.cs">
+      <DependentUpon>EraseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ini.cs" />
     <Compile Include="PinForm.cs">
       <SubType>Form</SubType>
@@ -85,6 +91,12 @@
     </Compile>
     <Compile Include="ReadForm.Designer.cs">
       <DependentUpon>ReadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BandwidthForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BandwidthForm.Designer.cs">
+      <DependentUpon>BandwidthForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ResetForm.cs">
       <SubType>Form</SubType>
@@ -109,9 +121,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChooserForm.resx">
       <DependentUpon>ChooserForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DelaysForm.resx">
       <DependentUpon>DelaysForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EraseForm.resx">
+      <DependentUpon>EraseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PinForm.resx">
       <DependentUpon>PinForm.cs</DependentUpon>
@@ -127,6 +143,9 @@
     </Compile>
     <EmbeddedResource Include="ReadForm.resx">
       <DependentUpon>ReadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BandwidthForm.resx">
+      <DependentUpon>BandwidthForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResetForm.resx">
       <DependentUpon>ResetForm.cs</DependentUpon>

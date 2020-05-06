@@ -1,4 +1,14 @@
-﻿namespace Greaseweazle
+﻿// ChooserForm.Designer.cs
+//
+// Greaseweazle GUI Wrapper
+//
+// Copyright (c) 2019 Don Mankin <don.mankin@yahoo.com>
+//
+// MIT License
+//
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
+
+namespace Greaseweazle
 {
     partial class ChooserForm
     {
@@ -28,6 +38,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChooserForm));
             this.gbAction = new System.Windows.Forms.GroupBox();
             this.gbUSBPorts = new System.Windows.Forms.GroupBox();
@@ -39,6 +50,8 @@
             this.rbF7 = new System.Windows.Forms.RadioButton();
             this.rbF1 = new System.Windows.Forms.RadioButton();
             this.gbActionSelect = new System.Windows.Forms.GroupBox();
+            this.rbEraseDisk = new System.Windows.Forms.RadioButton();
+            this.rbBandwidth = new System.Windows.Forms.RadioButton();
             this.rbReset = new System.Windows.Forms.RadioButton();
             this.rbPin = new System.Windows.Forms.RadioButton();
             this.rbReadDisk = new System.Windows.Forms.RadioButton();
@@ -50,6 +63,7 @@
             this.mnuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUSBSupport = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
             this.gbAction.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbType.SuspendLayout();
@@ -68,7 +82,7 @@
             this.gbAction.Controls.Add(this.pbGWsmall);
             this.gbAction.Location = new System.Drawing.Point(12, 29);
             this.gbAction.Name = "gbAction";
-            this.gbAction.Size = new System.Drawing.Size(410, 453);
+            this.gbAction.Size = new System.Drawing.Size(410, 486);
             this.gbAction.TabIndex = 1;
             this.gbAction.TabStop = false;
             // 
@@ -76,10 +90,10 @@
             // 
             this.gbUSBPorts.Controls.Add(this.btnRefreshUSB);
             this.gbUSBPorts.Controls.Add(this.lbUSBPorts);
-            this.gbUSBPorts.Location = new System.Drawing.Point(22, 233);
+            this.gbUSBPorts.Location = new System.Drawing.Point(22, 263);
             this.gbUSBPorts.Name = "gbUSBPorts";
             this.gbUSBPorts.Size = new System.Drawing.Size(367, 166);
-            this.gbUSBPorts.TabIndex = 13;
+            this.gbUSBPorts.TabIndex = 15;
             this.gbUSBPorts.TabStop = false;
             this.gbUSBPorts.Text = "USB Ports";
             // 
@@ -88,7 +102,7 @@
             this.btnRefreshUSB.Location = new System.Drawing.Point(129, 121);
             this.btnRefreshUSB.Name = "btnRefreshUSB";
             this.btnRefreshUSB.Size = new System.Drawing.Size(108, 29);
-            this.btnRefreshUSB.TabIndex = 15;
+            this.btnRefreshUSB.TabIndex = 17;
             this.btnRefreshUSB.Text = "Refresh";
             this.btnRefreshUSB.UseVisualStyleBackColor = true;
             this.btnRefreshUSB.Click += new System.EventHandler(this.btnRefreshUSB_Click);
@@ -106,20 +120,20 @@
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(62, 410);
+            this.btnSelect.Location = new System.Drawing.Point(62, 442);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(108, 29);
-            this.btnSelect.TabIndex = 16;
+            this.btnSelect.TabIndex = 18;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(240, 410);
+            this.btnClose.Location = new System.Drawing.Point(240, 442);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(108, 29);
-            this.btnClose.TabIndex = 17;
+            this.btnClose.TabIndex = 19;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -144,6 +158,7 @@
             this.rbF7.TabIndex = 5;
             this.rbF7.TabStop = true;
             this.rbF7.Text = "STM32F7";
+            this.toolTipChooser.SetToolTip(this.rbF7, "Host Tools v0.07 or Later");
             this.rbF7.UseVisualStyleBackColor = true;
             this.rbF7.CheckedChanged += new System.EventHandler(this.rbF7_CheckedChanged);
             // 
@@ -162,6 +177,8 @@
             // 
             // gbActionSelect
             // 
+            this.gbActionSelect.Controls.Add(this.rbEraseDisk);
+            this.gbActionSelect.Controls.Add(this.rbBandwidth);
             this.gbActionSelect.Controls.Add(this.rbReset);
             this.gbActionSelect.Controls.Add(this.rbPin);
             this.gbActionSelect.Controls.Add(this.rbReadDisk);
@@ -170,20 +187,47 @@
             this.gbActionSelect.Controls.Add(this.rbWriteDisk);
             this.gbActionSelect.Location = new System.Drawing.Point(22, 121);
             this.gbActionSelect.Name = "gbActionSelect";
-            this.gbActionSelect.Size = new System.Drawing.Size(367, 106);
+            this.gbActionSelect.Size = new System.Drawing.Size(367, 135);
             this.gbActionSelect.TabIndex = 6;
             this.gbActionSelect.TabStop = false;
             this.gbActionSelect.Text = "Action";
             // 
+            // rbEraseDisk
+            // 
+            this.rbEraseDisk.AutoSize = true;
+            this.rbEraseDisk.Location = new System.Drawing.Point(36, 75);
+            this.rbEraseDisk.Name = "rbEraseDisk";
+            this.rbEraseDisk.Size = new System.Drawing.Size(97, 21);
+            this.rbEraseDisk.TabIndex = 9;
+            this.rbEraseDisk.TabStop = true;
+            this.rbEraseDisk.Text = "Erase Disk";
+            this.toolTipChooser.SetToolTip(this.rbEraseDisk, "Host Tools v0.14 or Later");
+            this.rbEraseDisk.UseVisualStyleBackColor = true;
+            this.rbEraseDisk.CheckedChanged += new System.EventHandler(this.rbErase_CheckedChanged);
+            // 
+            // rbBandwidth
+            // 
+            this.rbBandwidth.AutoSize = true;
+            this.rbBandwidth.Location = new System.Drawing.Point(194, 102);
+            this.rbBandwidth.Name = "rbBandwidth";
+            this.rbBandwidth.Size = new System.Drawing.Size(153, 21);
+            this.rbBandwidth.TabIndex = 14;
+            this.rbBandwidth.TabStop = true;
+            this.rbBandwidth.Text = "Measure Bandwidth";
+            this.toolTipChooser.SetToolTip(this.rbBandwidth, "Host Tools v0.14 or Later");
+            this.rbBandwidth.UseVisualStyleBackColor = true;
+            this.rbBandwidth.CheckedChanged += new System.EventHandler(this.rbBandwidth_CheckedChanged);
+            // 
             // rbReset
             // 
             this.rbReset.AutoSize = true;
-            this.rbReset.Location = new System.Drawing.Point(194, 72);
+            this.rbReset.Location = new System.Drawing.Point(194, 75);
             this.rbReset.Name = "rbReset";
             this.rbReset.Size = new System.Drawing.Size(113, 21);
-            this.rbReset.TabIndex = 12;
+            this.rbReset.TabIndex = 13;
             this.rbReset.TabStop = true;
             this.rbReset.Text = "Reset Device";
+            this.toolTipChooser.SetToolTip(this.rbReset, "Host Tools v0.12 or Later");
             this.rbReset.UseVisualStyleBackColor = true;
             this.rbReset.CheckedChanged += new System.EventHandler(this.rbReset_CheckedChanged);
             // 
@@ -193,9 +237,10 @@
             this.rbPin.Location = new System.Drawing.Point(194, 48);
             this.rbPin.Name = "rbPin";
             this.rbPin.Size = new System.Drawing.Size(87, 21);
-            this.rbPin.TabIndex = 11;
+            this.rbPin.TabIndex = 12;
             this.rbPin.TabStop = true;
             this.rbPin.Text = "Pin Level";
+            this.toolTipChooser.SetToolTip(this.rbPin, "Host Tools v0.12 or Later");
             this.rbPin.UseVisualStyleBackColor = true;
             this.rbPin.CheckedChanged += new System.EventHandler(this.rbPin_CheckedChanged);
             // 
@@ -217,7 +262,7 @@
             this.rbUpdateFirmware.Location = new System.Drawing.Point(194, 21);
             this.rbUpdateFirmware.Name = "rbUpdateFirmware";
             this.rbUpdateFirmware.Size = new System.Drawing.Size(136, 21);
-            this.rbUpdateFirmware.TabIndex = 10;
+            this.rbUpdateFirmware.TabIndex = 11;
             this.rbUpdateFirmware.TabStop = true;
             this.rbUpdateFirmware.Text = "Update Firmware";
             this.rbUpdateFirmware.UseVisualStyleBackColor = true;
@@ -226,12 +271,13 @@
             // rbSetDelays
             // 
             this.rbSetDelays.AutoSize = true;
-            this.rbSetDelays.Location = new System.Drawing.Point(36, 72);
+            this.rbSetDelays.Location = new System.Drawing.Point(36, 102);
             this.rbSetDelays.Name = "rbSetDelays";
             this.rbSetDelays.Size = new System.Drawing.Size(97, 21);
-            this.rbSetDelays.TabIndex = 9;
+            this.rbSetDelays.TabIndex = 10;
             this.rbSetDelays.TabStop = true;
             this.rbSetDelays.Text = "Set Delays";
+            this.toolTipChooser.SetToolTip(this.rbSetDelays, "Host Tools v0.06 or Later");
             this.rbSetDelays.UseVisualStyleBackColor = true;
             this.rbSetDelays.CheckedChanged += new System.EventHandler(this.rbSetDelays_CheckedChanged);
             // 
@@ -282,6 +328,7 @@
             this.mnuUSBSupport.Name = "mnuUSBSupport";
             this.mnuUSBSupport.Size = new System.Drawing.Size(217, 26);
             this.mnuUSBSupport.Text = "Enable USB Support";
+            this.mnuUSBSupport.ToolTipText = "Required for Host Tools earlier than v0.11";
             this.mnuUSBSupport.CheckedChanged += new System.EventHandler(this.mnuUSBSupport_CheckChanged);
             this.mnuUSBSupport.Click += new System.EventHandler(this.mnuUSBSupport_Click);
             // 
@@ -298,7 +345,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(434, 492);
+            this.ClientSize = new System.Drawing.Size(434, 529);
             this.Controls.Add(this.gbAction);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -345,5 +392,8 @@
         private System.Windows.Forms.RadioButton rbReset;
         private System.Windows.Forms.RadioButton rbPin;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTipChooser;
+        private System.Windows.Forms.RadioButton rbEraseDisk;
+        private System.Windows.Forms.RadioButton rbBandwidth;
     }
 }

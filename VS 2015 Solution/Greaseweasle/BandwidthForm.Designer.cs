@@ -10,7 +10,7 @@
 
 namespace Greaseweazle
 {
-    partial class ResetForm
+    partial class BandwidthForm
     {
         /// <summary>
         /// Required designer variable.
@@ -38,10 +38,10 @@ namespace Greaseweazle
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResetForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BandwidthForm));
             this.gb1 = new System.Windows.Forms.GroupBox();
             this.btnBack = new System.Windows.Forms.Button();
-            this.txtResetCommandLine = new System.Windows.Forms.TextBox();
+            this.txtBandwidthCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.btnLaunch = new System.Windows.Forms.Button();
             this.gb1.SuspendLayout();
@@ -50,7 +50,7 @@ namespace Greaseweazle
             // gb1
             // 
             this.gb1.Controls.Add(this.btnBack);
-            this.gb1.Controls.Add(this.txtResetCommandLine);
+            this.gb1.Controls.Add(this.txtBandwidthCommandLine);
             this.gb1.Controls.Add(this.lblStaticCL);
             this.gb1.Controls.Add(this.btnLaunch);
             this.gb1.Location = new System.Drawing.Point(12, 12);
@@ -69,14 +69,14 @@ namespace Greaseweazle
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // txtResetCommandLine
+            // txtBandwidthCommandLine
             // 
-            this.txtResetCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtResetCommandLine.Location = new System.Drawing.Point(15, 49);
-            this.txtResetCommandLine.Multiline = true;
-            this.txtResetCommandLine.Name = "txtResetCommandLine";
-            this.txtResetCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtResetCommandLine.TabIndex = 2;
+            this.txtBandwidthCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtBandwidthCommandLine.Location = new System.Drawing.Point(15, 49);
+            this.txtBandwidthCommandLine.Multiline = true;
+            this.txtBandwidthCommandLine.Name = "txtBandwidthCommandLine";
+            this.txtBandwidthCommandLine.Size = new System.Drawing.Size(512, 74);
+            this.txtBandwidthCommandLine.TabIndex = 2;
             // 
             // lblStaticCL
             // 
@@ -97,7 +97,7 @@ namespace Greaseweazle
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
-            // ResetForm
+            // BandwidthForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,10 +106,10 @@ namespace Greaseweazle
             this.Controls.Add(this.gb1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ResetForm";
+            this.Name = "BandwidthForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Reset Device";
-            this.Load += new System.EventHandler(this.ResetForm_Load);
+            this.Text = "Measure USB read/write bandwidth";
+            this.Load += new System.EventHandler(this.BandwidthForm_Load);
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
             this.ResumeLayout(false);
@@ -120,7 +120,7 @@ namespace Greaseweazle
 
         private System.Windows.Forms.GroupBox gb1;
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.TextBox txtResetCommandLine;
+        private System.Windows.Forms.TextBox txtBandwidthCommandLine;
         private System.Windows.Forms.Label lblStaticCL;
         private System.Windows.Forms.Button btnLaunch;
     }
