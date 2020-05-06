@@ -501,6 +501,7 @@ namespace Greaseweazle
                         m_frmReset.Dispose();
                         m_frmReset = new ResetForm(this);
                         m_frmReset.ShowDialog(this);
+<<<<<<< HEAD
                     }
                     break;
                 case "erase":
@@ -527,6 +528,8 @@ namespace Greaseweazle
                         m_frmBandwidth.Dispose();
                         m_frmBandwidth = new BandwidthForm(this);
                         m_frmBandwidth.ShowDialog(this);
+=======
+>>>>>>> 91deb9b9f6ff142c3fc0fb999daf0e4eb62d3e22
                     }
                     break;
             }
