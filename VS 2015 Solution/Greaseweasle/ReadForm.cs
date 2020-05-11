@@ -257,7 +257,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sReadDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "Formats (*.HFE; *.SCP; *.IPF;)| *.HFE; *.SCP; *.IPF; | All files(*.*) | *.*";
+            openDialog.Filter = "Formats (*.HFE; *.SCP;)| *.HFE; *.SCP; | All files(*.*) | *.*";
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {

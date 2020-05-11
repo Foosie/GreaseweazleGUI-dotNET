@@ -80,7 +80,7 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v0.14";
+            this.Text = "GUI " + m_sVersion + " - Host Tools v0.15";
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
@@ -501,7 +501,6 @@ namespace Greaseweazle
                         m_frmReset.Dispose();
                         m_frmReset = new ResetForm(this);
                         m_frmReset.ShowDialog(this);
-<<<<<<< HEAD
                     }
                     break;
                 case "erase":
@@ -528,8 +527,6 @@ namespace Greaseweazle
                         m_frmBandwidth.Dispose();
                         m_frmBandwidth = new BandwidthForm(this);
                         m_frmBandwidth.ShowDialog(this);
-=======
->>>>>>> 91deb9b9f6ff142c3fc0fb999daf0e4eb62d3e22
                     }
                     break;
             }
