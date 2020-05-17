@@ -80,7 +80,7 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v0.15";
+            this.Text = "GUI " + m_sVersion + " - Host Tools v0.16";
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);

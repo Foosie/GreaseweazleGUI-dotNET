@@ -116,7 +116,14 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            txtUpdateCommandLine.Text = "python.exe gw.py update " + "\"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
+            //txtUpdateCommandLine.Text = "python.exe gw.py update " + "\"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
+
+            txtUpdateCommandLine.Text = "python.exe gw.py update";
+            if (chkBootLoader.Checked == true)
+                txtUpdateCommandLine.Text += " --bootloader";
+
+            txtUpdateCommandLine.Text += " \"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
+
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtUpdateCommandLine.Text += " " + m_sUSBPort;
         }
@@ -189,6 +196,13 @@ namespace Greaseweazle
                 ChooserForm.m_frmChooser.Show();
             }
             base.WndProc(ref m);
+        }
+        #endregion
+
+        #region chkBootLoader_CheckedChanged
+        private void chkBootLoader_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
         }
         #endregion
     }
