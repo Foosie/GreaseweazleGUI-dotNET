@@ -32,6 +32,7 @@ namespace Greaseweazle
         private string m_sUpdateFilename = "firmware.upd";
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
+        private bool m_bWindowsEXE = false;
         #endregion
 
         #region UpdateForm
@@ -93,6 +94,10 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+
+            // windows executable
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+                m_bWindowsEXE = (sRet == "True");
         }
         #endregion
 
@@ -116,9 +121,10 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            //txtUpdateCommandLine.Text = "python.exe gw.py update " + "\"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
-
-            txtUpdateCommandLine.Text = "python.exe gw.py update";
+            if (true == m_bWindowsEXE)
+                txtUpdateCommandLine.Text = "gw.exe update";
+            else
+                txtUpdateCommandLine.Text = "python.exe gw.py update";
             if (chkBootLoader.Checked == true)
                 txtUpdateCommandLine.Text += " --bootloader";
 

@@ -30,6 +30,7 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
+        private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
         private const int WM_CLOSE = 0x0010;
         #endregion
@@ -160,6 +161,10 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+
+            // windows executable
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+                m_bWindowsEXE = (sRet == "True");
         }
         #endregion
 
@@ -175,7 +180,10 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            txtRFDCommandLine.Text = "python.exe gw.py read";
+            if (true == m_bWindowsEXE)
+                txtRFDCommandLine.Text = "gw.exe read";
+            else
+                txtRFDCommandLine.Text = "python.exe gw.py read";
             if (chkDoubleStep.Checked == true)
                 txtRFDCommandLine.Text += " --double-step";
             if (chkRevsPerTrack.Checked == true)

@@ -30,6 +30,7 @@ namespace Greaseweazle
         private string m_sWriteDiskFolder = "";
         private string m_sWTDFilename = "mydisk.scp";
         private string m_sUSBPort = "UNKNOWN";
+        private bool m_bWindowsEXE = false;
         private bool m_bUSBSupport = false;
         private Form m_frmChooser = null;
         #endregion
@@ -151,13 +152,20 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+
+            // windows executable
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+                m_bWindowsEXE = (sRet == "True");
         }
         #endregion
 
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            txtWTDCommandLine.Text = "python.exe gw.py write";
+            if (true == m_bWindowsEXE)
+                txtWTDCommandLine.Text = "gw.exe write";
+            else
+                txtWTDCommandLine.Text = "python.exe gw.py write";
             if (chkWriteFirstCyl.Checked == true)
                 txtWTDCommandLine.Text += " --scyl=" + txtWriteFirstCyl.Text;
             if (chkWriteLastCyl.Checked == true)

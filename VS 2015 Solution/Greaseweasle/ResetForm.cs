@@ -27,6 +27,7 @@ namespace Greaseweazle
         private Form m_frmChooser = null;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
+        private bool m_bWindowsEXE = false;
 
         #region ResetForm
         public ResetForm(ChooserForm newForm)
@@ -78,7 +79,10 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            txtResetCommandLine.Text = "python.exe gw.py reset";
+            if (true == m_bWindowsEXE)
+                txtResetCommandLine.Text = "gw.exe reset";
+            else
+                txtResetCommandLine.Text = "python.exe gw.py reset";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtResetCommandLine.Text += " " + m_sUSBPort;
         }
@@ -102,6 +106,10 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+
+            // windows executable
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+                m_bWindowsEXE = (sRet == "True");
         }
         #endregion
 

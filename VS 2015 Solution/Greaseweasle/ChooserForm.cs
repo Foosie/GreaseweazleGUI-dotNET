@@ -36,6 +36,7 @@ namespace Greaseweazle
         public string m_action = "read";
         public const int WM_CLOSE = 0x0010;
         public static Boolean m_bF7Type = false;
+        public static Boolean m_bWindowsEXE = false;
         public static string m_sUSBPort = "UNKNOWN";
         public static string m_sIniFile = ".\\GreaseweazleGUI.ini";
         public static IniFile m_Ini = null;
@@ -80,7 +81,7 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v0.16";
+            this.Text = "GUI " + m_sVersion + " - Host Tools v0.17";
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
@@ -94,7 +95,7 @@ namespace Greaseweazle
             Directory.SetCurrentDirectory(sExeDir);
 
             // check for existance of gw.py
-            if (!File.Exists(sExeDir + "\\gw.py"))
+            if (!File.Exists(sExeDir + "\\gw.py") && !File.Exists(sExeDir + "\\gw.exe"))
                 sOops = "GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.";
 
             // display error
@@ -228,6 +229,21 @@ namespace Greaseweazle
                     mnuUSBSupport.Checked = false;
                 }
             }
+
+            // Windows Executable
+            if ((sRet = (m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                {
+                    mnuWindowsEXE.Checked = true;
+                    m_bWindowsEXE = true;
+                }
+                else
+                {
+                    mnuWindowsEXE.Checked = false;
+                    m_bWindowsEXE = false;
+                }
+            }
         }
         #endregion
 
@@ -251,6 +267,9 @@ namespace Greaseweazle
             // usb port
             m_Ini.IniWriteValue("gbUSBPorts", "mnuUSBSupport", (mnuUSBSupport.Checked == true).ToString());
             m_Ini.IniWriteValue("gbUSBPorts", "m_sUSBPort", m_sUSBPort);
+
+            // windows executable
+            m_Ini.IniWriteValue("gbWindowsEXE", "mnuWindowsEXE", (mnuWindowsEXE.Checked == true).ToString());
         }
         #endregion
 
@@ -620,6 +639,22 @@ namespace Greaseweazle
         {
             if (rbEraseDisk.Checked == true)
                 m_action = "erase";
+        }
+        #endregion
+
+        #region
+        private void mnuWindowsEXE_Click(object sender, EventArgs e)
+        {
+            if (mnuWindowsEXE.Checked != true)
+            {
+                mnuWindowsEXE.Checked = true;
+                m_bWindowsEXE = true;
+            }
+            else
+            {
+                mnuWindowsEXE.Checked = false;
+                m_bWindowsEXE = false;
+            }
         }
         #endregion
     }

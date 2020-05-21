@@ -64,6 +64,7 @@ namespace Greaseweazle
             this.mnuUSBSupport = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
+            this.mnuWindowsEXE = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAction.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbType.SuspendLayout();
@@ -318,7 +319,8 @@ namespace Greaseweazle
             // 
             this.mnuSettings.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.mnuSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuUSBSupport});
+            this.mnuUSBSupport,
+            this.mnuWindowsEXE});
             this.mnuSettings.Name = "mnuSettings";
             this.mnuSettings.Size = new System.Drawing.Size(74, 24);
             this.mnuSettings.Text = "Settings";
@@ -326,7 +328,7 @@ namespace Greaseweazle
             // mnuUSBSupport
             // 
             this.mnuUSBSupport.Name = "mnuUSBSupport";
-            this.mnuUSBSupport.Size = new System.Drawing.Size(217, 26);
+            this.mnuUSBSupport.Size = new System.Drawing.Size(257, 26);
             this.mnuUSBSupport.Text = "Enable USB Support";
             this.mnuUSBSupport.ToolTipText = "Required for Host Tools earlier than v0.11";
             this.mnuUSBSupport.CheckedChanged += new System.EventHandler(this.mnuUSBSupport_CheckChanged);
@@ -339,6 +341,14 @@ namespace Greaseweazle
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // mnuWindowsEXE
+            // 
+            this.mnuWindowsEXE.Name = "mnuWindowsEXE";
+            this.mnuWindowsEXE.Size = new System.Drawing.Size(257, 26);
+            this.mnuWindowsEXE.Text = "Self-contained Executable";
+            this.mnuWindowsEXE.ToolTipText = "Host Tools v0.17 or Later";
+            this.mnuWindowsEXE.Click += new System.EventHandler(this.mnuWindowsEXE_Click);
             // 
             // ChooserForm
             // 
@@ -395,5 +405,6 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolTip toolTipChooser;
         private System.Windows.Forms.RadioButton rbEraseDisk;
         private System.Windows.Forms.RadioButton rbBandwidth;
+        private System.Windows.Forms.ToolStripMenuItem mnuWindowsEXE;
     }
 }

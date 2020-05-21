@@ -29,6 +29,7 @@ namespace Greaseweazle
         private const int WM_CLOSE = 0x0010;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
+        private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
         #endregion
 
@@ -133,13 +134,20 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+
+            // windows executable
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+                m_bWindowsEXE = (sRet == "True");
         }
         #endregion
 
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            txtEraseCommandLine.Text = "python.exe gw.py erase";
+            if (true == m_bWindowsEXE)
+                txtEraseCommandLine.Text = "gw.exe erase";
+            else
+                txtEraseCommandLine.Text = "python.exe gw.py erase";
             if (chkWriteFirstCyl.Checked == true)
                 txtEraseCommandLine.Text += " --scyl=" + txtWriteFirstCyl.Text;
             if (chkWriteLastCyl.Checked == true)
