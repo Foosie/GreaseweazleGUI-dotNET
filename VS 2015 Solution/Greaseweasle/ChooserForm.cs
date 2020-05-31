@@ -32,6 +32,7 @@ namespace Greaseweazle
         private Form m_frmReset = null;
         private Form m_frmErase = null;
         private Form m_frmBandwidth = null;
+        private Form m_frmInfo = null;
         public string sExeDir = "";
         public string m_action = "read";
         public const int WM_CLOSE = 0x0010;
@@ -76,12 +77,13 @@ namespace Greaseweazle
             m_frmReset = new ResetForm(this);
             m_frmErase = new EraseForm(this);
             m_frmBandwidth = new BandwidthForm(this);
+            m_frmInfo = new InfoForm(this);
 
             // get version from Project, GreaseweaselGUI Properties, Assembly Information
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v0.17";
+            this.Text = "GUI " + m_sVersion + " - Host Tools v0.18";
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
@@ -189,6 +191,12 @@ namespace Greaseweazle
                     rbBandwidth.Checked = true;
             }
 
+            if ((sRet = (m_Ini.IniReadValue("gbAction", "rbInfo", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbInfo.Checked = true;
+            }
+
             // type
             if ((sRet = (m_Ini.IniReadValue("gbType", "rbF1", "garbage").Trim())) != "garbage")
             {
@@ -259,6 +267,7 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbAction", "rbPin", (rbPin.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbReset", (rbReset.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbBandwidth", (rbBandwidth.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbAction", "rbInfo", (rbInfo.Checked == true).ToString());
 
             // type
             m_Ini.IniWriteValue("gbType", "rbF1", (rbF1.Checked == true).ToString());
@@ -548,6 +557,19 @@ namespace Greaseweazle
                         m_frmBandwidth.ShowDialog(this);
                     }
                     break;
+                case "info":
+                    if (m_frmInfo.Visible)
+                    {
+                        m_frmInfo.WindowState = FormWindowState.Normal;
+                        m_frmInfo.BringToFront();
+                    }
+                    else
+                    {
+                        m_frmInfo.Dispose();
+                        m_frmInfo = new InfoForm(this);
+                        m_frmInfo.ShowDialog(this);
+                    }
+                    break;
             }
         }
         #endregion
@@ -655,6 +677,14 @@ namespace Greaseweazle
                 mnuWindowsEXE.Checked = false;
                 m_bWindowsEXE = false;
             }
+        }
+        #endregion
+
+        #region rbInfo_CheckedChanged
+        private void rbInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbInfo.Checked == true)
+                m_action = "info";
         }
         #endregion
     }

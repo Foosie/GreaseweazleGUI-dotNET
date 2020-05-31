@@ -50,6 +50,7 @@ namespace Greaseweazle
             this.rbF7 = new System.Windows.Forms.RadioButton();
             this.rbF1 = new System.Windows.Forms.RadioButton();
             this.gbActionSelect = new System.Windows.Forms.GroupBox();
+            this.rbInfo = new System.Windows.Forms.RadioButton();
             this.rbEraseDisk = new System.Windows.Forms.RadioButton();
             this.rbBandwidth = new System.Windows.Forms.RadioButton();
             this.rbReset = new System.Windows.Forms.RadioButton();
@@ -62,9 +63,9 @@ namespace Greaseweazle
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUSBSupport = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuWindowsEXE = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
-            this.mnuWindowsEXE = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAction.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbType.SuspendLayout();
@@ -83,7 +84,7 @@ namespace Greaseweazle
             this.gbAction.Controls.Add(this.pbGWsmall);
             this.gbAction.Location = new System.Drawing.Point(12, 29);
             this.gbAction.Name = "gbAction";
-            this.gbAction.Size = new System.Drawing.Size(410, 486);
+            this.gbAction.Size = new System.Drawing.Size(410, 521);
             this.gbAction.TabIndex = 1;
             this.gbAction.TabStop = false;
             // 
@@ -91,10 +92,10 @@ namespace Greaseweazle
             // 
             this.gbUSBPorts.Controls.Add(this.btnRefreshUSB);
             this.gbUSBPorts.Controls.Add(this.lbUSBPorts);
-            this.gbUSBPorts.Location = new System.Drawing.Point(22, 263);
+            this.gbUSBPorts.Location = new System.Drawing.Point(22, 290);
             this.gbUSBPorts.Name = "gbUSBPorts";
             this.gbUSBPorts.Size = new System.Drawing.Size(367, 166);
-            this.gbUSBPorts.TabIndex = 15;
+            this.gbUSBPorts.TabIndex = 16;
             this.gbUSBPorts.TabStop = false;
             this.gbUSBPorts.Text = "USB Ports";
             // 
@@ -103,7 +104,7 @@ namespace Greaseweazle
             this.btnRefreshUSB.Location = new System.Drawing.Point(129, 121);
             this.btnRefreshUSB.Name = "btnRefreshUSB";
             this.btnRefreshUSB.Size = new System.Drawing.Size(108, 29);
-            this.btnRefreshUSB.TabIndex = 17;
+            this.btnRefreshUSB.TabIndex = 18;
             this.btnRefreshUSB.Text = "Refresh";
             this.btnRefreshUSB.UseVisualStyleBackColor = true;
             this.btnRefreshUSB.Click += new System.EventHandler(this.btnRefreshUSB_Click);
@@ -116,25 +117,25 @@ namespace Greaseweazle
             this.lbUSBPorts.Location = new System.Drawing.Point(23, 26);
             this.lbUSBPorts.Name = "lbUSBPorts";
             this.lbUSBPorts.Size = new System.Drawing.Size(320, 84);
-            this.lbUSBPorts.TabIndex = 14;
+            this.lbUSBPorts.TabIndex = 17;
             this.lbUSBPorts.SelectedIndexChanged += new System.EventHandler(this.lbUSBPorts_SelectedIndexChanged);
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(62, 442);
+            this.btnSelect.Location = new System.Drawing.Point(62, 469);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(108, 29);
-            this.btnSelect.TabIndex = 18;
+            this.btnSelect.TabIndex = 19;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(240, 442);
+            this.btnClose.Location = new System.Drawing.Point(240, 469);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(108, 29);
-            this.btnClose.TabIndex = 19;
+            this.btnClose.TabIndex = 20;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -178,6 +179,7 @@ namespace Greaseweazle
             // 
             // gbActionSelect
             // 
+            this.gbActionSelect.Controls.Add(this.rbInfo);
             this.gbActionSelect.Controls.Add(this.rbEraseDisk);
             this.gbActionSelect.Controls.Add(this.rbBandwidth);
             this.gbActionSelect.Controls.Add(this.rbReset);
@@ -188,10 +190,23 @@ namespace Greaseweazle
             this.gbActionSelect.Controls.Add(this.rbWriteDisk);
             this.gbActionSelect.Location = new System.Drawing.Point(22, 121);
             this.gbActionSelect.Name = "gbActionSelect";
-            this.gbActionSelect.Size = new System.Drawing.Size(367, 135);
+            this.gbActionSelect.Size = new System.Drawing.Size(367, 163);
             this.gbActionSelect.TabIndex = 6;
             this.gbActionSelect.TabStop = false;
             this.gbActionSelect.Text = "Action";
+            // 
+            // rbInfo
+            // 
+            this.rbInfo.AutoSize = true;
+            this.rbInfo.Location = new System.Drawing.Point(194, 129);
+            this.rbInfo.Name = "rbInfo";
+            this.rbInfo.Size = new System.Drawing.Size(113, 21);
+            this.rbInfo.TabIndex = 15;
+            this.rbInfo.TabStop = true;
+            this.rbInfo.Text = "Info on Setup";
+            this.toolTipChooser.SetToolTip(this.rbInfo, "Host Tools v0.14 or Later");
+            this.rbInfo.UseVisualStyleBackColor = true;
+            this.rbInfo.CheckedChanged += new System.EventHandler(this.rbInfo_CheckedChanged);
             // 
             // rbEraseDisk
             // 
@@ -334,14 +349,6 @@ namespace Greaseweazle
             this.mnuUSBSupport.CheckedChanged += new System.EventHandler(this.mnuUSBSupport_CheckChanged);
             this.mnuUSBSupport.Click += new System.EventHandler(this.mnuUSBSupport_Click);
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // mnuWindowsEXE
             // 
             this.mnuWindowsEXE.Name = "mnuWindowsEXE";
@@ -350,12 +357,20 @@ namespace Greaseweazle
             this.mnuWindowsEXE.ToolTipText = "Host Tools v0.17 or Later";
             this.mnuWindowsEXE.Click += new System.EventHandler(this.mnuWindowsEXE_Click);
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // ChooserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(434, 529);
+            this.ClientSize = new System.Drawing.Size(434, 562);
             this.Controls.Add(this.gbAction);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -406,5 +421,6 @@ namespace Greaseweazle
         private System.Windows.Forms.RadioButton rbEraseDisk;
         private System.Windows.Forms.RadioButton rbBandwidth;
         private System.Windows.Forms.ToolStripMenuItem mnuWindowsEXE;
+        private System.Windows.Forms.RadioButton rbInfo;
     }
 }

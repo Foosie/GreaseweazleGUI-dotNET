@@ -84,7 +84,11 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveSelectRFD", txtDriveSelectRFD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveSelectRFD", (chkDriveSelectRFD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sReadDiskFolder", m_sReadDiskFolder);
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtRFDCommandLine", txtRFDCommandLine.Text);     
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtRFDCommandLine", txtRFDCommandLine.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRateRFD", (chkDriveRateRFD.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRateRFD", txtDriveRateRFD.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRpmRFD", (chkDriveRpmRFD.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRpmRFD", txtDriveRpmRFD.Text);
         }
         #endregion
 
@@ -156,6 +160,22 @@ namespace Greaseweazle
                     chkDoubleStep.Checked = true;
             }
 
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDriveRateRFD", "garbage").Trim())) != "garbage")
+                txtDriveRateRFD.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkDriveRateRFD", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDriveRateRFD.Checked = true;
+            }
+
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDriveRpmRFD", "garbage").Trim())) != "garbage")
+                txtDriveRpmRFD.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkDriveRpmRFD", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDriveRpmRFD.Checked = true;
+            }
+
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
@@ -165,15 +185,6 @@ namespace Greaseweazle
             // windows executable
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
                 m_bWindowsEXE = (sRet == "True");
-        }
-        #endregion
-
-        #region ReadForm_Load
-        private void ReadForm_Load(object sender, EventArgs e)
-        {
-            // read inifile
-            iniReadFile();
-            CreateCommandLine();
         }
         #endregion
 
@@ -194,6 +205,10 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --ecyl=" + txtReadLastCyl.Text;
             if (rbReadSingleSided.Checked == true)
                 txtRFDCommandLine.Text += " --single-sided";
+            if (chkDriveRateRFD.Checked == true)
+                txtRFDCommandLine.Text += " --rate=" + txtDriveRateRFD.Text;
+            if (chkDriveRpmRFD.Checked == true)
+                txtRFDCommandLine.Text += " --rpm=" + txtDriveRpmRFD.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive " + txtDriveSelectRFD.Text;
             txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + m_sRFDFilename + "\"";
@@ -235,6 +250,56 @@ namespace Greaseweazle
 
         private void chkDoubleStep_CheckedChanged(object sender, EventArgs e)
         {
+            CreateCommandLine();
+        }
+
+        private void chkDriveRateRFD_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkDriveRpmRFD_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtDriveRateRFD_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtDriveRpmRFD_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtRevsPerTrack_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtReadFirstCyl_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtReadLastCyl_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtDriveSelectRFD_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        #endregion
+
+        #region ReadForm_Load
+        private void ReadForm_Load(object sender, EventArgs e)
+        {
+            // read inifile
+            iniReadFile();
             CreateCommandLine();
         }
         #endregion
@@ -280,34 +345,6 @@ namespace Greaseweazle
         private void btnLaunch_Click(object sender, EventArgs e)
         {
             LaunchPython();
-        }
-        #endregion
-
-        #region txtRevsPerTrack_TextChanged
-        private void txtRevsPerTrack_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region txtReadFirstCyl_TextChanged
-        private void txtReadFirstCyl_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region txtReadLastCyl_TextChanged
-        private void txtReadLastCyl_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region txtDriveSelectRFD_TextChanged
-        private void txtDriveSelectRFD_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
         }
         #endregion
 
@@ -362,5 +399,6 @@ namespace Greaseweazle
             base.WndProc(ref m);
         }
         #endregion
+
     }
 }

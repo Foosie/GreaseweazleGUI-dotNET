@@ -77,6 +77,12 @@
     <Compile Include="EraseForm.Designer.cs">
       <DependentUpon>EraseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ini.cs" />
     <Compile Include="PinForm.cs">
       <SubType>Form</SubType>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EraseForm.resx">
       <DependentUpon>EraseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PinForm.resx">
       <DependentUpon>PinForm.cs</DependentUpon>

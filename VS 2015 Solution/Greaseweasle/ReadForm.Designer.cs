@@ -42,6 +42,10 @@ namespace Greaseweazle
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadForm));
             this.gbReadFromDisk = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDriveRpmRFD = new System.Windows.Forms.TextBox();
+            this.chkDriveRpmRFD = new System.Windows.Forms.CheckBox();
+            this.txtDriveRateRFD = new System.Windows.Forms.TextBox();
+            this.chkDriveRateRFD = new System.Windows.Forms.CheckBox();
             this.chkDoubleStep = new System.Windows.Forms.CheckBox();
             this.chkRevsPerTrack = new System.Windows.Forms.CheckBox();
             this.txtRevsPerTrack = new System.Windows.Forms.TextBox();
@@ -75,12 +79,16 @@ namespace Greaseweazle
             this.gbReadFromDisk.Controls.Add(this.btnRFDSelectFolder);
             this.gbReadFromDisk.Location = new System.Drawing.Point(21, 19);
             this.gbReadFromDisk.Name = "gbReadFromDisk";
-            this.gbReadFromDisk.Size = new System.Drawing.Size(555, 410);
+            this.gbReadFromDisk.Size = new System.Drawing.Size(555, 464);
             this.gbReadFromDisk.TabIndex = 0;
             this.gbReadFromDisk.TabStop = false;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDriveRpmRFD);
+            this.groupBox1.Controls.Add(this.chkDriveRpmRFD);
+            this.groupBox1.Controls.Add(this.txtDriveRateRFD);
+            this.groupBox1.Controls.Add(this.chkDriveRateRFD);
             this.groupBox1.Controls.Add(this.chkDoubleStep);
             this.groupBox1.Controls.Add(this.chkRevsPerTrack);
             this.groupBox1.Controls.Add(this.txtRevsPerTrack);
@@ -94,9 +102,57 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.rbReadDoubleSided);
             this.groupBox1.Location = new System.Drawing.Point(23, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(512, 207);
+            this.groupBox1.Size = new System.Drawing.Size(512, 264);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // txtDriveRpmRFD
+            // 
+            this.txtDriveRpmRFD.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDriveRpmRFD.Location = new System.Drawing.Point(352, 193);
+            this.txtDriveRpmRFD.MaxLength = 3;
+            this.txtDriveRpmRFD.Name = "txtDriveRpmRFD";
+            this.txtDriveRpmRFD.Size = new System.Drawing.Size(54, 22);
+            this.txtDriveRpmRFD.TabIndex = 14;
+            this.txtDriveRpmRFD.Text = "300";
+            this.toolTipRFD.SetToolTip(this.txtDriveRpmRFD, "Host Tools v0.18 or Later");
+            this.txtDriveRpmRFD.TextChanged += new System.EventHandler(this.txtDriveRpmRFD_TextChanged);
+            // 
+            // chkDriveRpmRFD
+            // 
+            this.chkDriveRpmRFD.AutoSize = true;
+            this.chkDriveRpmRFD.Location = new System.Drawing.Point(107, 195);
+            this.chkDriveRpmRFD.Name = "chkDriveRpmRFD";
+            this.chkDriveRpmRFD.Size = new System.Drawing.Size(60, 21);
+            this.chkDriveRpmRFD.TabIndex = 13;
+            this.chkDriveRpmRFD.Text = "RPM";
+            this.toolTipRFD.SetToolTip(this.chkDriveRpmRFD, "Host Tools v0.18 or Later");
+            this.chkDriveRpmRFD.UseVisualStyleBackColor = true;
+            this.chkDriveRpmRFD.CheckedChanged += new System.EventHandler(this.chkDriveRpmRFD_CheckedChanged);
+            // 
+            // txtDriveRateRFD
+            // 
+            this.txtDriveRateRFD.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDriveRateRFD.Location = new System.Drawing.Point(352, 163);
+            this.txtDriveRateRFD.MaxLength = 3;
+            this.txtDriveRateRFD.Name = "txtDriveRateRFD";
+            this.txtDriveRateRFD.Size = new System.Drawing.Size(54, 22);
+            this.txtDriveRateRFD.TabIndex = 12;
+            this.txtDriveRateRFD.Text = "250";
+            this.toolTipRFD.SetToolTip(this.txtDriveRateRFD, "Host Tools v0.18 or Later");
+            this.txtDriveRateRFD.TextChanged += new System.EventHandler(this.txtDriveRateRFD_TextChanged);
+            // 
+            // chkDriveRateRFD
+            // 
+            this.chkDriveRateRFD.AutoSize = true;
+            this.chkDriveRateRFD.Location = new System.Drawing.Point(107, 165);
+            this.chkDriveRateRFD.Name = "chkDriveRateRFD";
+            this.chkDriveRateRFD.Size = new System.Drawing.Size(107, 21);
+            this.chkDriveRateRFD.TabIndex = 11;
+            this.chkDriveRateRFD.Text = "Rate (kbit/s)";
+            this.toolTipRFD.SetToolTip(this.chkDriveRateRFD, "Host Tools v0.18 or Later");
+            this.chkDriveRateRFD.UseVisualStyleBackColor = true;
+            this.chkDriveRateRFD.CheckedChanged += new System.EventHandler(this.chkDriveRateRFD_CheckedChanged);
             // 
             // chkDoubleStep
             // 
@@ -200,10 +256,10 @@ namespace Greaseweazle
             // rbReadSingleSided
             // 
             this.rbReadSingleSided.AutoSize = true;
-            this.rbReadSingleSided.Location = new System.Drawing.Point(107, 168);
+            this.rbReadSingleSided.Location = new System.Drawing.Point(107, 224);
             this.rbReadSingleSided.Name = "rbReadSingleSided";
             this.rbReadSingleSided.Size = new System.Drawing.Size(108, 21);
-            this.rbReadSingleSided.TabIndex = 11;
+            this.rbReadSingleSided.TabIndex = 15;
             this.rbReadSingleSided.TabStop = true;
             this.rbReadSingleSided.Text = "Single Sided";
             this.rbReadSingleSided.UseVisualStyleBackColor = true;
@@ -213,10 +269,10 @@ namespace Greaseweazle
             // 
             this.rbReadDoubleSided.AutoSize = true;
             this.rbReadDoubleSided.Checked = true;
-            this.rbReadDoubleSided.Location = new System.Drawing.Point(221, 168);
+            this.rbReadDoubleSided.Location = new System.Drawing.Point(221, 224);
             this.rbReadDoubleSided.Name = "rbReadDoubleSided";
             this.rbReadDoubleSided.Size = new System.Drawing.Size(114, 21);
-            this.rbReadDoubleSided.TabIndex = 12;
+            this.rbReadDoubleSided.TabIndex = 16;
             this.rbReadDoubleSided.TabStop = true;
             this.rbReadDoubleSided.Text = "Double Sided";
             this.rbReadDoubleSided.UseVisualStyleBackColor = true;
@@ -224,10 +280,10 @@ namespace Greaseweazle
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(394, 363);
+            this.btnBack.Location = new System.Drawing.Point(394, 414);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 18;
+            this.btnBack.TabIndex = 22;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -235,37 +291,37 @@ namespace Greaseweazle
             // txtRFDCommandLine
             // 
             this.txtRFDCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtRFDCommandLine.Location = new System.Drawing.Point(23, 275);
+            this.txtRFDCommandLine.Location = new System.Drawing.Point(23, 326);
             this.txtRFDCommandLine.Multiline = true;
             this.txtRFDCommandLine.Name = "txtRFDCommandLine";
             this.txtRFDCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtRFDCommandLine.TabIndex = 14;
+            this.txtRFDCommandLine.TabIndex = 18;
             // 
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(229, 247);
+            this.lblStaticCL.Location = new System.Drawing.Point(229, 298);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
-            this.lblStaticCL.TabIndex = 13;
+            this.lblStaticCL.TabIndex = 17;
             this.lblStaticCL.Text = "Command Line";
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(280, 363);
+            this.btnLaunch.Location = new System.Drawing.Point(280, 414);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 17;
+            this.btnLaunch.TabIndex = 21;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // btnRFDSelectFile
             // 
-            this.btnRFDSelectFile.Location = new System.Drawing.Point(166, 363);
+            this.btnRFDSelectFile.Location = new System.Drawing.Point(166, 414);
             this.btnRFDSelectFile.Name = "btnRFDSelectFile";
             this.btnRFDSelectFile.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFile.TabIndex = 16;
+            this.btnRFDSelectFile.TabIndex = 20;
             this.btnRFDSelectFile.Text = "Select File";
             this.toolTipRFD.SetToolTip(this.btnRFDSelectFile, "HFE & IPF require Host Tools v0.13 or later");
             this.btnRFDSelectFile.UseVisualStyleBackColor = true;
@@ -273,10 +329,10 @@ namespace Greaseweazle
             // 
             // btnRFDSelectFolder
             // 
-            this.btnRFDSelectFolder.Location = new System.Drawing.Point(52, 363);
+            this.btnRFDSelectFolder.Location = new System.Drawing.Point(52, 414);
             this.btnRFDSelectFolder.Name = "btnRFDSelectFolder";
             this.btnRFDSelectFolder.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFolder.TabIndex = 15;
+            this.btnRFDSelectFolder.TabIndex = 19;
             this.btnRFDSelectFolder.Text = "Select Folder";
             this.btnRFDSelectFolder.UseVisualStyleBackColor = true;
             this.btnRFDSelectFolder.Click += new System.EventHandler(this.btnRFDSelectFolder_Click);
@@ -286,7 +342,7 @@ namespace Greaseweazle
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(597, 454);
+            this.ClientSize = new System.Drawing.Size(597, 503);
             this.Controls.Add(this.gbReadFromDisk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -324,5 +380,9 @@ namespace Greaseweazle
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkDoubleStep;
         private System.Windows.Forms.ToolTip toolTipRFD;
+        private System.Windows.Forms.TextBox txtDriveRpmRFD;
+        private System.Windows.Forms.CheckBox chkDriveRpmRFD;
+        private System.Windows.Forms.TextBox txtDriveRateRFD;
+        private System.Windows.Forms.CheckBox chkDriveRateRFD;
     }
 }
