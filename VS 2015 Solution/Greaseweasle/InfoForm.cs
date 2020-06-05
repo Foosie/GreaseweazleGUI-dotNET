@@ -115,7 +115,6 @@ namespace Greaseweazle
         #region btnLaunch_Click
         private void btnLaunch_Click(object sender, EventArgs e)
         {
-            CreateCommandLine();
             LaunchPython();
         }
         #endregion
