@@ -82,7 +82,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtBandwidthCommandLine.Text = "gw.exe bandwidth";
             else
-                txtBandwidthCommandLine.Text = "python.exe gw.py bandwidth";
+                txtBandwidthCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " bandwidth";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtBandwidthCommandLine.Text += " " + m_sUSBPort;
         }

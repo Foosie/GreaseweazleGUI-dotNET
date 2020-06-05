@@ -86,7 +86,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtPinCommandLine.Text = "gw.exe pin";
             else
-                txtPinCommandLine.Text = "python.exe gw.py pin " + txtPin.Text;
+                txtPinCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " pin " + txtPin.Text;
             if (rbHigh.Checked == true)
                 txtPinCommandLine.Text += " H";
             else

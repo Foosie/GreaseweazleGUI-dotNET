@@ -82,7 +82,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtResetCommandLine.Text = "gw.exe reset";
             else
-                txtResetCommandLine.Text = "python.exe gw.py reset";
+                txtResetCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " reset";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtResetCommandLine.Text += " " + m_sUSBPort;
         }

@@ -194,7 +194,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtRFDCommandLine.Text = "gw.exe read";
             else
-                txtRFDCommandLine.Text = "python.exe gw.py read";
+                txtRFDCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " read";
             if (chkDoubleStep.Checked == true)
                 txtRFDCommandLine.Text += " --double-step";
             if (chkRevsPerTrack.Checked == true)

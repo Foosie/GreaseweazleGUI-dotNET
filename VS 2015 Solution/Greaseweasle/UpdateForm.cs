@@ -124,7 +124,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtUpdateCommandLine.Text = "gw.exe update";
             else
-                txtUpdateCommandLine.Text = "python.exe gw.py update";
+                txtUpdateCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " update";
             if (chkBootLoader.Checked == true)
                 txtUpdateCommandLine.Text += " --bootloader";
 

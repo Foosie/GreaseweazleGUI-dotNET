@@ -140,7 +140,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtDelaysCommandLine.Text = "gw.exe delays";
             else
-                txtDelaysCommandLine.Text = "python.exe gw.py delays";
+                txtDelaysCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " delays";
             if (chkDelayDriveSelect.Checked == true)
                 txtDelaysCommandLine.Text += " --select=" + txtDelayDriveSelect.Text;
             if (chkDelayHeadSteps.Checked == true)

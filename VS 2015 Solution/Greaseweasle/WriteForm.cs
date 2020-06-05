@@ -165,7 +165,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtWTDCommandLine.Text = "gw.exe write";
             else
-                txtWTDCommandLine.Text = "python.exe gw.py write";
+                txtWTDCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " write";
             if (chkWriteFirstCyl.Checked == true)
                 txtWTDCommandLine.Text += " --scyl=" + txtWriteFirstCyl.Text;
             if (chkWriteLastCyl.Checked == true)

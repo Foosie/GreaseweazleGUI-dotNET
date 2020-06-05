@@ -38,6 +38,7 @@ namespace Greaseweazle
         public const int WM_CLOSE = 0x0010;
         public static Boolean m_bF7Type = false;
         public static Boolean m_bWindowsEXE = false;
+        public static string m_sGWscript = "gw.py";
         public static string m_sUSBPort = "UNKNOWN";
         public static string m_sIniFile = ".\\GreaseweazleGUI.ini";
         public static IniFile m_Ini = null;
@@ -97,12 +98,14 @@ namespace Greaseweazle
             Directory.SetCurrentDirectory(sExeDir);
 
             // check for existance of gw.py
-            if (!File.Exists(sExeDir + "\\gw.py") && !File.Exists(sExeDir + "\\gw.exe"))
-                sOops = "GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.";
+            if (!File.Exists(sExeDir + "\\gw.py") && !File.Exists(sExeDir + "\\gw") && !File.Exists(sExeDir + "\\gw.exe"))
+                System.Windows.Forms.MessageBox.Show("GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.", "Oops!");
 
-            // display error
-            if (sOops.Length > 0)
-                System.Windows.Forms.MessageBox.Show(sOops, "Oops!");
+            // determine which way to invoke the script
+            // this is overwridden if the user selects exe in settings
+            if (File.Exists(sExeDir + "\\gw"))
+                m_sGWscript = "gw";
+            else m_sGWscript = "gw.py";
 
             // read our settings
             iniReadFile();
@@ -664,7 +667,7 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region
+        #region mnuWindowsEXE_Click
         private void mnuWindowsEXE_Click(object sender, EventArgs e)
         {
             if (mnuWindowsEXE.Checked != true)

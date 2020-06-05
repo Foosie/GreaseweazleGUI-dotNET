@@ -147,7 +147,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtEraseCommandLine.Text = "gw.exe erase";
             else
-                txtEraseCommandLine.Text = "python.exe gw.py erase";
+                txtEraseCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " erase";
             if (chkWriteFirstCyl.Checked == true)
                 txtEraseCommandLine.Text += " --scyl=" + txtWriteFirstCyl.Text;
             if (chkWriteLastCyl.Checked == true)

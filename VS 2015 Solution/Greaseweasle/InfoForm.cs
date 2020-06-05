@@ -82,7 +82,7 @@ namespace Greaseweazle
             if (true == m_bWindowsEXE)
                 txtInfoCommandLine.Text = "gw.exe info";
             else
-                txtInfoCommandLine.Text = "python.exe gw.py info";
+                txtInfoCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " info";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtInfoCommandLine.Text += " " + m_sUSBPort;
         }
