@@ -48,6 +48,10 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
+        private string m_sGWVersionMajor = "0";
+        private string m_sGWVersionMinor = "00";
+        private string m_sGUISupportedVersionMajor = "0";
+        private string m_sGUISupportedVersionMinor = "19";
         #endregion
 
         #region ChooserForm
@@ -84,11 +88,11 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v0.18";
+            //this.Text = "GUI " + m_sVersion + " - Host Tools v0.19";
+            this.Text = "GUI " + m_sVersion + " - Host Tools v" + m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor;
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
-            string sOops = "";
             rbReadDisk.Checked = true;
             m_frmChooser = this;
             menuStrip1.BackColor = mnuSettings.BackColor;
@@ -100,6 +104,16 @@ namespace Greaseweazle
             // check for existance of gw.py
             if (!File.Exists(sExeDir + "\\gw.py") && !File.Exists(sExeDir + "\\gw") && !File.Exists(sExeDir + "\\gw.exe"))
                 System.Windows.Forms.MessageBox.Show("GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.", "Oops!");
+            else
+            {
+                if (chkVersions(sExeDir))
+                {
+                    if ((m_sGWVersionMajor == m_sGUISupportedVersionMajor) && (m_sGWVersionMinor == m_sGUISupportedVersionMinor))
+                        toolStripStatusLabel.Text = "                  GUI fully supports this Host Tools version                  ";
+                    else
+                        toolStripStatusLabel.Text = "  GUI may not support this Host Tools version   -   click me!  ";
+                }
+            }
 
             // determine which way to invoke the script
             // this is overwridden if the user selects exe in settings
@@ -122,6 +136,42 @@ namespace Greaseweazle
             refreshUSBPorts();
         }
         #endregion
+
+        #region chkVersions
+        public bool chkVersions(string sExeDir)
+        {
+            bool b1 = false;
+            bool b2 = false;
+
+            string fname = sExeDir + "\\scripts\\greaseweazle\\version.py";
+            if (File.Exists(fname))
+            {
+                string[] lines = System.IO.File.ReadAllLines(@fname);
+                foreach (string line in lines)
+                {
+                    string[] values = line.Split('=');
+                    if (values[0].Trim().ToLower() == "major")
+                    {
+                        b1 = true;
+                        m_sGWVersionMajor = values[1].Trim();
+                    }
+                    else
+                    {
+                        if (values[0].Trim().ToLower() == "minor")
+                        {
+                            b2 = true;
+                            m_sGWVersionMinor = values[1].Trim();
+                        }
+                    }
+                }
+
+            }
+            if (b1 && b2)
+                return true;
+            else
+                return false;
+        }
+        #endregion 
 
         #region iniReadFile
         public void iniReadFile()
@@ -688,6 +738,13 @@ namespace Greaseweazle
         {
             if (rbInfo.Checked == true)
                 m_action = "info";
+        }
+        #endregion
+
+        #region statusStrip_ItemClicked
+        private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            MessageBox.Show("The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.");
         }
         #endregion
     }

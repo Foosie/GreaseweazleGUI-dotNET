@@ -66,12 +66,15 @@ namespace Greaseweazle
             this.mnuWindowsEXE = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbAction.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbType.SuspendLayout();
             this.gbActionSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGWsmall)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbAction
@@ -365,12 +368,31 @@ namespace Greaseweazle
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 584);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(434, 24);
+            this.statusStrip.SizingGrip = false;
+            this.statusStrip.Stretch = false;
+            this.statusStrip.TabIndex = 4;
+            this.statusStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip_ItemClicked);
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 19);
+            // 
             // ChooserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(434, 562);
+            this.ClientSize = new System.Drawing.Size(434, 608);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.gbAction);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -389,6 +411,8 @@ namespace Greaseweazle
             ((System.ComponentModel.ISupportInitialize)(this.pbGWsmall)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,5 +446,7 @@ namespace Greaseweazle
         private System.Windows.Forms.RadioButton rbBandwidth;
         private System.Windows.Forms.ToolStripMenuItem mnuWindowsEXE;
         private System.Windows.Forms.RadioButton rbInfo;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }
