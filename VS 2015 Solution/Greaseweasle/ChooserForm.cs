@@ -108,10 +108,17 @@ namespace Greaseweazle
             {
                 if (chkVersions(sExeDir))
                 {
+                    string sHTVer = "Host Tools v" + m_sGWVersionMajor + "." + m_sGWVersionMinor;
                     if ((m_sGWVersionMajor == m_sGUISupportedVersionMajor) && (m_sGWVersionMinor == m_sGUISupportedVersionMinor))
-                        toolStripStatusLabel.Text = "                  GUI fully supports this Host Tools version                  ";
+                    {
+                        toolStripStatusLabel.BackColor = Color.FromArgb(173, 255, 47);
+                        toolStripStatusLabel.Text = "                      GUI fully supports " + sHTVer + "                      ";
+                    }
                     else
-                        toolStripStatusLabel.Text = "  GUI may not support this Host Tools version   -   click me!  ";
+                    {
+                        toolStripStatusLabel.BackColor = Color.FromArgb(255, 182, 193);
+                        toolStripStatusLabel.Text = "   GUI may not fully support " + sHTVer + "   -   click me!    ";
+                    }
                 }
             }
 
