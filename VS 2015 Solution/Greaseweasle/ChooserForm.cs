@@ -119,6 +119,10 @@ namespace Greaseweazle
                         toolStripStatusLabel.BackColor = Color.FromArgb(255, 182, 193);
                         toolStripStatusLabel.Text = "   GUI may not fully support " + sHTVer + "   -   click me!    ";
                     }
+                } else
+                {
+                    toolStripStatusLabel.BackColor = Color.FromArgb(255, 182, 193);
+                    toolStripStatusLabel.Text = "          GUI cannot locate the Greaseweazle version file!            ";
                 }
             }
 

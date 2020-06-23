@@ -83,6 +83,8 @@ namespace Greaseweazle
                 txtInfoCommandLine.Text = "gw.exe info";
             else
                 txtInfoCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " info";
+            if (chkBootLoader.Checked == true)
+                txtInfoCommandLine.Text += " --bootloader";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtInfoCommandLine.Text += " " + m_sUSBPort;
         }
@@ -148,6 +150,13 @@ namespace Greaseweazle
                 ChooserForm.m_frmChooser.Show();
             }
             base.WndProc(ref m);
+        }
+        #endregion
+
+        #region chkBootLoader_CheckedChanged
+        private void chkBootLoader_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
         }
         #endregion
     }
