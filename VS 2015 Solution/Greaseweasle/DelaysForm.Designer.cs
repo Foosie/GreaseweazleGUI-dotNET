@@ -56,8 +56,11 @@ namespace Greaseweazle
             this.chkDelayDriveSelect = new System.Windows.Forms.CheckBox();
             this.txtDelayHeadSteps = new System.Windows.Forms.TextBox();
             this.chkDelayHeadSteps = new System.Windows.Forms.CheckBox();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.gbSetDelays.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -245,12 +248,29 @@ namespace Greaseweazle
             this.chkDelayHeadSteps.UseVisualStyleBackColor = true;
             this.chkDelayHeadSteps.CheckedChanged += new System.EventHandler(this.chkDelayHeadSteps_CheckedChanged);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 444);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(574, 25);
+            this.statusStrip.TabIndex = 1;
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            // 
             // DelaysForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(574, 440);
+            this.ClientSize = new System.Drawing.Size(574, 469);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -262,7 +282,10 @@ namespace Greaseweazle
             this.groupBox1.PerformLayout();
             this.gbSetDelays.ResumeLayout(false);
             this.gbSetDelays.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -285,5 +308,7 @@ namespace Greaseweazle
         private System.Windows.Forms.Button btnDelaysDefaults;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnLaunch;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }

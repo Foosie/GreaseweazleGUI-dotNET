@@ -49,8 +49,11 @@ namespace Greaseweazle
             this.txtPinCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.btnLaunch = new System.Windows.Forms.Button();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbPin.SuspendLayout();
             this.gb1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbPin
@@ -157,12 +160,29 @@ namespace Greaseweazle
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 348);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(572, 25);
+            this.statusStrip.TabIndex = 1;
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            // 
             // PinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(572, 345);
+            this.ClientSize = new System.Drawing.Size(572, 373);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.gbPin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -174,7 +194,10 @@ namespace Greaseweazle
             this.gbPin.PerformLayout();
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -190,5 +213,7 @@ namespace Greaseweazle
         private System.Windows.Forms.TextBox txtPinCommandLine;
         private System.Windows.Forms.Label lblStaticCL;
         private System.Windows.Forms.Button btnLaunch;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }

@@ -86,15 +86,10 @@ namespace Greaseweazle
             // found out the controller type
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
             {
-                if (sRet == "True")
+                if (sRet == "False")
                 {
-                    chkDriveSelect.Enabled = true;
-                    txtDriveSelect.Enabled = true;
-                }
-                else
-                {
-                    chkDriveSelect.Enabled = false;
-                    txtDriveSelect.Enabled = false;
+                    chkDriveSelect.BackColor = Color.FromArgb(255, 182, 193);
+                    txtDriveSelect.BackColor = Color.FromArgb(255, 182, 193);
                 }
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "rbWriteDoubleSided", "garbage").Trim())) != "garbage")
@@ -203,6 +198,12 @@ namespace Greaseweazle
         {
             // read inifile
             iniReadFile();
+
+            // initialize status label
+            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
+            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
+            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+
             CreateCommandLine();
         }
         #endregion

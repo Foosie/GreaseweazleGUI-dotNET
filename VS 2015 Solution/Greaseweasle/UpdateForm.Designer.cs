@@ -45,12 +45,15 @@ namespace Greaseweazle
             this.btnBack = new System.Windows.Forms.Button();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.gbUpdateFirmware = new System.Windows.Forms.GroupBox();
-            this.txtUpdateCommandLine = new System.Windows.Forms.TextBox();
             this.gb1 = new System.Windows.Forms.GroupBox();
             this.chkBootLoader = new System.Windows.Forms.CheckBox();
+            this.txtUpdateCommandLine = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbUpdateFirmware.SuspendLayout();
             this.gb1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSelectUpdateFile
@@ -106,15 +109,6 @@ namespace Greaseweazle
             this.gbUpdateFirmware.TabIndex = 1;
             this.gbUpdateFirmware.TabStop = false;
             // 
-            // txtUpdateCommandLine
-            // 
-            this.txtUpdateCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtUpdateCommandLine.Location = new System.Drawing.Point(15, 151);
-            this.txtUpdateCommandLine.Multiline = true;
-            this.txtUpdateCommandLine.Name = "txtUpdateCommandLine";
-            this.txtUpdateCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtUpdateCommandLine.TabIndex = 5;
-            // 
             // gb1
             // 
             this.gb1.Controls.Add(this.chkBootLoader);
@@ -133,16 +127,41 @@ namespace Greaseweazle
             this.chkBootLoader.TabIndex = 3;
             this.chkBootLoader.Text = "Bootloader (Take Care)";
             this.toolTip1.SetToolTip(this.chkBootLoader, "Host Tools v0.16 or Later\r\nNot normally required\r\nFailure may brick the Weazle an" +
-        "d require full reflash");
+        "d require full reflash\r\nNO jumper across GND and DCLK");
             this.chkBootLoader.UseVisualStyleBackColor = true;
             this.chkBootLoader.CheckedChanged += new System.EventHandler(this.chkBootLoader_CheckedChanged);
+            // 
+            // txtUpdateCommandLine
+            // 
+            this.txtUpdateCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtUpdateCommandLine.Location = new System.Drawing.Point(15, 151);
+            this.txtUpdateCommandLine.Multiline = true;
+            this.txtUpdateCommandLine.Name = "txtUpdateCommandLine";
+            this.txtUpdateCommandLine.Size = new System.Drawing.Size(512, 74);
+            this.txtUpdateCommandLine.TabIndex = 5;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 316);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(569, 22);
+            this.statusStrip.TabIndex = 2;
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // UpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(569, 310);
+            this.ClientSize = new System.Drawing.Size(569, 338);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.gbUpdateFirmware);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -154,7 +173,10 @@ namespace Greaseweazle
             this.gbUpdateFirmware.PerformLayout();
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -169,5 +191,7 @@ namespace Greaseweazle
         private System.Windows.Forms.GroupBox gb1;
         private System.Windows.Forms.CheckBox chkBootLoader;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }

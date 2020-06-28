@@ -55,8 +55,11 @@ namespace Greaseweazle
             this.txtWriteFirstCyl = new System.Windows.Forms.TextBox();
             this.chkWriteFirstCyl = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.gbEraseDisk.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -141,7 +144,6 @@ namespace Greaseweazle
             // chkDriveSelect
             // 
             this.chkDriveSelect.AutoSize = true;
-            this.chkDriveSelect.Enabled = false;
             this.chkDriveSelect.Location = new System.Drawing.Point(107, 83);
             this.chkDriveSelect.Name = "chkDriveSelect";
             this.chkDriveSelect.Size = new System.Drawing.Size(162, 21);
@@ -217,12 +219,29 @@ namespace Greaseweazle
             this.chkWriteFirstCyl.UseVisualStyleBackColor = true;
             this.chkWriteFirstCyl.CheckedChanged += new System.EventHandler(this.chkWriteFirstCyl_CheckedChanged);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 393);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(576, 25);
+            this.statusStrip.TabIndex = 2;
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            // 
             // EraseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(576, 388);
+            this.ClientSize = new System.Drawing.Size(576, 418);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -234,7 +253,10 @@ namespace Greaseweazle
             this.groupBox1.PerformLayout();
             this.gbEraseDisk.ResumeLayout(false);
             this.gbEraseDisk.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -254,5 +276,7 @@ namespace Greaseweazle
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }

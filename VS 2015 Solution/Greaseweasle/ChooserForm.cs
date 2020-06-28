@@ -48,10 +48,14 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        private string m_sGWVersionMajor = "0";
-        private string m_sGWVersionMinor = "00";
-        private string m_sGUISupportedVersionMajor = "0";
-        private string m_sGUISupportedVersionMinor = "19";
+        private static string m_sGWVersionMajor = "0";
+        private static string m_sGWVersionMinor = "00";
+        private static string m_sGUISupportedVersionMajor = "0";
+        private static string m_sGUISupportedVersionMinor = "19";
+        private static decimal m_GUIToolsVersion = decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor);
+        public static decimal m_GWToolsVersion = decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor);
+        public static string m_sStatusLine = "";
+        public static Color m_StatusColor = Color.FromArgb(173, 255, 47); // green ok
         #endregion
 
         #region ChooserForm
@@ -108,22 +112,50 @@ namespace Greaseweazle
             {
                 if (chkVersions(sExeDir))
                 {
+                    m_GWToolsVersion = decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor);
                     string sHTVer = "Host Tools v" + m_sGWVersionMajor + "." + m_sGWVersionMinor;
-                    if ((m_sGWVersionMajor == m_sGUISupportedVersionMajor) && (m_sGWVersionMinor == m_sGUISupportedVersionMinor))
+                    if (m_GWToolsVersion == m_GUIToolsVersion)
                     {
+                        m_sStatusLine = "        GUI supports all current options in " + sHTVer;
+                        toolStripStatusLabel.Text = m_sStatusLine;
                         toolStripStatusLabel.BackColor = Color.FromArgb(173, 255, 47);
-                        toolStripStatusLabel.Text = "                      GUI fully supports " + sHTVer + "                      ";
+                        this.statusStrip.BackColor = ChooserForm.m_StatusColor;
                     }
                     else
-                    {
-                        toolStripStatusLabel.BackColor = Color.FromArgb(255, 182, 193);
-                        toolStripStatusLabel.Text = "   GUI may not fully support " + sHTVer + "   -   click me!    ";
-                    }
+                    {                  
+                        m_StatusColor = Color.FromArgb(255, 182, 193);
+                        toolStripStatusLabel.BackColor = m_StatusColor;
+                        this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+                        if (m_GWToolsVersion < m_GUIToolsVersion)
+                            m_sStatusLine = "    " + sHTVer + " doesn't support all options in the GUI";
+                        else
+                            m_sStatusLine = "      GUI will not support newer options in " + sHTVer;
+                        toolStripStatusLabel.Text = m_sStatusLine;
+                    }        
                 } else
                 {
-                    toolStripStatusLabel.BackColor = Color.FromArgb(255, 182, 193);
-                    toolStripStatusLabel.Text = "          GUI cannot locate the Greaseweazle version file!            ";
+                    m_sStatusLine = "          GUI cannot locate the Greaseweazle version file!            ";
+                    toolStripStatusLabel.Text = m_sStatusLine;
+                    m_StatusColor = Color.FromArgb(255, 182, 193);
+                    toolStripStatusLabel.BackColor = m_StatusColor;
                 }
+
+                // version options check
+                if (ChooserForm.m_GWToolsVersion < (decimal)0.06)
+                    this.rbSetDelays.BackColor = Color.FromArgb(255, 182, 193);
+
+                if (ChooserForm.m_GWToolsVersion < (decimal)0.12)
+                {
+                    this.rbPin.BackColor = Color.FromArgb(255, 182, 193);
+                    this.rbReset.BackColor = Color.FromArgb(255, 182, 193);
+                }
+                if (ChooserForm.m_GWToolsVersion < (decimal)0.14)
+                {
+                    this.rbEraseDisk.BackColor = Color.FromArgb(255, 182, 193);
+                    this.rbBandwidth.BackColor = Color.FromArgb(255, 182, 193);
+                }
+                if (ChooserForm.m_GWToolsVersion < (decimal)0.18)
+                    this.rbInfo.BackColor = Color.FromArgb(255, 182, 193);
             }
 
             // determine which way to invoke the script
@@ -180,7 +212,11 @@ namespace Greaseweazle
             if (b1 && b2)
                 return true;
             else
+            {
+                // stub in correct version number so everything is enabled
+                // m_GWToolsVersion = decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor);
                 return false;
+            }
         }
         #endregion 
 
@@ -754,6 +790,13 @@ namespace Greaseweazle
 
         #region statusStrip_ItemClicked
         private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            MessageBox.Show("The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.");
+        }
+        #endregion
+
+        #region mnuInfo_Click
+        private void mnuInfo_Click(object sender, EventArgs e)
         {
             MessageBox.Show("The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.");
         }

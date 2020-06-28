@@ -133,6 +133,12 @@ namespace Greaseweazle
         private void BandwidthForm_Load(object sender, EventArgs e)
         {
             iniReadFile();
+
+            // initialize status label
+            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine;
+            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
+            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+
             CreateCommandLine();
         }
         #endregion

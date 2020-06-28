@@ -38,7 +38,6 @@ namespace Greaseweazle
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadForm));
             this.gbReadFromDisk = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -63,9 +62,11 @@ namespace Greaseweazle
             this.btnLaunch = new System.Windows.Forms.Button();
             this.btnRFDSelectFile = new System.Windows.Forms.Button();
             this.btnRFDSelectFolder = new System.Windows.Forms.Button();
-            this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbReadFromDisk.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbReadFromDisk
@@ -115,7 +116,6 @@ namespace Greaseweazle
             this.txtDriveRpmRFD.Size = new System.Drawing.Size(54, 22);
             this.txtDriveRpmRFD.TabIndex = 14;
             this.txtDriveRpmRFD.Text = "300";
-            this.toolTipRFD.SetToolTip(this.txtDriveRpmRFD, "Host Tools v0.18 or Later");
             this.txtDriveRpmRFD.TextChanged += new System.EventHandler(this.txtDriveRpmRFD_TextChanged);
             // 
             // chkDriveRpmRFD
@@ -126,7 +126,6 @@ namespace Greaseweazle
             this.chkDriveRpmRFD.Size = new System.Drawing.Size(60, 21);
             this.chkDriveRpmRFD.TabIndex = 13;
             this.chkDriveRpmRFD.Text = "RPM";
-            this.toolTipRFD.SetToolTip(this.chkDriveRpmRFD, "Host Tools v0.18 or Later");
             this.chkDriveRpmRFD.UseVisualStyleBackColor = true;
             this.chkDriveRpmRFD.CheckedChanged += new System.EventHandler(this.chkDriveRpmRFD_CheckedChanged);
             // 
@@ -139,7 +138,6 @@ namespace Greaseweazle
             this.txtDriveRateRFD.Size = new System.Drawing.Size(54, 22);
             this.txtDriveRateRFD.TabIndex = 12;
             this.txtDriveRateRFD.Text = "250";
-            this.toolTipRFD.SetToolTip(this.txtDriveRateRFD, "Host Tools v0.18 or Later");
             this.txtDriveRateRFD.TextChanged += new System.EventHandler(this.txtDriveRateRFD_TextChanged);
             // 
             // chkDriveRateRFD
@@ -150,7 +148,6 @@ namespace Greaseweazle
             this.chkDriveRateRFD.Size = new System.Drawing.Size(107, 21);
             this.chkDriveRateRFD.TabIndex = 11;
             this.chkDriveRateRFD.Text = "Rate (kbit/s)";
-            this.toolTipRFD.SetToolTip(this.chkDriveRateRFD, "Host Tools v0.18 or Later");
             this.chkDriveRateRFD.UseVisualStyleBackColor = true;
             this.chkDriveRateRFD.CheckedChanged += new System.EventHandler(this.chkDriveRateRFD_CheckedChanged);
             // 
@@ -162,7 +159,6 @@ namespace Greaseweazle
             this.chkDoubleStep.Size = new System.Drawing.Size(109, 21);
             this.chkDoubleStep.TabIndex = 2;
             this.chkDoubleStep.Text = "Double-Step";
-            this.toolTipRFD.SetToolTip(this.chkDoubleStep, "Host Tools v0.12 or Later");
             this.chkDoubleStep.UseVisualStyleBackColor = true;
             this.chkDoubleStep.CheckedChanged += new System.EventHandler(this.chkDoubleStep_CheckedChanged);
             // 
@@ -243,13 +239,11 @@ namespace Greaseweazle
             // chkDriveSelectRFD
             // 
             this.chkDriveSelectRFD.AutoSize = true;
-            this.chkDriveSelectRFD.Enabled = false;
             this.chkDriveSelectRFD.Location = new System.Drawing.Point(107, 136);
             this.chkDriveSelectRFD.Name = "chkDriveSelectRFD";
             this.chkDriveSelectRFD.Size = new System.Drawing.Size(162, 21);
             this.chkDriveSelectRFD.TabIndex = 9;
             this.chkDriveSelectRFD.Text = "Drive Select (AB012)";
-            this.toolTipRFD.SetToolTip(this.chkDriveSelectRFD, "Host Tools v0.10 or Later");
             this.chkDriveSelectRFD.UseVisualStyleBackColor = true;
             this.chkDriveSelectRFD.CheckedChanged += new System.EventHandler(this.chkDriveSelectRFD_CheckedChanged);
             // 
@@ -323,7 +317,6 @@ namespace Greaseweazle
             this.btnRFDSelectFile.Size = new System.Drawing.Size(108, 29);
             this.btnRFDSelectFile.TabIndex = 20;
             this.btnRFDSelectFile.Text = "Select File";
-            this.toolTipRFD.SetToolTip(this.btnRFDSelectFile, "HFE & IPF require Host Tools v0.13 or later");
             this.btnRFDSelectFile.UseVisualStyleBackColor = true;
             this.btnRFDSelectFile.Click += new System.EventHandler(this.btnRFDSelectFile_Click);
             // 
@@ -337,12 +330,30 @@ namespace Greaseweazle
             this.btnRFDSelectFolder.UseVisualStyleBackColor = true;
             this.btnRFDSelectFolder.Click += new System.EventHandler(this.btnRFDSelectFolder_Click);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 506);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(597, 25);
+            this.statusStrip.TabIndex = 1;
+            this.statusStrip.Text = "statusStrip";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            // 
             // ReadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(597, 503);
+            this.ClientSize = new System.Drawing.Size(597, 531);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.gbReadFromDisk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -354,7 +365,10 @@ namespace Greaseweazle
             this.gbReadFromDisk.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -379,10 +393,11 @@ namespace Greaseweazle
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkDoubleStep;
-        private System.Windows.Forms.ToolTip toolTipRFD;
         private System.Windows.Forms.TextBox txtDriveRpmRFD;
         private System.Windows.Forms.CheckBox chkDriveRpmRFD;
         private System.Windows.Forms.TextBox txtDriveRateRFD;
         private System.Windows.Forms.CheckBox chkDriveRateRFD;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }

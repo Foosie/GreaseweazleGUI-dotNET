@@ -38,16 +38,21 @@ namespace Greaseweazle
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InfoForm));
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkBootLoader = new System.Windows.Forms.CheckBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.txtInfoCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.btnLaunch = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkBootLoader = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.gb1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb1
@@ -62,6 +67,27 @@ namespace Greaseweazle
             this.gb1.Size = new System.Drawing.Size(543, 288);
             this.gb1.TabIndex = 0;
             this.gb1.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkBootLoader);
+            this.groupBox1.Location = new System.Drawing.Point(15, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(512, 82);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            // 
+            // chkBootLoader
+            // 
+            this.chkBootLoader.AutoSize = true;
+            this.chkBootLoader.Location = new System.Drawing.Point(65, 35);
+            this.chkBootLoader.Name = "chkBootLoader";
+            this.chkBootLoader.Size = new System.Drawing.Size(99, 21);
+            this.chkBootLoader.TabIndex = 3;
+            this.chkBootLoader.Text = "Bootloader";
+            this.toolTip1.SetToolTip(this.chkBootLoader, "Host Tools v0.19 or Later\r\nRequires F7 type");
+            this.chkBootLoader.UseVisualStyleBackColor = true;
+            this.chkBootLoader.CheckedChanged += new System.EventHandler(this.chkBootLoader_CheckedChanged);
             // 
             // btnBack
             // 
@@ -101,32 +127,29 @@ namespace Greaseweazle
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
-            // groupBox1
+            // statusStrip
             // 
-            this.groupBox1.Controls.Add(this.chkBootLoader);
-            this.groupBox1.Location = new System.Drawing.Point(15, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(512, 82);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 321);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(572, 25);
+            this.statusStrip.TabIndex = 1;
             // 
-            // chkBootLoader
+            // toolStripStatusLabel
             // 
-            this.chkBootLoader.AutoSize = true;
-            this.chkBootLoader.Location = new System.Drawing.Point(65, 35);
-            this.chkBootLoader.Name = "chkBootLoader";
-            this.chkBootLoader.Size = new System.Drawing.Size(99, 21);
-            this.chkBootLoader.TabIndex = 3;
-            this.chkBootLoader.Text = "Bootloader";
-            this.chkBootLoader.UseVisualStyleBackColor = true;
-            this.chkBootLoader.CheckedChanged += new System.EventHandler(this.chkBootLoader_CheckedChanged);
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
             // 
             // InfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(572, 312);
+            this.ClientSize = new System.Drawing.Size(572, 346);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.gb1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -138,7 +161,10 @@ namespace Greaseweazle
             this.gb1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -151,5 +177,8 @@ namespace Greaseweazle
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkBootLoader;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }

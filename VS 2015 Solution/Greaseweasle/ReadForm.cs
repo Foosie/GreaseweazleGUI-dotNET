@@ -97,22 +97,7 @@ namespace Greaseweazle
         {
             string sRet;
 
-            // found out the controller type
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                {
-                    chkDriveSelectRFD.Enabled = true;
-                    txtDriveSelectRFD.Enabled = true;
-                }
-                else
-                {
-                    chkDriveSelectRFD.Enabled = false;
-                    txtDriveSelectRFD.Enabled = false;
-                }
-            }
-
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "m_sRFDFilename", "garbage").Trim())) != "garbage")
+           if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "m_sRFDFilename", "garbage").Trim())) != "garbage")
                 m_sRFDFilename = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbReadDoubleSided", "garbage").Trim())) != "garbage")
             {
@@ -174,6 +159,17 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkDriveRpmRFD.Checked = true;
+            }
+
+            // found out the controller type
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "False")
+                {
+                    chkDriveSelectRFD.Checked = false;
+                    chkDriveSelectRFD.BackColor = Color.FromArgb(255, 182, 193);
+                    txtDriveSelectRFD.BackColor = Color.FromArgb(255, 182, 193);
+                }
             }
 
             // usb port
@@ -300,6 +296,29 @@ namespace Greaseweazle
         {
             // read inifile
             iniReadFile();
+
+            // initialize status label
+            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
+            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
+            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+
+            // version options check
+            if (ChooserForm.m_GWToolsVersion < (decimal)0.12)
+            {
+                this.chkDoubleStep.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkDoubleStep.Checked = false;
+            }
+
+            if (ChooserForm.m_GWToolsVersion < (decimal)0.18)
+            {
+                this.chkDriveRateRFD.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkDriveRateRFD.Checked = false;
+                this.txtDriveRateRFD.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkDriveRpmRFD.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkDriveRpmRFD.Checked = false;
+                this.txtDriveRpmRFD.BackColor = Color.FromArgb(255, 182, 193);
+            }
+
             CreateCommandLine();
         }
         #endregion
@@ -399,6 +418,5 @@ namespace Greaseweazle
             base.WndProc(ref m);
         }
         #endregion
-
     }
 }

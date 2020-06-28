@@ -54,8 +54,13 @@ namespace Greaseweazle
             string sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             Directory.SetCurrentDirectory(sExeDir);
 
+            // set defaults
             if (m_sUpdateFolder.Length == 0)
                 m_sUpdateFolder = sExeDir;
+
+            // bootloader support enabled in v0.16
+            if (ChooserForm.m_GWToolsVersion < (decimal)0.16)
+                this.chkBootLoader.BackColor = Color.FromArgb(255, 182, 193);
         }
         #endregion
 
@@ -106,6 +111,12 @@ namespace Greaseweazle
         {
             // read inifile
             iniReadFile();
+
+            // initialize status label
+            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
+            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
+            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+
             CreateCommandLine();
         }
         #endregion
@@ -126,8 +137,8 @@ namespace Greaseweazle
                 txtUpdateCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " update";
             if (chkBootLoader.Checked == true)
                 txtUpdateCommandLine.Text += " --bootloader";
-
-            txtUpdateCommandLine.Text += " \"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
+            else
+                txtUpdateCommandLine.Text += " \"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
 
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtUpdateCommandLine.Text += " " + m_sUSBPort;

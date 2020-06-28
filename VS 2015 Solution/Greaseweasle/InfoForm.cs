@@ -28,6 +28,7 @@ namespace Greaseweazle
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
         private bool m_bWindowsEXE = false;
+        private bool m_bF7Type = true;
 
         #region InfoForm
         public InfoForm(ChooserForm newForm)
@@ -37,6 +38,9 @@ namespace Greaseweazle
 
             // disable maximize box
             this.MaximizeBox = false;
+
+            // extend tooltip time
+            toolTip1.ShowAlways = true;
         }
         #endregion
 
@@ -102,6 +106,13 @@ namespace Greaseweazle
         {
             string sRet;
 
+            // find out the controller type
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
+            {
+                if (sRet != "True")
+                    m_bF7Type = false;
+            }
+
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
@@ -134,6 +145,16 @@ namespace Greaseweazle
         private void InfoForm_Load(object sender, EventArgs e)
         {
             iniReadFile();
+
+            // initialize status label
+            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
+            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
+            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+
+            // bootloader support enabled in v0.16 for type F7
+            if ((ChooserForm.m_GWToolsVersion < (decimal)0.16) || (!m_bF7Type))
+                this.chkBootLoader.BackColor =  Color.FromArgb(255, 182, 193);
+
             CreateCommandLine();
         }
         #endregion

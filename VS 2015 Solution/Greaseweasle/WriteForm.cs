@@ -94,15 +94,10 @@ namespace Greaseweazle
             // found out the controller type
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
             {
-                if (sRet == "True")
+                if (sRet == "False")
                 {
-                    chkDriveSelectWTD.Enabled = true;
-                    txtDriveSelectWTD.Enabled = true;
-                }
-                else
-                {
-                    chkDriveSelectWTD.Enabled = false;
-                    txtDriveSelectWTD.Enabled = false;
+                    chkDriveSelectWTD.BackColor = Color.FromArgb(255, 182, 193);
+                    txtDriveSelectWTD.BackColor = Color.FromArgb(255, 182, 193);
                 }
             }
 
@@ -224,6 +219,19 @@ namespace Greaseweazle
         {
             // read inifile
             iniReadFile();
+
+            // initialize status label
+            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
+            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
+            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+
+            // version options check
+            if ((ChooserForm.m_GWToolsVersion < (decimal)0.05) || (ChooserForm.m_GWToolsVersion > (decimal)0.12))
+            {
+                this.chkWTDAdjustSpeed.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkWTDAdjustSpeed.Checked = false;
+            }
+
             CreateCommandLine();
         }
         #endregion

@@ -68,6 +68,7 @@ namespace Greaseweazle
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mnuInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAction.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbType.SuspendLayout();
@@ -207,7 +208,7 @@ namespace Greaseweazle
             this.rbInfo.TabIndex = 15;
             this.rbInfo.TabStop = true;
             this.rbInfo.Text = "Info on Setup";
-            this.toolTipChooser.SetToolTip(this.rbInfo, "Host Tools v0.14 or Later");
+            this.toolTipChooser.SetToolTip(this.rbInfo, "Host Tools v0.18 or Later");
             this.rbInfo.UseVisualStyleBackColor = true;
             this.rbInfo.CheckedChanged += new System.EventHandler(this.rbInfo_CheckedChanged);
             // 
@@ -326,12 +327,14 @@ namespace Greaseweazle
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSettings,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.mnuInfo});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(434, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
+            this.toolTipChooser.SetToolTip(this.menuStrip1, "Click me for more information");
             // 
             // mnuSettings
             // 
@@ -373,9 +376,9 @@ namespace Greaseweazle
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 584);
+            this.statusStrip.Location = new System.Drawing.Point(0, 569);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(434, 24);
+            this.statusStrip.Size = new System.Drawing.Size(434, 22);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.Stretch = false;
             this.statusStrip.TabIndex = 4;
@@ -384,14 +387,22 @@ namespace Greaseweazle
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 19);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            this.toolStripStatusLabel.ToolTipText = "Click me for more infomation";
+            // 
+            // mnuInfo
+            // 
+            this.mnuInfo.Name = "mnuInfo";
+            this.mnuInfo.Size = new System.Drawing.Size(47, 24);
+            this.mnuInfo.Text = "Info";
+            this.mnuInfo.Click += new System.EventHandler(this.mnuInfo_Click);
             // 
             // ChooserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(434, 608);
+            this.ClientSize = new System.Drawing.Size(434, 591);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.gbAction);
             this.Controls.Add(this.menuStrip1);
@@ -448,5 +459,6 @@ namespace Greaseweazle
         private System.Windows.Forms.RadioButton rbInfo;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripMenuItem mnuInfo;
     }
 }

@@ -57,8 +57,11 @@ namespace Greaseweazle
             this.txtWriteFirstCyl = new System.Windows.Forms.TextBox();
             this.chkWriteFirstCyl = new System.Windows.Forms.CheckBox();
             this.toolTipWTD = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.gbWriteToDisk.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -156,7 +159,6 @@ namespace Greaseweazle
             // chkDriveSelectWTD
             // 
             this.chkDriveSelectWTD.AutoSize = true;
-            this.chkDriveSelectWTD.Enabled = false;
             this.chkDriveSelectWTD.Location = new System.Drawing.Point(107, 116);
             this.chkDriveSelectWTD.Name = "chkDriveSelectWTD";
             this.chkDriveSelectWTD.Size = new System.Drawing.Size(162, 21);
@@ -174,7 +176,7 @@ namespace Greaseweazle
             this.chkWTDAdjustSpeed.Size = new System.Drawing.Size(114, 21);
             this.chkWTDAdjustSpeed.TabIndex = 3;
             this.chkWTDAdjustSpeed.Text = "Adjust Speed";
-            this.toolTipWTD.SetToolTip(this.chkWTDAdjustSpeed, "Host Tools v0.05 or Later\r\nHost Tools v0.12 or Earlier");
+            this.toolTipWTD.SetToolTip(this.chkWTDAdjustSpeed, "Host Tools v0.05 through v0.12");
             this.chkWTDAdjustSpeed.UseVisualStyleBackColor = true;
             this.chkWTDAdjustSpeed.CheckedChanged += new System.EventHandler(this.chkWTDAdjustSpeed_CheckedChanged_1);
             // 
@@ -244,12 +246,29 @@ namespace Greaseweazle
             this.chkWriteFirstCyl.UseVisualStyleBackColor = true;
             this.chkWriteFirstCyl.CheckedChanged += new System.EventHandler(this.chkWriteFirstCyl_CheckedChanged_1);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 434);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(576, 25);
+            this.statusStrip.TabIndex = 2;
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            // 
             // WriteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(576, 429);
+            this.ClientSize = new System.Drawing.Size(576, 459);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -261,7 +280,10 @@ namespace Greaseweazle
             this.groupBox1.PerformLayout();
             this.gbWriteToDisk.ResumeLayout(false);
             this.gbWriteToDisk.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -283,5 +305,7 @@ namespace Greaseweazle
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.ToolTip toolTipWTD;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }
