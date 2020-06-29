@@ -164,7 +164,7 @@ namespace Greaseweazle
             this.chkDriveSelectWTD.Size = new System.Drawing.Size(162, 21);
             this.chkDriveSelectWTD.TabIndex = 8;
             this.chkDriveSelectWTD.Text = "Drive Select (AB012)";
-            this.toolTipWTD.SetToolTip(this.chkDriveSelectWTD, "Host Tools v0.10 or Later");
+            this.toolTipWTD.SetToolTip(this.chkDriveSelectWTD, "Host Tools v0.10 or later\r\nRequires F7 type");
             this.chkDriveSelectWTD.UseVisualStyleBackColor = true;
             this.chkDriveSelectWTD.CheckedChanged += new System.EventHandler(this.chkDriveSelectWTD_CheckedChanged);
             // 

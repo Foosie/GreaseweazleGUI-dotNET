@@ -85,7 +85,7 @@ namespace Greaseweazle
             this.chkBootLoader.Size = new System.Drawing.Size(99, 21);
             this.chkBootLoader.TabIndex = 3;
             this.chkBootLoader.Text = "Bootloader";
-            this.toolTip1.SetToolTip(this.chkBootLoader, "Host Tools v0.19 or Later\r\nRequires F7 type");
+            this.toolTip1.SetToolTip(this.chkBootLoader, "Host Tools v0.19 or later\r\nRequires F7 type");
             this.chkBootLoader.UseVisualStyleBackColor = true;
             this.chkBootLoader.CheckedChanged += new System.EventHandler(this.chkBootLoader_CheckedChanged);
             // 

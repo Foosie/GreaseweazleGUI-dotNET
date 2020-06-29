@@ -164,7 +164,7 @@ namespace Greaseweazle
             this.rbF7.TabIndex = 5;
             this.rbF7.TabStop = true;
             this.rbF7.Text = "STM32F7";
-            this.toolTipChooser.SetToolTip(this.rbF7, "Host Tools v0.07 or Later");
+            this.toolTipChooser.SetToolTip(this.rbF7, "Host Tools v0.07 or later");
             this.rbF7.UseVisualStyleBackColor = true;
             this.rbF7.CheckedChanged += new System.EventHandler(this.rbF7_CheckedChanged);
             // 
@@ -208,7 +208,7 @@ namespace Greaseweazle
             this.rbInfo.TabIndex = 15;
             this.rbInfo.TabStop = true;
             this.rbInfo.Text = "Info on Setup";
-            this.toolTipChooser.SetToolTip(this.rbInfo, "Host Tools v0.18 or Later");
+            this.toolTipChooser.SetToolTip(this.rbInfo, "Host Tools v0.18 or later");
             this.rbInfo.UseVisualStyleBackColor = true;
             this.rbInfo.CheckedChanged += new System.EventHandler(this.rbInfo_CheckedChanged);
             // 
@@ -221,7 +221,7 @@ namespace Greaseweazle
             this.rbEraseDisk.TabIndex = 9;
             this.rbEraseDisk.TabStop = true;
             this.rbEraseDisk.Text = "Erase Disk";
-            this.toolTipChooser.SetToolTip(this.rbEraseDisk, "Host Tools v0.14 or Later");
+            this.toolTipChooser.SetToolTip(this.rbEraseDisk, "Host Tools v0.14 or later");
             this.rbEraseDisk.UseVisualStyleBackColor = true;
             this.rbEraseDisk.CheckedChanged += new System.EventHandler(this.rbErase_CheckedChanged);
             // 
@@ -234,7 +234,7 @@ namespace Greaseweazle
             this.rbBandwidth.TabIndex = 14;
             this.rbBandwidth.TabStop = true;
             this.rbBandwidth.Text = "Measure Bandwidth";
-            this.toolTipChooser.SetToolTip(this.rbBandwidth, "Host Tools v0.14 or Later");
+            this.toolTipChooser.SetToolTip(this.rbBandwidth, "Host Tools v0.14 or later");
             this.rbBandwidth.UseVisualStyleBackColor = true;
             this.rbBandwidth.CheckedChanged += new System.EventHandler(this.rbBandwidth_CheckedChanged);
             // 
@@ -247,7 +247,7 @@ namespace Greaseweazle
             this.rbReset.TabIndex = 13;
             this.rbReset.TabStop = true;
             this.rbReset.Text = "Reset Device";
-            this.toolTipChooser.SetToolTip(this.rbReset, "Host Tools v0.12 or Later");
+            this.toolTipChooser.SetToolTip(this.rbReset, "Host Tools v0.12 or later");
             this.rbReset.UseVisualStyleBackColor = true;
             this.rbReset.CheckedChanged += new System.EventHandler(this.rbReset_CheckedChanged);
             // 
@@ -260,7 +260,7 @@ namespace Greaseweazle
             this.rbPin.TabIndex = 12;
             this.rbPin.TabStop = true;
             this.rbPin.Text = "Pin Level";
-            this.toolTipChooser.SetToolTip(this.rbPin, "Host Tools v0.12 or Later");
+            this.toolTipChooser.SetToolTip(this.rbPin, "Host Tools v0.12 or later");
             this.rbPin.UseVisualStyleBackColor = true;
             this.rbPin.CheckedChanged += new System.EventHandler(this.rbPin_CheckedChanged);
             // 
@@ -297,7 +297,7 @@ namespace Greaseweazle
             this.rbSetDelays.TabIndex = 10;
             this.rbSetDelays.TabStop = true;
             this.rbSetDelays.Text = "Set Delays";
-            this.toolTipChooser.SetToolTip(this.rbSetDelays, "Host Tools v0.06 or Later");
+            this.toolTipChooser.SetToolTip(this.rbSetDelays, "Host Tools v0.06 or later");
             this.rbSetDelays.UseVisualStyleBackColor = true;
             this.rbSetDelays.CheckedChanged += new System.EventHandler(this.rbSetDelays_CheckedChanged);
             // 
@@ -360,7 +360,7 @@ namespace Greaseweazle
             this.mnuWindowsEXE.Name = "mnuWindowsEXE";
             this.mnuWindowsEXE.Size = new System.Drawing.Size(257, 26);
             this.mnuWindowsEXE.Text = "Self-contained Executable";
-            this.mnuWindowsEXE.ToolTipText = "Host Tools v0.17 or Later";
+            this.mnuWindowsEXE.ToolTipText = "Host Tools v0.17 or later";
             this.mnuWindowsEXE.Click += new System.EventHandler(this.mnuWindowsEXE_Click);
             // 
             // aboutToolStripMenuItem

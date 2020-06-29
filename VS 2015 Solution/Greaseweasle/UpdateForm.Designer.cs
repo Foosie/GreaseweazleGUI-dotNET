@@ -126,7 +126,7 @@ namespace Greaseweazle
             this.chkBootLoader.Size = new System.Drawing.Size(179, 21);
             this.chkBootLoader.TabIndex = 3;
             this.chkBootLoader.Text = "Bootloader (Take Care)";
-            this.toolTip1.SetToolTip(this.chkBootLoader, "Host Tools v0.16 or Later\r\nNot normally required\r\nFailure may brick the Weazle an" +
+            this.toolTip1.SetToolTip(this.chkBootLoader, "Host Tools v0.16 or later\r\nNot normally required\r\nFailure may brick the Weazle an" +
         "d require full reflash\r\nNO jumper across GND and DCLK");
             this.chkBootLoader.UseVisualStyleBackColor = true;
             this.chkBootLoader.CheckedChanged += new System.EventHandler(this.chkBootLoader_CheckedChanged);

@@ -38,6 +38,7 @@ namespace Greaseweazle
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadForm));
             this.gbReadFromDisk = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -64,6 +65,7 @@ namespace Greaseweazle
             this.btnRFDSelectFolder = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
             this.gbReadFromDisk.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -126,6 +128,7 @@ namespace Greaseweazle
             this.chkDriveRpmRFD.Size = new System.Drawing.Size(60, 21);
             this.chkDriveRpmRFD.TabIndex = 13;
             this.chkDriveRpmRFD.Text = "RPM";
+            this.toolTipRFD.SetToolTip(this.chkDriveRpmRFD, "Host Tools v0.18 or later");
             this.chkDriveRpmRFD.UseVisualStyleBackColor = true;
             this.chkDriveRpmRFD.CheckedChanged += new System.EventHandler(this.chkDriveRpmRFD_CheckedChanged);
             // 
@@ -148,6 +151,7 @@ namespace Greaseweazle
             this.chkDriveRateRFD.Size = new System.Drawing.Size(107, 21);
             this.chkDriveRateRFD.TabIndex = 11;
             this.chkDriveRateRFD.Text = "Rate (kbit/s)";
+            this.toolTipRFD.SetToolTip(this.chkDriveRateRFD, "Host Tools v0.18 or later");
             this.chkDriveRateRFD.UseVisualStyleBackColor = true;
             this.chkDriveRateRFD.CheckedChanged += new System.EventHandler(this.chkDriveRateRFD_CheckedChanged);
             // 
@@ -159,6 +163,7 @@ namespace Greaseweazle
             this.chkDoubleStep.Size = new System.Drawing.Size(109, 21);
             this.chkDoubleStep.TabIndex = 2;
             this.chkDoubleStep.Text = "Double-Step";
+            this.toolTipRFD.SetToolTip(this.chkDoubleStep, "Host Tools v0.12 or later");
             this.chkDoubleStep.UseVisualStyleBackColor = true;
             this.chkDoubleStep.CheckedChanged += new System.EventHandler(this.chkDoubleStep_CheckedChanged);
             // 
@@ -244,6 +249,7 @@ namespace Greaseweazle
             this.chkDriveSelectRFD.Size = new System.Drawing.Size(162, 21);
             this.chkDriveSelectRFD.TabIndex = 9;
             this.chkDriveSelectRFD.Text = "Drive Select (AB012)";
+            this.toolTipRFD.SetToolTip(this.chkDriveSelectRFD, "Host Tools v0.10 or later\r\nRequires F7 type");
             this.chkDriveSelectRFD.UseVisualStyleBackColor = true;
             this.chkDriveSelectRFD.CheckedChanged += new System.EventHandler(this.chkDriveSelectRFD_CheckedChanged);
             // 
@@ -399,5 +405,6 @@ namespace Greaseweazle
         private System.Windows.Forms.CheckBox chkDriveRateRFD;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolTip toolTipRFD;
     }
 }
