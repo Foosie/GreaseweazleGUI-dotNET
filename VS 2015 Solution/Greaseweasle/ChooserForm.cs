@@ -51,7 +51,7 @@ namespace Greaseweazle
         private static string m_sGWVersionMajor = "0";
         private static string m_sGWVersionMinor = "00";
         private static string m_sGUISupportedVersionMajor = "0";
-        private static string m_sGUISupportedVersionMinor = "19";
+        private static string m_sGUISupportedVersionMinor = "20";
         private static decimal m_GUIToolsVersion = decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor);
         public static decimal m_GWToolsVersion = decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor);
         public static string m_sStatusLine = "";
@@ -92,7 +92,6 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            //this.Text = "GUI " + m_sVersion + " - Host Tools v0.19";
             this.Text = "GUI " + m_sVersion + " - Host Tools v" + m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor;
 
             // initialize some stuff

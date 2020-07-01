@@ -72,6 +72,9 @@ namespace Greaseweazle
         public void iniWriteFile()
         {
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "m_sWTDFilename", m_sWTDFilename);
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkEraseEmpty", (chkEraseEmpty.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkWTDAdjustSpeed", (chkWTDAdjustSpeed.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbWriteDoubleSided", (rbWriteDoubleSided.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbWriteSingleSided", (rbWriteSingleSided.Checked == true).ToString());
@@ -105,6 +108,22 @@ namespace Greaseweazle
                 m_sWTDFilename = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "m_sWriteDiskFolder", "garbage").Trim())) != "garbage")
                 m_sWriteDiskFolder = sRet;
+
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkDoubleStep", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDoubleStep.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkEraseEmpty", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkEraseEmpty.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkLegacySS", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkLegacySS.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkWTDAdjustSpeed", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -169,9 +188,16 @@ namespace Greaseweazle
                 txtWTDCommandLine.Text += " --single-sided";
             if (chkWTDAdjustSpeed.Checked == true)
                 txtWTDCommandLine.Text += " --adjust-speed";
+            if (chkDoubleStep.Checked == true)
+                txtWTDCommandLine.Text += " --double-step";
+            if (chkWTDAdjustSpeed.Checked == true)
+                txtWTDCommandLine.Text += " --erase-empty";
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
                 txtWTDCommandLine.Text += " --drive=" + txtDriveSelectWTD.Text;
-            txtWTDCommandLine.Text += " " + "\"" + m_sWriteDiskFolder + "\\" + m_sWTDFilename + "\"";
+            txtWTDCommandLine.Text += " " + "\"" + m_sWriteDiskFolder + "\\" + m_sWTDFilename;
+            if (chkLegacySS.Checked == true)
+                txtWTDCommandLine.Text += "::legacy_ss";
+            txtWTDCommandLine.Text += "\"";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtWTDCommandLine.Text += " " + m_sUSBPort;
         }
@@ -228,8 +254,21 @@ namespace Greaseweazle
             // version options check
             if ((ChooserForm.m_GWToolsVersion < (decimal)0.05) || (ChooserForm.m_GWToolsVersion > (decimal)0.12))
             {
-                this.chkWTDAdjustSpeed.BackColor = Color.FromArgb(255, 182, 193);
+                if (ChooserForm.m_StatusColor == Color.FromArgb(173, 255, 47))  // current version
+                    this.chkWTDAdjustSpeed.Text = "Adjust Speed - OBSOLETE";
+                else                                                            // different version
+                    this.chkWTDAdjustSpeed.BackColor = Color.FromArgb(255, 182, 193);
                 this.chkWTDAdjustSpeed.Checked = false;
+            }
+
+            if (ChooserForm.m_GWToolsVersion < (decimal)0.20)
+            {
+                this.chkDoubleStep.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkDoubleStep.Checked = false;
+                this.chkEraseEmpty.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkEraseEmpty.Checked = false;
+                this.chkLegacySS.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkLegacySS.Checked = false;
             }
 
             CreateCommandLine();
@@ -320,6 +359,21 @@ namespace Greaseweazle
         }
 
         private void txtDriveSelectWTD_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkDoubleStep_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkEraseEmpty_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkLegacySS_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
