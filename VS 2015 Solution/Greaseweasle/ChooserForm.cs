@@ -17,6 +17,7 @@ using System.Drawing;
 using System.Threading;
 using System.Linq;
 using System.IO.Ports;
+using System.Globalization;
 
 namespace Greaseweazle
 {
@@ -52,8 +53,8 @@ namespace Greaseweazle
         private static string m_sGWVersionMinor = "00";
         private static string m_sGUISupportedVersionMajor = "0";
         private static string m_sGUISupportedVersionMinor = "20";
-        private static decimal m_GUIToolsVersion = decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor);
-        public static decimal m_GWToolsVersion = decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor);
+        private static decimal m_GUIToolsVersion = Decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor, NumberStyles.AllowExponent|NumberStyles.AllowDecimalPoint);
+        public static decimal m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint);
         public static string m_sStatusLine = "";
         public static Color m_StatusColor = Color.FromArgb(173, 255, 47); // green ok
         #endregion
@@ -111,7 +112,7 @@ namespace Greaseweazle
             {
                 if (chkVersions(sExeDir))
                 {
-                    m_GWToolsVersion = decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor);
+                    m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint);
                     string sHTVer = "Host Tools v" + m_sGWVersionMajor + "." + m_sGWVersionMinor;
                     if (m_GWToolsVersion == m_GUIToolsVersion)
                     {
@@ -213,7 +214,6 @@ namespace Greaseweazle
             else
             {
                 // stub in correct version number so everything is enabled
-                // m_GWToolsVersion = decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor);
                 return false;
             }
         }
