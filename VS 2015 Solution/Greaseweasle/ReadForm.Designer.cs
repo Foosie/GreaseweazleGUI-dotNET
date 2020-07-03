@@ -66,6 +66,7 @@ namespace Greaseweazle
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
+            this.chkLegacySS = new System.Windows.Forms.CheckBox();
             this.gbReadFromDisk.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -88,6 +89,7 @@ namespace Greaseweazle
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkLegacySS);
             this.groupBox1.Controls.Add(this.txtDriveRpmRFD);
             this.groupBox1.Controls.Add(this.chkDriveRpmRFD);
             this.groupBox1.Controls.Add(this.txtDriveRateRFD);
@@ -283,7 +285,7 @@ namespace Greaseweazle
             this.btnBack.Location = new System.Drawing.Point(394, 414);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 22;
+            this.btnBack.TabIndex = 23;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -295,7 +297,7 @@ namespace Greaseweazle
             this.txtRFDCommandLine.Multiline = true;
             this.txtRFDCommandLine.Name = "txtRFDCommandLine";
             this.txtRFDCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtRFDCommandLine.TabIndex = 18;
+            this.txtRFDCommandLine.TabIndex = 19;
             // 
             // lblStaticCL
             // 
@@ -303,7 +305,7 @@ namespace Greaseweazle
             this.lblStaticCL.Location = new System.Drawing.Point(229, 298);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
-            this.lblStaticCL.TabIndex = 17;
+            this.lblStaticCL.TabIndex = 18;
             this.lblStaticCL.Text = "Command Line";
             // 
             // btnLaunch
@@ -311,7 +313,7 @@ namespace Greaseweazle
             this.btnLaunch.Location = new System.Drawing.Point(280, 414);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 21;
+            this.btnLaunch.TabIndex = 22;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -321,7 +323,7 @@ namespace Greaseweazle
             this.btnRFDSelectFile.Location = new System.Drawing.Point(166, 414);
             this.btnRFDSelectFile.Name = "btnRFDSelectFile";
             this.btnRFDSelectFile.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFile.TabIndex = 20;
+            this.btnRFDSelectFile.TabIndex = 21;
             this.btnRFDSelectFile.Text = "Select File";
             this.btnRFDSelectFile.UseVisualStyleBackColor = true;
             this.btnRFDSelectFile.Click += new System.EventHandler(this.btnRFDSelectFile_Click);
@@ -331,7 +333,7 @@ namespace Greaseweazle
             this.btnRFDSelectFolder.Location = new System.Drawing.Point(52, 414);
             this.btnRFDSelectFolder.Name = "btnRFDSelectFolder";
             this.btnRFDSelectFolder.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFolder.TabIndex = 19;
+            this.btnRFDSelectFolder.TabIndex = 20;
             this.btnRFDSelectFolder.Text = "Select Folder";
             this.btnRFDSelectFolder.UseVisualStyleBackColor = true;
             this.btnRFDSelectFolder.Click += new System.EventHandler(this.btnRFDSelectFolder_Click);
@@ -352,6 +354,18 @@ namespace Greaseweazle
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            // 
+            // chkLegacySS
+            // 
+            this.chkLegacySS.AutoSize = true;
+            this.chkLegacySS.Enabled = false;
+            this.chkLegacySS.Location = new System.Drawing.Point(352, 225);
+            this.chkLegacySS.Name = "chkLegacySS";
+            this.chkLegacySS.Size = new System.Drawing.Size(76, 21);
+            this.chkLegacySS.TabIndex = 17;
+            this.chkLegacySS.Text = "Legacy";
+            this.chkLegacySS.UseVisualStyleBackColor = true;
+            this.chkLegacySS.CheckedChanged += new System.EventHandler(this.chkLegacySS_CheckedChanged);
             // 
             // ReadForm
             // 
@@ -406,5 +420,6 @@ namespace Greaseweazle
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolTip toolTipRFD;
+        private System.Windows.Forms.CheckBox chkLegacySS;
     }
 }

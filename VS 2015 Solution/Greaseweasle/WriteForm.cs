@@ -74,7 +74,6 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "m_sWTDFilename", m_sWTDFilename);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkEraseEmpty", (chkEraseEmpty.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkWTDAdjustSpeed", (chkWTDAdjustSpeed.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbWriteDoubleSided", (rbWriteDoubleSided.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbWriteSingleSided", (rbWriteSingleSided.Checked == true).ToString());
@@ -118,11 +117,6 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkEraseEmpty.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkLegacySS", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkLegacySS.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkWTDAdjustSpeed", "garbage").Trim())) != "garbage")
             {
@@ -194,10 +188,7 @@ namespace Greaseweazle
                 txtWTDCommandLine.Text += " --erase-empty";
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
                 txtWTDCommandLine.Text += " --drive=" + txtDriveSelectWTD.Text;
-            txtWTDCommandLine.Text += " " + "\"" + m_sWriteDiskFolder + "\\" + m_sWTDFilename;
-            if (chkLegacySS.Checked == true)
-                txtWTDCommandLine.Text += "::legacy_ss";
-            txtWTDCommandLine.Text += "\"";
+            txtWTDCommandLine.Text += " " + "\"" + m_sWriteDiskFolder + "\\" + m_sWTDFilename + "\"";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtWTDCommandLine.Text += " " + m_sUSBPort;
         }
@@ -267,8 +258,6 @@ namespace Greaseweazle
                 this.chkDoubleStep.Checked = false;
                 this.chkEraseEmpty.BackColor = Color.FromArgb(255, 182, 193);
                 this.chkEraseEmpty.Checked = false;
-                this.chkLegacySS.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkLegacySS.Checked = false;
             }
 
             CreateCommandLine();

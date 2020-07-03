@@ -53,10 +53,11 @@ namespace Greaseweazle
         private static string m_sGWVersionMinor = "00";
         private static string m_sGUISupportedVersionMajor = "0";
         private static string m_sGUISupportedVersionMinor = "20";
-        private static decimal m_GUIToolsVersion = Decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor, NumberStyles.AllowExponent|NumberStyles.AllowDecimalPoint);
-        public static decimal m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint);
+        private static decimal m_GUIToolsVersion = Decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor, CultureInfo.InvariantCulture);   
+        public static decimal m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, CultureInfo.InvariantCulture);
         public static string m_sStatusLine = "";
         public static Color m_StatusColor = Color.FromArgb(173, 255, 47); // green ok
+        private string m_sInfo = "The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. Options in red are not supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.";
         #endregion
 
         #region ChooserForm
@@ -112,7 +113,7 @@ namespace Greaseweazle
             {
                 if (chkVersions(sExeDir))
                 {
-                    m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint);
+                    m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, CultureInfo.InvariantCulture);
                     string sHTVer = "Host Tools v" + m_sGWVersionMajor + "." + m_sGWVersionMinor;
                     if (m_GWToolsVersion == m_GUIToolsVersion)
                     {
@@ -790,14 +791,14 @@ namespace Greaseweazle
         #region statusStrip_ItemClicked
         private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            MessageBox.Show("The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.");
+            MessageBox.Show(m_sInfo);
         }
         #endregion
 
         #region mnuInfo_Click
         private void mnuInfo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.");
+            MessageBox.Show(m_sInfo);
         }
         #endregion
     }

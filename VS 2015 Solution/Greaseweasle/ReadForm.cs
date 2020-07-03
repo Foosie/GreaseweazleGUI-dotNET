@@ -75,6 +75,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbReadDoubleSided", (rbReadDoubleSided.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbReadSingleSided", (rbReadSingleSided.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtReadLastCyl", txtReadLastCyl.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkReadLastCyl", (chkReadLastCyl.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtReadFirstCyl", txtReadFirstCyl.Text);
@@ -102,12 +103,20 @@ namespace Greaseweazle
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbReadDoubleSided", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
+                {
                     rbReadDoubleSided.Checked = true;
+                    rbReadSingleSided.Enabled = true;
+                }
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbReadSingleSided", "garbage").Trim())) != "garbage")
             {
+                if ((sRet == "True" && rbReadDoubleSided.Checked))
+                   rbReadSingleSided.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkLegacySS", "garbage").Trim())) != "garbage")
+            {
                 if (sRet == "True")
-                    rbReadSingleSided.Checked = true;
+                    chkLegacySS.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtReadLastCyl", "garbage").Trim())) != "garbage")
                 txtReadLastCyl.Text = sRet;
@@ -207,7 +216,10 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --rpm=" + txtDriveRpmRFD.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive " + txtDriveSelectRFD.Text;
-            txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + m_sRFDFilename + "\"";
+            txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + m_sRFDFilename;
+            if (chkLegacySS.Checked == true)
+                txtRFDCommandLine.Text += "::legacy_ss";
+            txtRFDCommandLine.Text += "\"";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtRFDCommandLine.Text += " " + m_sUSBPort;
         }
@@ -236,11 +248,19 @@ namespace Greaseweazle
 
         private void rbReadSingleSided_CheckedChanged(object sender, EventArgs e)
         {
+            if (rbReadSingleSided.Checked)
+                chkLegacySS.Enabled = true;
+            else
+                chkLegacySS.Enabled = false;
             CreateCommandLine();
         }
 
         private void rbReadDoubleSided_CheckedChanged(object sender, EventArgs e)
         {
+            if (rbReadSingleSided.Checked)
+                chkLegacySS.Enabled = true;
+            else
+                chkLegacySS.Enabled = false;
             CreateCommandLine();
         }
 
@@ -289,6 +309,11 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void chkLegacySS_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
 
         #region ReadForm_Load
@@ -317,6 +342,12 @@ namespace Greaseweazle
                 this.chkDriveRpmRFD.BackColor = Color.FromArgb(255, 182, 193);
                 this.chkDriveRpmRFD.Checked = false;
                 this.txtDriveRpmRFD.BackColor = Color.FromArgb(255, 182, 193);
+            }
+
+            if (ChooserForm.m_GWToolsVersion < (decimal)0.20)
+            {
+                this.chkLegacySS.BackColor = Color.FromArgb(255, 182, 193);
+                this.chkLegacySS.Checked = false;
             }
 
             CreateCommandLine();

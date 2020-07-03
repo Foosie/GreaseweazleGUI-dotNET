@@ -47,6 +47,8 @@ namespace Greaseweazle
             this.txtWTDCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.gbWriteToDisk = new System.Windows.Forms.GroupBox();
+            this.chkEraseEmpty = new System.Windows.Forms.CheckBox();
+            this.chkDoubleStep = new System.Windows.Forms.CheckBox();
             this.txtDriveSelectWTD = new System.Windows.Forms.TextBox();
             this.chkDriveSelectWTD = new System.Windows.Forms.CheckBox();
             this.chkWTDAdjustSpeed = new System.Windows.Forms.CheckBox();
@@ -59,9 +61,6 @@ namespace Greaseweazle
             this.toolTipWTD = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.chkDoubleStep = new System.Windows.Forms.CheckBox();
-            this.chkEraseEmpty = new System.Windows.Forms.CheckBox();
-            this.chkLegacySS = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbWriteToDisk.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -132,7 +131,6 @@ namespace Greaseweazle
             // 
             // gbWriteToDisk
             // 
-            this.gbWriteToDisk.Controls.Add(this.chkLegacySS);
             this.gbWriteToDisk.Controls.Add(this.chkEraseEmpty);
             this.gbWriteToDisk.Controls.Add(this.chkDoubleStep);
             this.gbWriteToDisk.Controls.Add(this.txtDriveSelectWTD);
@@ -150,6 +148,30 @@ namespace Greaseweazle
             this.gbWriteToDisk.TabIndex = 2;
             this.gbWriteToDisk.TabStop = false;
             this.gbWriteToDisk.Enter += new System.EventHandler(this.gbWriteToDisk_Enter);
+            // 
+            // chkEraseEmpty
+            // 
+            this.chkEraseEmpty.AutoSize = true;
+            this.chkEraseEmpty.Location = new System.Drawing.Point(54, 58);
+            this.chkEraseEmpty.Name = "chkEraseEmpty";
+            this.chkEraseEmpty.Size = new System.Drawing.Size(110, 21);
+            this.chkEraseEmpty.TabIndex = 5;
+            this.chkEraseEmpty.Text = "Erase Empty";
+            this.toolTipWTD.SetToolTip(this.chkEraseEmpty, "Host Tools v0.20 or later");
+            this.chkEraseEmpty.UseVisualStyleBackColor = true;
+            this.chkEraseEmpty.CheckedChanged += new System.EventHandler(this.chkEraseEmpty_CheckedChanged);
+            // 
+            // chkDoubleStep
+            // 
+            this.chkDoubleStep.AutoSize = true;
+            this.chkDoubleStep.Location = new System.Drawing.Point(298, 31);
+            this.chkDoubleStep.Name = "chkDoubleStep";
+            this.chkDoubleStep.Size = new System.Drawing.Size(109, 21);
+            this.chkDoubleStep.TabIndex = 4;
+            this.chkDoubleStep.Text = "Double-Step";
+            this.toolTipWTD.SetToolTip(this.chkDoubleStep, "Host Tools v0.20 or later");
+            this.chkDoubleStep.UseVisualStyleBackColor = true;
+            this.chkDoubleStep.CheckedChanged += new System.EventHandler(this.chkDoubleStep_CheckedChanged);
             // 
             // txtDriveSelectWTD
             // 
@@ -268,42 +290,6 @@ namespace Greaseweazle
             this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel";
             // 
-            // chkDoubleStep
-            // 
-            this.chkDoubleStep.AutoSize = true;
-            this.chkDoubleStep.Location = new System.Drawing.Point(298, 31);
-            this.chkDoubleStep.Name = "chkDoubleStep";
-            this.chkDoubleStep.Size = new System.Drawing.Size(109, 21);
-            this.chkDoubleStep.TabIndex = 4;
-            this.chkDoubleStep.Text = "Double-Step";
-            this.toolTipWTD.SetToolTip(this.chkDoubleStep, "Host Tools v0.20 or later");
-            this.chkDoubleStep.UseVisualStyleBackColor = true;
-            this.chkDoubleStep.CheckedChanged += new System.EventHandler(this.chkDoubleStep_CheckedChanged);
-            // 
-            // chkEraseEmpty
-            // 
-            this.chkEraseEmpty.AutoSize = true;
-            this.chkEraseEmpty.Location = new System.Drawing.Point(54, 58);
-            this.chkEraseEmpty.Name = "chkEraseEmpty";
-            this.chkEraseEmpty.Size = new System.Drawing.Size(110, 21);
-            this.chkEraseEmpty.TabIndex = 5;
-            this.chkEraseEmpty.Text = "Erase Empty";
-            this.toolTipWTD.SetToolTip(this.chkEraseEmpty, "Host Tools v0.20 or later");
-            this.chkEraseEmpty.UseVisualStyleBackColor = true;
-            this.chkEraseEmpty.CheckedChanged += new System.EventHandler(this.chkEraseEmpty_CheckedChanged);
-            // 
-            // chkLegacySS
-            // 
-            this.chkLegacySS.AutoSize = true;
-            this.chkLegacySS.Location = new System.Drawing.Point(298, 58);
-            this.chkLegacySS.Name = "chkLegacySS";
-            this.chkLegacySS.Size = new System.Drawing.Size(160, 21);
-            this.chkLegacySS.TabIndex = 6;
-            this.chkLegacySS.Text = "Legacy Single-Sided";
-            this.toolTipWTD.SetToolTip(this.chkLegacySS, "Host Tools v0.20 or later");
-            this.chkLegacySS.UseVisualStyleBackColor = true;
-            this.chkLegacySS.CheckedChanged += new System.EventHandler(this.chkLegacySS_CheckedChanged);
-            // 
             // WriteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -349,7 +335,6 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolTip toolTipWTD;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
-        private System.Windows.Forms.CheckBox chkLegacySS;
         private System.Windows.Forms.CheckBox chkEraseEmpty;
         private System.Windows.Forms.CheckBox chkDoubleStep;
     }
