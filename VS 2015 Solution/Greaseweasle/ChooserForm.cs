@@ -179,6 +179,12 @@ namespace Greaseweazle
                     m_bWindowsEXE = true;
                 }
             }
+            else
+            {
+                // doesn't exist, uncheck it
+                mnuWindowsEXE.Checked = false;
+                m_bWindowsEXE =false;
+            }
 
             // set default folders
                 if (m_sReadDiskFolder.Length == 0)
