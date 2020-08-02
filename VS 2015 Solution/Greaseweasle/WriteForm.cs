@@ -312,21 +312,6 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void chkWTDAdjustSpeed_CheckedChanged_1(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-
-        private void chkWriteFirstCyl_CheckedChanged_1(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-
-        private void chkWriteLastCyl_CheckedChanged_1(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-
         private void gbWriteToDisk_Enter(object sender, EventArgs e)
         {
             CreateCommandLine();

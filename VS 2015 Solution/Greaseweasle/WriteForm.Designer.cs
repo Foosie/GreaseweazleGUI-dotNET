@@ -206,7 +206,7 @@ namespace Greaseweazle
             this.chkWTDAdjustSpeed.Text = "Adjust Speed";
             this.toolTipWTD.SetToolTip(this.chkWTDAdjustSpeed, "Host Tools v0.05 through v0.12");
             this.chkWTDAdjustSpeed.UseVisualStyleBackColor = true;
-            this.chkWTDAdjustSpeed.CheckedChanged += new System.EventHandler(this.chkWTDAdjustSpeed_CheckedChanged_1);
+            this.chkWTDAdjustSpeed.CheckedChanged += new System.EventHandler(this.chkWTDAdjustSpeed_CheckedChanged);
             // 
             // rbWriteDoubleSided
             // 
@@ -251,7 +251,7 @@ namespace Greaseweazle
             this.chkWriteLastCyl.TabIndex = 9;
             this.chkWriteLastCyl.Text = "Last cylinder to write";
             this.chkWriteLastCyl.UseVisualStyleBackColor = true;
-            this.chkWriteLastCyl.CheckedChanged += new System.EventHandler(this.chkWriteLastCyl_CheckedChanged_1);
+            this.chkWriteLastCyl.CheckedChanged += new System.EventHandler(this.chkWriteLastCyl_CheckedChanged);
             // 
             // txtWriteFirstCyl
             // 
@@ -272,7 +272,7 @@ namespace Greaseweazle
             this.chkWriteFirstCyl.TabIndex = 7;
             this.chkWriteFirstCyl.Text = "First cylinder to write";
             this.chkWriteFirstCyl.UseVisualStyleBackColor = true;
-            this.chkWriteFirstCyl.CheckedChanged += new System.EventHandler(this.chkWriteFirstCyl_CheckedChanged_1);
+            this.chkWriteFirstCyl.CheckedChanged += new System.EventHandler(this.chkWriteFirstCyl_CheckedChanged);
             // 
             // statusStrip
             // 

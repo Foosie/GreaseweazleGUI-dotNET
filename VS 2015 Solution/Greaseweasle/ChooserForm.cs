@@ -179,9 +179,9 @@ namespace Greaseweazle
                     m_bWindowsEXE = true;
                 }
             }
-            else
+            else if (mnuWindowsEXE.Checked)
             {
-                // doesn't exist, uncheck it
+                AutoClosingMessageBox.Show("Missing gw.exe in folder.\n\nWindows Self-contained Executable mode deselected", this.Text, 10000);
                 mnuWindowsEXE.Checked = false;
                 m_bWindowsEXE =false;
             }

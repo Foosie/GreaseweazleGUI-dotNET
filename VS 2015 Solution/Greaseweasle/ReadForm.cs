@@ -26,7 +26,6 @@ namespace Greaseweazle
     public partial class ReadForm : Form
     {
         #region declarations
-        private string m_sRFDFilename = "mydisk.scp";
         private string m_sReadDiskFolder = "";
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
@@ -71,7 +70,7 @@ namespace Greaseweazle
         #region iniWriteFile
         public void iniWriteFile()
         {
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sRFDFilename", m_sRFDFilename);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sRFDFilename",tbFilename.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbReadDoubleSided", (rbReadDoubleSided.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbReadSingleSided", (rbReadSingleSided.Checked == true).ToString());
@@ -98,8 +97,8 @@ namespace Greaseweazle
         {
             string sRet;
 
-           if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "m_sRFDFilename", "garbage").Trim())) != "garbage")
-                m_sRFDFilename = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "m_sRFDFilename", "garbage").Trim())) != "garbage")
+                tbFilename.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbReadDoubleSided", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -216,7 +215,7 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --rpm=" + txtDriveRpmRFD.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive " + txtDriveSelectRFD.Text;
-            txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + m_sRFDFilename;
+            txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + tbFilename.Text.Trim();
             if (chkLegacySS.Checked == true)
                 txtRFDCommandLine.Text += "::legacy_ss";
             txtRFDCommandLine.Text += "\"";
@@ -384,7 +383,7 @@ namespace Greaseweazle
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
-                m_sRFDFilename = openDialog.SafeFileName;
+                tbFilename.Text = openDialog.SafeFileName;
                 m_sReadDiskFolder = Path.GetDirectoryName(openDialog.FileName);
                 CreateCommandLine();
             }
@@ -447,6 +446,13 @@ namespace Greaseweazle
                 ChooserForm.m_frmChooser.Show();
             }
             base.WndProc(ref m);
+        }
+        #endregion
+
+        #region tbFilename_TextChanged
+        private void tbFilename_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
         }
         #endregion
     }
