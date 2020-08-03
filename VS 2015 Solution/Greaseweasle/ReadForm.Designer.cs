@@ -41,6 +41,12 @@ namespace Greaseweazle
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadForm));
             this.gbReadFromDisk = new System.Windows.Forms.GroupBox();
+            this.gbFilename = new System.Windows.Forms.GroupBox();
+            this.btnInc = new System.Windows.Forms.Button();
+            this.tbSuffix = new System.Windows.Forms.TextBox();
+            this.lblSuffix = new System.Windows.Forms.Label();
+            this.tbFilename = new System.Windows.Forms.TextBox();
+            this.lblFilename = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.txtRFDCommandLine = new System.Windows.Forms.TextBox();
             this.lblCommandLine = new System.Windows.Forms.Label();
@@ -48,8 +54,6 @@ namespace Greaseweazle
             this.btnLaunch = new System.Windows.Forms.Button();
             this.btnRFDSelectFolder = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbFilename = new System.Windows.Forms.TextBox();
-            this.lblFilename = new System.Windows.Forms.Label();
             this.chkLegacySS = new System.Windows.Forms.CheckBox();
             this.txtDriveRpmRFD = new System.Windows.Forms.TextBox();
             this.chkDriveRpmRFD = new System.Windows.Forms.CheckBox();
@@ -69,13 +73,16 @@ namespace Greaseweazle
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
+            this.btnDec = new System.Windows.Forms.Button();
             this.gbReadFromDisk.SuspendLayout();
+            this.gbFilename.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbReadFromDisk
             // 
+            this.gbReadFromDisk.Controls.Add(this.gbFilename);
             this.gbReadFromDisk.Controls.Add(this.btnBack);
             this.gbReadFromDisk.Controls.Add(this.txtRFDCommandLine);
             this.gbReadFromDisk.Controls.Add(this.lblCommandLine);
@@ -85,16 +92,76 @@ namespace Greaseweazle
             this.gbReadFromDisk.Controls.Add(this.groupBox1);
             this.gbReadFromDisk.Location = new System.Drawing.Point(21, 19);
             this.gbReadFromDisk.Name = "gbReadFromDisk";
-            this.gbReadFromDisk.Size = new System.Drawing.Size(555, 498);
+            this.gbReadFromDisk.Size = new System.Drawing.Size(555, 566);
             this.gbReadFromDisk.TabIndex = 0;
             this.gbReadFromDisk.TabStop = false;
             // 
+            // gbFilename
+            // 
+            this.gbFilename.Controls.Add(this.btnDec);
+            this.gbFilename.Controls.Add(this.btnInc);
+            this.gbFilename.Controls.Add(this.tbSuffix);
+            this.gbFilename.Controls.Add(this.lblSuffix);
+            this.gbFilename.Controls.Add(this.tbFilename);
+            this.gbFilename.Controls.Add(this.lblFilename);
+            this.gbFilename.Location = new System.Drawing.Point(21, 292);
+            this.gbFilename.Name = "gbFilename";
+            this.gbFilename.Size = new System.Drawing.Size(512, 102);
+            this.gbFilename.TabIndex = 18;
+            this.gbFilename.TabStop = false;
+            // 
+            // btnInc
+            // 
+            this.btnInc.Location = new System.Drawing.Point(273, 55);
+            this.btnInc.Name = "btnInc";
+            this.btnInc.Size = new System.Drawing.Size(58, 29);
+            this.btnInc.TabIndex = 23;
+            this.btnInc.Text = ">>>>";
+            this.btnInc.UseVisualStyleBackColor = true;
+            this.btnInc.Click += new System.EventHandler(this.btnInc_Click);
+            // 
+            // tbSuffix
+            // 
+            this.tbSuffix.Location = new System.Drawing.Point(215, 58);
+            this.tbSuffix.MaxLength = 3;
+            this.tbSuffix.Name = "tbSuffix";
+            this.tbSuffix.Size = new System.Drawing.Size(36, 22);
+            this.tbSuffix.TabIndex = 22;
+            this.tbSuffix.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbSuffix.TextChanged += new System.EventHandler(this.tbSuffix_TextChanged);
+            // 
+            // lblSuffix
+            // 
+            this.lblSuffix.AutoSize = true;
+            this.lblSuffix.Location = new System.Drawing.Point(101, 61);
+            this.lblSuffix.Name = "lblSuffix";
+            this.lblSuffix.Size = new System.Drawing.Size(77, 17);
+            this.lblSuffix.TabIndex = 21;
+            this.lblSuffix.Text = "Nbr. Suffix:";
+            // 
+            // tbFilename
+            // 
+            this.tbFilename.Location = new System.Drawing.Point(215, 23);
+            this.tbFilename.Name = "tbFilename";
+            this.tbFilename.Size = new System.Drawing.Size(197, 22);
+            this.tbFilename.TabIndex = 20;
+            this.tbFilename.Text = "mydisk.scp";
+            this.tbFilename.TextChanged += new System.EventHandler(this.tbFilename_TextChanged);
+            // 
+            // lblFilename
+            // 
+            this.lblFilename.Location = new System.Drawing.Point(101, 23);
+            this.lblFilename.Name = "lblFilename";
+            this.lblFilename.Size = new System.Drawing.Size(100, 23);
+            this.lblFilename.TabIndex = 19;
+            this.lblFilename.Text = "Filename:";
+            // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(386, 451);
+            this.btnBack.Location = new System.Drawing.Point(386, 519);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 31;
+            this.btnBack.TabIndex = 30;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -102,55 +169,53 @@ namespace Greaseweazle
             // txtRFDCommandLine
             // 
             this.txtRFDCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtRFDCommandLine.Location = new System.Drawing.Point(21, 363);
+            this.txtRFDCommandLine.Location = new System.Drawing.Point(21, 431);
             this.txtRFDCommandLine.Multiline = true;
             this.txtRFDCommandLine.Name = "txtRFDCommandLine";
             this.txtRFDCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtRFDCommandLine.TabIndex = 27;
+            this.txtRFDCommandLine.TabIndex = 26;
             // 
             // lblCommandLine
             // 
             this.lblCommandLine.AutoSize = true;
-            this.lblCommandLine.Location = new System.Drawing.Point(227, 335);
+            this.lblCommandLine.Location = new System.Drawing.Point(227, 403);
             this.lblCommandLine.Name = "lblCommandLine";
             this.lblCommandLine.Size = new System.Drawing.Size(102, 17);
-            this.lblCommandLine.TabIndex = 26;
+            this.lblCommandLine.TabIndex = 25;
             this.lblCommandLine.Text = "Command Line";
             // 
             // btnRFDSelectFile
             // 
-            this.btnRFDSelectFile.Location = new System.Drawing.Point(164, 451);
+            this.btnRFDSelectFile.Location = new System.Drawing.Point(164, 519);
             this.btnRFDSelectFile.Name = "btnRFDSelectFile";
             this.btnRFDSelectFile.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFile.TabIndex = 29;
+            this.btnRFDSelectFile.TabIndex = 28;
             this.btnRFDSelectFile.Text = "Select File";
             this.btnRFDSelectFile.UseVisualStyleBackColor = true;
             this.btnRFDSelectFile.Click += new System.EventHandler(this.btnRFDSelectFile_Click);
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(272, 451);
+            this.btnLaunch.Location = new System.Drawing.Point(272, 519);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 30;
+            this.btnLaunch.TabIndex = 29;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // btnRFDSelectFolder
             // 
-            this.btnRFDSelectFolder.Location = new System.Drawing.Point(50, 451);
+            this.btnRFDSelectFolder.Location = new System.Drawing.Point(50, 519);
             this.btnRFDSelectFolder.Name = "btnRFDSelectFolder";
             this.btnRFDSelectFolder.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFolder.TabIndex = 28;
+            this.btnRFDSelectFolder.TabIndex = 27;
             this.btnRFDSelectFolder.Text = "Select Folder";
             this.btnRFDSelectFolder.UseVisualStyleBackColor = true;
             this.btnRFDSelectFolder.Click += new System.EventHandler(this.btnRFDSelectFolder_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tbFilename);
-            this.groupBox1.Controls.Add(this.lblFilename);
             this.groupBox1.Controls.Add(this.chkLegacySS);
             this.groupBox1.Controls.Add(this.txtDriveRpmRFD);
             this.groupBox1.Controls.Add(this.chkDriveRpmRFD);
@@ -169,26 +234,9 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.rbReadDoubleSided);
             this.groupBox1.Location = new System.Drawing.Point(23, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(512, 306);
+            this.groupBox1.Size = new System.Drawing.Size(512, 265);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            // 
-            // tbFilename
-            // 
-            this.tbFilename.Location = new System.Drawing.Point(215, 261);
-            this.tbFilename.Name = "tbFilename";
-            this.tbFilename.Size = new System.Drawing.Size(197, 22);
-            this.tbFilename.TabIndex = 19;
-            this.tbFilename.Text = "mydisk.scp";
-            this.tbFilename.TextChanged += new System.EventHandler(this.tbFilename_TextChanged);
-            // 
-            // lblFilename
-            // 
-            this.lblFilename.Location = new System.Drawing.Point(101, 261);
-            this.lblFilename.Name = "lblFilename";
-            this.lblFilename.Size = new System.Drawing.Size(100, 23);
-            this.lblFilename.TabIndex = 18;
-            this.lblFilename.Text = "Filename:";
             // 
             // chkLegacySS
             // 
@@ -376,7 +424,7 @@ namespace Greaseweazle
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 535);
+            this.statusStrip.Location = new System.Drawing.Point(0, 606);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(597, 25);
             this.statusStrip.TabIndex = 1;
@@ -388,12 +436,22 @@ namespace Greaseweazle
             this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel";
             // 
+            // btnDec
+            // 
+            this.btnDec.Location = new System.Drawing.Point(353, 55);
+            this.btnDec.Name = "btnDec";
+            this.btnDec.Size = new System.Drawing.Size(58, 29);
+            this.btnDec.TabIndex = 24;
+            this.btnDec.Text = "<<<<";
+            this.btnDec.UseVisualStyleBackColor = true;
+            this.btnDec.Click += new System.EventHandler(this.btnDec_Click);
+            // 
             // ReadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(597, 560);
+            this.ClientSize = new System.Drawing.Size(597, 631);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.gbReadFromDisk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -404,6 +462,8 @@ namespace Greaseweazle
             this.Load += new System.EventHandler(this.ReadForm_Load);
             this.gbReadFromDisk.ResumeLayout(false);
             this.gbReadFromDisk.PerformLayout();
+            this.gbFilename.ResumeLayout(false);
+            this.gbFilename.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -436,13 +496,18 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolTip toolTipRFD;
         private System.Windows.Forms.CheckBox chkLegacySS;
-        private System.Windows.Forms.TextBox tbFilename;
-        private System.Windows.Forms.Label lblFilename;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.TextBox txtRFDCommandLine;
         private System.Windows.Forms.Label lblCommandLine;
         private System.Windows.Forms.Button btnRFDSelectFile;
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.Button btnRFDSelectFolder;
+        private System.Windows.Forms.GroupBox gbFilename;
+        private System.Windows.Forms.TextBox tbFilename;
+        private System.Windows.Forms.Label lblFilename;
+        private System.Windows.Forms.Button btnInc;
+        private System.Windows.Forms.TextBox tbSuffix;
+        private System.Windows.Forms.Label lblSuffix;
+        private System.Windows.Forms.Button btnDec;
     }
 }

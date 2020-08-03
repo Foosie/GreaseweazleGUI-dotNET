@@ -9,16 +9,10 @@
 // See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Greaseweazle
@@ -32,6 +26,7 @@ namespace Greaseweazle
         private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
         private const int WM_CLOSE = 0x0010;
+        private const string m_sSeperator = "--";
         #endregion
 
         #region ReadForm
@@ -98,7 +93,11 @@ namespace Greaseweazle
             string sRet;
 
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "m_sRFDFilename", "garbage").Trim())) != "garbage")
+            {
                 tbFilename.Text = sRet;
+                SetFNSuffix();
+                CreateCommandLine();           
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbReadDoubleSided", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -452,7 +451,116 @@ namespace Greaseweazle
         #region tbFilename_TextChanged
         private void tbFilename_TextChanged(object sender, EventArgs e)
         {
+            GetFNSuffix();
             CreateCommandLine();
+        }
+        #endregion
+
+        #region btnInc_Click
+        private void btnInc_Click(object sender, EventArgs e)
+        {
+            ChgSuffix(1);
+        }
+        #endregion
+
+        #region btnDec_Click
+        private void btnDec_Click(object sender, EventArgs e)
+        {
+            ChgSuffix(2);
+        }
+        #endregion
+
+        #region tbSuffix_TextChanged
+        private void tbSuffix_TextChanged(object sender, EventArgs e)
+        {
+            ChgFilenameSuffix();
+            CreateCommandLine();
+        }
+        #endregion
+
+        #region SetFNSuffix
+        private void SetFNSuffix()
+        {
+            int pos = -1;
+            int n = -1;
+            if (tbFilename.Text.Trim().Length > 0)
+            {
+                string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
+                if ((pos = sFN.LastIndexOf(m_sSeperator)) != -1)
+                    tbSuffix.Text = sFN.Substring(pos + m_sSeperator.Length, sFN.Length - pos - m_sSeperator.Length);
+            }
+        }
+        #endregion
+
+        #region GetFNSuffix
+        private void GetFNSuffix()
+        {
+            int pos = -1;
+            int n = -1;
+            string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
+            string sExt = Path.GetExtension(tbFilename.Text);
+            if ((pos = sFN.IndexOf(m_sSeperator)) == -1)
+                return;
+            String sSuffix = sFN.Substring(pos+2);
+            Int32.TryParse(sSuffix, out n);
+            tbSuffix.Text = n.ToString();
+        }
+        #endregion
+
+        #region ChgFilenameSuffix
+        private void ChgFilenameSuffix()
+        {
+            int pos = -1;
+            int n = -1;
+            string sSuffix = "";
+            if (tbSuffix.Text.Trim().Length > 0)
+            {
+                sSuffix = tbSuffix.Text.Trim();
+                if (sSuffix.Length > 0)
+                    Int32.TryParse(sSuffix.Trim(), out n);
+            }
+            string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
+            string sExt = Path.GetExtension(tbFilename.Text);
+            if ((pos = sFN.LastIndexOf(m_sSeperator)) != -1)
+                sFN = sFN.Substring(0, pos);
+            if (n != -1)
+                tbFilename.Text = sFN + m_sSeperator + n.ToString() + sExt;
+            else
+                tbFilename.Text = sFN + sExt;
+        }
+        #endregion
+
+        #region ChgSuffix
+        private void ChgSuffix(int direction)
+        {
+            int n = -1;
+            int increment = 1;
+            int decrement = 2;
+            if (direction != increment && direction != decrement)
+                return;
+            if (tbSuffix.Text.Trim().Length == 0)
+                tbSuffix.Text = "0";
+            else
+                tbSuffix.Text = tbSuffix.Text.Trim();
+            Int32.TryParse(tbSuffix.Text.Trim(), out n);
+            if (direction == increment)
+            {
+                if (n < 999)
+                {
+                    n++;
+                    tbSuffix.Text = n.ToString();
+                }
+            }
+            else if (direction == decrement)
+            {
+                if (n > 0)
+                {
+                    n--;
+                    tbSuffix.Text = n.ToString();
+                }
+                else
+                    tbSuffix.Text = "";
+            }
         }
         #endregion
     }
