@@ -84,6 +84,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRateRFD", txtDriveRateRFD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRpmRFD", (chkDriveRpmRFD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRpmRFD", txtDriveRpmRFD.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkAutoInc", (chkAutoInc.Checked == true).ToString());
         }
         #endregion
 
@@ -166,6 +167,12 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkDriveRpmRFD.Checked = true;
+            }
+
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkAutoInc", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkAutoInc.Checked = true;
             }
 
             // found out the controller type
@@ -424,6 +431,8 @@ namespace Greaseweazle
             {
                 Process exeProcess = Process.Start(startInfo);
                 ChooserForm.m_ProcessId = exeProcess.Id;
+                if (chkAutoInc.Checked)
+                    ChgSuffix(1);
             }
             catch (Exception e)
             {
