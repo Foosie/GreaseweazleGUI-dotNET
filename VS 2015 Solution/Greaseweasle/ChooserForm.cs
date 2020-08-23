@@ -35,7 +35,7 @@ namespace Greaseweazle
         private Form m_frmErase = null;
         private Form m_frmBandwidth = null;
         private Form m_frmInfo = null;
-        public string sExeDir = "";
+        public string m_sExeDir = "";
         public string m_action = "read";
         public const int WM_CLOSE = 0x0010;
         public static Boolean m_bF7Type = false;
@@ -59,6 +59,7 @@ namespace Greaseweazle
         public static string m_sStatusLine = "";
         public static Color m_StatusColor = Color.FromArgb(173, 255, 47); // green ok
         private string m_sInfo = "The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. Options in red are not supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.";
+        private ToolStripMenuItem[] m_mnuItems;
         #endregion
 
         #region ChooserForm
@@ -104,15 +105,15 @@ namespace Greaseweazle
             menuStrip1.BackColor = mnuSettings.BackColor;
 
             // set working directory to executable directory
-            sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            Directory.SetCurrentDirectory(sExeDir);
+            m_sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            Directory.SetCurrentDirectory(m_sExeDir);
 
             // check for existance of gw.py
-            if (!File.Exists(sExeDir + "\\gw.py") && !File.Exists(sExeDir + "\\gw") && !File.Exists(sExeDir + "\\gw.exe"))
+            if (!File.Exists(m_sExeDir + "\\gw.py") && !File.Exists(m_sExeDir + "\\gw") && !File.Exists(m_sExeDir + "\\gw.exe"))
                 System.Windows.Forms.MessageBox.Show("GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.", "Oops!");
             else
             {
-                if (chkVersions(sExeDir))
+                if (chkVersions(m_sExeDir))
                 {
                     m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, CultureInfo.InvariantCulture);
                     string sHTVer = "Host Tools v" + m_sGWVersionMajor + "." + m_sGWVersionMinor;
@@ -162,15 +163,25 @@ namespace Greaseweazle
 
             // determine which way to invoke the script
             // this is overwridden if the user selects exe in settings
-            if (File.Exists(sExeDir + "\\gw"))
+            if (File.Exists(m_sExeDir + "\\gw"))
                 m_sGWscript = "gw";
             else m_sGWscript = "gw.py";
 
-            // read our settings
+            // stub ini file if necessary
+            if (!File.Exists(m_sIniFile))
+                m_Ini.IniWriteValue("gbMisc", "txtProfile", "GreaseweazleGUI");
+
+            // build the profile menu
+            BuildProfileMenu();
+
+            // now restore the selected profile
+            restoreSelectedProfile();
+
+            // finally read our settings
             iniReadFile();
 
             // if compiled windows version check it
-            if (File.Exists(sExeDir + "\\gw.exe"))
+            if (File.Exists(m_sExeDir + "\\gw.exe"))
             {
                 if (!mnuWindowsEXE.Checked)
                 {
@@ -183,16 +194,16 @@ namespace Greaseweazle
             {
                 AutoClosingMessageBox.Show("Missing gw.exe in folder.\n\nWindows Self-contained Executable mode deselected", this.Text, 10000);
                 mnuWindowsEXE.Checked = false;
-                m_bWindowsEXE =false;
+                m_bWindowsEXE = false;
             }
 
             // set default folders
-                if (m_sReadDiskFolder.Length == 0)
-                m_sReadDiskFolder = sExeDir;
+            if (m_sReadDiskFolder.Length == 0)
+                m_sReadDiskFolder = m_sExeDir;
             if (m_sWriteDiskFolder.Length == 0)
-                m_sWriteDiskFolder = sExeDir;
+                m_sWriteDiskFolder = m_sExeDir;
             if (m_sUpdateFirmwareFolder.Length == 0)
-                m_sUpdateFirmwareFolder = sExeDir;
+                m_sUpdateFirmwareFolder = m_sExeDir;
 
             // Get a list of serial port names.
             refreshUSBPorts();
@@ -200,12 +211,12 @@ namespace Greaseweazle
         #endregion
 
         #region chkVersions
-        public bool chkVersions(string sExeDir)
+        public bool chkVersions(string m_sExeDir)
         {
             bool b1 = false;
             bool b2 = false;
 
-            string fname = sExeDir + "\\scripts\\greaseweazle\\version.py";
+            string fname = m_sExeDir + "\\scripts\\greaseweazle\\version.py";
             if (File.Exists(fname))
             {
                 string[] lines = System.IO.File.ReadAllLines(@fname);
@@ -469,6 +480,9 @@ namespace Greaseweazle
                 // write inifile
                 iniWriteFile();
 
+                // save the selected profile
+                saveSelectedProfile();
+
                 // release mutex
                 if (null != m_exclusiveMutex)
                     m_exclusiveMutex.Close();
@@ -495,7 +509,12 @@ namespace Greaseweazle
                 }
             }
 
+            // save our profile
             iniWriteFile();
+
+            // save the selected profile
+            saveSelectedProfile();
+
             Application.Exit();
         }
         #endregion
@@ -820,7 +839,91 @@ namespace Greaseweazle
         }
         #endregion
 
-       
+        #region BuildProfileMenu
+        private void BuildProfileMenu()
+        {
+            string[] filePaths = Directory.GetFiles(m_sExeDir, "*.ini");
+            m_mnuItems = null; // and dispose of any sub-items
+
+            m_mnuItems = new ToolStripMenuItem[filePaths.Length];
+            string fname;
+
+            for (int i = 0; i < m_mnuItems.Length; i++)
+            {
+                fname = Path.GetFileNameWithoutExtension(filePaths[i]);
+                m_mnuItems[i] = new ToolStripMenuItem();
+                m_mnuItems[i].Name = "mnu" + fname;
+                m_mnuItems[i].Text = fname;
+                m_mnuItems[i].Click += new EventHandler(MenuItemClickHandler);
+            }
+
+            mnuProfiles.DropDownItems.AddRange(m_mnuItems);
+        }
+        #endregion
+
+        #region MenuItemClickHandler
+        private void MenuItemClickHandler(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
+            for (int i = 0; i < m_mnuItems.Length; i++)
+            { 
+                m_mnuItems[i].Checked = false;
+                if (m_mnuItems[i] == clickedItem)
+                    m_mnuItems[i].Checked = true;
+            }
+            m_sIniFile = ".\\" + clickedItem + ".ini";
+            m_Ini = new IniFile(m_sIniFile);
+            iniReadFile();
+        }
+        #endregion
+
+        #region mnuProfileNew_Click
+        private void mnuProfileNew_Click(object sender, EventArgs e)
+        { 
+            InputForm m_frmInput = new InputForm(this);
+            m_frmInput.ShowDialog(this);
+
+            // now restart the application
+            Application.Restart();
+        }
+        #endregion
+
+        #region restoreSelectedProfile
+        private void restoreSelectedProfile()
+        {
+            string sRet;
+            IniFile ifile = new IniFile(".\\GreaseweazleGUI.ini");
+            sRet = m_Ini.IniReadValue("gbMisc", "txtProfile", "garbage").Trim();
+            for (int i = 0; i < m_mnuItems.Length; i++)
+            {
+                m_mnuItems[i].Checked = false;
+                if (m_mnuItems[i].ToString() == sRet)
+                {
+                    m_mnuItems[i].Checked = true;
+                    m_sIniFile = ".\\" + sRet + ".ini";
+                    m_Ini = new IniFile(m_sIniFile);
+                }
+            }
+        }
+        #endregion
+
+        #region saveSelectedProfile
+        private void saveSelectedProfile()
+        {
+            bool bFound = false;
+            IniFile ifile = new IniFile(".\\GreaseweazleGUI.ini");
+            for (int i = 0; i < m_mnuItems.Length; i++)
+            {
+                if (m_mnuItems[i].Checked)
+                {
+                    ifile.IniWriteValue("gbMisc", "txtProfile", m_mnuItems[i].ToString());
+                    bFound = true;
+                }
+            }
+            if (!bFound)
+                ifile.IniWriteValue("gbMisc", "txtProfile", "GreaseweazleGUI");
+        }
+        #endregion
     }
 
     #region AutoClosingMessageBox

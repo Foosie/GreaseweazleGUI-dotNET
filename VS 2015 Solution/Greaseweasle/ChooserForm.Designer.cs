@@ -61,6 +61,9 @@ namespace Greaseweazle
             this.rbWriteDisk = new System.Windows.Forms.RadioButton();
             this.pbGWsmall = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mnuProfiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuProfileNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUSBSupport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowsEXE = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +71,6 @@ namespace Greaseweazle
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mnuInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAction.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbType.SuspendLayout();
@@ -326,15 +328,38 @@ namespace Greaseweazle
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuProfiles,
+            this.mnuInfo,
             this.mnuSettings,
-            this.aboutToolStripMenuItem,
-            this.mnuInfo});
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(434, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             this.toolTipChooser.SetToolTip(this.menuStrip1, "Click me for more information");
+            // 
+            // mnuProfiles
+            // 
+            this.mnuProfiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuProfileNew});
+            this.mnuProfiles.Name = "mnuProfiles";
+            this.mnuProfiles.Size = new System.Drawing.Size(70, 24);
+            this.mnuProfiles.Text = "Profiles";
+            // 
+            // mnuProfileNew
+            // 
+            this.mnuProfileNew.Name = "mnuProfileNew";
+            this.mnuProfileNew.Size = new System.Drawing.Size(181, 26);
+            this.mnuProfileNew.Text = "-New-";
+            this.mnuProfileNew.Click += new System.EventHandler(this.mnuProfileNew_Click);
+            // 
+            // mnuInfo
+            // 
+            this.mnuInfo.Name = "mnuInfo";
+            this.mnuInfo.Size = new System.Drawing.Size(47, 24);
+            this.mnuInfo.Text = "Info";
+            this.mnuInfo.Click += new System.EventHandler(this.mnuInfo_Click);
             // 
             // mnuSettings
             // 
@@ -389,13 +414,6 @@ namespace Greaseweazle
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             this.toolStripStatusLabel.ToolTipText = "Click me for more infomation";
-            // 
-            // mnuInfo
-            // 
-            this.mnuInfo.Name = "mnuInfo";
-            this.mnuInfo.Size = new System.Drawing.Size(47, 24);
-            this.mnuInfo.Text = "Info";
-            this.mnuInfo.Click += new System.EventHandler(this.mnuInfo_Click);
             // 
             // ChooserForm
             // 
@@ -460,5 +478,7 @@ namespace Greaseweazle
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem mnuInfo;
+        private System.Windows.Forms.ToolStripMenuItem mnuProfiles;
+        private System.Windows.Forms.ToolStripMenuItem mnuProfileNew;
     }
 }
