@@ -924,6 +924,52 @@ namespace Greaseweazle
                 ifile.IniWriteValue("gbMisc", "txtProfile", "GreaseweazleGUI");
         }
         #endregion
+
+        #region mnuDelete_Click
+        private void mnuDelete_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.RestoreDirectory = true; // make sure directory is set to executable path
+            openDialog.AddExtension = true;
+            openDialog.CheckFileExists = true;
+            openDialog.DefaultExt = "ini";
+            openDialog.InitialDirectory = m_sExeDir;
+            openDialog.Multiselect = false;
+            openDialog.Title = "Select a profile (current profile excluded)";
+            openDialog.Filter = "Profiles (*.INI;) | *.INI;";
+            DialogResult drRet = DialogResult.Cancel;
+            if ((drRet = openDialog.ShowDialog()) == DialogResult.OK)
+            {
+                while (Path.GetDirectoryName(openDialog.FileName) != Path.Combine(Path.GetDirectoryName(Application.StartupPath), m_sExeDir))
+                {
+                    MessageBox.Show("Please select a profile which is in the default folder", "Wrong folder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    drRet = openDialog.ShowDialog();
+                }
+                string sFilename = openDialog.FileName;
+                string sProfilename = Path.GetFileNameWithoutExtension(sFilename);
+                if (sProfilename == "GreaseweazleGUI")
+                    MessageBox.Show("You cannot delete the default profile", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                {
+                    // determine the selected profile
+                    for (int i = 0; i < m_mnuItems.Length; i++)
+                    {
+                        if ((m_mnuItems[i].Checked) && (m_mnuItems[i].ToString() == sProfilename))
+                        {
+                            MessageBox.Show("You cannot delete the current profile", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                    drRet = MessageBox.Show("Delete profile " + sProfilename.ToUpper() + ".\n\n Are you sure?", "Delete Profile", MessageBoxButtons.YesNo);
+                    if (drRet == DialogResult.Yes)
+                    {
+                        File.Delete(sFilename);
+                        Application.Restart();
+                    }
+                }
+            }
+        }
+        #endregion
     }
 
     #region AutoClosingMessageBox

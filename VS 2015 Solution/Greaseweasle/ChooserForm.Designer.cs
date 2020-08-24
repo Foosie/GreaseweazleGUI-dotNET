@@ -71,6 +71,7 @@ namespace Greaseweazle
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAction.SuspendLayout();
             this.gbUSBPorts.SuspendLayout();
             this.gbType.SuspendLayout();
@@ -342,7 +343,8 @@ namespace Greaseweazle
             // mnuProfiles
             // 
             this.mnuProfiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuProfileNew});
+            this.mnuProfileNew,
+            this.mnuDelete});
             this.mnuProfiles.Name = "mnuProfiles";
             this.mnuProfiles.Size = new System.Drawing.Size(70, 24);
             this.mnuProfiles.Text = "Profiles";
@@ -415,6 +417,13 @@ namespace Greaseweazle
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             this.toolStripStatusLabel.ToolTipText = "Click me for more infomation";
             // 
+            // mnuDelete
+            // 
+            this.mnuDelete.Name = "mnuDelete";
+            this.mnuDelete.Size = new System.Drawing.Size(181, 26);
+            this.mnuDelete.Text = "-Delete-";
+            this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
+            // 
             // ChooserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -480,5 +489,6 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolStripMenuItem mnuInfo;
         private System.Windows.Forms.ToolStripMenuItem mnuProfiles;
         private System.Windows.Forms.ToolStripMenuItem mnuProfileNew;
+        private System.Windows.Forms.ToolStripMenuItem mnuDelete;
     }
 }
