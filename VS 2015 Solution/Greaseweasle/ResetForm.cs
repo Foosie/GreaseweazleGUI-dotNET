@@ -27,6 +27,7 @@ namespace Greaseweazle
         private Form m_frmChooser = null;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
+        private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
 
         #region ResetForm
@@ -83,7 +84,9 @@ namespace Greaseweazle
                 txtResetCommandLine.Text = "gw.exe reset";
             else
                 txtResetCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " reset";
-            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+            if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+                txtResetCommandLine.Text += " --device=" + m_sUSBPort;
+            if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtResetCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion
@@ -106,6 +109,8 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
+                m_bLegacyUSB = (sRet == "True");
 
             // windows executable
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")

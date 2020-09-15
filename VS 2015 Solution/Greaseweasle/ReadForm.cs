@@ -23,6 +23,7 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
+        private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
         private const int WM_CLOSE = 0x0010;
@@ -191,6 +192,8 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
+                m_bLegacyUSB = (sRet == "True");
 
             // windows executable
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
@@ -220,12 +223,14 @@ namespace Greaseweazle
             if (chkDriveRpmRFD.Checked == true)
                 txtRFDCommandLine.Text += " --rpm=" + txtDriveRpmRFD.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
-                txtRFDCommandLine.Text += " --drive " + txtDriveSelectRFD.Text;
+                txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
+            if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+                txtRFDCommandLine.Text += " --device=" + m_sUSBPort;
             txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + tbFilename.Text.Trim();
             if (chkLegacySS.Checked == true)
                 txtRFDCommandLine.Text += "::legacy_ss";
             txtRFDCommandLine.Text += "\"";
-            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+            if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtRFDCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion
@@ -357,7 +362,7 @@ namespace Greaseweazle
 
             CreateCommandLine();
         }
-        #endregion
+        #endregion  
 
         #region btnRFDSelectFolder_Click
         private void btnRFDSelectFolder_Click(object sender, EventArgs e)

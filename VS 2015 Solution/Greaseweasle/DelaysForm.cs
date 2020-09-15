@@ -31,6 +31,7 @@ namespace Greaseweazle
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bWindowsEXE = false;
         private bool m_bUSBSupport = false;
+        private bool m_bLegacyUSB = true;
         #endregion
 
         #region DelaysForm
@@ -127,6 +128,8 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
+                m_bLegacyUSB = (sRet == "True");
 
             // windows executable
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
@@ -151,7 +154,9 @@ namespace Greaseweazle
                 txtDelaysCommandLine.Text += " --motor=" + txtDelayMotorOn.Text;
             if (chkDelayAutoDeselect.Checked == true)
                 txtDelaysCommandLine.Text += " --auto-off=" + txtDelayAutoDeselect.Text;
-            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+            if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+                txtDelaysCommandLine.Text += " --device=" + m_sUSBPort;
+            if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtDelaysCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion

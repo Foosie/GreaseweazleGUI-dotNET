@@ -71,6 +71,12 @@
     <Compile Include="DelaysForm.Designer.cs">
       <DependentUpon>DelaysForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SeekForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeekForm.Designer.cs">
+      <DependentUpon>SeekForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EraseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DelaysForm.resx">
       <DependentUpon>DelaysForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeekForm.resx">
+      <DependentUpon>SeekForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EraseForm.resx">
       <DependentUpon>EraseForm.cs</DependentUpon>

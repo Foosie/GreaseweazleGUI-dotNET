@@ -35,10 +35,12 @@ namespace Greaseweazle
         private Form m_frmErase = null;
         private Form m_frmBandwidth = null;
         private Form m_frmInfo = null;
+        private Form m_frmSeek = null;
         public string m_sExeDir = "";
         public string m_action = "read";
         public const int WM_CLOSE = 0x0010;
         public static Boolean m_bF7Type = false;
+        public static Boolean m_bLegacyUSB = false;
         public static Boolean m_bWindowsEXE = false;
         public static string m_sGWscript = "gw.py";
         public static string m_sUSBPort = "UNKNOWN";
@@ -53,7 +55,7 @@ namespace Greaseweazle
         private static string m_sGWVersionMajor = "0";
         private static string m_sGWVersionMinor = "00";
         private static string m_sGUISupportedVersionMajor = "0";
-        private static string m_sGUISupportedVersionMinor = "20";
+        private static string m_sGUISupportedVersionMinor = "21";
         private static decimal m_GUIToolsVersion = Decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor, CultureInfo.InvariantCulture);   
         public static decimal m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, CultureInfo.InvariantCulture);
         public static string m_sStatusLine = "";
@@ -91,12 +93,13 @@ namespace Greaseweazle
             m_frmErase = new EraseForm(this);
             m_frmBandwidth = new BandwidthForm(this);
             m_frmInfo = new InfoForm(this);
+            m_frmSeek = new SeekForm(this);
 
             // get version from Project, GreaseweaselGUI Properties, Assembly Information
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v" + m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor;
+            this.Text = "GUI " + m_sVersion + " supports Host Tools v" + m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor;
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
@@ -159,6 +162,8 @@ namespace Greaseweazle
                 }
                 if (ChooserForm.m_GWToolsVersion < (decimal)0.18)
                     this.rbInfo.BackColor = Color.FromArgb(255, 182, 193);
+                if (ChooserForm.m_GWToolsVersion < (decimal)0.21)
+                    this.rbSeekCyl.BackColor = Color.FromArgb(255, 182, 193);
             }
 
             // determine which way to invoke the script
@@ -319,11 +324,15 @@ namespace Greaseweazle
                 if (sRet == "True")
                     rbBandwidth.Checked = true;
             }
-
             if ((sRet = (m_Ini.IniReadValue("gbAction", "rbInfo", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
                     rbInfo.Checked = true;
+            }
+            if ((sRet = (m_Ini.IniReadValue("gbAction", "rbSeekCyl", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbSeekCyl.Checked = true;
             }
 
             // type
@@ -341,6 +350,8 @@ namespace Greaseweazle
             // usb port
             if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
+            if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
+                chkLegacyUSB.Checked = (sRet == "True");
             if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -397,6 +408,7 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbAction", "rbReset", (rbReset.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbBandwidth", (rbBandwidth.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbInfo", (rbInfo.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbAction", "rbSeekCyl", (rbSeekCyl.Checked == true).ToString());
 
             // type
             m_Ini.IniWriteValue("gbType", "rbF1", (rbF1.Checked == true).ToString());
@@ -404,6 +416,7 @@ namespace Greaseweazle
 
             // usb port
             m_Ini.IniWriteValue("gbUSBPorts", "mnuUSBSupport", (mnuUSBSupport.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbUSBPorts", "chkLegacyUSB", (chkLegacyUSB.Checked == true).ToString());
             m_Ini.IniWriteValue("gbUSBPorts", "m_sUSBPort", m_sUSBPort);
 
             // windows executable
@@ -707,6 +720,19 @@ namespace Greaseweazle
                         m_frmInfo.ShowDialog(this);
                     }
                     break;
+                case "seek":
+                    if (m_frmSeek.Visible)
+                    {
+                        m_frmSeek.WindowState = FormWindowState.Normal;
+                        m_frmSeek.BringToFront();
+                    }
+                    else
+                    {
+                        m_frmSeek.Dispose();
+                        m_frmSeek = new SeekForm(this);
+                        m_frmSeek.ShowDialog(this);
+                    }
+                    break;
             }
         }
         #endregion
@@ -968,6 +994,21 @@ namespace Greaseweazle
                     }
                 }
             }
+        }
+        #endregion
+
+        #region chkLegacyUSB_CheckedChanged
+        private void chkLegacyUSB_CheckedChanged(object sender, EventArgs e)
+        {
+            m_bLegacyUSB = chkLegacyUSB.Checked;
+        }
+        #endregion
+
+        #region rbSeekCyl_CheckedChanged
+        private void rbSeekCyl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSeekCyl.Checked == true)
+                m_action = "seek";
         }
         #endregion
     }

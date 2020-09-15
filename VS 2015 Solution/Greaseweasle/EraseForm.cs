@@ -29,6 +29,7 @@ namespace Greaseweazle
         private const int WM_CLOSE = 0x0010;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
+        private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
         #endregion
@@ -129,6 +130,8 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
+                m_bLegacyUSB = (sRet == "True");
 
             // windows executable
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
@@ -151,7 +154,9 @@ namespace Greaseweazle
                 txtEraseCommandLine.Text += " --single-sided";
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtEraseCommandLine.Text += " --drive=" + txtDriveSelect.Text;
-            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+            if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+                txtEraseCommandLine.Text += " --device=" + m_sUSBPort;
+            if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtEraseCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion

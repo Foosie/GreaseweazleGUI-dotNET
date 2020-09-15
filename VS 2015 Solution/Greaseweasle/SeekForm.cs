@@ -1,4 +1,4 @@
-﻿// Updateorm.cs
+﻿// EraseForm.cs
 //
 // Greaseweazle GUI Wrapper
 //
@@ -6,7 +6,7 @@
 //
 // MIT License
 //
-// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
+// See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.using System;
 
 using System;
 using System.Collections.Generic;
@@ -23,21 +23,19 @@ using System.Windows.Forms;
 
 namespace Greaseweazle
 {
-    public partial class UpdateForm : Form
+    public partial class SeekForm : Form
     {
         #region declarations
-        private Form m_frmChooser = null;
         private const int WM_CLOSE = 0x0010;
-        private string m_sUpdateFolder = "";
-        private string m_sUpdateFilename = "firmware.upd";
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
         private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
+        private Form m_frmChooser = null;
         #endregion
 
-        #region UpdateForm
-        public UpdateForm(ChooserForm newForm)
+        #region EraseForm
+        public SeekForm(ChooserForm newForm)
         {
             m_frmChooser = newForm;
             InitializeComponent();
@@ -54,14 +52,6 @@ namespace Greaseweazle
             // set working directory to executable directory
             string sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             Directory.SetCurrentDirectory(sExeDir);
-
-            // set defaults
-            if (m_sUpdateFolder.Length == 0)
-                m_sUpdateFolder = sExeDir;
-
-            // bootloader support enabled in v0.16
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.16)
-                this.chkBootLoader.BackColor = Color.FromArgb(255, 182, 193);
         }
         #endregion
 
@@ -77,10 +67,10 @@ namespace Greaseweazle
         #region iniWriteFile
         public void iniWriteFile()
         {
-            // update firmware
-            ChooserForm.m_Ini.IniWriteValue("gbUpdateFirmware", "m_sUpdateFilename", m_sUpdateFilename);
-            ChooserForm.m_Ini.IniWriteValue("gbUpdateFirmware", "m_sUpdateFolder", m_sUpdateFolder);
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtUpdateCommandLine", txtUpdateCommandLine.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtSeekCyl", txtSeekCyl.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtDriveSelect", txtDriveSelect.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtEraseCommandLine", txtCommandLine.Text);
         }
         #endregion
 
@@ -89,11 +79,24 @@ namespace Greaseweazle
         {
             string sRet;
 
-            // update firmware
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUpdateFirmware", "m_sUpdateFilename", "garbage").Trim())) != "garbage")
-                m_sUpdateFilename = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUpdateFirmware", "m_sUpdateFolder", "garbage").Trim())) != "garbage")
-                m_sUpdateFolder = sRet;
+            // found out the controller type
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "False")
+                {
+                    chkDriveSelect.BackColor = Color.FromArgb(255, 182, 193);
+                    txtDriveSelect.BackColor = Color.FromArgb(255, 182, 193);
+                }
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "txtSeekCyl", "garbage").Trim())) != "garbage")
+                    txtSeekCyl.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "txtDriveSelect", "garbage").Trim())) != "garbage")
+                txtDriveSelect.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "chkDriveSelect", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDriveSelect.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -109,43 +112,20 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region UpdateForm_Load
-        private void UpdateForm_Load(object sender, EventArgs e)
-        {
-            // read inifile
-            iniReadFile();
-
-            // initialize status label
-            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
-            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
-            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
-
-            CreateCommandLine();
-        }
-        #endregion
-   
-        #region btnLaunch_Click
-        private void btnLaunch_Click(object sender, EventArgs e)
-        {
-            LaunchPython();
-        }
-        #endregion
-
         #region CreateCommandLine
         private void CreateCommandLine()
         {
             if (true == m_bWindowsEXE)
-                txtUpdateCommandLine.Text = "gw.exe update";
+                txtCommandLine.Text = "gw.exe seek";
             else
-                txtUpdateCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " update";
-            if (chkBootLoader.Checked == true)
-                txtUpdateCommandLine.Text += " --bootloader";
+                txtCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " seek";
+            if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
+                txtCommandLine.Text += " --drive=" + txtDriveSelect.Text;
             if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
-                txtUpdateCommandLine.Text += " --device=" + m_sUSBPort;
-            if (chkBootLoader.Checked == false)
-                txtUpdateCommandLine.Text += " \"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
+                txtCommandLine.Text += " --device=" + m_sUSBPort;
+            txtCommandLine.Text += " " + txtSeekCyl.Text;
             if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
-                txtUpdateCommandLine.Text += " " + m_sUSBPort;
+                txtCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion
 
@@ -171,7 +151,8 @@ namespace Greaseweazle
             startInfo.UseShellExecute = false;
             startInfo.FileName = "C:\\WINDOWS\\SYSTEM32\\cmd.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
-            startInfo.Arguments = "/K " + "\"" + txtUpdateCommandLine.Text + "\"";
+            txtCommandLine.Text = txtCommandLine.Text.Trim(); // remove empty usb port if it exists
+            startInfo.Arguments = "/K " + "\"" + txtCommandLine.Text + "\"";
             try
             {
                 Process exeProcess = Process.Start(startInfo);
@@ -185,24 +166,76 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region btnSelectUpdateFile_Click
-        private void btnSelectUpdateFile_Click(object sender, EventArgs e)
+        #region EraseForm_Load
+        private void EraseForm_Load(object sender, EventArgs e)
         {
-            // select file and folder where file is to be read from
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.RestoreDirectory = true; // make sure directory is set to executable path
-            openDialog.InitialDirectory = m_sUpdateFolder;
-            openDialog.Multiselect = false;
-            openDialog.Title = "Select an image";
-            openDialog.Filter = "UPD Files (*.upd)|*.upd" + "|" + "All Files (*.*)|*.*";
-            if (openDialog.ShowDialog() == DialogResult.OK)
-            {
-                m_sUpdateFilename = openDialog.SafeFileName;
-                m_sUpdateFolder = Path.GetDirectoryName(openDialog.FileName);
-                CreateCommandLine();
-            }
+            // read inifile
+            iniReadFile();
+
+            // initialize status label
+            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
+            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
+            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+
+            CreateCommandLine();
         }
         #endregion
+
+        #region btnLaunch_Click
+        private void btnLaunch_Click(object sender, EventArgs e)
+        {
+            LaunchPython();
+        }
+        #endregion
+
+        #region changed
+
+        private void chkWriteLastCyl_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkWriteFirstCyl_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkDriveSelect_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+       private void gbEraseDisk_Enter(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void rbWriteSingleSided_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void rbWriteDoubleSided_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtWriteFirstCyl_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtDriveSelect_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtWriteLastCyl_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        #endregion // changed
 
         #region WndProc
         protected override void WndProc(ref Message m) // capture close message so we can save our settings
@@ -219,11 +252,5 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region chkBootLoader_CheckedChanged
-        private void chkBootLoader_CheckedChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-        #endregion
     }
 }
