@@ -99,7 +99,7 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " supports Host Tools v" + m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor;
+            this.Text = "GUI " + m_sVersion + " - Host Tools v" + m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor;
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
