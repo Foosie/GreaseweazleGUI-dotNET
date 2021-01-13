@@ -149,8 +149,6 @@ namespace Greaseweazle
         #region InfoForm_Load
         private void InfoForm_Load(object sender, EventArgs e)
         {
-            iniReadFile();
-
             // initialize status label
             this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
             this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
@@ -160,6 +158,7 @@ namespace Greaseweazle
             if ((ChooserForm.m_GWToolsVersion < (decimal)0.16) || (!m_bF7Type))
                 this.chkBootLoader.BackColor =  Color.FromArgb(255, 182, 193);
 
+            iniReadFile();
             CreateCommandLine();
         }
         #endregion

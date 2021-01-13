@@ -57,6 +57,10 @@ namespace Greaseweazle
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.chkHeadsSet = new System.Windows.Forms.CheckBox();
+            this.txtHeadsSet = new System.Windows.Forms.TextBox();
+            this.chkCylSet = new System.Windows.Forms.CheckBox();
+            this.txtCylSet = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.gbEraseDisk.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -71,26 +75,26 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.gbEraseDisk);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(551, 363);
+            this.groupBox1.Size = new System.Drawing.Size(551, 414);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(332, 313);
+            this.btnBack.Location = new System.Drawing.Point(332, 365);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 15;
+            this.btnBack.TabIndex = 19;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(111, 313);
+            this.btnLaunch.Location = new System.Drawing.Point(111, 365);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 14;
+            this.btnLaunch.TabIndex = 18;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -98,23 +102,27 @@ namespace Greaseweazle
             // txtEraseCommandLine
             // 
             this.txtEraseCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtEraseCommandLine.Location = new System.Drawing.Point(19, 220);
+            this.txtEraseCommandLine.Location = new System.Drawing.Point(19, 272);
             this.txtEraseCommandLine.Multiline = true;
             this.txtEraseCommandLine.Name = "txtEraseCommandLine";
             this.txtEraseCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtEraseCommandLine.TabIndex = 13;
+            this.txtEraseCommandLine.TabIndex = 17;
             // 
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(225, 192);
+            this.lblStaticCL.Location = new System.Drawing.Point(225, 244);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
-            this.lblStaticCL.TabIndex = 12;
+            this.lblStaticCL.TabIndex = 16;
             this.lblStaticCL.Text = "Command Line";
             // 
             // gbEraseDisk
             // 
+            this.gbEraseDisk.Controls.Add(this.chkHeadsSet);
+            this.gbEraseDisk.Controls.Add(this.txtHeadsSet);
+            this.gbEraseDisk.Controls.Add(this.chkCylSet);
+            this.gbEraseDisk.Controls.Add(this.txtCylSet);
             this.gbEraseDisk.Controls.Add(this.txtDriveSelect);
             this.gbEraseDisk.Controls.Add(this.chkDriveSelect);
             this.gbEraseDisk.Controls.Add(this.rbWriteDoubleSided);
@@ -125,7 +133,7 @@ namespace Greaseweazle
             this.gbEraseDisk.Controls.Add(this.chkWriteFirstCyl);
             this.gbEraseDisk.Location = new System.Drawing.Point(19, 21);
             this.gbEraseDisk.Name = "gbEraseDisk";
-            this.gbEraseDisk.Size = new System.Drawing.Size(512, 155);
+            this.gbEraseDisk.Size = new System.Drawing.Size(512, 208);
             this.gbEraseDisk.TabIndex = 2;
             this.gbEraseDisk.TabStop = false;
             this.gbEraseDisk.Enter += new System.EventHandler(this.gbEraseDisk_Enter);
@@ -133,21 +141,22 @@ namespace Greaseweazle
             // txtDriveSelect
             // 
             this.txtDriveSelect.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtDriveSelect.Location = new System.Drawing.Point(352, 82);
+            this.txtDriveSelect.Location = new System.Drawing.Point(313, 137);
             this.txtDriveSelect.MaxLength = 1;
             this.txtDriveSelect.Name = "txtDriveSelect";
-            this.txtDriveSelect.Size = new System.Drawing.Size(54, 22);
-            this.txtDriveSelect.TabIndex = 9;
+            this.txtDriveSelect.Size = new System.Drawing.Size(93, 22);
+            this.txtDriveSelect.TabIndex = 13;
             this.txtDriveSelect.Text = "A";
+            this.txtDriveSelect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDriveSelect.TextChanged += new System.EventHandler(this.txtDriveSelect_TextChanged);
             // 
             // chkDriveSelect
             // 
             this.chkDriveSelect.AutoSize = true;
-            this.chkDriveSelect.Location = new System.Drawing.Point(107, 83);
+            this.chkDriveSelect.Location = new System.Drawing.Point(107, 139);
             this.chkDriveSelect.Name = "chkDriveSelect";
             this.chkDriveSelect.Size = new System.Drawing.Size(162, 21);
-            this.chkDriveSelect.TabIndex = 8;
+            this.chkDriveSelect.TabIndex = 12;
             this.chkDriveSelect.Text = "Drive Select (AB012)";
             this.toolTip.SetToolTip(this.chkDriveSelect, "Host Tools v0.18 or later\r\nRequires F7 type");
             this.chkDriveSelect.UseVisualStyleBackColor = true;
@@ -157,10 +166,10 @@ namespace Greaseweazle
             // 
             this.rbWriteDoubleSided.AutoSize = true;
             this.rbWriteDoubleSided.Checked = true;
-            this.rbWriteDoubleSided.Location = new System.Drawing.Point(224, 117);
+            this.rbWriteDoubleSided.Location = new System.Drawing.Point(224, 172);
             this.rbWriteDoubleSided.Name = "rbWriteDoubleSided";
             this.rbWriteDoubleSided.Size = new System.Drawing.Size(114, 21);
-            this.rbWriteDoubleSided.TabIndex = 11;
+            this.rbWriteDoubleSided.TabIndex = 15;
             this.rbWriteDoubleSided.TabStop = true;
             this.rbWriteDoubleSided.Text = "Double Sided";
             this.rbWriteDoubleSided.UseVisualStyleBackColor = true;
@@ -169,10 +178,10 @@ namespace Greaseweazle
             // rbWriteSingleSided
             // 
             this.rbWriteSingleSided.AutoSize = true;
-            this.rbWriteSingleSided.Location = new System.Drawing.Point(107, 117);
+            this.rbWriteSingleSided.Location = new System.Drawing.Point(107, 172);
             this.rbWriteSingleSided.Name = "rbWriteSingleSided";
             this.rbWriteSingleSided.Size = new System.Drawing.Size(108, 21);
-            this.rbWriteSingleSided.TabIndex = 10;
+            this.rbWriteSingleSided.TabIndex = 14;
             this.rbWriteSingleSided.TabStop = true;
             this.rbWriteSingleSided.Text = "Single Sided";
             this.rbWriteSingleSided.UseVisualStyleBackColor = true;
@@ -181,11 +190,12 @@ namespace Greaseweazle
             // txtWriteLastCyl
             // 
             this.txtWriteLastCyl.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtWriteLastCyl.Location = new System.Drawing.Point(352, 53);
+            this.txtWriteLastCyl.Location = new System.Drawing.Point(313, 53);
             this.txtWriteLastCyl.Name = "txtWriteLastCyl";
-            this.txtWriteLastCyl.Size = new System.Drawing.Size(54, 22);
+            this.txtWriteLastCyl.Size = new System.Drawing.Size(93, 22);
             this.txtWriteLastCyl.TabIndex = 7;
             this.txtWriteLastCyl.Text = "79";
+            this.txtWriteLastCyl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtWriteLastCyl.TextChanged += new System.EventHandler(this.txtWriteLastCyl_TextChanged);
             // 
             // chkWriteLastCyl
@@ -202,11 +212,12 @@ namespace Greaseweazle
             // txtWriteFirstCyl
             // 
             this.txtWriteFirstCyl.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtWriteFirstCyl.Location = new System.Drawing.Point(352, 25);
+            this.txtWriteFirstCyl.Location = new System.Drawing.Point(313, 25);
             this.txtWriteFirstCyl.Name = "txtWriteFirstCyl";
-            this.txtWriteFirstCyl.Size = new System.Drawing.Size(54, 22);
+            this.txtWriteFirstCyl.Size = new System.Drawing.Size(93, 22);
             this.txtWriteFirstCyl.TabIndex = 5;
             this.txtWriteFirstCyl.Text = "0";
+            this.txtWriteFirstCyl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtWriteFirstCyl.TextChanged += new System.EventHandler(this.txtWriteFirstCyl_TextChanged);
             // 
             // chkWriteFirstCyl
@@ -225,7 +236,7 @@ namespace Greaseweazle
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 393);
+            this.statusStrip.Location = new System.Drawing.Point(0, 449);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(576, 25);
             this.statusStrip.TabIndex = 2;
@@ -236,12 +247,56 @@ namespace Greaseweazle
             this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel";
             // 
+            // chkHeadsSet
+            // 
+            this.chkHeadsSet.AutoSize = true;
+            this.chkHeadsSet.Location = new System.Drawing.Point(107, 111);
+            this.chkHeadsSet.Name = "chkHeadsSet";
+            this.chkHeadsSet.Size = new System.Drawing.Size(94, 21);
+            this.chkHeadsSet.TabIndex = 10;
+            this.chkHeadsSet.Text = "Head sets";
+            this.chkHeadsSet.UseVisualStyleBackColor = true;
+            this.chkHeadsSet.CheckedChanged += new System.EventHandler(this.chkHeadsSet_CheckedChanged);
+            // 
+            // txtHeadsSet
+            // 
+            this.txtHeadsSet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtHeadsSet.Location = new System.Drawing.Point(313, 109);
+            this.txtHeadsSet.Name = "txtHeadsSet";
+            this.txtHeadsSet.Size = new System.Drawing.Size(93, 22);
+            this.txtHeadsSet.TabIndex = 11;
+            this.txtHeadsSet.Text = "0,1";
+            this.txtHeadsSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtHeadsSet.TextChanged += new System.EventHandler(this.txtHeadsSet_TextChanged);
+            // 
+            // chkCylSet
+            // 
+            this.chkCylSet.AutoSize = true;
+            this.chkCylSet.Location = new System.Drawing.Point(107, 83);
+            this.chkCylSet.Name = "chkCylSet";
+            this.chkCylSet.Size = new System.Drawing.Size(111, 21);
+            this.chkCylSet.TabIndex = 8;
+            this.chkCylSet.Text = "Cylinder sets";
+            this.chkCylSet.UseVisualStyleBackColor = true;
+            this.chkCylSet.CheckedChanged += new System.EventHandler(this.chkCylSet_CheckedChanged);
+            // 
+            // txtCylSet
+            // 
+            this.txtCylSet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtCylSet.Location = new System.Drawing.Point(313, 81);
+            this.txtCylSet.Name = "txtCylSet";
+            this.txtCylSet.Size = new System.Drawing.Size(93, 22);
+            this.txtCylSet.TabIndex = 9;
+            this.txtCylSet.Text = "0-34,35-79";
+            this.txtCylSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtCylSet.TextChanged += new System.EventHandler(this.txtCylSet_TextChanged);
+            // 
             // EraseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(576, 418);
+            this.ClientSize = new System.Drawing.Size(576, 474);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -279,5 +334,9 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.CheckBox chkHeadsSet;
+        private System.Windows.Forms.TextBox txtHeadsSet;
+        private System.Windows.Forms.CheckBox chkCylSet;
+        private System.Windows.Forms.TextBox txtCylSet;
     }
 }

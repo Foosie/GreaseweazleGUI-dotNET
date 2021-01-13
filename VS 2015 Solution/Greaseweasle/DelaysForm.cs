@@ -164,14 +164,12 @@ namespace Greaseweazle
         #region DelaysForm_Load
         private void DelaysForm_Load(object sender, EventArgs e)
         {
-            // read inifile
-            iniReadFile();
-
             // initialize status label
             this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
             this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
             this.statusStrip.BackColor = ChooserForm.m_StatusColor;
 
+            iniReadFile();
             CreateCommandLine();
         }
         #endregion

@@ -55,7 +55,7 @@ namespace Greaseweazle
         private static string m_sGWVersionMajor = "0";
         private static string m_sGWVersionMinor = "00";
         private static string m_sGUISupportedVersionMajor = "0";
-        private static string m_sGUISupportedVersionMinor = "21";
+        private static string m_sGUISupportedVersionMinor = "23";
         private static decimal m_GUIToolsVersion = Decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor, CultureInfo.InvariantCulture);   
         public static decimal m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, CultureInfo.InvariantCulture);
         public static string m_sStatusLine = "";
