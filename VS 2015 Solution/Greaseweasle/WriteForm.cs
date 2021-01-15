@@ -85,6 +85,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkWriteFirstCyl", (chkWriteFirstCyl.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDriveSelectWTD", txtDriveSelectWTD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDriveSelectWTD", (chkDriveSelectWTD.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtPrecomp", txtPrecomp.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkPrecomp", (chkPrecomp.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "m_sWriteDiskFolder", m_sWriteDiskFolder);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtRTDCommandLine", txtWTDCommandLine.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkCylSet", (chkCylSet.Checked == true).ToString());
@@ -102,7 +104,6 @@ namespace Greaseweazle
         {
             string sRet;
 
-            // found out the controller type
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "False")
@@ -166,6 +167,15 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkDriveSelectWTD.Checked = true;
             }
+
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtPrecomp", "garbage").Trim())) != "garbage")
+                txtPrecomp.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkPrecomp", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkPrecomp.Checked = true;
+            }
+
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkCylSet", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -223,6 +233,8 @@ namespace Greaseweazle
             // no syntax changes
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
                 txtWTDCommandLine.Text += " --drive=" + txtDriveSelectWTD.Text;
+            if (chkPrecomp.Checked == true)
+                txtWTDCommandLine.Text += " --precomp=" + txtPrecomp.Text;
 
             // conditional command line syntax
             if (chkDoubleStep.Checked == true)
@@ -365,6 +377,12 @@ namespace Greaseweazle
                 this.rbWriteSingleSided.Checked = false;
                 this.rbWriteDoubleSided.BackColor = Color.FromArgb(255, 182, 193);
                 this.rbWriteDoubleSided.Checked = false;
+            }
+
+            if (ChooserForm.m_GWToolsVersion < (decimal)0.24)
+            {
+                this.chkPrecomp.BackColor = Color.FromArgb(255, 182, 193);
+                this.txtPrecomp.BackColor = Color.FromArgb(255, 182, 193);
             }
 
             iniReadFile();
@@ -530,6 +548,16 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void chkPrecomp_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtPrecomp_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion // changed
 
         #region WndProc
@@ -546,5 +574,6 @@ namespace Greaseweazle
             base.WndProc(ref m);
         }
         #endregion
+
     }
 }
