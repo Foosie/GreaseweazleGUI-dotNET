@@ -76,13 +76,6 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkEraseEmpty", (chkEraseEmpty.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkWTDAdjustSpeed", (chkWTDAdjustSpeed.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbWriteDoubleSided", (rbWriteDoubleSided.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbWriteSingleSided", (rbWriteSingleSided.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtWriteLastCyl", txtWriteLastCyl.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkWriteLastCyl", (chkWriteLastCyl.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtWriteFirstCyl", txtWriteFirstCyl.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkWriteFirstCyl", (chkWriteFirstCyl.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDriveSelectWTD", txtDriveSelectWTD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDriveSelectWTD", (chkDriveSelectWTD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtPrecomp", txtPrecomp.Text);
@@ -104,15 +97,6 @@ namespace Greaseweazle
         {
             string sRet;
 
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "False")
-                {
-                    chkDriveSelectWTD.BackColor = Color.FromArgb(255, 182, 193);
-                    txtDriveSelectWTD.BackColor = Color.FromArgb(255, 182, 193);
-                }
-            }
-
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "m_sWTDFilename", "garbage").Trim())) != "garbage")
                 m_sWTDFilename = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "m_sWriteDiskFolder", "garbage").Trim())) != "garbage")
@@ -130,35 +114,6 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkEraseEmpty.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkWTDAdjustSpeed", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkWTDAdjustSpeed.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "rbWriteDoubleSided", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    rbWriteDoubleSided.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "rbWriteSingleSided", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    rbWriteSingleSided.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtWriteLastCyl", "garbage").Trim())) != "garbage")
-                txtWriteLastCyl.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkWriteLastCyl", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkWriteLastCyl.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtWriteFirstCyl", "garbage").Trim())) != "garbage")
-                txtWriteFirstCyl.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkWriteFirstCyl", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkWriteFirstCyl.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtDriveSelectWTD", "garbage").Trim())) != "garbage")
                 txtDriveSelectWTD.Text = sRet;
@@ -238,26 +193,10 @@ namespace Greaseweazle
 
             // conditional command line syntax
             if (chkDoubleStep.Checked == true)
-            {
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.22)
-                    txtWTDCommandLine.Text += " --double-step";
-                else
-                    sTrack += "step=" + txtDoubleStep.Text + ":";
-            }
+                sTrack += "step=" + txtDoubleStep.Text + ":";
 
-            // old syntax
-            if (rbWriteSingleSided.Checked == true)
-                txtWTDCommandLine.Text += " --single-sided";
-            if (chkWriteFirstCyl.Checked == true)
-                txtWTDCommandLine.Text += " --scyl=" + txtWriteFirstCyl.Text;
-            if (chkWriteLastCyl.Checked == true)
-                txtWTDCommandLine.Text += " --ecyl=" + txtWriteLastCyl.Text;
-            if (chkWTDAdjustSpeed.Checked == true)
-                txtWTDCommandLine.Text += " --adjust-speed";
             if (chkEraseEmpty.Checked == true)
                 txtWTDCommandLine.Text += " --erase-empty";
-
-            // new syntax
             if (chkHeadsSet.Checked == true)
                 sTrack += "h=" + txtHeadsSet.Text + ":";
             if (chkCylSet.Checked == true)
@@ -325,65 +264,18 @@ namespace Greaseweazle
         #region WriteForm_Load
         private void WriteForm_Load(object sender, EventArgs e)
         {
-            // initialize status label
-            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
-            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
-            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
-
-            // version options check
-            if ((ChooserForm.m_GWToolsVersion < (decimal)0.05) || (ChooserForm.m_GWToolsVersion > (decimal)0.12))
-            {
-                this.chkWTDAdjustSpeed.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkWTDAdjustSpeed.Checked = false;
-            }
-
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.20)
-            {
-                this.chkEraseEmpty.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkEraseEmpty.Checked = false;
-            }
-
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.22)
-            {
-                // old syntax
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.20)
-                {
-                    this.txtDoubleStep.Enabled = false;
-                    this.txtDoubleStep.Text = "2";
-                }
-                else
-                    this.txtDoubleStep.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkCylSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkCylSet.Checked = false;
-                this.txtCylSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkHeadsSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkHeadsSet.Checked = false;
-                this.txtHeadsSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkFlippyOffset.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkFlippyOffset.Checked = false;
-                this.rbFlippyPanasonic.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbFlippyPanasonic.Checked = false;
-                this.rbFlippyTeac.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbFlippyTeac.Checked = false;
-            }
-            else
-            {
-                // new syntax
-                this.chkWriteFirstCyl.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkWriteFirstCyl.Checked = false;
-                this.chkWriteLastCyl.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkWriteLastCyl.Checked = false;
-                this.rbWriteSingleSided.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbWriteSingleSided.Checked = false;
-                this.rbWriteDoubleSided.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbWriteDoubleSided.Checked = false;
-            }
-
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.24)
-            {
-                this.chkPrecomp.BackColor = Color.FromArgb(255, 182, 193);
-                this.txtPrecomp.BackColor = Color.FromArgb(255, 182, 193);
-            }
+            // set colors
+            this.lblHostTools.Text = ChooserForm.m_sStatusLine;
+            this.BackColor = ChooserForm.cChocolate;
+            this.txtDoubleStep.BackColor = ChooserForm.cLightBrown;
+            this.txtDriveSelectWTD.BackColor = ChooserForm.cLightBrown;
+            this.txtPrecomp.BackColor = ChooserForm.cLightBrown;
+            this.txtCylSet.BackColor = ChooserForm.cLightBrown;
+            this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
+            this.txtWTDCommandLine.BackColor = ChooserForm.cLightBrown;
+            this.btnWTDSelectFile.BackColor = ChooserForm.cDarkBrown;
+            this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
+            this.btnBack.BackColor = ChooserForm.cDarkBrown;
 
             iniReadFile();
             CreateCommandLine();
@@ -418,24 +310,11 @@ namespace Greaseweazle
 
         #region changed
 
-        private void chkWriteLastCyl_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkWriteLastCyl.Checked)
-                chkCylSet.Checked = false;
-            CreateCommandLine();
-        }
-
         private void txtWriteLastCyl_TextChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
 
-        private void chkWriteFirstCyl_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkWriteFirstCyl.Checked)
-                chkCylSet.Checked = false;
-            CreateCommandLine();
-        }
 
         private void chkWTDAdjustSpeed_CheckedChanged(object sender, EventArgs e)
         {
@@ -449,20 +328,6 @@ namespace Greaseweazle
 
         private void gbWriteToDisk_Enter(object sender, EventArgs e)
         {
-            CreateCommandLine();
-        }
-
-        private void rbWriteSingleSided_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbWriteSingleSided.Checked)
-                chkHeadsSet.Checked = false;
-            CreateCommandLine();
-        }
-
-        private void rbWriteDoubleSided_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbWriteDoubleSided.Checked)
-                chkHeadsSet.Checked = false;
             CreateCommandLine();
         }
 
@@ -498,11 +363,6 @@ namespace Greaseweazle
 
          private void chkCylSet_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkCylSet.Checked)
-            {
-                chkWriteFirstCyl.Checked = false;
-                chkWriteLastCyl.Checked = false;
-            }
             CreateCommandLine();
         }
 
@@ -513,11 +373,6 @@ namespace Greaseweazle
 
         private void chkHeadsSet_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkHeadsSet.Checked)
-            {
-                rbWriteSingleSided.Checked = false;
-                rbWriteDoubleSided.Checked = false;
-            }
             CreateCommandLine();
         }
 

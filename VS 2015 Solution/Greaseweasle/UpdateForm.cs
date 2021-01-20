@@ -58,10 +58,6 @@ namespace Greaseweazle
             // set defaults
             if (m_sUpdateFolder.Length == 0)
                 m_sUpdateFolder = sExeDir;
-
-            // bootloader support enabled in v0.16
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.16)
-                this.chkBootLoader.BackColor = Color.FromArgb(255, 182, 193);
         }
         #endregion
 
@@ -115,10 +111,14 @@ namespace Greaseweazle
             // read inifile
             iniReadFile();
 
-            // initialize status label
-            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
-            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
-            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+            // set colors
+            this.lblHostTools.Text = ChooserForm.m_sStatusLine;
+            this.BackColor = ChooserForm.cChocolate;
+            this.txtUpdateCommandLine.BackColor = ChooserForm.cLightBrown;
+            this.btnSelectUpdateFile.BackColor = ChooserForm.cDarkBrown;
+            this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
+            this.btnBack.BackColor = ChooserForm.cDarkBrown;
+
 
             CreateCommandLine();
         }
@@ -225,5 +225,10 @@ namespace Greaseweazle
             CreateCommandLine();
         }
         #endregion
+
+        private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

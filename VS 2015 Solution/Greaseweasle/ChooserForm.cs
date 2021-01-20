@@ -24,6 +24,17 @@ namespace Greaseweazle
 {
     public partial class ChooserForm : Form
     {
+        private class ChocolateRenderer : ToolStripProfessionalRenderer
+        {
+            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+            {
+                Rectangle rc = new Rectangle(Point.Empty, e.Item.Size);
+                Color c = ChooserForm.cChocolate;
+                using (SolidBrush brush = new SolidBrush(c))
+                    e.Graphics.FillRectangle(brush, rc);
+            }
+        }
+
         #region declarations
         public static Form m_frmChooser = null;
         private Form m_frmRead = null;
@@ -52,15 +63,12 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        private static string m_sGWVersionMajor = "0";
-        private static string m_sGWVersionMinor = "00";
-        private static string m_sGUISupportedVersionMajor = "0";
-        private static string m_sGUISupportedVersionMinor = "24";
-        private static decimal m_GUIToolsVersion = Decimal.Parse(m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor, CultureInfo.InvariantCulture);   
-        public static decimal m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, CultureInfo.InvariantCulture);
-        public static string m_sStatusLine = "";
-        public static Color m_StatusColor = Color.FromArgb(173, 255, 47); // green ok
-        private string m_sInfo = "The GUI executable supports Host Tools versions up to the one identified in the GUI's title bar. The GUI will always choose the Host Tools from the folder the executable was placed. If you use a previous version of Host Tools, make sure you only choose GUI options that are supported. Options in red are not supported. If you put the executable in a newer version folder of Host Tools than identified in the title bar, all older functions should work unless removed in the newer version. The GUI cannot identify the actual firmware version burned to the controller. Use the 'info' Greaseweazle option to retrieve this information.";
+        public static string m_sStatusLine = "for Host Tools v0.24";
+        public static Color cChocolate = Color.FromArgb(100, 82, 72);
+        public static Color cLightBrown = Color.FromArgb(150, 114, 93);
+        public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
+        public static Color cWhite = Color.FromArgb(0, 0, 0);
+        private string m_sInfo = "The GUI executable only supports the Host Tools version identified in the GUI's status bar. The GUI will always use the Host Tools from the folder from which the executable was placed. Use the 'info' Greaseweazle option to determine the firmware's current version.";
         private ToolStripMenuItem[] m_mnuItems;
         #endregion
 
@@ -68,6 +76,8 @@ namespace Greaseweazle
         public ChooserForm()
         {
             InitializeComponent();
+            //menuStrip1.Renderer = new myRenderer();  // change menu strip highlight color
+            menuStrip1.Renderer = new ChocolateRenderer();
             InitializeMyStuff();
         }
         #endregion
@@ -99,13 +109,28 @@ namespace Greaseweazle
             m_sVersion = Application.ProductVersion;
             string[] tokens = m_sVersion.Split('.');
             m_sVersion = "v" + tokens[2] + "." + tokens[3];
-            this.Text = "GUI " + m_sVersion + " - Host Tools v" + m_sGUISupportedVersionMajor + "." + m_sGUISupportedVersionMinor;
+            this.Text = "GreaseweazleGUI " + m_sVersion;
 
             // initialize some stuff
             m_Ini = new IniFile(m_sIniFile);
             rbReadDisk.Checked = true;
             m_frmChooser = this;
-            menuStrip1.BackColor = mnuSettings.BackColor;
+
+            // new color stufff
+            this.lblHostTools.Text = m_sStatusLine;
+            this.BackColor = cChocolate;
+            this.ForeColor = cWhite;
+            this.menuStrip1.BackColor = cChocolate;
+            this.menuStrip1.ForeColor = cWhite;
+            this.btnRefreshUSB.BackColor = cDarkBrown;
+            this.btnSelect.BackColor = cDarkBrown;
+            this.btnClose.BackColor = cDarkBrown;
+            this.lbUSBPorts.BackColor = cLightBrown;
+            this.mnuSettings.ForeColor = Color.White;
+            this.mnuProfileNew.ForeColor = Color.White;
+            this.mnuDelete.ForeColor = Color.White;
+            this.mnuUSBSupport.ForeColor = Color.White;
+            this.mnuWindowsEXE.ForeColor = Color.White;
 
             // set working directory to executable directory
             m_sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -114,57 +139,6 @@ namespace Greaseweazle
             // check for existance of gw.py
             if (!File.Exists(m_sExeDir + "\\gw.py") && !File.Exists(m_sExeDir + "\\gw") && !File.Exists(m_sExeDir + "\\gw.exe"))
                 System.Windows.Forms.MessageBox.Show("GreaseweazleGUI.exe must be moved to same folder as the controllers CURRENT firmware 'Host Tools' support files were extracted.", "Oops!");
-            else
-            {
-                if (chkVersions(m_sExeDir))
-                {
-                    m_GWToolsVersion = Decimal.Parse(m_sGWVersionMajor + "." + m_sGWVersionMinor, CultureInfo.InvariantCulture);
-                    string sHTVer = "Host Tools v" + m_sGWVersionMajor + "." + m_sGWVersionMinor;
-                    if (m_GWToolsVersion == m_GUIToolsVersion)
-                    {
-                        m_sStatusLine = "        GUI supports all current options in " + sHTVer;
-                        toolStripStatusLabel.Text = m_sStatusLine;
-                        toolStripStatusLabel.BackColor = Color.FromArgb(173, 255, 47);
-                        this.statusStrip.BackColor = ChooserForm.m_StatusColor;
-                    }
-                    else
-                    {                  
-                        m_StatusColor = Color.FromArgb(255, 182, 193);
-                        toolStripStatusLabel.BackColor = m_StatusColor;
-                        this.statusStrip.BackColor = ChooserForm.m_StatusColor;
-                        if (m_GWToolsVersion < m_GUIToolsVersion)
-                            m_sStatusLine = "    " + sHTVer + " doesn't support all options in the GUI";
-                        else
-                            m_sStatusLine = "      GUI will not support newer options in " + sHTVer;
-                        toolStripStatusLabel.Text = m_sStatusLine;
-                    }        
-                } else
-                {
-                    m_sStatusLine = "          GUI cannot locate the Greaseweazle version file!            ";
-                    toolStripStatusLabel.Text = m_sStatusLine;
-                    m_StatusColor = Color.FromArgb(255, 182, 193);
-                    toolStripStatusLabel.BackColor = m_StatusColor;
-                }
-
-                // version options check
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.06)
-                    this.rbSetDelays.BackColor = Color.FromArgb(255, 182, 193);
-
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.12)
-                {
-                    this.rbPin.BackColor = Color.FromArgb(255, 182, 193);
-                    this.rbReset.BackColor = Color.FromArgb(255, 182, 193);
-                }
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.14)
-                {
-                    this.rbEraseDisk.BackColor = Color.FromArgb(255, 182, 193);
-                    this.rbBandwidth.BackColor = Color.FromArgb(255, 182, 193);
-                }
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.18)
-                    this.rbInfo.BackColor = Color.FromArgb(255, 182, 193);
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.21)
-                    this.rbSeekCyl.BackColor = Color.FromArgb(255, 182, 193);
-            }
 
             // determine which way to invoke the script
             // this is overwridden if the user selects exe in settings
@@ -214,45 +188,6 @@ namespace Greaseweazle
             refreshUSBPorts();
         }
         #endregion
-
-        #region chkVersions
-        public bool chkVersions(string m_sExeDir)
-        {
-            bool b1 = false;
-            bool b2 = false;
-
-            string fname = m_sExeDir + "\\scripts\\greaseweazle\\version.py";
-            if (File.Exists(fname))
-            {
-                string[] lines = System.IO.File.ReadAllLines(@fname);
-                foreach (string line in lines)
-                {
-                    string[] values = line.Split('=');
-                    if (values[0].Trim().ToLower() == "major")
-                    {
-                        b1 = true;
-                        m_sGWVersionMajor = values[1].Trim();
-                    }
-                    else
-                    {
-                        if (values[0].Trim().ToLower() == "minor")
-                        {
-                            b2 = true;
-                            m_sGWVersionMinor = values[1].Trim();
-                        }
-                    }
-                }
-
-            }
-            if (b1 && b2)
-                return true;
-            else
-            {
-                // stub in correct version number so everything is enabled
-                return false;
-            }
-        }
-        #endregion 
 
         #region iniReadFile
         public void iniReadFile()
@@ -335,18 +270,6 @@ namespace Greaseweazle
                     rbSeekCyl.Checked = true;
             }
 
-            // type
-            if ((sRet = (m_Ini.IniReadValue("gbType", "rbF1", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    rbF1.Checked = true;
-            }
-            if ((sRet = (m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    rbF7.Checked = true;
-            }
-
             // usb port
             if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
@@ -409,10 +332,6 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbAction", "rbBandwidth", (rbBandwidth.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbInfo", (rbInfo.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbSeekCyl", (rbSeekCyl.Checked == true).ToString());
-
-            // type
-            m_Ini.IniWriteValue("gbType", "rbF1", (rbF1.Checked == true).ToString());
-            m_Ini.IniWriteValue("gbType", "rbF7", (rbF7.Checked == true).ToString());
 
             // usb port
             m_Ini.IniWriteValue("gbUSBPorts", "mnuUSBSupport", (mnuUSBSupport.Checked == true).ToString());
@@ -787,22 +706,6 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region rbF7_CheckedChanged
-        private void rbF7_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbF7.Checked)
-                m_bF7Type = true;
-        }
-        #endregion
-
-        #region rbF1_CheckedChanged
-        private void rbF1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbF1.Checked)
-                m_bF7Type = false;
-        }
-        #endregion
-
         #region aboutToolStripMenuItem_Click
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -851,13 +754,6 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region statusStrip_ItemClicked
-        private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            MessageBox.Show(m_sInfo);
-        }
-        #endregion
-
         #region mnuInfo_Click
         private void mnuInfo_Click(object sender, EventArgs e)
         {
@@ -878,9 +774,11 @@ namespace Greaseweazle
             {
                 fname = Path.GetFileNameWithoutExtension(filePaths[i]);
                 m_mnuItems[i] = new ToolStripMenuItem();
+                m_mnuItems[i].BackColor = cChocolate;
+                m_mnuItems[i].ForeColor = Color.White;
                 m_mnuItems[i].Name = "mnu" + fname;
                 m_mnuItems[i].Text = fname;
-                m_mnuItems[i].Click += new EventHandler(MenuItemClickHandler);
+                m_mnuItems[i].Click += new EventHandler(MenuItemClickHandler);              
             }
 
             mnuProfiles.DropDownItems.AddRange(m_mnuItems);
@@ -1044,4 +942,5 @@ namespace Greaseweazle
         static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
     }
     #endregion
+
 }

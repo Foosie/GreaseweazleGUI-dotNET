@@ -79,15 +79,6 @@ namespace Greaseweazle
         {
             string sRet;
 
-            // found out the controller type
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "False")
-                {
-                    chkDriveSelect.BackColor = Color.FromArgb(255, 182, 193);
-                    txtDriveSelect.BackColor = Color.FromArgb(255, 182, 193);
-                }
-            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "txtSeekCyl", "garbage").Trim())) != "garbage")
                     txtSeekCyl.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "txtDriveSelect", "garbage").Trim())) != "garbage")
@@ -119,11 +110,11 @@ namespace Greaseweazle
                 txtCommandLine.Text = "gw.exe seek";
             else
                 txtCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " seek";
+            txtCommandLine.Text += " " + txtSeekCyl.Text;
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtCommandLine.Text += " --drive=" + txtDriveSelect.Text;
             if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtCommandLine.Text += " --device=" + m_sUSBPort;
-            txtCommandLine.Text += " " + txtSeekCyl.Text;
             if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtCommandLine.Text += " " + m_sUSBPort;
         }
@@ -166,16 +157,20 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region EraseForm_Load
-        private void EraseForm_Load(object sender, EventArgs e)
+        #region SeekForm_Load
+        private void SeekForm_Load(object sender, EventArgs e)
         {
             // read inifile
             iniReadFile();
 
-            // initialize status label
-            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
-            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
-            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+            // set colors
+            this.lblHostTools.Text = ChooserForm.m_sStatusLine;
+            this.BackColor = ChooserForm.cChocolate;
+            this.txtSeekCyl.BackColor = ChooserForm.cLightBrown;
+            this.txtDriveSelect.BackColor = ChooserForm.cLightBrown;
+            this.txtCommandLine.BackColor = ChooserForm.cLightBrown;
+            this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
+            this.btnBack.BackColor = ChooserForm.cDarkBrown;
 
             CreateCommandLine();
         }

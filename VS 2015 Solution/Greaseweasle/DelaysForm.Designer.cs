@@ -56,11 +56,9 @@ namespace Greaseweazle
             this.chkDelayDriveSelect = new System.Windows.Forms.CheckBox();
             this.txtDelayHeadSteps = new System.Windows.Forms.TextBox();
             this.chkDelayHeadSteps = new System.Windows.Forms.CheckBox();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblHostTools = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.gbSetDelays.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -79,37 +77,41 @@ namespace Greaseweazle
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.Color.Maroon;
             this.btnBack.Location = new System.Drawing.Point(357, 359);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 16;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnLaunch
             // 
+            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
             this.btnLaunch.Location = new System.Drawing.Point(81, 359);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 14;
             this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // btnDelaysDefaults
             // 
+            this.btnDelaysDefaults.BackColor = System.Drawing.Color.Maroon;
             this.btnDelaysDefaults.Location = new System.Drawing.Point(219, 359);
             this.btnDelaysDefaults.Name = "btnDelaysDefaults";
             this.btnDelaysDefaults.Size = new System.Drawing.Size(108, 29);
             this.btnDelaysDefaults.TabIndex = 15;
             this.btnDelaysDefaults.Text = "Defaults";
-            this.btnDelaysDefaults.UseVisualStyleBackColor = true;
+            this.btnDelaysDefaults.UseVisualStyleBackColor = false;
             this.btnDelaysDefaults.Click += new System.EventHandler(this.btnDelaysDefaults_Click);
             // 
             // txtDelaysCommandLine
             // 
-            this.txtDelaysCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDelaysCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelaysCommandLine.ForeColor = System.Drawing.Color.White;
             this.txtDelaysCommandLine.Location = new System.Drawing.Point(16, 268);
             this.txtDelaysCommandLine.Multiline = true;
             this.txtDelaysCommandLine.Name = "txtDelaysCommandLine";
@@ -145,12 +147,14 @@ namespace Greaseweazle
             // 
             // txtDelayAutoDeselect
             // 
-            this.txtDelayAutoDeselect.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDelayAutoDeselect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelayAutoDeselect.ForeColor = System.Drawing.Color.White;
             this.txtDelayAutoDeselect.Location = new System.Drawing.Point(395, 161);
             this.txtDelayAutoDeselect.Name = "txtDelayAutoDeselect";
             this.txtDelayAutoDeselect.Size = new System.Drawing.Size(54, 22);
             this.txtDelayAutoDeselect.TabIndex = 11;
             this.txtDelayAutoDeselect.Text = "10000";
+            this.txtDelayAutoDeselect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDelayAutoDeselect.TextChanged += new System.EventHandler(this.txtDelayAutoDeselect_TextChanged);
             // 
             // chkDelayAutoDeselect
@@ -166,12 +170,14 @@ namespace Greaseweazle
             // 
             // txtDelayMotorOn
             // 
-            this.txtDelayMotorOn.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDelayMotorOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelayMotorOn.ForeColor = System.Drawing.Color.White;
             this.txtDelayMotorOn.Location = new System.Drawing.Point(395, 128);
             this.txtDelayMotorOn.Name = "txtDelayMotorOn";
             this.txtDelayMotorOn.Size = new System.Drawing.Size(54, 22);
             this.txtDelayMotorOn.TabIndex = 9;
             this.txtDelayMotorOn.Text = "750";
+            this.txtDelayMotorOn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDelayMotorOn.TextChanged += new System.EventHandler(this.txtDelayMotorOn_TextChanged);
             // 
             // chkDelayMotorOn
@@ -187,12 +193,14 @@ namespace Greaseweazle
             // 
             // txtDelaySeekSettle
             // 
-            this.txtDelaySeekSettle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDelaySeekSettle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelaySeekSettle.ForeColor = System.Drawing.Color.White;
             this.txtDelaySeekSettle.Location = new System.Drawing.Point(395, 95);
             this.txtDelaySeekSettle.Name = "txtDelaySeekSettle";
             this.txtDelaySeekSettle.Size = new System.Drawing.Size(54, 22);
             this.txtDelaySeekSettle.TabIndex = 7;
             this.txtDelaySeekSettle.Text = "15";
+            this.txtDelaySeekSettle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDelaySeekSettle.TextChanged += new System.EventHandler(this.txtDelaySeekSettle_TextChanged);
             // 
             // chkDelaySeekSettle
@@ -208,12 +216,14 @@ namespace Greaseweazle
             // 
             // txtDelayDriveSelect
             // 
-            this.txtDelayDriveSelect.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDelayDriveSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelayDriveSelect.ForeColor = System.Drawing.Color.White;
             this.txtDelayDriveSelect.Location = new System.Drawing.Point(395, 29);
             this.txtDelayDriveSelect.Name = "txtDelayDriveSelect";
             this.txtDelayDriveSelect.Size = new System.Drawing.Size(54, 22);
             this.txtDelayDriveSelect.TabIndex = 3;
             this.txtDelayDriveSelect.Text = "10";
+            this.txtDelayDriveSelect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDelayDriveSelect.TextChanged += new System.EventHandler(this.txtDelayDriveSelect_TextChanged);
             // 
             // chkDelayDriveSelect
@@ -229,12 +239,14 @@ namespace Greaseweazle
             // 
             // txtDelayHeadSteps
             // 
-            this.txtDelayHeadSteps.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDelayHeadSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelayHeadSteps.ForeColor = System.Drawing.Color.White;
             this.txtDelayHeadSteps.Location = new System.Drawing.Point(395, 62);
             this.txtDelayHeadSteps.Name = "txtDelayHeadSteps";
             this.txtDelayHeadSteps.Size = new System.Drawing.Size(54, 22);
             this.txtDelayHeadSteps.TabIndex = 5;
             this.txtDelayHeadSteps.Text = "3000";
+            this.txtDelayHeadSteps.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDelayHeadSteps.TextChanged += new System.EventHandler(this.txtDelayHeadSteps_TextChanged);
             // 
             // chkDelayHeadSteps
@@ -248,30 +260,26 @@ namespace Greaseweazle
             this.chkDelayHeadSteps.UseVisualStyleBackColor = true;
             this.chkDelayHeadSteps.CheckedChanged += new System.EventHandler(this.chkDelayHeadSteps_CheckedChanged);
             // 
-            // statusStrip
+            // lblHostTools
             // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 444);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(574, 25);
-            this.statusStrip.TabIndex = 1;
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
-            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHostTools.ForeColor = System.Drawing.Color.White;
+            this.lblHostTools.Location = new System.Drawing.Point(104, 435);
+            this.lblHostTools.Name = "lblHostTools";
+            this.lblHostTools.Size = new System.Drawing.Size(367, 23);
+            this.lblHostTools.TabIndex = 8;
+            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DelaysForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(574, 469);
-            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.groupBox1);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DelaysForm";
@@ -282,10 +290,7 @@ namespace Greaseweazle
             this.groupBox1.PerformLayout();
             this.gbSetDelays.ResumeLayout(false);
             this.gbSetDelays.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -308,7 +313,6 @@ namespace Greaseweazle
         private System.Windows.Forms.Button btnDelaysDefaults;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnLaunch;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Label lblHostTools;
     }
 }

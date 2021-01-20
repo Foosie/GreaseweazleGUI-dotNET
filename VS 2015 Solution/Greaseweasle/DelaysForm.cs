@@ -164,10 +164,18 @@ namespace Greaseweazle
         #region DelaysForm_Load
         private void DelaysForm_Load(object sender, EventArgs e)
         {
-            // initialize status label
-            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
-            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
-            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
+            // set colors
+            this.lblHostTools.Text = ChooserForm.m_sStatusLine;
+            this.BackColor = ChooserForm.cChocolate;
+            this.txtDelayDriveSelect.BackColor = ChooserForm.cLightBrown;
+            this.txtDelayHeadSteps.BackColor = ChooserForm.cLightBrown;
+            this.txtDelaySeekSettle.BackColor = ChooserForm.cLightBrown;
+            this.txtDelayMotorOn.BackColor = ChooserForm.cLightBrown;
+            this.txtDelayAutoDeselect.BackColor = ChooserForm.cLightBrown;
+            this.txtDelaysCommandLine.BackColor = ChooserForm.cLightBrown;
+            this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
+            this.btnDelaysDefaults.BackColor = ChooserForm.cDarkBrown;
+            this.btnBack.BackColor = ChooserForm.cDarkBrown;
 
             iniReadFile();
             CreateCommandLine();

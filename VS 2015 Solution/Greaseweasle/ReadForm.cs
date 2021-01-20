@@ -69,13 +69,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sRFDFilename",tbFilename.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDoubleStep", txtDoubleStep.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbReadDoubleSided", (rbReadDoubleSided.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbReadSingleSided", (rbReadSingleSided.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtReadLastCyl", txtReadLastCyl.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkReadLastCyl", (chkReadLastCyl.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtReadFirstCyl", txtReadFirstCyl.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkReadFirstCyl", (chkReadFirstCyl.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());          
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtRevsPerTrack", txtRevsPerTrack.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRevsPerTrack", (chkRevsPerTrack.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveSelectRFD", txtDriveSelectRFD.Text);
@@ -108,40 +102,10 @@ namespace Greaseweazle
                 SetFNSuffix();
                 CreateCommandLine();           
             }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbReadDoubleSided", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                {
-                    rbReadDoubleSided.Checked = true;
-                    chkLegacySS.Enabled = false;
-                }
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbReadSingleSided", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                {
-                    rbReadSingleSided.Checked = true;
-                    chkLegacySS.Enabled = true;
-                }
-            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkLegacySS", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
                     chkLegacySS.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtReadLastCyl", "garbage").Trim())) != "garbage")
-                txtReadLastCyl.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkReadLastCyl", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkReadLastCyl.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtReadFirstCyl", "garbage").Trim())) != "garbage")
-                txtReadFirstCyl.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkReadFirstCyl", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkReadFirstCyl.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtRevsPerTrack", "garbage").Trim())) != "garbage")
                 txtRevsPerTrack.Text = sRet;
@@ -184,15 +148,6 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkAutoInc.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "False")
-                {
-                    chkDriveSelectRFD.Checked = false;
-                    chkDriveSelectRFD.BackColor = Color.FromArgb(255, 182, 193);
-                    txtDriveSelectRFD.BackColor = Color.FromArgb(255, 182, 193);
-                }
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkCylSet", "garbage").Trim())) != "garbage")
             {
@@ -248,7 +203,6 @@ namespace Greaseweazle
             else
                 txtRFDCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " read";
 
-            // no syntax changes
             if (chkRevsPerTrack.Checked == true)
                 txtRFDCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
             if (chkDriveRateRFD.Checked == true)
@@ -257,25 +211,8 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --rpm=" + txtDriveRpmRFD.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
-
-            // conditional command line syntax
             if (chkDoubleStep.Checked == true)
-            {
-                if (ChooserForm.m_GWToolsVersion < (decimal)0.22)
-                    txtRFDCommandLine.Text += " --double-step";
-                else
                     sTrack += "step=" + txtDoubleStep.Text + ":";
-            }
-
-            // old syntax
-            if (rbReadSingleSided.Checked == true)
-                txtRFDCommandLine.Text += " --single-sided";
-            if (chkReadFirstCyl.Checked == true)
-                txtRFDCommandLine.Text += " --scyl=" + txtReadFirstCyl.Text;
-            if (chkReadLastCyl.Checked == true)
-                txtRFDCommandLine.Text += " --ecyl=" + txtReadLastCyl.Text;
-
-            // new syntax
             if (chkHeadsSet.Checked == true)
                 sTrack += "h=" + txtHeadsSet.Text + ":";
             if (chkCylSet.Checked == true)
@@ -312,48 +249,8 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void chkReadFirstCyl_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkReadFirstCyl.Checked)
-                chkCylSet.Checked = false;
-            CreateCommandLine();
-        }
-
-        private void chkReadLastCyl_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkReadLastCyl.Checked)
-                chkCylSet.Checked = false;
-            CreateCommandLine();
-        }
-
         private void chkDriveSelectRFD_CheckedChanged(object sender, EventArgs e)
         {
-            CreateCommandLine();
-        }
-
-        private void rbReadSingleSided_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbReadSingleSided.Checked)
-            {
-                chkLegacySS.Enabled = true;
-                chkHeadsSet.Checked = false;
-            }
-            else
-                chkLegacySS.Enabled = false;
-            CreateCommandLine();
-        }
-
-        private void rbReadDoubleSided_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbReadSingleSided.Checked)
-                chkLegacySS.Enabled = true;
-            else
-                chkLegacySS.Enabled = false;
-            if (rbReadDoubleSided.Checked)
-            {
-                chkLegacySS.Checked = false;
-                chkHeadsSet.Checked = false;
-            }
             CreateCommandLine();
         }
 
@@ -404,27 +301,23 @@ namespace Greaseweazle
 
         private void chkLegacySS_CheckedChanged(object sender, EventArgs e)
         {
+            if (chkLegacySS.Checked)
+            {
+                chkHeadsSet.Checked = true;
+                txtHeadsSet.Text = "0";
+            }
             CreateCommandLine();
         }
 
         private void chkCylSet_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkCylSet.Checked)
-            {
-                chkReadFirstCyl.Checked = false;
-                chkReadLastCyl.Checked = false;
-            }
             CreateCommandLine();
         }
 
         private void chkHeadsSet_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkHeadsSet.Checked)
-            {
-                rbReadSingleSided.Checked = false;
-                rbReadDoubleSided.Checked = false;
-                chkLegacySS.Enabled = true;
-            }
+            if (!chkHeadsSet.Checked)
+                chkLegacySS.Checked = false;
             CreateCommandLine();
         }
 
@@ -470,65 +363,25 @@ namespace Greaseweazle
         #region ReadForm_Load
         private void ReadForm_Load(object sender, EventArgs e)
         {
-            // initialize status label
-            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
-            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
-            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
-
-            // version options check
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.12)
-            {
-                this.chkDoubleStep.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkDoubleStep.Checked = false;
-            }
-
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.18)
-            {
-                this.chkDriveRateRFD.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkDriveRateRFD.Checked = false;
-                this.txtDriveRateRFD.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkDriveRpmRFD.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkDriveRpmRFD.Checked = false;
-                this.txtDriveRpmRFD.BackColor = Color.FromArgb(255, 182, 193);
-            }
-
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.20)
-            {
-                this.chkLegacySS.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkLegacySS.Checked = false;
-            }
-
-            if (ChooserForm.m_GWToolsVersion < (decimal)0.22)
-            {
-                // old syntax
-                this.txtDoubleStep.Enabled = false;
-                this.txtDoubleStep.Text = "2";
-                this.chkCylSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkCylSet.Checked = false;
-                this.txtCylSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkHeadsSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkHeadsSet.Checked = false;
-                this.txtHeadsSet.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkFlippyOffset.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkFlippyOffset.Checked = false;
-                this.rbFlippyPanasonic.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbFlippyPanasonic.Checked = false;
-                this.rbFlippyTeac.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbFlippyTeac.Checked = false;
-            }
-            else
-            {
-                // new syntax
-                this.chkReadFirstCyl.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkReadFirstCyl.Checked = false;
-                this.chkReadLastCyl.BackColor = Color.FromArgb(255, 182, 193);
-                this.chkReadLastCyl.Checked = false;        
-                this.rbReadSingleSided.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbReadSingleSided.Checked = false;
-                this.rbReadDoubleSided.BackColor = Color.FromArgb(255, 182, 193);
-                this.rbReadDoubleSided.Checked = false;
-
-            }
+            // set colors
+            this.lblHostTools.Text = ChooserForm.m_sStatusLine;
+            this.BackColor = ChooserForm.cChocolate;
+            this.txtDoubleStep.BackColor = ChooserForm.cLightBrown;
+            this.txtRevsPerTrack.BackColor = ChooserForm.cLightBrown;
+            this.txtDriveSelectRFD.BackColor = ChooserForm.cLightBrown;
+            this.txtDriveRateRFD.BackColor = ChooserForm.cLightBrown;
+            this.txtDriveRpmRFD.BackColor = ChooserForm.cLightBrown;
+            this.txtCylSet.BackColor = ChooserForm.cLightBrown;
+            this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
+            this.tbFilename.BackColor = ChooserForm.cLightBrown;
+            this.tbSuffix.BackColor = ChooserForm.cLightBrown;
+            this.btnInc.BackColor = ChooserForm.cDarkBrown;
+            this.btnDec.BackColor = ChooserForm.cDarkBrown;
+            this.txtRFDCommandLine.BackColor = ChooserForm.cLightBrown;
+            this.btnRFDSelectFolder.BackColor = ChooserForm.cDarkBrown;
+            this.btnRFDSelectFile.BackColor = ChooserForm.cDarkBrown;
+            this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
+            this.btnBack.BackColor = ChooserForm.cDarkBrown;
 
             iniReadFile();
             CreateCommandLine();
@@ -561,7 +414,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sReadDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "Images|*.scp;*.hfe;*.adf|All files (*.*)|*.*";
+            openDialog.Filter = "Images|*.scp;*.hfe;*.adf;*.ipf|All files (*.*)|*.*";
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {

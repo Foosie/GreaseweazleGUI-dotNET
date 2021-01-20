@@ -29,7 +29,6 @@ namespace Greaseweazle
         private bool m_bUSBSupport = false;
         private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
-        private bool m_bF7Type = true;
 
         #region InfoForm
         public InfoForm(ChooserForm newForm)
@@ -109,13 +108,6 @@ namespace Greaseweazle
         {
             string sRet;
 
-            // find out the controller type
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbType", "rbF7", "garbage").Trim())) != "garbage")
-            {
-                if (sRet != "True")
-                    m_bF7Type = false;
-            }
-
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
@@ -149,14 +141,13 @@ namespace Greaseweazle
         #region InfoForm_Load
         private void InfoForm_Load(object sender, EventArgs e)
         {
-            // initialize status label
-            this.toolStripStatusLabel.Text = ChooserForm.m_sStatusLine.Trim();
-            this.toolStripStatusLabel.BackColor = ChooserForm.m_StatusColor;
-            this.statusStrip.BackColor = ChooserForm.m_StatusColor;
-
-            // bootloader support enabled in v0.16 for type F7
-            if ((ChooserForm.m_GWToolsVersion < (decimal)0.16) || (!m_bF7Type))
-                this.chkBootLoader.BackColor =  Color.FromArgb(255, 182, 193);
+            // set colors
+            this.lblHostTools.Text = ChooserForm.m_sStatusLine;
+            this.lblHostTools.Text = ChooserForm.m_sStatusLine;
+            this.BackColor = ChooserForm.cChocolate;
+            this.txtInfoCommandLine.BackColor = ChooserForm.cLightBrown;
+            this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
+            this.btnBack.BackColor = ChooserForm.cDarkBrown;
 
             iniReadFile();
             CreateCommandLine();

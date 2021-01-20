@@ -57,10 +57,7 @@ namespace Greaseweazle
             this.btnRFDSelectFolder = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chkLegacySS = new System.Windows.Forms.CheckBox();
-            this.rbReadSingleSided = new System.Windows.Forms.RadioButton();
-            this.rbReadDoubleSided = new System.Windows.Forms.RadioButton();
             this.chkHeadsSet = new System.Windows.Forms.CheckBox();
             this.txtHeadsSet = new System.Windows.Forms.TextBox();
             this.chkCylSet = new System.Windows.Forms.CheckBox();
@@ -80,21 +77,14 @@ namespace Greaseweazle
             this.chkDoubleStep = new System.Windows.Forms.CheckBox();
             this.chkRevsPerTrack = new System.Windows.Forms.CheckBox();
             this.txtRevsPerTrack = new System.Windows.Forms.TextBox();
-            this.chkReadFirstCyl = new System.Windows.Forms.CheckBox();
-            this.txtReadFirstCyl = new System.Windows.Forms.TextBox();
-            this.chkReadLastCyl = new System.Windows.Forms.CheckBox();
-            this.txtReadLastCyl = new System.Windows.Forms.TextBox();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
+            this.lblHostTools = new System.Windows.Forms.Label();
             this.gbReadFromDisk.SuspendLayout();
             this.gbFilename.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.gbFlippy.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbReadFromDisk
@@ -109,7 +99,7 @@ namespace Greaseweazle
             this.gbReadFromDisk.Controls.Add(this.groupBox1);
             this.gbReadFromDisk.Location = new System.Drawing.Point(0, -4);
             this.gbReadFromDisk.Name = "gbReadFromDisk";
-            this.gbReadFromDisk.Size = new System.Drawing.Size(780, 470);
+            this.gbReadFromDisk.Size = new System.Drawing.Size(780, 425);
             this.gbReadFromDisk.TabIndex = 0;
             this.gbReadFromDisk.TabStop = false;
             // 
@@ -122,7 +112,7 @@ namespace Greaseweazle
             this.gbFilename.Controls.Add(this.lblSuffix);
             this.gbFilename.Controls.Add(this.tbFilename);
             this.gbFilename.Controls.Add(this.lblFilename);
-            this.gbFilename.Location = new System.Drawing.Point(12, 255);
+            this.gbFilename.Location = new System.Drawing.Point(12, 209);
             this.gbFilename.Name = "gbFilename";
             this.gbFilename.Size = new System.Drawing.Size(757, 73);
             this.gbFilename.TabIndex = 4;
@@ -140,33 +130,36 @@ namespace Greaseweazle
             // 
             // btnDec
             // 
-            this.btnDec.Location = new System.Drawing.Point(677, 15);
+            this.btnDec.BackColor = System.Drawing.Color.Maroon;
+            this.btnDec.Location = new System.Drawing.Point(677, 16);
             this.btnDec.Name = "btnDec";
             this.btnDec.Size = new System.Drawing.Size(58, 29);
             this.btnDec.TabIndex = 34;
             this.btnDec.Text = "<<<<";
-            this.btnDec.UseVisualStyleBackColor = true;
+            this.btnDec.UseVisualStyleBackColor = false;
             this.btnDec.Click += new System.EventHandler(this.btnDec_Click);
             // 
             // btnInc
             // 
-            this.btnInc.Location = new System.Drawing.Point(582, 15);
+            this.btnInc.BackColor = System.Drawing.Color.Maroon;
+            this.btnInc.Location = new System.Drawing.Point(582, 16);
             this.btnInc.Name = "btnInc";
             this.btnInc.Size = new System.Drawing.Size(58, 29);
             this.btnInc.TabIndex = 33;
             this.btnInc.Text = ">>>>";
-            this.btnInc.UseVisualStyleBackColor = true;
+            this.btnInc.UseVisualStyleBackColor = false;
             this.btnInc.Click += new System.EventHandler(this.btnInc_Click);
             // 
             // tbSuffix
             // 
-            this.tbSuffix.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tbSuffix.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.tbSuffix.ForeColor = System.Drawing.Color.White;
             this.tbSuffix.Location = new System.Drawing.Point(486, 18);
             this.tbSuffix.MaxLength = 3;
             this.tbSuffix.Name = "tbSuffix";
             this.tbSuffix.Size = new System.Drawing.Size(58, 22);
             this.tbSuffix.TabIndex = 32;
-            this.tbSuffix.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbSuffix.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbSuffix.TextChanged += new System.EventHandler(this.tbSuffix_TextChanged);
             // 
             // lblSuffix
@@ -180,12 +173,14 @@ namespace Greaseweazle
             // 
             // tbFilename
             // 
-            this.tbFilename.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tbFilename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.tbFilename.ForeColor = System.Drawing.Color.White;
             this.tbFilename.Location = new System.Drawing.Point(161, 18);
             this.tbFilename.Name = "tbFilename";
             this.tbFilename.Size = new System.Drawing.Size(197, 22);
             this.tbFilename.TabIndex = 30;
             this.tbFilename.Text = "mydisk.scp";
+            this.tbFilename.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbFilename.TextChanged += new System.EventHandler(this.tbFilename_TextChanged);
             // 
             // lblFilename
@@ -198,18 +193,20 @@ namespace Greaseweazle
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(596, 430);
+            this.btnBack.BackColor = System.Drawing.Color.Maroon;
+            this.btnBack.Location = new System.Drawing.Point(596, 377);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 41;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // txtRFDCommandLine
             // 
-            this.txtRFDCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtRFDCommandLine.Location = new System.Drawing.Point(12, 364);
+            this.txtRFDCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtRFDCommandLine.ForeColor = System.Drawing.Color.White;
+            this.txtRFDCommandLine.Location = new System.Drawing.Point(12, 311);
             this.txtRFDCommandLine.Multiline = true;
             this.txtRFDCommandLine.Name = "txtRFDCommandLine";
             this.txtRFDCommandLine.Size = new System.Drawing.Size(757, 54);
@@ -218,7 +215,7 @@ namespace Greaseweazle
             // lblCommandLine
             // 
             this.lblCommandLine.AutoSize = true;
-            this.lblCommandLine.Location = new System.Drawing.Point(339, 339);
+            this.lblCommandLine.Location = new System.Drawing.Point(339, 288);
             this.lblCommandLine.Name = "lblCommandLine";
             this.lblCommandLine.Size = new System.Drawing.Size(102, 17);
             this.lblCommandLine.TabIndex = 36;
@@ -226,32 +223,35 @@ namespace Greaseweazle
             // 
             // btnRFDSelectFile
             // 
-            this.btnRFDSelectFile.Location = new System.Drawing.Point(250, 430);
+            this.btnRFDSelectFile.BackColor = System.Drawing.Color.Maroon;
+            this.btnRFDSelectFile.Location = new System.Drawing.Point(250, 377);
             this.btnRFDSelectFile.Name = "btnRFDSelectFile";
             this.btnRFDSelectFile.Size = new System.Drawing.Size(108, 29);
             this.btnRFDSelectFile.TabIndex = 39;
             this.btnRFDSelectFile.Text = "Select File";
-            this.btnRFDSelectFile.UseVisualStyleBackColor = true;
+            this.btnRFDSelectFile.UseVisualStyleBackColor = false;
             this.btnRFDSelectFile.Click += new System.EventHandler(this.btnRFDSelectFile_Click);
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(423, 430);
+            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
+            this.btnLaunch.Location = new System.Drawing.Point(423, 377);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 40;
             this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // btnRFDSelectFolder
             // 
-            this.btnRFDSelectFolder.Location = new System.Drawing.Point(77, 430);
+            this.btnRFDSelectFolder.BackColor = System.Drawing.Color.Maroon;
+            this.btnRFDSelectFolder.Location = new System.Drawing.Point(77, 377);
             this.btnRFDSelectFolder.Name = "btnRFDSelectFolder";
             this.btnRFDSelectFolder.Size = new System.Drawing.Size(108, 29);
             this.btnRFDSelectFolder.TabIndex = 38;
             this.btnRFDSelectFolder.Text = "Select Folder";
-            this.btnRFDSelectFolder.UseVisualStyleBackColor = true;
+            this.btnRFDSelectFolder.UseVisualStyleBackColor = false;
             this.btnRFDSelectFolder.Click += new System.EventHandler(this.btnRFDSelectFolder_Click);
             // 
             // groupBox1
@@ -260,13 +260,13 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(757, 238);
+            this.groupBox1.Size = new System.Drawing.Size(757, 189);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.groupBox4);
+            this.groupBox3.Controls.Add(this.chkLegacySS);
             this.groupBox3.Controls.Add(this.chkHeadsSet);
             this.groupBox3.Controls.Add(this.txtHeadsSet);
             this.groupBox3.Controls.Add(this.chkCylSet);
@@ -276,60 +276,25 @@ namespace Greaseweazle
             this.groupBox3.Controls.Add(this.gbFlippy);
             this.groupBox3.Location = new System.Drawing.Point(384, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(362, 213);
+            this.groupBox3.Size = new System.Drawing.Size(362, 164);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.chkLegacySS);
-            this.groupBox4.Controls.Add(this.rbReadSingleSided);
-            this.groupBox4.Controls.Add(this.rbReadDoubleSided);
-            this.groupBox4.Location = new System.Drawing.Point(12, 102);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(339, 49);
-            this.groupBox4.TabIndex = 33;
-            this.groupBox4.TabStop = false;
             // 
             // chkLegacySS
             // 
             this.chkLegacySS.AutoSize = true;
-            this.chkLegacySS.Enabled = false;
-            this.chkLegacySS.Location = new System.Drawing.Point(254, 20);
+            this.chkLegacySS.Location = new System.Drawing.Point(253, 81);
             this.chkLegacySS.Name = "chkLegacySS";
-            this.chkLegacySS.Size = new System.Drawing.Size(76, 21);
+            this.chkLegacySS.Size = new System.Drawing.Size(98, 21);
             this.chkLegacySS.TabIndex = 25;
-            this.chkLegacySS.Text = "Legacy";
+            this.chkLegacySS.Text = "SS Legacy";
             this.chkLegacySS.UseVisualStyleBackColor = true;
             this.chkLegacySS.CheckedChanged += new System.EventHandler(this.chkLegacySS_CheckedChanged);
-            // 
-            // rbReadSingleSided
-            // 
-            this.rbReadSingleSided.AutoSize = true;
-            this.rbReadSingleSided.Location = new System.Drawing.Point(9, 19);
-            this.rbReadSingleSided.Name = "rbReadSingleSided";
-            this.rbReadSingleSided.Size = new System.Drawing.Size(108, 21);
-            this.rbReadSingleSided.TabIndex = 23;
-            this.rbReadSingleSided.Text = "Single Sided";
-            this.toolTipRFD.SetToolTip(this.rbReadSingleSided, "Host Tools v0.21 or earlier");
-            this.rbReadSingleSided.UseVisualStyleBackColor = true;
-            this.rbReadSingleSided.CheckedChanged += new System.EventHandler(this.rbReadSingleSided_CheckedChanged);
-            // 
-            // rbReadDoubleSided
-            // 
-            this.rbReadDoubleSided.AutoSize = true;
-            this.rbReadDoubleSided.Location = new System.Drawing.Point(129, 19);
-            this.rbReadDoubleSided.Name = "rbReadDoubleSided";
-            this.rbReadDoubleSided.Size = new System.Drawing.Size(114, 21);
-            this.rbReadDoubleSided.TabIndex = 24;
-            this.rbReadDoubleSided.Text = "Double Sided";
-            this.toolTipRFD.SetToolTip(this.rbReadDoubleSided, "Host Tools v0.21 or earlier");
-            this.rbReadDoubleSided.UseVisualStyleBackColor = true;
-            this.rbReadDoubleSided.CheckedChanged += new System.EventHandler(this.rbReadDoubleSided_CheckedChanged);
             // 
             // chkHeadsSet
             // 
             this.chkHeadsSet.AutoSize = true;
+            this.chkHeadsSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkHeadsSet.Location = new System.Drawing.Point(21, 81);
             this.chkHeadsSet.Name = "chkHeadsSet";
             this.chkHeadsSet.Size = new System.Drawing.Size(94, 21);
@@ -341,10 +306,12 @@ namespace Greaseweazle
             // 
             // txtHeadsSet
             // 
-            this.txtHeadsSet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtHeadsSet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtHeadsSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHeadsSet.ForeColor = System.Drawing.Color.White;
             this.txtHeadsSet.Location = new System.Drawing.Point(141, 79);
             this.txtHeadsSet.Name = "txtHeadsSet";
-            this.txtHeadsSet.Size = new System.Drawing.Size(210, 22);
+            this.txtHeadsSet.Size = new System.Drawing.Size(99, 22);
             this.txtHeadsSet.TabIndex = 22;
             this.txtHeadsSet.Text = "0-1";
             this.txtHeadsSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -354,6 +321,7 @@ namespace Greaseweazle
             // chkCylSet
             // 
             this.chkCylSet.AutoSize = true;
+            this.chkCylSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCylSet.Location = new System.Drawing.Point(21, 53);
             this.chkCylSet.Name = "chkCylSet";
             this.chkCylSet.Size = new System.Drawing.Size(111, 21);
@@ -365,7 +333,9 @@ namespace Greaseweazle
             // 
             // txtCylSet
             // 
-            this.txtCylSet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtCylSet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtCylSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCylSet.ForeColor = System.Drawing.Color.White;
             this.txtCylSet.Location = new System.Drawing.Point(141, 51);
             this.txtCylSet.Name = "txtCylSet";
             this.txtCylSet.Size = new System.Drawing.Size(210, 22);
@@ -377,7 +347,9 @@ namespace Greaseweazle
             // 
             // txtDriveRpmRFD
             // 
-            this.txtDriveRpmRFD.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDriveRpmRFD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDriveRpmRFD.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDriveRpmRFD.ForeColor = System.Drawing.Color.White;
             this.txtDriveRpmRFD.Location = new System.Drawing.Point(141, 23);
             this.txtDriveRpmRFD.MaxLength = 3;
             this.txtDriveRpmRFD.Name = "txtDriveRpmRFD";
@@ -390,6 +362,7 @@ namespace Greaseweazle
             // chkDriveRpmRFD
             // 
             this.chkDriveRpmRFD.AutoSize = true;
+            this.chkDriveRpmRFD.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDriveRpmRFD.Location = new System.Drawing.Point(21, 25);
             this.chkDriveRpmRFD.Name = "chkDriveRpmRFD";
             this.chkDriveRpmRFD.Size = new System.Drawing.Size(60, 21);
@@ -404,7 +377,7 @@ namespace Greaseweazle
             this.gbFlippy.Controls.Add(this.chkFlippyOffset);
             this.gbFlippy.Controls.Add(this.rbFlippyPanasonic);
             this.gbFlippy.Controls.Add(this.rbFlippyTeac);
-            this.gbFlippy.Location = new System.Drawing.Point(12, 152);
+            this.gbFlippy.Location = new System.Drawing.Point(12, 103);
             this.gbFlippy.Name = "gbFlippy";
             this.gbFlippy.Size = new System.Drawing.Size(339, 48);
             this.gbFlippy.TabIndex = 26;
@@ -414,7 +387,7 @@ namespace Greaseweazle
             // chkFlippyOffset
             // 
             this.chkFlippyOffset.AutoSize = true;
-            this.chkFlippyOffset.Location = new System.Drawing.Point(13, 18);
+            this.chkFlippyOffset.Location = new System.Drawing.Point(11, 18);
             this.chkFlippyOffset.Name = "chkFlippyOffset";
             this.chkFlippyOffset.Size = new System.Drawing.Size(106, 21);
             this.chkFlippyOffset.TabIndex = 26;
@@ -457,20 +430,17 @@ namespace Greaseweazle
             this.groupBox2.Controls.Add(this.chkDoubleStep);
             this.groupBox2.Controls.Add(this.chkRevsPerTrack);
             this.groupBox2.Controls.Add(this.txtRevsPerTrack);
-            this.groupBox2.Controls.Add(this.chkReadFirstCyl);
-            this.groupBox2.Controls.Add(this.txtReadFirstCyl);
-            this.groupBox2.Controls.Add(this.chkReadLastCyl);
-            this.groupBox2.Controls.Add(this.txtReadLastCyl);
             this.groupBox2.Location = new System.Drawing.Point(11, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(362, 213);
+            this.groupBox2.Size = new System.Drawing.Size(362, 164);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
             // txtDriveRateRFD
             // 
-            this.txtDriveRateRFD.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtDriveRateRFD.Location = new System.Drawing.Point(263, 168);
+            this.txtDriveRateRFD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDriveRateRFD.ForeColor = System.Drawing.Color.White;
+            this.txtDriveRateRFD.Location = new System.Drawing.Point(263, 110);
             this.txtDriveRateRFD.MaxLength = 3;
             this.txtDriveRateRFD.Name = "txtDriveRateRFD";
             this.txtDriveRateRFD.Size = new System.Drawing.Size(84, 22);
@@ -482,7 +452,7 @@ namespace Greaseweazle
             // chkDriveRateRFD
             // 
             this.chkDriveRateRFD.AutoSize = true;
-            this.chkDriveRateRFD.Location = new System.Drawing.Point(18, 170);
+            this.chkDriveRateRFD.Location = new System.Drawing.Point(18, 112);
             this.chkDriveRateRFD.Name = "chkDriveRateRFD";
             this.chkDriveRateRFD.Size = new System.Drawing.Size(107, 21);
             this.chkDriveRateRFD.TabIndex = 15;
@@ -493,8 +463,9 @@ namespace Greaseweazle
             // 
             // txtDriveSelectRFD
             // 
-            this.txtDriveSelectRFD.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtDriveSelectRFD.Location = new System.Drawing.Point(263, 139);
+            this.txtDriveSelectRFD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDriveSelectRFD.ForeColor = System.Drawing.Color.White;
+            this.txtDriveSelectRFD.Location = new System.Drawing.Point(263, 81);
             this.txtDriveSelectRFD.MaxLength = 1;
             this.txtDriveSelectRFD.Name = "txtDriveSelectRFD";
             this.txtDriveSelectRFD.Size = new System.Drawing.Size(84, 22);
@@ -506,18 +477,19 @@ namespace Greaseweazle
             // chkDriveSelectRFD
             // 
             this.chkDriveSelectRFD.AutoSize = true;
-            this.chkDriveSelectRFD.Location = new System.Drawing.Point(18, 141);
+            this.chkDriveSelectRFD.Location = new System.Drawing.Point(18, 83);
             this.chkDriveSelectRFD.Name = "chkDriveSelectRFD";
-            this.chkDriveSelectRFD.Size = new System.Drawing.Size(162, 21);
+            this.chkDriveSelectRFD.Size = new System.Drawing.Size(182, 21);
             this.chkDriveSelectRFD.TabIndex = 13;
-            this.chkDriveSelectRFD.Text = "Drive Select (AB012)";
+            this.chkDriveSelectRFD.Text = "F7 Drive Select (AB012)";
             this.toolTipRFD.SetToolTip(this.chkDriveSelectRFD, "Host Tools v0.10 or later\r\nRequires F7 type");
             this.chkDriveSelectRFD.UseVisualStyleBackColor = true;
             this.chkDriveSelectRFD.CheckedChanged += new System.EventHandler(this.chkDriveSelectRFD_CheckedChanged);
             // 
             // txtDoubleStep
             // 
-            this.txtDoubleStep.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtDoubleStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDoubleStep.ForeColor = System.Drawing.Color.White;
             this.txtDoubleStep.Location = new System.Drawing.Point(263, 23);
             this.txtDoubleStep.Name = "txtDoubleStep";
             this.txtDoubleStep.Size = new System.Drawing.Size(84, 22);
@@ -551,7 +523,8 @@ namespace Greaseweazle
             // 
             // txtRevsPerTrack
             // 
-            this.txtRevsPerTrack.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtRevsPerTrack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtRevsPerTrack.ForeColor = System.Drawing.Color.White;
             this.txtRevsPerTrack.Location = new System.Drawing.Point(263, 52);
             this.txtRevsPerTrack.Name = "txtRevsPerTrack";
             this.txtRevsPerTrack.Size = new System.Drawing.Size(84, 22);
@@ -560,79 +533,26 @@ namespace Greaseweazle
             this.txtRevsPerTrack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRevsPerTrack.TextChanged += new System.EventHandler(this.txtRevsPerTrack_TextChanged);
             // 
-            // chkReadFirstCyl
+            // lblHostTools
             // 
-            this.chkReadFirstCyl.AutoSize = true;
-            this.chkReadFirstCyl.Location = new System.Drawing.Point(18, 82);
-            this.chkReadFirstCyl.Name = "chkReadFirstCyl";
-            this.chkReadFirstCyl.Size = new System.Drawing.Size(159, 21);
-            this.chkReadFirstCyl.TabIndex = 9;
-            this.chkReadFirstCyl.Text = "First cylinder to read";
-            this.toolTipRFD.SetToolTip(this.chkReadFirstCyl, "Host Tools v0.21 or earlier");
-            this.chkReadFirstCyl.UseVisualStyleBackColor = true;
-            this.chkReadFirstCyl.CheckedChanged += new System.EventHandler(this.chkReadFirstCyl_CheckedChanged);
-            // 
-            // txtReadFirstCyl
-            // 
-            this.txtReadFirstCyl.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtReadFirstCyl.Location = new System.Drawing.Point(263, 81);
-            this.txtReadFirstCyl.Name = "txtReadFirstCyl";
-            this.txtReadFirstCyl.Size = new System.Drawing.Size(84, 22);
-            this.txtReadFirstCyl.TabIndex = 10;
-            this.txtReadFirstCyl.Text = "0";
-            this.txtReadFirstCyl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTipRFD.SetToolTip(this.txtReadFirstCyl, "Host Tools v0.21 or earlier");
-            this.txtReadFirstCyl.TextChanged += new System.EventHandler(this.txtReadFirstCyl_TextChanged);
-            // 
-            // chkReadLastCyl
-            // 
-            this.chkReadLastCyl.AutoSize = true;
-            this.chkReadLastCyl.Location = new System.Drawing.Point(18, 112);
-            this.chkReadLastCyl.Name = "chkReadLastCyl";
-            this.chkReadLastCyl.Size = new System.Drawing.Size(159, 21);
-            this.chkReadLastCyl.TabIndex = 11;
-            this.chkReadLastCyl.Text = "Last cylinder to read";
-            this.toolTipRFD.SetToolTip(this.chkReadLastCyl, "Host Tools v0.21 or earlier");
-            this.chkReadLastCyl.UseVisualStyleBackColor = true;
-            this.chkReadLastCyl.CheckedChanged += new System.EventHandler(this.chkReadLastCyl_CheckedChanged);
-            // 
-            // txtReadLastCyl
-            // 
-            this.txtReadLastCyl.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtReadLastCyl.Location = new System.Drawing.Point(263, 111);
-            this.txtReadLastCyl.Name = "txtReadLastCyl";
-            this.txtReadLastCyl.Size = new System.Drawing.Size(84, 22);
-            this.txtReadLastCyl.TabIndex = 12;
-            this.txtReadLastCyl.Text = "79";
-            this.txtReadLastCyl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTipRFD.SetToolTip(this.txtReadLastCyl, "Host Tools v0.21 or earlier");
-            this.txtReadLastCyl.TextChanged += new System.EventHandler(this.txtReadLastCyl_TextChanged);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 474);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(781, 25);
-            this.statusStrip.TabIndex = 1;
-            this.statusStrip.Text = "statusStrip";
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
-            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHostTools.ForeColor = System.Drawing.Color.White;
+            this.lblHostTools.Location = new System.Drawing.Point(207, 426);
+            this.lblHostTools.Name = "lblHostTools";
+            this.lblHostTools.Size = new System.Drawing.Size(367, 23);
+            this.lblHostTools.TabIndex = 5;
+            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ReadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(781, 499);
-            this.Controls.Add(this.statusStrip);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ClientSize = new System.Drawing.Size(781, 456);
+            this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gbReadFromDisk);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ReadForm";
@@ -646,16 +566,11 @@ namespace Greaseweazle
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.gbFlippy.ResumeLayout(false);
             this.gbFlippy.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -663,8 +578,6 @@ namespace Greaseweazle
 
         private System.Windows.Forms.GroupBox gbReadFromDisk;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolTip toolTipRFD;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.TextBox txtRFDCommandLine;
@@ -681,10 +594,7 @@ namespace Greaseweazle
         private System.Windows.Forms.Button btnDec;
         private System.Windows.Forms.CheckBox chkAutoInc;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox chkLegacySS;
-        private System.Windows.Forms.RadioButton rbReadSingleSided;
-        private System.Windows.Forms.RadioButton rbReadDoubleSided;
         private System.Windows.Forms.CheckBox chkHeadsSet;
         private System.Windows.Forms.TextBox txtHeadsSet;
         private System.Windows.Forms.CheckBox chkCylSet;
@@ -704,9 +614,6 @@ namespace Greaseweazle
         private System.Windows.Forms.CheckBox chkDoubleStep;
         private System.Windows.Forms.CheckBox chkRevsPerTrack;
         private System.Windows.Forms.TextBox txtRevsPerTrack;
-        private System.Windows.Forms.CheckBox chkReadFirstCyl;
-        private System.Windows.Forms.TextBox txtReadFirstCyl;
-        private System.Windows.Forms.CheckBox chkReadLastCyl;
-        private System.Windows.Forms.TextBox txtReadLastCyl;
+        private System.Windows.Forms.Label lblHostTools;
     }
 }

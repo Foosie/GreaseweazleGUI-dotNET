@@ -49,11 +49,9 @@ namespace Greaseweazle
             this.txtPinCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.btnLaunch = new System.Windows.Forms.Button();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblHostTools = new System.Windows.Forms.Label();
             this.gbPin.SuspendLayout();
             this.gb1.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbPin
@@ -114,27 +112,31 @@ namespace Greaseweazle
             // 
             // txtPin
             // 
-            this.txtPin.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtPin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtPin.ForeColor = System.Drawing.Color.White;
             this.txtPin.Location = new System.Drawing.Point(311, 19);
             this.txtPin.Name = "txtPin";
             this.txtPin.Size = new System.Drawing.Size(31, 22);
             this.txtPin.TabIndex = 3;
             this.txtPin.Text = "22";
+            this.txtPin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPin.TextChanged += new System.EventHandler(this.txtPin_TextChanged);
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.Color.Maroon;
             this.btnBack.Location = new System.Drawing.Point(311, 267);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 9;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // txtPinCommandLine
             // 
-            this.txtPinCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtPinCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtPinCommandLine.ForeColor = System.Drawing.Color.White;
             this.txtPinCommandLine.Location = new System.Drawing.Point(15, 179);
             this.txtPinCommandLine.Multiline = true;
             this.txtPinCommandLine.Name = "txtPinCommandLine";
@@ -152,38 +154,35 @@ namespace Greaseweazle
             // 
             // btnLaunch
             // 
+            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
             this.btnLaunch.Location = new System.Drawing.Point(124, 267);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 8;
             this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
-            // statusStrip
+            // lblHostTools
             // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 348);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(572, 25);
-            this.statusStrip.TabIndex = 1;
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
-            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHostTools.ForeColor = System.Drawing.Color.White;
+            this.lblHostTools.Location = new System.Drawing.Point(103, 337);
+            this.lblHostTools.Name = "lblHostTools";
+            this.lblHostTools.Size = new System.Drawing.Size(367, 23);
+            this.lblHostTools.TabIndex = 8;
+            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(572, 373);
-            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gbPin);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PinForm";
@@ -194,10 +193,7 @@ namespace Greaseweazle
             this.gbPin.PerformLayout();
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -213,7 +209,6 @@ namespace Greaseweazle
         private System.Windows.Forms.TextBox txtPinCommandLine;
         private System.Windows.Forms.Label lblStaticCL;
         private System.Windows.Forms.Button btnLaunch;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Label lblHostTools;
     }
 }

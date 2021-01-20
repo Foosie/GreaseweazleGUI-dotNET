@@ -48,11 +48,9 @@ namespace Greaseweazle
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.btnLaunch = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblHostTools = new System.Windows.Forms.Label();
             this.gb1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb1
@@ -91,17 +89,19 @@ namespace Greaseweazle
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.Color.Maroon;
             this.btnBack.Location = new System.Drawing.Point(311, 240);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // txtInfoCommandLine
             // 
-            this.txtInfoCommandLine.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtInfoCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtInfoCommandLine.ForeColor = System.Drawing.Color.White;
             this.txtInfoCommandLine.Location = new System.Drawing.Point(15, 152);
             this.txtInfoCommandLine.Multiline = true;
             this.txtInfoCommandLine.Name = "txtInfoCommandLine";
@@ -119,38 +119,35 @@ namespace Greaseweazle
             // 
             // btnLaunch
             // 
+            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
             this.btnLaunch.Location = new System.Drawing.Point(124, 240);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 3;
             this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
-            // statusStrip
+            // lblHostTools
             // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 321);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(572, 25);
-            this.statusStrip.TabIndex = 1;
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
-            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
+            this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHostTools.ForeColor = System.Drawing.Color.White;
+            this.lblHostTools.Location = new System.Drawing.Point(103, 310);
+            this.lblHostTools.Name = "lblHostTools";
+            this.lblHostTools.Size = new System.Drawing.Size(367, 23);
+            this.lblHostTools.TabIndex = 11;
+            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(572, 346);
-            this.Controls.Add(this.statusStrip);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ClientSize = new System.Drawing.Size(572, 343);
+            this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gb1);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InfoForm";
@@ -161,10 +158,7 @@ namespace Greaseweazle
             this.gb1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -178,7 +172,6 @@ namespace Greaseweazle
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkBootLoader;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Label lblHostTools;
     }
 }
