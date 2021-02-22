@@ -266,6 +266,8 @@ namespace Greaseweazle
             this.pbGWsmall.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbGWsmall.TabIndex = 10;
             this.pbGWsmall.TabStop = false;
+            this.toolTipChooser.SetToolTip(this.pbGWsmall, "Click Me");
+            this.pbGWsmall.Click += new System.EventHandler(this.pbGWsmall_Click);
             // 
             // gbActionSelect
             // 

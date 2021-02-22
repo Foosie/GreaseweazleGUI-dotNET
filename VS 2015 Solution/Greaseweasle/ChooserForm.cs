@@ -47,6 +47,7 @@ namespace Greaseweazle
         private Form m_frmBandwidth = null;
         private Form m_frmInfo = null;
         private Form m_frmSeek = null;
+        private Form m_frmPicture = null;
         public string m_sExeDir = "";
         public string m_action = "read";
         public const int WM_CLOSE = 0x0010;
@@ -104,6 +105,7 @@ namespace Greaseweazle
             m_frmBandwidth = new BandwidthForm(this);
             m_frmInfo = new InfoForm(this);
             m_frmSeek = new SeekForm(this);
+            m_frmPicture = new PictureForm(this);
 
             // get version from Project, GreaseweaselGUI Properties, Assembly Information
             m_sVersion = Application.ProductVersion;
@@ -909,6 +911,21 @@ namespace Greaseweazle
                 m_action = "seek";
         }
         #endregion
+
+        private void pbGWsmall_Click(object sender, EventArgs e)
+        {
+            if (m_frmPicture.Visible)
+            {
+                m_frmPicture.WindowState = FormWindowState.Normal;
+                m_frmPicture.BringToFront();
+            }
+            else
+            {
+                m_frmPicture.Dispose();
+                m_frmPicture = new PictureForm(this);
+                m_frmPicture.ShowDialog(this);
+            }
+        }
     }
 
     #region AutoClosingMessageBox
