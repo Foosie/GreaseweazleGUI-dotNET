@@ -262,8 +262,8 @@ namespace Greaseweazle
             this.pbGWsmall.Image = ((System.Drawing.Image)(resources.GetObject("pbGWsmall.Image")));
             this.pbGWsmall.Location = new System.Drawing.Point(22, 21);
             this.pbGWsmall.Name = "pbGWsmall";
-            this.pbGWsmall.Size = new System.Drawing.Size(367, 94);
-            this.pbGWsmall.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbGWsmall.Size = new System.Drawing.Size(366, 146);
+            this.pbGWsmall.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbGWsmall.TabIndex = 10;
             this.pbGWsmall.TabStop = false;
             // 
@@ -280,7 +280,7 @@ namespace Greaseweazle
             this.gbActionSelect.Controls.Add(this.rbSetDelays);
             this.gbActionSelect.Controls.Add(this.rbWriteDisk);
             this.gbActionSelect.ForeColor = System.Drawing.Color.White;
-            this.gbActionSelect.Location = new System.Drawing.Point(22, 121);
+            this.gbActionSelect.Location = new System.Drawing.Point(22, 167);
             this.gbActionSelect.Name = "gbActionSelect";
             this.gbActionSelect.Size = new System.Drawing.Size(367, 163);
             this.gbActionSelect.TabIndex = 6;
@@ -327,7 +327,7 @@ namespace Greaseweazle
             // 
             this.btnClose.BackColor = System.Drawing.Color.Maroon;
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(240, 469);
+            this.btnClose.Location = new System.Drawing.Point(240, 514);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(108, 29);
             this.btnClose.TabIndex = 22;
@@ -339,7 +339,7 @@ namespace Greaseweazle
             // 
             this.btnSelect.BackColor = System.Drawing.Color.Maroon;
             this.btnSelect.ForeColor = System.Drawing.Color.White;
-            this.btnSelect.Location = new System.Drawing.Point(62, 469);
+            this.btnSelect.Location = new System.Drawing.Point(62, 514);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(108, 29);
             this.btnSelect.TabIndex = 21;
@@ -353,7 +353,7 @@ namespace Greaseweazle
             this.gbUSBPorts.Controls.Add(this.btnRefreshUSB);
             this.gbUSBPorts.Controls.Add(this.lbUSBPorts);
             this.gbUSBPorts.ForeColor = System.Drawing.Color.White;
-            this.gbUSBPorts.Location = new System.Drawing.Point(22, 290);
+            this.gbUSBPorts.Location = new System.Drawing.Point(22, 335);
             this.gbUSBPorts.Name = "gbUSBPorts";
             this.gbUSBPorts.Size = new System.Drawing.Size(367, 166);
             this.gbUSBPorts.TabIndex = 17;
@@ -404,9 +404,9 @@ namespace Greaseweazle
             this.gbAction.Controls.Add(this.gbActionSelect);
             this.gbAction.Controls.Add(this.pbGWsmall);
             this.gbAction.ForeColor = System.Drawing.Color.White;
-            this.gbAction.Location = new System.Drawing.Point(12, 29);
+            this.gbAction.Location = new System.Drawing.Point(12, 31);
             this.gbAction.Name = "gbAction";
-            this.gbAction.Size = new System.Drawing.Size(410, 521);
+            this.gbAction.Size = new System.Drawing.Size(410, 560);
             this.gbAction.TabIndex = 1;
             this.gbAction.TabStop = false;
             // 
@@ -414,9 +414,9 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(34, 559);
+            this.lblHostTools.Location = new System.Drawing.Point(34, 598);
             this.lblHostTools.Name = "lblHostTools";
-            this.lblHostTools.Size = new System.Drawing.Size(367, 23);
+            this.lblHostTools.Size = new System.Drawing.Size(367, 31);
             this.lblHostTools.TabIndex = 4;
             this.lblHostTools.Text = "for Host Tools v0.24";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -426,7 +426,7 @@ namespace Greaseweazle
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(434, 591);
+            this.ClientSize = new System.Drawing.Size(434, 638);
             this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gbAction);
             this.Controls.Add(this.menuStrip1);
