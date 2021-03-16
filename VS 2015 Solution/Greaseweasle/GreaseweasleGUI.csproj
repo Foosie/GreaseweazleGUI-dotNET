@@ -77,6 +77,12 @@
     <Compile Include="PictureForm.Designer.cs">
       <DependentUpon>PictureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CleanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CleanForm.Designer.cs">
+      <DependentUpon>CleanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SeekForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PictureForm.resx">
       <DependentUpon>PictureForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CleanForm.resx">
+      <DependentUpon>CleanForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeekForm.resx">
       <DependentUpon>SeekForm.cs</DependentUpon>

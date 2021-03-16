@@ -15,10 +15,8 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Drawing;
 using System.Threading;
-using System.Linq;
 using System.IO.Ports;
-using System.Globalization;
-using System.Timers;
+using System.Collections.Generic;
 
 namespace Greaseweazle
 {
@@ -46,6 +44,7 @@ namespace Greaseweazle
         private Form m_frmErase = null;
         private Form m_frmBandwidth = null;
         private Form m_frmInfo = null;
+        private Form m_frmClean = null;
         private Form m_frmSeek = null;
         private Form m_frmPicture = null;
         public string m_sExeDir = "";
@@ -54,6 +53,7 @@ namespace Greaseweazle
         public static Boolean m_bF7Type = false;
         public static Boolean m_bLegacyUSB = false;
         public static Boolean m_bWindowsEXE = false;
+        public static Boolean m_bElapsedTime = false;
         public static string m_sGWscript = "gw.py";
         public static string m_sUSBPort = "UNKNOWN";
         public static string m_sIniFile = ".\\GreaseweazleGUI.ini";
@@ -64,7 +64,7 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        public static string m_sStatusLine = "for Host Tools v0.24";
+        public static string m_sStatusLine = "for Host Tools v0.25";
         public static Color cChocolate = Color.FromArgb(100, 82, 72);
         public static Color cLightBrown = Color.FromArgb(150, 114, 93);
         public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
@@ -104,6 +104,7 @@ namespace Greaseweazle
             m_frmErase = new EraseForm(this);
             m_frmBandwidth = new BandwidthForm(this);
             m_frmInfo = new InfoForm(this);
+            m_frmClean = new CleanForm(this);
             m_frmSeek = new SeekForm(this);
             m_frmPicture = new PictureForm(this);
 
@@ -133,6 +134,7 @@ namespace Greaseweazle
             this.mnuDelete.ForeColor = Color.White;
             this.mnuUSBSupport.ForeColor = Color.White;
             this.mnuWindowsEXE.ForeColor = Color.White;
+            this.mnuElapsedTime.ForeColor = Color.White;
 
             // set working directory to executable directory
             m_sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -266,6 +268,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     rbInfo.Checked = true;
             }
+            if ((sRet = (m_Ini.IniReadValue("gbAction", "rbCleanHeads", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbCleanHeads.Checked = true;
+            }
             if ((sRet = (m_Ini.IniReadValue("gbAction", "rbSeekCyl", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -275,8 +282,6 @@ namespace Greaseweazle
             // usb port
             if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
-            if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
-                chkLegacyUSB.Checked = (sRet == "True");
             if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -304,7 +309,7 @@ namespace Greaseweazle
             }
 
             // Windows Executable
-            if ((sRet = (m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            if ((sRet = (m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
                 {
@@ -315,6 +320,21 @@ namespace Greaseweazle
                 {
                     mnuWindowsEXE.Checked = false;
                     m_bWindowsEXE = false;
+                }
+            }
+
+            // Elapsed Time
+            if ((sRet = (m_Ini.IniReadValue("gbGlobals", "mnuElapsedTime", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                {
+                    mnuElapsedTime.Checked = true;
+                    m_bElapsedTime = true;
+                }
+                else
+                {
+                    mnuElapsedTime.Checked = false;
+                    m_bElapsedTime = false;
                 }
             }
         }
@@ -333,15 +353,16 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbAction", "rbReset", (rbReset.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbBandwidth", (rbBandwidth.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbInfo", (rbInfo.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbAction", "rbCleanHeads", (rbCleanHeads.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbSeekCyl", (rbSeekCyl.Checked == true).ToString());
 
             // usb port
             m_Ini.IniWriteValue("gbUSBPorts", "mnuUSBSupport", (mnuUSBSupport.Checked == true).ToString());
-            m_Ini.IniWriteValue("gbUSBPorts", "chkLegacyUSB", (chkLegacyUSB.Checked == true).ToString());
             m_Ini.IniWriteValue("gbUSBPorts", "m_sUSBPort", m_sUSBPort);
 
-            // windows executable
-            m_Ini.IniWriteValue("gbWindowsEXE", "mnuWindowsEXE", (mnuWindowsEXE.Checked == true).ToString());
+            // globals
+            m_Ini.IniWriteValue("gbGlobals", "mnuWindowsEXE", (mnuWindowsEXE.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbGlobals", "mnuElapsedTime", (mnuElapsedTime.Checked == true).ToString());
         }
         #endregion
 
@@ -641,6 +662,19 @@ namespace Greaseweazle
                         m_frmInfo.ShowDialog(this);
                     }
                     break;
+                case "clean":
+                    if (m_frmClean.Visible)
+                    {
+                        m_frmClean.WindowState = FormWindowState.Normal;
+                        m_frmClean.BringToFront();
+                    }
+                    else
+                    {
+                        m_frmClean.Dispose();
+                        m_frmClean = new CleanForm(this);  /// fix
+                        m_frmClean.ShowDialog(this);
+                    }
+                    break;
                 case "seek":
                     if (m_frmSeek.Visible)
                     {
@@ -753,6 +787,14 @@ namespace Greaseweazle
         {
             if (rbInfo.Checked == true)
                 m_action = "info";
+        }
+        #endregion
+
+        #region rbCleanHeads_CheckedChanged
+        private void rbCleanHeads_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbCleanHeads.Checked == true)
+                m_action = "clean";
         }
         #endregion
 
@@ -897,13 +939,6 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region chkLegacyUSB_CheckedChanged
-        private void chkLegacyUSB_CheckedChanged(object sender, EventArgs e)
-        {
-            m_bLegacyUSB = chkLegacyUSB.Checked;
-        }
-        #endregion
-
         #region rbSeekCyl_CheckedChanged
         private void rbSeekCyl_CheckedChanged(object sender, EventArgs e)
         {
@@ -912,6 +947,7 @@ namespace Greaseweazle
         }
         #endregion
 
+        #region pbGWsmall_Click
         private void pbGWsmall_Click(object sender, EventArgs e)
         {
             if (m_frmPicture.Visible)
@@ -926,6 +962,14 @@ namespace Greaseweazle
                 m_frmPicture.ShowDialog(this);
             }
         }
+        #endregion
+
+        #region mnuElapsedTime_Click
+        private void mnuElapsedTime_Click(object sender, EventArgs e)
+        {
+            m_bElapsedTime = mnuElapsedTime.Checked = !mnuElapsedTime.Checked;
+        }
+        #endregion
     }
 
     #region AutoClosingMessageBox

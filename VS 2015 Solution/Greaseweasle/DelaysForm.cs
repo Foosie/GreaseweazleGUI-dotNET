@@ -9,16 +9,10 @@
 // See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Greaseweazle
@@ -32,6 +26,7 @@ namespace Greaseweazle
         private bool m_bWindowsEXE = false;
         private bool m_bUSBSupport = false;
         private bool m_bLegacyUSB = true;
+        private bool m_bElapsedTime = false;
         #endregion
 
         #region DelaysForm
@@ -131,9 +126,11 @@ namespace Greaseweazle
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
                 m_bLegacyUSB = (sRet == "True");
 
-            // windows executable
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            // globals
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
                 m_bWindowsEXE = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuElapsedTime", "garbage").Trim())) != "garbage")
+                m_bElapsedTime = (sRet == "True");
         }
         #endregion
 
@@ -141,9 +138,12 @@ namespace Greaseweazle
         private void CreateCommandLine()
         {
             if (true == m_bWindowsEXE)
-                txtDelaysCommandLine.Text = "gw.exe delays";
+                txtDelaysCommandLine.Text = "gw.exe";
             else
-                txtDelaysCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " delays";
+                txtDelaysCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
+            if (true == m_bElapsedTime)
+                txtDelaysCommandLine.Text += " --time";
+            txtDelaysCommandLine.Text += " delays";
             if (chkDelayDriveSelect.Checked == true)
                 txtDelaysCommandLine.Text += " --select=" + txtDelayDriveSelect.Text;
             if (chkDelayHeadSteps.Checked == true)

@@ -9,16 +9,9 @@
 // See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.using System;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Greaseweazle
@@ -34,6 +27,7 @@ namespace Greaseweazle
         private bool m_bUSBSupport = false;
         private bool m_bLegacyUSB = true;
         private Form m_frmChooser = null;
+        private bool m_bElapsedTime = false;
         #endregion
 
         #region WriteForm
@@ -73,6 +67,7 @@ namespace Greaseweazle
         public void iniWriteFile()
         {
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "m_sWTDFilename", m_sWTDFilename);
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "cbExtension", cbExtension.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkEraseEmpty", (chkEraseEmpty.Checked == true).ToString());
@@ -86,6 +81,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtCylSet", txtCylSet.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkHeadsSet", (chkHeadsSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtHeadsSet", txtHeadsSet.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkRetries", (chkRetries.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtRetries", txtRetries.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkFlippyOffset", (chkFlippyOffset.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbFlippyPanasonic", (rbFlippyPanasonic.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbFlippyTeac", (rbFlippyTeac.Checked == true).ToString());
@@ -97,6 +94,8 @@ namespace Greaseweazle
         {
             string sRet;
 
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "cbExtension", "garbage").Trim())) != "garbage")
+                cbExtension.SelectedIndex = cbExtension.FindString(sRet);
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "m_sWTDFilename", "garbage").Trim())) != "garbage")
                 m_sWTDFilename = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "m_sWriteDiskFolder", "garbage").Trim())) != "garbage")
@@ -130,7 +129,13 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkPrecomp.Checked = true;
             }
-
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtRetries", "garbage").Trim())) != "garbage")
+                txtRetries.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkRetries", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkRetries.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkCylSet", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -169,9 +174,11 @@ namespace Greaseweazle
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
                 m_bLegacyUSB = (sRet == "True");
 
-            // windows executable
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            // globals
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
                 m_bWindowsEXE = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuElapsedTime", "garbage").Trim())) != "garbage")
+                m_bElapsedTime = (sRet == "True");
         }
         #endregion
 
@@ -181,11 +188,14 @@ namespace Greaseweazle
             string sTrack = " --track=";
 
             if (true == m_bWindowsEXE)
-                txtWTDCommandLine.Text = "gw.exe write";
+                txtWTDCommandLine.Text = "gw.exe";
             else
-                txtWTDCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " write";
-
-            // no syntax changes
+                txtWTDCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
+            if (true == m_bElapsedTime)
+                txtWTDCommandLine.Text += " --time";
+            txtWTDCommandLine.Text += " write";
+            if (chkRetries.Checked == true)
+                txtWTDCommandLine.Text += " --retries=" + txtRetries.Text;
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
                 txtWTDCommandLine.Text += " --drive=" + txtDriveSelectWTD.Text;
             if (chkPrecomp.Checked == true)
@@ -271,7 +281,9 @@ namespace Greaseweazle
             this.txtDriveSelectWTD.BackColor = ChooserForm.cLightBrown;
             this.txtPrecomp.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;
+            this.txtRetries.BackColor = ChooserForm.cLightBrown;
             this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
+            this.cbExtension.BackColor = ChooserForm.cLightBrown;
             this.txtWTDCommandLine.BackColor = ChooserForm.cLightBrown;
             this.btnWTDSelectFile.BackColor = ChooserForm.cDarkBrown;
             this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
@@ -298,7 +310,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sWriteDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "Images|*.scp;*.hfe;*.adf;*.ipf|All files (*.*)|*.*";
+            openDialog.Filter = "Images|*.scp;*.hfe;*.adf;*.ipf;*.dsk|All files (*.*)|*.*";
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 m_sWTDFilename = openDialog.SafeFileName;
@@ -413,6 +425,17 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+
+        private void chkRetries_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtRetries_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion // changed
 
         #region WndProc
@@ -430,5 +453,39 @@ namespace Greaseweazle
         }
         #endregion
 
+        #region cbExtension_SelectedIndexChanged
+        private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_sWTDFilename = removeDiskType(m_sWTDFilename, true) + cbExtension.Text;      
+            CreateCommandLine();
+        }
+        #endregion
+
+        #region removeDiskType
+        private string removeDiskType(string fn, bool noext)
+        {
+            string sRemove = ".scp::disktype=amiga";
+            int pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            sRemove = ".scp::disktype=c64";
+            pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            if (noext)
+            {
+                string s = Path.GetFileNameWithoutExtension(fn);
+                if (s.EndsWith("."))
+                    s = s.Remove(s.Length - 1);   // remove period
+                return (s);
+            }
+            else
+            {
+                if (fn.EndsWith("."))
+                    fn = fn.Remove(fn.Length - 1);   // remove period
+                return (fn);
+            }
+        }
+        #endregion
     }
 }

@@ -28,6 +28,7 @@ namespace Greaseweazle
         private Form m_frmChooser = null;
         private const int WM_CLOSE = 0x0010;
         private const string m_sSeperator = "--";
+        private bool m_bElapsedTime = false;
         #endregion
 
         #region ReadForm
@@ -67,6 +68,7 @@ namespace Greaseweazle
         public void iniWriteFile()
         {
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sRFDFilename",tbFilename.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbExtension", cbExtension.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());          
@@ -80,6 +82,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRateRFD", txtDriveRateRFD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRpmRFD", (chkDriveRpmRFD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRpmRFD", txtDriveRpmRFD.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRetriesRFD", (chkDriveRetriesRFD.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRetriesRFD", txtDriveRetriesRFD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkAutoInc", (chkAutoInc.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkCylSet", (chkCylSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtCylSet", txtCylSet.Text);
@@ -96,6 +100,8 @@ namespace Greaseweazle
         {
             string sRet;
 
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "cbExtension", "garbage").Trim())) != "garbage")
+                cbExtension.SelectedIndex = cbExtension.FindString(sRet);
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "m_sRFDFilename", "garbage").Trim())) != "garbage")
             {
                 tbFilename.Text = sRet;
@@ -144,6 +150,13 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkDriveRpmRFD.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDriveRetriesRFD", "garbage").Trim())) != "garbage")
+                txtDriveRetriesRFD.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkDriveRetriesRFD", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDriveRetriesRFD.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkAutoInc", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -188,8 +201,10 @@ namespace Greaseweazle
                 m_bLegacyUSB = (sRet == "True");
 
             // windows executable
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
                 m_bWindowsEXE = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuElapsedTime", "garbage").Trim())) != "garbage")
+                m_bElapsedTime = (sRet == "True");
         }
         #endregion
 
@@ -199,10 +214,14 @@ namespace Greaseweazle
             string sTrack = " --track=";
 
             if (true == m_bWindowsEXE)
-                txtRFDCommandLine.Text = "gw.exe read";
+                txtRFDCommandLine.Text = "gw.exe";
             else
-                txtRFDCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " read";
-
+                txtRFDCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
+            if (true == m_bElapsedTime)
+                txtRFDCommandLine.Text += " --time";
+            txtRFDCommandLine.Text += " read";
+            if (chkDriveRetriesRFD.Checked == true)
+                txtRFDCommandLine.Text += " --retries=" + txtDriveRetriesRFD.Text;
             if (chkRevsPerTrack.Checked == true)
                 txtRFDCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
             if (chkDriveRateRFD.Checked == true)
@@ -265,6 +284,11 @@ namespace Greaseweazle
         }
 
         private void chkDriveRpmRFD_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkDriveRetriesRFD_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
@@ -358,6 +382,16 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void txtDriveRetriesRFD_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.tbFilename.Text = removeDiskType(this.tbFilename.Text, true) + cbExtension.Text;
+            CreateCommandLine();
+        }
         #endregion
 
         #region ReadForm_Load
@@ -370,11 +404,14 @@ namespace Greaseweazle
             this.txtRevsPerTrack.BackColor = ChooserForm.cLightBrown;
             this.txtDriveSelectRFD.BackColor = ChooserForm.cLightBrown;
             this.txtDriveRateRFD.BackColor = ChooserForm.cLightBrown;
+            this.txtDriveRetriesRFD.BackColor = ChooserForm.cLightBrown;
             this.txtDriveRpmRFD.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;
             this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
             this.tbFilename.BackColor = ChooserForm.cLightBrown;
             this.tbSuffix.BackColor = ChooserForm.cLightBrown;
+            this.cbExtension.ForeColor = Color.White;
+            this.cbExtension.BackColor = ChooserForm.cLightBrown;
             this.btnInc.BackColor = ChooserForm.cDarkBrown;
             this.btnDec.BackColor = ChooserForm.cDarkBrown;
             this.txtRFDCommandLine.BackColor = ChooserForm.cLightBrown;
@@ -523,7 +560,7 @@ namespace Greaseweazle
             int n = -1;
             if (tbFilename.Text.Trim().Length > 0)
             {
-                string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
+                string sFN = removeDiskType(tbFilename.Text, true); // remove extension as well
                 if ((pos = sFN.LastIndexOf(m_sSeperator)) != -1)
                     tbSuffix.Text = sFN.Substring(pos + m_sSeperator.Length, sFN.Length - pos - m_sSeperator.Length);
             }
@@ -535,7 +572,8 @@ namespace Greaseweazle
         {
             int pos = -1;
             int n = -1;
-            string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
+            //string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
+            string sFN = removeDiskType(tbFilename.Text, true); // remove extension as well
             string sExt = Path.GetExtension(tbFilename.Text);
             if ((pos = sFN.IndexOf(m_sSeperator)) == -1)
                 return;
@@ -557,14 +595,13 @@ namespace Greaseweazle
                 if (sSuffix.Length > 0)
                     Int32.TryParse(sSuffix.Trim(), out n);
             }
-            string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
-            string sExt = Path.GetExtension(tbFilename.Text);
+            string sFN = removeDiskType(tbFilename.Text, true);  // remove extension as well
             if ((pos = sFN.LastIndexOf(m_sSeperator)) != -1)
                 sFN = sFN.Substring(0, pos);
             if (n != -1)
-                tbFilename.Text = sFN + m_sSeperator + n.ToString() + sExt;
+                tbFilename.Text = sFN + m_sSeperator + n.ToString() + cbExtension.Text;
             else
-                tbFilename.Text = sFN + sExt;
+                tbFilename.Text = sFN + cbExtension.Text;
         }
         #endregion
 
@@ -591,7 +628,7 @@ namespace Greaseweazle
             }
             else if (direction == decrement)
             {
-                if (n > 0)
+                if (n > 1)
                 {
                     n--;
                     tbSuffix.Text = n.ToString();
@@ -600,7 +637,33 @@ namespace Greaseweazle
                     tbSuffix.Text = "";
             }
         }
+        #endregion
 
+        #region removeDiskType
+        private string removeDiskType(string fn, bool noext)
+        {
+            string sRemove = ".scp::disktype=amiga";
+            int pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            sRemove = ".scp::disktype=c64";
+            pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            if (noext)
+            {
+                string s = Path.GetFileNameWithoutExtension(fn);
+                if (s.EndsWith("."))
+                    s = s.Remove(s.Length - 1);   // remove period
+                return (s);
+            }
+            else
+            {
+                if (fn.EndsWith("."))
+                    fn = fn.Remove(fn.Length - 1);   // remove period
+                return (fn);
+            }
+        }
         #endregion
     }
 }

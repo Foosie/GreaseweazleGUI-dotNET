@@ -9,16 +9,9 @@
 // See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.using System;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Greaseweazle
@@ -32,6 +25,7 @@ namespace Greaseweazle
         private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
+        private bool m_bElapsedTime = false;
         #endregion
 
         #region EraseForm
@@ -112,9 +106,11 @@ namespace Greaseweazle
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
                 m_bLegacyUSB = (sRet == "True");
 
-            // windows executable
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            // globals
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
                 m_bWindowsEXE = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuElapsedTime", "garbage").Trim())) != "garbage")
+                m_bElapsedTime = (sRet == "True");
         }
         #endregion
 
@@ -124,9 +120,12 @@ namespace Greaseweazle
             string sTrack = " --track=";
 
             if (true == m_bWindowsEXE)
-                txtEraseCommandLine.Text = "gw.exe erase";
+                txtEraseCommandLine.Text = "gw.exe";
             else
-                txtEraseCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " erase";
+                txtEraseCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
+            if (true == m_bElapsedTime)
+                txtEraseCommandLine.Text += " --time";
+            txtEraseCommandLine.Text += " erase";
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtEraseCommandLine.Text += " --drive=" + txtDriveSelect.Text;
             if (chkHeadsSet.Checked == true)

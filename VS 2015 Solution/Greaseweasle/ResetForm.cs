@@ -9,14 +9,7 @@
 // See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Greaseweazle
@@ -29,6 +22,7 @@ namespace Greaseweazle
         private bool m_bUSBSupport = false;
         private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
+        private bool m_bElapsedTime = false;
 
         #region ResetForm
         public ResetForm(ChooserForm newForm)
@@ -81,9 +75,12 @@ namespace Greaseweazle
         private void CreateCommandLine()
         {
             if (true == m_bWindowsEXE)
-                txtResetCommandLine.Text = "gw.exe reset";
+                txtResetCommandLine.Text = "gw.exe";
             else
-                txtResetCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " reset";
+                txtResetCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
+            if (true == m_bElapsedTime)
+                txtResetCommandLine.Text += " --time";
+            txtResetCommandLine.Text += " reset";
             if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtResetCommandLine.Text += " --device=" + m_sUSBPort;
             if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
@@ -112,9 +109,11 @@ namespace Greaseweazle
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
                 m_bLegacyUSB = (sRet == "True");
 
-            // windows executable
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            // globals
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
                 m_bWindowsEXE = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuElapsedTime", "garbage").Trim())) != "garbage")
+                m_bElapsedTime = (sRet == "True");
         }
         #endregion
 

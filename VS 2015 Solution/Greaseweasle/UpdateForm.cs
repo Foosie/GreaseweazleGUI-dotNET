@@ -9,16 +9,9 @@
 // See the file LICENSE for more details, or visit <https://opensource.org/licenses/MIT>.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Greaseweazle
@@ -34,6 +27,7 @@ namespace Greaseweazle
         private bool m_bUSBSupport = false;
         private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
+        private bool m_bElapsedTime = false;
         #endregion
 
         #region UpdateForm
@@ -99,9 +93,11 @@ namespace Greaseweazle
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
                 m_bLegacyUSB = (sRet == "True");
 
-            // windows executable
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWindowsEXE", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
+            // globals
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
                 m_bWindowsEXE = (sRet == "True");
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuElapsedTime", "garbage").Trim())) != "garbage")
+                m_bElapsedTime = (sRet == "True");
         }
         #endregion
 
@@ -135,9 +131,12 @@ namespace Greaseweazle
         private void CreateCommandLine()
         {
             if (true == m_bWindowsEXE)
-                txtUpdateCommandLine.Text = "gw.exe update";
+                txtUpdateCommandLine.Text = "gw.exe";
             else
-                txtUpdateCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript + " update";
+                txtUpdateCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
+            if (true == m_bElapsedTime)
+                txtUpdateCommandLine.Text += " --time";
+            txtUpdateCommandLine.Text += " update";
             if (chkBootLoader.Checked == true)
                 txtUpdateCommandLine.Text += " --bootloader";
             if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
