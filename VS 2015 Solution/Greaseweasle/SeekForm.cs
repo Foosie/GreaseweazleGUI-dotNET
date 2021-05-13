@@ -64,6 +64,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtSeekCyl", txtSeekCyl.Text);
             ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtDriveSelect", txtDriveSelect.Text);
             ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "chkMotorOn", (chkMotorOn.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "chkForce", (chkForce.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtEraseCommandLine", txtCommandLine.Text);
         }
         #endregion
@@ -81,6 +83,16 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkDriveSelect.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "chkMotorOn", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkMotorOn.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "chkForce", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkForce.Checked = true;
             }
 
             // usb port
@@ -111,6 +123,10 @@ namespace Greaseweazle
             txtCommandLine.Text += " seek" + " " + txtSeekCyl.Text;
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtCommandLine.Text += " --drive=" + txtDriveSelect.Text;
+            if (chkMotorOn.Checked == true)
+                txtCommandLine.Text += " --motor-on";
+            if (chkForce.Checked == true)
+                txtCommandLine.Text += " --force";
             if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtCommandLine.Text += " --device=" + m_sUSBPort;
             if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
@@ -224,6 +240,16 @@ namespace Greaseweazle
         }
 
         private void txtWriteLastCyl_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkForce_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkMotorOn_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
