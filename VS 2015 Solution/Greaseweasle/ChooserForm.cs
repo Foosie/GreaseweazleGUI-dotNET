@@ -51,7 +51,6 @@ namespace Greaseweazle
         public string m_action = "read";
         public const int WM_CLOSE = 0x0010;
         public static Boolean m_bF7Type = false;
-        public static Boolean m_bLegacyUSB = false;
         public static Boolean m_bWindowsEXE = false;
         public static Boolean m_bElapsedTime = false;
         public static string m_sGWscript = "gw.py";

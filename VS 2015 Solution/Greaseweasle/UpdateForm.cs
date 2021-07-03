@@ -25,7 +25,6 @@ namespace Greaseweazle
         private string m_sUpdateFilename = "firmware.upd";
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
-        private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
         private bool m_bElapsedTime = false;
         #endregion
@@ -90,8 +89,6 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
-                m_bLegacyUSB = (sRet == "True");
 
             // globals
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
@@ -139,12 +136,10 @@ namespace Greaseweazle
             txtUpdateCommandLine.Text += " update";
             if (chkBootLoader.Checked == true)
                 txtUpdateCommandLine.Text += " --bootloader";
-            if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtUpdateCommandLine.Text += " --device=" + m_sUSBPort;
             if (chkBootLoader.Checked == false)
                 txtUpdateCommandLine.Text += " \"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
-            if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
-                txtUpdateCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion
 

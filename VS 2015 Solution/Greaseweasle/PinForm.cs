@@ -20,7 +20,6 @@ namespace Greaseweazle
         private Form m_frmChooser = null;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
-        private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
         private bool m_bElapsedTime = false;
 
@@ -80,8 +79,6 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
-                m_bLegacyUSB = (sRet == "True");
 
             // globals
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
@@ -100,11 +97,11 @@ namespace Greaseweazle
                 txtPinCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
             if (true == m_bElapsedTime)
                 txtPinCommandLine.Text += " --time";
-            txtPinCommandLine.Text += " pin " + txtPin.Text;
+            txtPinCommandLine.Text += " pin";
             if (rbSet.Checked)
-                txtPinCommandLine.Text += " set";
+                txtPinCommandLine.Text += " set " + txtPin.Text;
             else
-                txtPinCommandLine.Text += " get";
+                txtPinCommandLine.Text += " get " + txtPin.Text;
             if (gbHighLow.Enabled)
             {
                 if (rbHigh.Checked == true)
@@ -112,10 +109,8 @@ namespace Greaseweazle
                 else
                     txtPinCommandLine.Text += " L";
             }        
-            if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtPinCommandLine.Text += " --device=" + m_sUSBPort;
-            if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
-                txtPinCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion
 

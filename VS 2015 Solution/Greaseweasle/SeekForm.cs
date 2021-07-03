@@ -22,7 +22,6 @@ namespace Greaseweazle
         private const int WM_CLOSE = 0x0010;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
-        private bool m_bLegacyUSB = true;
         private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
         private bool m_bElapsedTime = false;
@@ -100,8 +99,6 @@ namespace Greaseweazle
                 m_sUSBPort = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "mnuUSBSupport", "garbage").Trim())) != "garbage")
                 m_bUSBSupport = (sRet == "True");
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "chkLegacyUSB", "garbage").Trim())) != "garbage")
-                m_bLegacyUSB = (sRet == "True");
 
             // globals
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbGlobals", "mnuWindowsEXE", "garbage").Trim())) != "garbage")
@@ -127,10 +124,8 @@ namespace Greaseweazle
                 txtCommandLine.Text += " --motor-on";
             if (chkForce.Checked == true)
                 txtCommandLine.Text += " --force";
-            if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtCommandLine.Text += " --device=" + m_sUSBPort;
-            if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
-                txtCommandLine.Text += " " + m_sUSBPort;
         }
         #endregion
 
