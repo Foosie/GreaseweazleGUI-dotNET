@@ -46,14 +46,14 @@ namespace Greaseweazle
             this.txtCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.gbEraseDisk = new System.Windows.Forms.GroupBox();
+            this.chkMotorOn = new System.Windows.Forms.CheckBox();
+            this.chkForce = new System.Windows.Forms.CheckBox();
             this.lblSeekCyl = new System.Windows.Forms.Label();
             this.txtDriveSelect = new System.Windows.Forms.TextBox();
             this.chkDriveSelect = new System.Windows.Forms.CheckBox();
             this.txtSeekCyl = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.lblHostTools = new System.Windows.Forms.Label();
-            this.chkForce = new System.Windows.Forms.CheckBox();
-            this.chkMotorOn = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbEraseDisk.SuspendLayout();
             this.SuspendLayout();
@@ -127,6 +127,30 @@ namespace Greaseweazle
             this.gbEraseDisk.TabStop = false;
             this.gbEraseDisk.Enter += new System.EventHandler(this.gbEraseDisk_Enter);
             // 
+            // chkMotorOn
+            // 
+            this.chkMotorOn.AutoSize = true;
+            this.chkMotorOn.Location = new System.Drawing.Point(107, 108);
+            this.chkMotorOn.Name = "chkMotorOn";
+            this.chkMotorOn.Size = new System.Drawing.Size(89, 21);
+            this.chkMotorOn.TabIndex = 8;
+            this.chkMotorOn.Text = "Motor On";
+            this.toolTip.SetToolTip(this.chkMotorOn, "Host Tools v0.27 or later\r\n");
+            this.chkMotorOn.UseVisualStyleBackColor = true;
+            this.chkMotorOn.CheckedChanged += new System.EventHandler(this.chkMotorOn_CheckedChanged);
+            // 
+            // chkForce
+            // 
+            this.chkForce.AutoSize = true;
+            this.chkForce.Location = new System.Drawing.Point(107, 81);
+            this.chkForce.Name = "chkForce";
+            this.chkForce.Size = new System.Drawing.Size(187, 21);
+            this.chkForce.TabIndex = 7;
+            this.chkForce.Text = "Force Extreme Cycinders";
+            this.toolTip.SetToolTip(this.chkForce, "Host Tools v0.27 or later");
+            this.chkForce.UseVisualStyleBackColor = true;
+            this.chkForce.CheckedChanged += new System.EventHandler(this.chkForce_CheckedChanged);
+            // 
             // lblSeekCyl
             // 
             this.lblSeekCyl.AutoSize = true;
@@ -182,32 +206,8 @@ namespace Greaseweazle
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 13;
-            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // chkForce
-            // 
-            this.chkForce.AutoSize = true;
-            this.chkForce.Location = new System.Drawing.Point(107, 81);
-            this.chkForce.Name = "chkForce";
-            this.chkForce.Size = new System.Drawing.Size(187, 21);
-            this.chkForce.TabIndex = 7;
-            this.chkForce.Text = "Force Extreme Cycinders";
-            this.toolTip.SetToolTip(this.chkForce, "Host Tools v0.27 or later");
-            this.chkForce.UseVisualStyleBackColor = true;
-            this.chkForce.CheckedChanged += new System.EventHandler(this.chkForce_CheckedChanged);
-            // 
-            // chkMotorOn
-            // 
-            this.chkMotorOn.AutoSize = true;
-            this.chkMotorOn.Location = new System.Drawing.Point(107, 108);
-            this.chkMotorOn.Name = "chkMotorOn";
-            this.chkMotorOn.Size = new System.Drawing.Size(89, 21);
-            this.chkMotorOn.TabIndex = 8;
-            this.chkMotorOn.Text = "Motor On";
-            this.toolTip.SetToolTip(this.chkMotorOn, "Host Tools v0.27 or later\r\n");
-            this.chkMotorOn.UseVisualStyleBackColor = true;
-            this.chkMotorOn.CheckedChanged += new System.EventHandler(this.chkMotorOn_CheckedChanged);
             // 
             // SeekForm
             // 

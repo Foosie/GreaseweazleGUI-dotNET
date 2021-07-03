@@ -42,6 +42,8 @@ namespace Greaseweazle
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadForm));
             this.gbReadFromDisk = new System.Windows.Forms.GroupBox();
             this.gbFilename = new System.Windows.Forms.GroupBox();
+            this.lblDiskType = new System.Windows.Forms.Label();
+            this.cbExtension = new System.Windows.Forms.ComboBox();
             this.chkAutoInc = new System.Windows.Forms.CheckBox();
             this.btnDec = new System.Windows.Forms.Button();
             this.btnInc = new System.Windows.Forms.Button();
@@ -81,8 +83,6 @@ namespace Greaseweazle
             this.txtRevsPerTrack = new System.Windows.Forms.TextBox();
             this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
             this.lblHostTools = new System.Windows.Forms.Label();
-            this.cbExtension = new System.Windows.Forms.ComboBox();
-            this.lblDiskType = new System.Windows.Forms.Label();
             this.gbReadFromDisk.SuspendLayout();
             this.gbFilename.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -123,6 +123,33 @@ namespace Greaseweazle
             this.gbFilename.Size = new System.Drawing.Size(757, 96);
             this.gbFilename.TabIndex = 31;
             this.gbFilename.TabStop = false;
+            // 
+            // lblDiskType
+            // 
+            this.lblDiskType.AutoSize = true;
+            this.lblDiskType.Location = new System.Drawing.Point(393, 23);
+            this.lblDiskType.Name = "lblDiskType";
+            this.lblDiskType.Size = new System.Drawing.Size(71, 17);
+            this.lblDiskType.TabIndex = 34;
+            this.lblDiskType.Text = "DiskType:";
+            // 
+            // cbExtension
+            // 
+            this.cbExtension.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbExtension.ForeColor = System.Drawing.Color.White;
+            this.cbExtension.FormattingEnabled = true;
+            this.cbExtension.Items.AddRange(new object[] {
+            ".adf",
+            ".ipf",
+            ".hfe",
+            ".scp",
+            ".scp::disktype=amiga",
+            ".scp::disktype=c64"});
+            this.cbExtension.Location = new System.Drawing.Point(470, 20);
+            this.cbExtension.Name = "cbExtension";
+            this.cbExtension.Size = new System.Drawing.Size(263, 24);
+            this.cbExtension.TabIndex = 35;
+            this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
             // 
             // chkAutoInc
             // 
@@ -475,7 +502,7 @@ namespace Greaseweazle
             this.txtDriveRateRFD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDriveRateRFD.ForeColor = System.Drawing.Color.White;
             this.txtDriveRateRFD.Location = new System.Drawing.Point(263, 110);
-            this.txtDriveRateRFD.MaxLength = 3;
+            this.txtDriveRateRFD.MaxLength = 4;
             this.txtDriveRateRFD.Name = "txtDriveRateRFD";
             this.txtDriveRateRFD.Size = new System.Drawing.Size(84, 22);
             this.txtDriveRateRFD.TabIndex = 16;
@@ -575,35 +602,8 @@ namespace Greaseweazle
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 47;
-            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cbExtension
-            // 
-            this.cbExtension.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.cbExtension.ForeColor = System.Drawing.Color.White;
-            this.cbExtension.FormattingEnabled = true;
-            this.cbExtension.Items.AddRange(new object[] {
-            ".adf",
-            ".ipf",
-            ".hfe",
-            ".scp",
-            ".scp::disktype=amiga",
-            ".scp::disktype=c64"});
-            this.cbExtension.Location = new System.Drawing.Point(470, 20);
-            this.cbExtension.Name = "cbExtension";
-            this.cbExtension.Size = new System.Drawing.Size(263, 24);
-            this.cbExtension.TabIndex = 35;
-            this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
-            // 
-            // lblDiskType
-            // 
-            this.lblDiskType.AutoSize = true;
-            this.lblDiskType.Location = new System.Drawing.Point(393, 23);
-            this.lblDiskType.Name = "lblDiskType";
-            this.lblDiskType.Size = new System.Drawing.Size(71, 17);
-            this.lblDiskType.TabIndex = 34;
-            this.lblDiskType.Text = "DiskType:";
             // 
             // ReadForm
             // 

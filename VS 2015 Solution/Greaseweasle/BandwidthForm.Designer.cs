@@ -108,7 +108,7 @@ namespace Greaseweazle
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 10;
-            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BandwidthForm

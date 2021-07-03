@@ -109,7 +109,7 @@ namespace Greaseweazle
             this.mnuProfileNew.BackColor = System.Drawing.SystemColors.Control;
             this.mnuProfileNew.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mnuProfileNew.Name = "mnuProfileNew";
-            this.mnuProfileNew.Size = new System.Drawing.Size(181, 26);
+            this.mnuProfileNew.Size = new System.Drawing.Size(140, 26);
             this.mnuProfileNew.Text = "-New-";
             this.mnuProfileNew.Click += new System.EventHandler(this.mnuProfileNew_Click);
             // 
@@ -118,7 +118,7 @@ namespace Greaseweazle
             this.mnuDelete.BackColor = System.Drawing.SystemColors.Control;
             this.mnuDelete.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(181, 26);
+            this.mnuDelete.Size = new System.Drawing.Size(140, 26);
             this.mnuDelete.Text = "-Delete-";
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
@@ -430,7 +430,7 @@ namespace Greaseweazle
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(334, 31);
             this.lblHostTools.TabIndex = 24;
-            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ChooserForm

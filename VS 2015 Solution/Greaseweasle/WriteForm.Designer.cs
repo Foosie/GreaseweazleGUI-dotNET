@@ -41,6 +41,9 @@ namespace Greaseweazle
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WriteForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbDiskType = new System.Windows.Forms.GroupBox();
+            this.lblDiskType = new System.Windows.Forms.Label();
+            this.cbExtension = new System.Windows.Forms.ComboBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnLaunch = new System.Windows.Forms.Button();
             this.btnWTDSelectFile = new System.Windows.Forms.Button();
@@ -68,15 +71,12 @@ namespace Greaseweazle
             this.chkDoubleStep = new System.Windows.Forms.CheckBox();
             this.toolTipWTD = new System.Windows.Forms.ToolTip(this.components);
             this.lblHostTools = new System.Windows.Forms.Label();
-            this.gbDiskType = new System.Windows.Forms.GroupBox();
-            this.lblDiskType = new System.Windows.Forms.Label();
-            this.cbExtension = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
+            this.gbDiskType.SuspendLayout();
             this.gbWriteToDisk.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gbFlippy.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.gbDiskType.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -93,6 +93,43 @@ namespace Greaseweazle
             this.groupBox1.Size = new System.Drawing.Size(776, 407);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // gbDiskType
+            // 
+            this.gbDiskType.Controls.Add(this.lblDiskType);
+            this.gbDiskType.Controls.Add(this.cbExtension);
+            this.gbDiskType.Location = new System.Drawing.Point(11, 209);
+            this.gbDiskType.Name = "gbDiskType";
+            this.gbDiskType.Size = new System.Drawing.Size(753, 61);
+            this.gbDiskType.TabIndex = 32;
+            this.gbDiskType.TabStop = false;
+            // 
+            // lblDiskType
+            // 
+            this.lblDiskType.AutoSize = true;
+            this.lblDiskType.Location = new System.Drawing.Point(185, 24);
+            this.lblDiskType.Name = "lblDiskType";
+            this.lblDiskType.Size = new System.Drawing.Size(71, 17);
+            this.lblDiskType.TabIndex = 36;
+            this.lblDiskType.Text = "DiskType:";
+            // 
+            // cbExtension
+            // 
+            this.cbExtension.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbExtension.ForeColor = System.Drawing.Color.White;
+            this.cbExtension.FormattingEnabled = true;
+            this.cbExtension.Items.AddRange(new object[] {
+            ".adf",
+            ".ipf",
+            ".hfe",
+            ".scp",
+            ".scp::disktype=amiga",
+            ".scp::disktype=c64"});
+            this.cbExtension.Location = new System.Drawing.Point(304, 21);
+            this.cbExtension.Name = "cbExtension";
+            this.cbExtension.Size = new System.Drawing.Size(263, 24);
+            this.cbExtension.TabIndex = 37;
+            this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
             // 
             // btnBack
             // 
@@ -403,45 +440,8 @@ namespace Greaseweazle
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 31;
-            this.lblHostTools.Text = "for Host Tools v0.24";
+            this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // gbDiskType
-            // 
-            this.gbDiskType.Controls.Add(this.lblDiskType);
-            this.gbDiskType.Controls.Add(this.cbExtension);
-            this.gbDiskType.Location = new System.Drawing.Point(11, 209);
-            this.gbDiskType.Name = "gbDiskType";
-            this.gbDiskType.Size = new System.Drawing.Size(753, 61);
-            this.gbDiskType.TabIndex = 32;
-            this.gbDiskType.TabStop = false;
-            // 
-            // lblDiskType
-            // 
-            this.lblDiskType.AutoSize = true;
-            this.lblDiskType.Location = new System.Drawing.Point(185, 24);
-            this.lblDiskType.Name = "lblDiskType";
-            this.lblDiskType.Size = new System.Drawing.Size(71, 17);
-            this.lblDiskType.TabIndex = 36;
-            this.lblDiskType.Text = "DiskType:";
-            // 
-            // cbExtension
-            // 
-            this.cbExtension.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.cbExtension.ForeColor = System.Drawing.Color.White;
-            this.cbExtension.FormattingEnabled = true;
-            this.cbExtension.Items.AddRange(new object[] {
-            ".adf",
-            ".ipf",
-            ".hfe",
-            ".scp",
-            ".scp::disktype=amiga",
-            ".scp::disktype=c64"});
-            this.cbExtension.Location = new System.Drawing.Point(304, 21);
-            this.cbExtension.Name = "cbExtension";
-            this.cbExtension.Size = new System.Drawing.Size(263, 24);
-            this.cbExtension.TabIndex = 37;
-            this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
             // 
             // WriteForm
             // 
@@ -460,6 +460,8 @@ namespace Greaseweazle
             this.Load += new System.EventHandler(this.WriteForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbDiskType.ResumeLayout(false);
+            this.gbDiskType.PerformLayout();
             this.gbWriteToDisk.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -467,8 +469,6 @@ namespace Greaseweazle
             this.gbFlippy.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.gbDiskType.ResumeLayout(false);
-            this.gbDiskType.PerformLayout();
             this.ResumeLayout(false);
 
         }

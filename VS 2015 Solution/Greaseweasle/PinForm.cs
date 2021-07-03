@@ -38,6 +38,8 @@ namespace Greaseweazle
         {
             // update firmware
             ChooserForm.m_Ini.IniWriteValue("gbPinLevel", "txtPin", txtPin.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbPinLevel", "rbGet", (rbGet.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbPinLevel", "rbSet", (rbSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbPinLevel", "rbLow", (rbLow.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbPinLevel", "rbHigh", (rbHigh.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbPinLevel", "txtPinCommandLine", txtPinCommandLine.Text);
@@ -52,6 +54,16 @@ namespace Greaseweazle
             // pin level
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbPinLevel", "txtPin", "garbage").Trim())) != "garbage")
                 txtPin.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbPinLevel", "rbGet", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbGet.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbPinLevel", "rbSet", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbSet.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbPinLevel", "rbLow", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -89,10 +101,17 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtPinCommandLine.Text += " --time";
             txtPinCommandLine.Text += " pin " + txtPin.Text;
-            if (rbHigh.Checked == true)
-                txtPinCommandLine.Text += " H";
+            if (rbSet.Checked)
+                txtPinCommandLine.Text += " set";
             else
-                txtPinCommandLine.Text += " L";
+                txtPinCommandLine.Text += " get";
+            if (gbHighLow.Enabled)
+            {
+                if (rbHigh.Checked == true)
+                    txtPinCommandLine.Text += " H";
+                else
+                    txtPinCommandLine.Text += " L";
+            }        
             if ((m_bLegacyUSB == false) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtPinCommandLine.Text += " --device=" + m_sUSBPort;
             if ((m_bLegacyUSB == true) && (m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
@@ -187,6 +206,22 @@ namespace Greaseweazle
         #region txtPin_TextChanged
         private void txtPin_TextChanged(object sender, EventArgs e)
         {
+            CreateCommandLine();
+        }
+        #endregion
+
+        #region rbGet_CheckedChanged
+        private void rbGet_CheckedChanged(object sender, EventArgs e)
+        {
+            this.gbHighLow.Enabled = this.rbSet.Checked;
+            CreateCommandLine();
+        }
+        #endregion
+
+        #region rbSet_CheckedChanged
+        private void rbSet_CheckedChanged(object sender, EventArgs e)
+        {
+            this.gbHighLow.Enabled = this.rbSet.Checked;
             CreateCommandLine();
         }
         #endregion
