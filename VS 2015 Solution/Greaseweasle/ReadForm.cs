@@ -68,6 +68,7 @@ namespace Greaseweazle
         {
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sRFDFilename",tbFilename.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbExtension", cbExtension.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbFormat", cbFormat.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());          
@@ -98,15 +99,16 @@ namespace Greaseweazle
         public void iniReadFile()
         {
             string sRet;
-
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "cbExtension", "garbage").Trim())) != "garbage")
                 cbExtension.SelectedIndex = cbExtension.FindString(sRet);
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "cbFormat", "garbage").Trim())) != "garbage")
+                cbFormat.SelectedIndex = cbFormat.FindString(sRet);
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "m_sRFDFilename", "garbage").Trim())) != "garbage")
             {
                 tbFilename.Text = sRet;
                 SetFNSuffix();
                 CreateCommandLine();           
-            }
+            }          
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkLegacySS", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -246,7 +248,8 @@ namespace Greaseweazle
                     sTrack = sTrack.Remove(sTrack.Length - 1, 1); ;
                 txtRFDCommandLine.Text += sTrack;
             }
-
+            if (cbFormat.Text.Length > 0)
+                txtRFDCommandLine.Text += " --format " + cbFormat.Text;
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtRFDCommandLine.Text += " --device=" + m_sUSBPort;
             txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + tbFilename.Text.Trim();
@@ -383,7 +386,14 @@ namespace Greaseweazle
 
         private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.tbFilename.Text = removeDiskType(this.tbFilename.Text, true) + cbExtension.Text;
+            tbFilename.Text = removeDiskType(this.tbFilename.Text, true) + cbExtension.Text;
+            if (cbExtension.Text != ".ipf")
+                cbFormat.SelectedIndex = 0;
+            CreateCommandLine();
+        }
+
+        private void cbFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
             CreateCommandLine();
         }
         #endregion
@@ -406,6 +416,8 @@ namespace Greaseweazle
             this.tbSuffix.BackColor = ChooserForm.cLightBrown;
             this.cbExtension.ForeColor = Color.White;
             this.cbExtension.BackColor = ChooserForm.cLightBrown;
+            this.cbFormat.ForeColor = Color.White;
+            this.cbFormat.BackColor = ChooserForm.cLightBrown;
             this.btnInc.BackColor = ChooserForm.cDarkBrown;
             this.btnDec.BackColor = ChooserForm.cDarkBrown;
             this.txtRFDCommandLine.BackColor = ChooserForm.cLightBrown;
@@ -451,6 +463,9 @@ namespace Greaseweazle
             {
                 tbFilename.Text = openDialog.SafeFileName;
                 m_sReadDiskFolder = Path.GetDirectoryName(openDialog.FileName);
+                string sExt = Path.GetExtension(tbFilename.Text);
+                int iIndex = cbExtension.FindString(sExt);
+                cbExtension.SelectedIndex = iIndex;
                 CreateCommandLine();
             }
         }

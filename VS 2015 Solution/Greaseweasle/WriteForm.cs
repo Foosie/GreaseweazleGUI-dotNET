@@ -67,6 +67,7 @@ namespace Greaseweazle
         {
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "m_sWTDFilename", m_sWTDFilename);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "cbExtension", cbExtension.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "cbFormat", cbFormat.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkEraseEmpty", (chkEraseEmpty.Checked == true).ToString());
@@ -95,6 +96,8 @@ namespace Greaseweazle
 
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "cbExtension", "garbage").Trim())) != "garbage")
                 cbExtension.SelectedIndex = cbExtension.FindString(sRet);
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "cbFormat", "garbage").Trim())) != "garbage")
+                cbFormat.SelectedIndex = cbFormat.FindString(sRet);
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "m_sWTDFilename", "garbage").Trim())) != "garbage")
                 m_sWTDFilename = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "m_sWriteDiskFolder", "garbage").Trim())) != "garbage")
@@ -183,7 +186,6 @@ namespace Greaseweazle
         private void CreateCommandLine()
         {
             string sTrack = " --track=";
-
             if (true == m_bWindowsEXE)
                 txtWTDCommandLine.Text = "gw.exe";
             else
@@ -197,11 +199,10 @@ namespace Greaseweazle
                 txtWTDCommandLine.Text += " --drive=" + txtDriveSelectWTD.Text;
             if (chkPrecomp.Checked == true)
                 txtWTDCommandLine.Text += " --precomp=" + txtPrecomp.Text;
-
-            // conditional command line syntax
+            if (cbFormat.Text.Length > 0)
+                txtWTDCommandLine.Text += " --format " + cbFormat.Text;
             if (chkDoubleStep.Checked == true)
                 sTrack += "step=" + txtDoubleStep.Text + ":";
-
             if (chkEraseEmpty.Checked == true)
                 txtWTDCommandLine.Text += " --erase-empty";
             if (chkHeadsSet.Checked == true)
@@ -277,6 +278,7 @@ namespace Greaseweazle
             this.txtRetries.BackColor = ChooserForm.cLightBrown;
             this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
             this.cbExtension.BackColor = ChooserForm.cLightBrown;
+            this.cbFormat.BackColor = ChooserForm.cLightBrown;
             this.txtWTDCommandLine.BackColor = ChooserForm.cLightBrown;
             this.btnWTDSelectFile.BackColor = ChooserForm.cDarkBrown;
             this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
@@ -308,6 +310,9 @@ namespace Greaseweazle
             {
                 m_sWTDFilename = openDialog.SafeFileName;
                 m_sWriteDiskFolder = Path.GetDirectoryName(openDialog.FileName);
+                string sExt = Path.GetExtension(m_sWTDFilename);
+                int iIndex = cbExtension.FindString(sExt);
+                cbExtension.SelectedIndex = iIndex;
                 CreateCommandLine();
             }
         }
@@ -446,14 +451,6 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region cbExtension_SelectedIndexChanged
-        private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            m_sWTDFilename = removeDiskType(m_sWTDFilename, true) + cbExtension.Text;      
-            CreateCommandLine();
-        }
-        #endregion
-
         #region removeDiskType
         private string removeDiskType(string fn, bool noext)
         {
@@ -478,6 +475,23 @@ namespace Greaseweazle
                     fn = fn.Remove(fn.Length - 1);   // remove period
                 return (fn);
             }
+        }
+        #endregion
+
+        #region cbExtension_SelectedIndexChanged
+        private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_sWTDFilename = removeDiskType(m_sWTDFilename, true) + cbExtension.Text;
+            if (cbExtension.Text != ".ipf")
+                cbFormat.SelectedIndex = 0;
+            CreateCommandLine();
+        }
+        #endregion 
+
+        #region cbFormat_SelectedIndexChanged
+        private void cbFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
         }
         #endregion
     }

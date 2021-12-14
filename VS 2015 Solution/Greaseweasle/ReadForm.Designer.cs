@@ -83,6 +83,8 @@ namespace Greaseweazle
             this.txtRevsPerTrack = new System.Windows.Forms.TextBox();
             this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
             this.lblHostTools = new System.Windows.Forms.Label();
+            this.lblFormat = new System.Windows.Forms.Label();
+            this.cbFormat = new System.Windows.Forms.ComboBox();
             this.gbReadFromDisk.SuspendLayout();
             this.gbFilename.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -101,14 +103,16 @@ namespace Greaseweazle
             this.gbReadFromDisk.Controls.Add(this.btnLaunch);
             this.gbReadFromDisk.Controls.Add(this.btnRFDSelectFolder);
             this.gbReadFromDisk.Controls.Add(this.groupBox1);
-            this.gbReadFromDisk.Location = new System.Drawing.Point(0, -4);
+            this.gbReadFromDisk.Location = new System.Drawing.Point(0, -9);
             this.gbReadFromDisk.Name = "gbReadFromDisk";
-            this.gbReadFromDisk.Size = new System.Drawing.Size(780, 464);
+            this.gbReadFromDisk.Size = new System.Drawing.Size(780, 456);
             this.gbReadFromDisk.TabIndex = 0;
             this.gbReadFromDisk.TabStop = false;
             // 
             // gbFilename
             // 
+            this.gbFilename.Controls.Add(this.lblFormat);
+            this.gbFilename.Controls.Add(this.cbFormat);
             this.gbFilename.Controls.Add(this.lblDiskType);
             this.gbFilename.Controls.Add(this.cbExtension);
             this.gbFilename.Controls.Add(this.chkAutoInc);
@@ -120,17 +124,17 @@ namespace Greaseweazle
             this.gbFilename.Controls.Add(this.lblFilename);
             this.gbFilename.Location = new System.Drawing.Point(12, 224);
             this.gbFilename.Name = "gbFilename";
-            this.gbFilename.Size = new System.Drawing.Size(757, 96);
+            this.gbFilename.Size = new System.Drawing.Size(757, 89);
             this.gbFilename.TabIndex = 31;
             this.gbFilename.TabStop = false;
             // 
             // lblDiskType
             // 
             this.lblDiskType.AutoSize = true;
-            this.lblDiskType.Location = new System.Drawing.Point(393, 23);
+            this.lblDiskType.Location = new System.Drawing.Point(90, 53);
             this.lblDiskType.Name = "lblDiskType";
             this.lblDiskType.Size = new System.Drawing.Size(71, 17);
-            this.lblDiskType.TabIndex = 34;
+            this.lblDiskType.TabIndex = 39;
             this.lblDiskType.Text = "DiskType:";
             // 
             // cbExtension
@@ -139,35 +143,41 @@ namespace Greaseweazle
             this.cbExtension.ForeColor = System.Drawing.Color.White;
             this.cbExtension.FormattingEnabled = true;
             this.cbExtension.Items.AddRange(new object[] {
+            "",
             ".adf",
+            ".d81",
+            ".dsk",
+            ".img",
+            ".ima",
+            ".st",
             ".ipf",
             ".hfe",
             ".scp",
             ".scp::disktype=amiga",
             ".scp::disktype=c64"});
-            this.cbExtension.Location = new System.Drawing.Point(470, 20);
+            this.cbExtension.Location = new System.Drawing.Point(185, 53);
             this.cbExtension.Name = "cbExtension";
-            this.cbExtension.Size = new System.Drawing.Size(263, 24);
-            this.cbExtension.TabIndex = 35;
+            this.cbExtension.Size = new System.Drawing.Size(177, 24);
+            this.cbExtension.TabIndex = 40;
             this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
             // 
             // chkAutoInc
             // 
             this.chkAutoInc.AutoSize = true;
-            this.chkAutoInc.Location = new System.Drawing.Point(82, 57);
+            this.chkAutoInc.Location = new System.Drawing.Point(405, 21);
             this.chkAutoInc.Name = "chkAutoInc";
-            this.chkAutoInc.Size = new System.Drawing.Size(176, 21);
-            this.chkAutoInc.TabIndex = 36;
-            this.chkAutoInc.Text = "Increment after Launch";
+            this.chkAutoInc.Size = new System.Drawing.Size(64, 21);
+            this.chkAutoInc.TabIndex = 34;
+            this.chkAutoInc.Text = "Inc++";
             this.chkAutoInc.UseVisualStyleBackColor = true;
             // 
             // btnDec
             // 
             this.btnDec.BackColor = System.Drawing.Color.Maroon;
-            this.btnDec.Location = new System.Drawing.Point(604, 53);
+            this.btnDec.Location = new System.Drawing.Point(680, 17);
             this.btnDec.Name = "btnDec";
             this.btnDec.Size = new System.Drawing.Size(58, 29);
-            this.btnDec.TabIndex = 40;
+            this.btnDec.TabIndex = 38;
             this.btnDec.Text = "<<<<";
             this.btnDec.UseVisualStyleBackColor = false;
             this.btnDec.Click += new System.EventHandler(this.btnDec_Click);
@@ -175,10 +185,10 @@ namespace Greaseweazle
             // btnInc
             // 
             this.btnInc.BackColor = System.Drawing.Color.Maroon;
-            this.btnInc.Location = new System.Drawing.Point(500, 53);
+            this.btnInc.Location = new System.Drawing.Point(614, 17);
             this.btnInc.Name = "btnInc";
             this.btnInc.Size = new System.Drawing.Size(58, 29);
-            this.btnInc.TabIndex = 39;
+            this.btnInc.TabIndex = 37;
             this.btnInc.Text = ">>>>";
             this.btnInc.UseVisualStyleBackColor = false;
             this.btnInc.Click += new System.EventHandler(this.btnInc_Click);
@@ -187,28 +197,28 @@ namespace Greaseweazle
             // 
             this.tbSuffix.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.tbSuffix.ForeColor = System.Drawing.Color.White;
-            this.tbSuffix.Location = new System.Drawing.Point(396, 56);
+            this.tbSuffix.Location = new System.Drawing.Point(547, 20);
             this.tbSuffix.MaxLength = 3;
             this.tbSuffix.Name = "tbSuffix";
             this.tbSuffix.Size = new System.Drawing.Size(58, 22);
-            this.tbSuffix.TabIndex = 38;
+            this.tbSuffix.TabIndex = 36;
             this.tbSuffix.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbSuffix.TextChanged += new System.EventHandler(this.tbSuffix_TextChanged);
             // 
             // lblSuffix
             // 
             this.lblSuffix.AutoSize = true;
-            this.lblSuffix.Location = new System.Drawing.Point(291, 59);
+            this.lblSuffix.Location = new System.Drawing.Point(498, 23);
             this.lblSuffix.Name = "lblSuffix";
-            this.lblSuffix.Size = new System.Drawing.Size(77, 17);
-            this.lblSuffix.TabIndex = 37;
-            this.lblSuffix.Text = "Nbr. Suffix:";
+            this.lblSuffix.Size = new System.Drawing.Size(46, 17);
+            this.lblSuffix.TabIndex = 35;
+            this.lblSuffix.Text = "Suffix:";
             // 
             // tbFilename
             // 
             this.tbFilename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.tbFilename.ForeColor = System.Drawing.Color.White;
-            this.tbFilename.Location = new System.Drawing.Point(104, 21);
+            this.tbFilename.Location = new System.Drawing.Point(104, 20);
             this.tbFilename.Name = "tbFilename";
             this.tbFilename.Size = new System.Drawing.Size(254, 22);
             this.tbFilename.TabIndex = 33;
@@ -219,7 +229,7 @@ namespace Greaseweazle
             // lblFilename
             // 
             this.lblFilename.AutoSize = true;
-            this.lblFilename.Location = new System.Drawing.Point(18, 21);
+            this.lblFilename.Location = new System.Drawing.Point(18, 23);
             this.lblFilename.Name = "lblFilename";
             this.lblFilename.Size = new System.Drawing.Size(69, 17);
             this.lblFilename.TabIndex = 32;
@@ -228,10 +238,10 @@ namespace Greaseweazle
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(596, 418);
+            this.btnBack.Location = new System.Drawing.Point(596, 411);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 46;
+            this.btnBack.TabIndex = 48;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -240,28 +250,28 @@ namespace Greaseweazle
             // 
             this.txtRFDCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtRFDCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtRFDCommandLine.Location = new System.Drawing.Point(12, 352);
+            this.txtRFDCommandLine.Location = new System.Drawing.Point(12, 345);
             this.txtRFDCommandLine.Multiline = true;
             this.txtRFDCommandLine.Name = "txtRFDCommandLine";
             this.txtRFDCommandLine.Size = new System.Drawing.Size(757, 54);
-            this.txtRFDCommandLine.TabIndex = 42;
+            this.txtRFDCommandLine.TabIndex = 44;
             // 
             // lblCommandLine
             // 
             this.lblCommandLine.AutoSize = true;
-            this.lblCommandLine.Location = new System.Drawing.Point(339, 327);
+            this.lblCommandLine.Location = new System.Drawing.Point(339, 320);
             this.lblCommandLine.Name = "lblCommandLine";
             this.lblCommandLine.Size = new System.Drawing.Size(102, 17);
-            this.lblCommandLine.TabIndex = 41;
+            this.lblCommandLine.TabIndex = 43;
             this.lblCommandLine.Text = "Command Line";
             // 
             // btnRFDSelectFile
             // 
             this.btnRFDSelectFile.BackColor = System.Drawing.Color.Maroon;
-            this.btnRFDSelectFile.Location = new System.Drawing.Point(250, 418);
+            this.btnRFDSelectFile.Location = new System.Drawing.Point(250, 411);
             this.btnRFDSelectFile.Name = "btnRFDSelectFile";
             this.btnRFDSelectFile.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFile.TabIndex = 44;
+            this.btnRFDSelectFile.TabIndex = 46;
             this.btnRFDSelectFile.Text = "Select File";
             this.btnRFDSelectFile.UseVisualStyleBackColor = false;
             this.btnRFDSelectFile.Click += new System.EventHandler(this.btnRFDSelectFile_Click);
@@ -269,10 +279,10 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(423, 418);
+            this.btnLaunch.Location = new System.Drawing.Point(423, 411);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 45;
+            this.btnLaunch.TabIndex = 47;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -280,10 +290,10 @@ namespace Greaseweazle
             // btnRFDSelectFolder
             // 
             this.btnRFDSelectFolder.BackColor = System.Drawing.Color.Maroon;
-            this.btnRFDSelectFolder.Location = new System.Drawing.Point(77, 418);
+            this.btnRFDSelectFolder.Location = new System.Drawing.Point(77, 411);
             this.btnRFDSelectFolder.Name = "btnRFDSelectFolder";
             this.btnRFDSelectFolder.Size = new System.Drawing.Size(108, 29);
-            this.btnRFDSelectFolder.TabIndex = 43;
+            this.btnRFDSelectFolder.TabIndex = 45;
             this.btnRFDSelectFolder.Text = "Select Folder";
             this.btnRFDSelectFolder.UseVisualStyleBackColor = false;
             this.btnRFDSelectFolder.Click += new System.EventHandler(this.btnRFDSelectFolder_Click);
@@ -598,19 +608,54 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(207, 468);
+            this.lblHostTools.Location = new System.Drawing.Point(207, 459);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
-            this.lblHostTools.TabIndex = 47;
+            this.lblHostTools.TabIndex = 49;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFormat
+            // 
+            this.lblFormat.AutoSize = true;
+            this.lblFormat.Location = new System.Drawing.Point(402, 56);
+            this.lblFormat.Name = "lblFormat";
+            this.lblFormat.Size = new System.Drawing.Size(56, 17);
+            this.lblFormat.TabIndex = 41;
+            this.lblFormat.Text = "Format:";
+            // 
+            // cbFormat
+            // 
+            this.cbFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbFormat.ForeColor = System.Drawing.Color.White;
+            this.cbFormat.FormattingEnabled = true;
+            this.cbFormat.Items.AddRange(new object[] {
+            "",
+            "amiga.amigados",
+            "atarist.360",
+            "atarist.400",
+            "atarist.440",
+            "atarist.720",
+            "atarist.800",
+            "atarist.880",
+            "commodore.1581",
+            "ibm.1200",
+            "ibm.1440",
+            "ibm.180",
+            "ibm.360",
+            "ibm.720"});
+            this.cbFormat.Location = new System.Drawing.Point(483, 53);
+            this.cbFormat.Name = "cbFormat";
+            this.cbFormat.Size = new System.Drawing.Size(177, 24);
+            this.cbFormat.TabIndex = 42;
+            this.cbFormat.SelectedIndexChanged += new System.EventHandler(this.cbFormat_SelectedIndexChanged);
             // 
             // ReadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(781, 501);
+            this.ClientSize = new System.Drawing.Size(781, 495);
             this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gbReadFromDisk);
             this.ForeColor = System.Drawing.Color.White;
@@ -680,5 +725,7 @@ namespace Greaseweazle
         private System.Windows.Forms.CheckBox chkDriveRetriesRFD;
         private System.Windows.Forms.ComboBox cbExtension;
         private System.Windows.Forms.Label lblDiskType;
+        private System.Windows.Forms.Label lblFormat;
+        private System.Windows.Forms.ComboBox cbFormat;
     }
 }

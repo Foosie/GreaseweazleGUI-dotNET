@@ -71,6 +71,8 @@ namespace Greaseweazle
             this.chkDoubleStep = new System.Windows.Forms.CheckBox();
             this.toolTipWTD = new System.Windows.Forms.ToolTip(this.components);
             this.lblHostTools = new System.Windows.Forms.Label();
+            this.lblFormat = new System.Windows.Forms.Label();
+            this.cbFormat = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.gbDiskType.SuspendLayout();
             this.gbWriteToDisk.SuspendLayout();
@@ -96,21 +98,23 @@ namespace Greaseweazle
             // 
             // gbDiskType
             // 
+            this.gbDiskType.Controls.Add(this.lblFormat);
+            this.gbDiskType.Controls.Add(this.cbFormat);
             this.gbDiskType.Controls.Add(this.lblDiskType);
             this.gbDiskType.Controls.Add(this.cbExtension);
             this.gbDiskType.Location = new System.Drawing.Point(11, 209);
             this.gbDiskType.Name = "gbDiskType";
             this.gbDiskType.Size = new System.Drawing.Size(753, 61);
-            this.gbDiskType.TabIndex = 32;
+            this.gbDiskType.TabIndex = 26;
             this.gbDiskType.TabStop = false;
             // 
             // lblDiskType
             // 
             this.lblDiskType.AutoSize = true;
-            this.lblDiskType.Location = new System.Drawing.Point(185, 24);
+            this.lblDiskType.Location = new System.Drawing.Point(51, 24);
             this.lblDiskType.Name = "lblDiskType";
             this.lblDiskType.Size = new System.Drawing.Size(71, 17);
-            this.lblDiskType.TabIndex = 36;
+            this.lblDiskType.TabIndex = 27;
             this.lblDiskType.Text = "DiskType:";
             // 
             // cbExtension
@@ -119,16 +123,22 @@ namespace Greaseweazle
             this.cbExtension.ForeColor = System.Drawing.Color.White;
             this.cbExtension.FormattingEnabled = true;
             this.cbExtension.Items.AddRange(new object[] {
+            "",
             ".adf",
+            ".d81",
+            ".dsk",
+            ".img",
+            ".ima",
+            ".st",
             ".ipf",
             ".hfe",
             ".scp",
             ".scp::disktype=amiga",
             ".scp::disktype=c64"});
-            this.cbExtension.Location = new System.Drawing.Point(304, 21);
+            this.cbExtension.Location = new System.Drawing.Point(151, 21);
             this.cbExtension.Name = "cbExtension";
-            this.cbExtension.Size = new System.Drawing.Size(263, 24);
-            this.cbExtension.TabIndex = 37;
+            this.cbExtension.Size = new System.Drawing.Size(177, 24);
+            this.cbExtension.TabIndex = 28;
             this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
             // 
             // btnBack
@@ -137,7 +147,7 @@ namespace Greaseweazle
             this.btnBack.Location = new System.Drawing.Point(460, 366);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 30;
+            this.btnBack.TabIndex = 35;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -148,7 +158,7 @@ namespace Greaseweazle
             this.btnLaunch.Location = new System.Drawing.Point(334, 366);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 29;
+            this.btnLaunch.TabIndex = 34;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -159,7 +169,7 @@ namespace Greaseweazle
             this.btnWTDSelectFile.Location = new System.Drawing.Point(208, 366);
             this.btnWTDSelectFile.Name = "btnWTDSelectFile";
             this.btnWTDSelectFile.Size = new System.Drawing.Size(108, 29);
-            this.btnWTDSelectFile.TabIndex = 28;
+            this.btnWTDSelectFile.TabIndex = 33;
             this.btnWTDSelectFile.Text = "Select File";
             this.toolTipWTD.SetToolTip(this.btnWTDSelectFile, "HFE & IPF require Host Tools v0.13 or later");
             this.btnWTDSelectFile.UseVisualStyleBackColor = false;
@@ -169,11 +179,11 @@ namespace Greaseweazle
             // 
             this.txtWTDCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtWTDCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtWTDCommandLine.Location = new System.Drawing.Point(23, 301);
+            this.txtWTDCommandLine.Location = new System.Drawing.Point(11, 301);
             this.txtWTDCommandLine.Multiline = true;
             this.txtWTDCommandLine.Name = "txtWTDCommandLine";
-            this.txtWTDCommandLine.Size = new System.Drawing.Size(730, 56);
-            this.txtWTDCommandLine.TabIndex = 27;
+            this.txtWTDCommandLine.Size = new System.Drawing.Size(753, 56);
+            this.txtWTDCommandLine.TabIndex = 32;
             // 
             // lblStaticCL
             // 
@@ -181,7 +191,7 @@ namespace Greaseweazle
             this.lblStaticCL.Location = new System.Drawing.Point(337, 277);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
-            this.lblStaticCL.TabIndex = 26;
+            this.lblStaticCL.TabIndex = 31;
             this.lblStaticCL.Text = "Command Line";
             // 
             // gbWriteToDisk
@@ -439,9 +449,44 @@ namespace Greaseweazle
             this.lblHostTools.Location = new System.Drawing.Point(209, 420);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
-            this.lblHostTools.TabIndex = 31;
+            this.lblHostTools.TabIndex = 36;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFormat
+            // 
+            this.lblFormat.AutoSize = true;
+            this.lblFormat.Location = new System.Drawing.Point(424, 24);
+            this.lblFormat.Name = "lblFormat";
+            this.lblFormat.Size = new System.Drawing.Size(56, 17);
+            this.lblFormat.TabIndex = 29;
+            this.lblFormat.Text = "Format:";
+            // 
+            // cbFormat
+            // 
+            this.cbFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbFormat.ForeColor = System.Drawing.Color.White;
+            this.cbFormat.FormattingEnabled = true;
+            this.cbFormat.Items.AddRange(new object[] {
+            "",
+            "amiga.amigados",
+            "atarist.360",
+            "atarist.400",
+            "atarist.440",
+            "atarist.720",
+            "atarist.800",
+            "atarist.880",
+            "commodore.1581",
+            "ibm.1200",
+            "ibm.1440",
+            "ibm.180",
+            "ibm.360",
+            "ibm.720"});
+            this.cbFormat.Location = new System.Drawing.Point(523, 21);
+            this.cbFormat.Name = "cbFormat";
+            this.cbFormat.Size = new System.Drawing.Size(177, 24);
+            this.cbFormat.TabIndex = 30;
+            this.cbFormat.SelectedIndexChanged += new System.EventHandler(this.cbFormat_SelectedIndexChanged);
             // 
             // WriteForm
             // 
@@ -505,5 +550,7 @@ namespace Greaseweazle
         private System.Windows.Forms.GroupBox gbDiskType;
         private System.Windows.Forms.Label lblDiskType;
         private System.Windows.Forms.ComboBox cbExtension;
+        private System.Windows.Forms.Label lblFormat;
+        private System.Windows.Forms.ComboBox cbFormat;
     }
 }
