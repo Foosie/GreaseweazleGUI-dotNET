@@ -42,6 +42,8 @@ namespace Greaseweazle
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReadForm));
             this.gbReadFromDisk = new System.Windows.Forms.GroupBox();
             this.gbFilename = new System.Windows.Forms.GroupBox();
+            this.lblFormat = new System.Windows.Forms.Label();
+            this.cbFormat = new System.Windows.Forms.ComboBox();
             this.lblDiskType = new System.Windows.Forms.Label();
             this.cbExtension = new System.Windows.Forms.ComboBox();
             this.chkAutoInc = new System.Windows.Forms.CheckBox();
@@ -83,8 +85,6 @@ namespace Greaseweazle
             this.txtRevsPerTrack = new System.Windows.Forms.TextBox();
             this.toolTipRFD = new System.Windows.Forms.ToolTip(this.components);
             this.lblHostTools = new System.Windows.Forms.Label();
-            this.lblFormat = new System.Windows.Forms.Label();
-            this.cbFormat = new System.Windows.Forms.ComboBox();
             this.gbReadFromDisk.SuspendLayout();
             this.gbFilename.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -128,6 +128,49 @@ namespace Greaseweazle
             this.gbFilename.TabIndex = 31;
             this.gbFilename.TabStop = false;
             // 
+            // lblFormat
+            // 
+            this.lblFormat.AutoSize = true;
+            this.lblFormat.Location = new System.Drawing.Point(402, 56);
+            this.lblFormat.Name = "lblFormat";
+            this.lblFormat.Size = new System.Drawing.Size(56, 17);
+            this.lblFormat.TabIndex = 41;
+            this.lblFormat.Text = "Format:";
+            // 
+            // cbFormat
+            // 
+            this.cbFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbFormat.ForeColor = System.Drawing.Color.White;
+            this.cbFormat.FormattingEnabled = true;
+            this.cbFormat.Items.AddRange(new object[] {
+            "",
+            "acorn.dfs.ss",
+            "acorn.dfs.ds",
+            "acorn.adfs.160",
+            "acorn.adfs.320",
+            "acorn.adfs.640",
+            "acorn.adfs.800",
+            "acorn.adfs.1600",
+            "amiga.amigados",
+            "amiga.amigados_hd",
+            "atarist.360",
+            "atarist.400",
+            "atarist.440",
+            "atarist.720",
+            "atarist.800",
+            "atarist.880",
+            "commodore.1581",
+            "ibm.180",
+            "ibm.360",
+            "ibm.720",
+            "ibm.1200",
+            "ibm.1440"});
+            this.cbFormat.Location = new System.Drawing.Point(483, 53);
+            this.cbFormat.Name = "cbFormat";
+            this.cbFormat.Size = new System.Drawing.Size(177, 24);
+            this.cbFormat.TabIndex = 42;
+            this.cbFormat.SelectedIndexChanged += new System.EventHandler(this.cbFormat_SelectedIndexChanged);
+            // 
             // lblDiskType
             // 
             this.lblDiskType.AutoSize = true;
@@ -145,16 +188,21 @@ namespace Greaseweazle
             this.cbExtension.Items.AddRange(new object[] {
             "",
             ".adf",
+            ".ads",
+            ".adm",
+            ".adl",
             ".d81",
+            ".dsd",
             ".dsk",
+            ".hfe",
             ".img",
             ".ima",
-            ".st",
-            ".ipf",
-            ".hfe",
             ".scp",
             ".scp::disktype=amiga",
-            ".scp::disktype=c64"});
+            ".scp::disktype=c64",
+            ".ssd",
+            ".st",
+            ".ipf"});
             this.cbExtension.Location = new System.Drawing.Point(185, 53);
             this.cbExtension.Name = "cbExtension";
             this.cbExtension.Size = new System.Drawing.Size(177, 24);
@@ -614,41 +662,6 @@ namespace Greaseweazle
             this.lblHostTools.TabIndex = 49;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblFormat
-            // 
-            this.lblFormat.AutoSize = true;
-            this.lblFormat.Location = new System.Drawing.Point(402, 56);
-            this.lblFormat.Name = "lblFormat";
-            this.lblFormat.Size = new System.Drawing.Size(56, 17);
-            this.lblFormat.TabIndex = 41;
-            this.lblFormat.Text = "Format:";
-            // 
-            // cbFormat
-            // 
-            this.cbFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.cbFormat.ForeColor = System.Drawing.Color.White;
-            this.cbFormat.FormattingEnabled = true;
-            this.cbFormat.Items.AddRange(new object[] {
-            "",
-            "amiga.amigados",
-            "atarist.360",
-            "atarist.400",
-            "atarist.440",
-            "atarist.720",
-            "atarist.800",
-            "atarist.880",
-            "commodore.1581",
-            "ibm.1200",
-            "ibm.1440",
-            "ibm.180",
-            "ibm.360",
-            "ibm.720"});
-            this.cbFormat.Location = new System.Drawing.Point(483, 53);
-            this.cbFormat.Name = "cbFormat";
-            this.cbFormat.Size = new System.Drawing.Size(177, 24);
-            this.cbFormat.TabIndex = 42;
-            this.cbFormat.SelectedIndexChanged += new System.EventHandler(this.cbFormat_SelectedIndexChanged);
             // 
             // ReadForm
             // 

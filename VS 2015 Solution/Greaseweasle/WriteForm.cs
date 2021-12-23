@@ -305,7 +305,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sWriteDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "Images|*.scp;*.hfe;*.adf;*.ipf;*.dsk|All files (*.*)|*.*";
+            openDialog.Filter = "Images|*.adf;*.adl;*.adm;*.ads;*.dsd;*.dsk;*.hfe;*.ipf;*.scp;*.ssd|All files (*.*)|*.*";
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 m_sWTDFilename = openDialog.SafeFileName;
@@ -482,8 +482,8 @@ namespace Greaseweazle
         private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
         {
             m_sWTDFilename = removeDiskType(m_sWTDFilename, true) + cbExtension.Text;
-            if (cbExtension.Text != ".ipf")
-                cbFormat.SelectedIndex = 0;
+            //if (cbExtension.Text != ".ipf")
+                //cbFormat.SelectedIndex = 0;
             CreateCommandLine();
         }
         #endregion 

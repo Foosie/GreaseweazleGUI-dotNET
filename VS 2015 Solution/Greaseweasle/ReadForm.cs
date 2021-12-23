@@ -387,8 +387,8 @@ namespace Greaseweazle
         private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
         {
             tbFilename.Text = removeDiskType(this.tbFilename.Text, true) + cbExtension.Text;
-            if (cbExtension.Text != ".ipf")
-                cbFormat.SelectedIndex = 0;
+            //if (cbExtension.Text != ".ipf")
+                //cbFormat.SelectedIndex = 0;
             CreateCommandLine();
         }
 
@@ -457,7 +457,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sReadDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "Images|*.scp;*.hfe;*.adf;*.ipf|All files (*.*)|*.*";
+            openDialog.Filter = "Images|*.adf;*.adl;*.adm;*.ads;*.dsd;*.dsk;*.hfe;*.ipf;*.scp;*.ssd|All files (*.*)|*.*";
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
