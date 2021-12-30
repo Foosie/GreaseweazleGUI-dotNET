@@ -457,7 +457,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sReadDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "Images|*.adf;*.adl;*.adm;*.ads;*.dsd;*.dsk;*.hfe;*.ipf;*.scp;*.ssd|All files (*.*)|*.*";
+            openDialog.Filter = "Images|*.adf;*.adl;*.adm;*.ads;*.dsd;*.dsk;*.hfe;*.ipf;*.scp;*.sf7;*.ssd|All files (*.*)|*.*";
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {

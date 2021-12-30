@@ -140,6 +140,7 @@ namespace Greaseweazle
             "atarist.800",
             "atarist.880",
             "commodore.1581",
+            "sega.sf7",
             "ibm.180",
             "ibm.360",
             "ibm.720",
@@ -180,6 +181,7 @@ namespace Greaseweazle
             ".scp",
             ".scp::disktype=amiga",
             ".scp::disktype=c64",
+            ".sf7",
             ".ssd",
             ".st",
             ".ipf"});
