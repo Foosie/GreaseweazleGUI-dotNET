@@ -40,7 +40,6 @@ namespace Greaseweazle
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateForm));
-            this.btnSelectUpdateFile = new System.Windows.Forms.Button();
             this.btnLaunch = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.lblStaticCL = new System.Windows.Forms.Label();
@@ -54,21 +53,10 @@ namespace Greaseweazle
             this.gb1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnSelectUpdateFile
-            // 
-            this.btnSelectUpdateFile.BackColor = System.Drawing.Color.Maroon;
-            this.btnSelectUpdateFile.Location = new System.Drawing.Point(80, 238);
-            this.btnSelectUpdateFile.Name = "btnSelectUpdateFile";
-            this.btnSelectUpdateFile.Size = new System.Drawing.Size(108, 29);
-            this.btnSelectUpdateFile.TabIndex = 6;
-            this.btnSelectUpdateFile.Text = "Select File";
-            this.btnSelectUpdateFile.UseVisualStyleBackColor = false;
-            this.btnSelectUpdateFile.Click += new System.EventHandler(this.btnSelectUpdateFile_Click);
-            // 
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(214, 238);
+            this.btnLaunch.Location = new System.Drawing.Point(151, 238);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 7;
@@ -79,7 +67,7 @@ namespace Greaseweazle
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(348, 238);
+            this.btnBack.Location = new System.Drawing.Point(285, 238);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 8;
@@ -103,7 +91,6 @@ namespace Greaseweazle
             this.gbUpdateFirmware.Controls.Add(this.lblStaticCL);
             this.gbUpdateFirmware.Controls.Add(this.btnBack);
             this.gbUpdateFirmware.Controls.Add(this.btnLaunch);
-            this.gbUpdateFirmware.Controls.Add(this.btnSelectUpdateFile);
             this.gbUpdateFirmware.Location = new System.Drawing.Point(12, 12);
             this.gbUpdateFirmware.Name = "gbUpdateFirmware";
             this.gbUpdateFirmware.Size = new System.Drawing.Size(545, 284);
@@ -177,8 +164,6 @@ namespace Greaseweazle
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnSelectUpdateFile;
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label lblStaticCL;

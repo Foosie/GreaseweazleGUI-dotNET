@@ -108,7 +108,6 @@ namespace Greaseweazle
             this.lblHostTools.Text = ChooserForm.m_sStatusLine;
             this.BackColor = ChooserForm.cChocolate;
             this.txtUpdateCommandLine.BackColor = ChooserForm.cLightBrown;
-            this.btnSelectUpdateFile.BackColor = ChooserForm.cDarkBrown;
             this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
             this.btnBack.BackColor = ChooserForm.cDarkBrown;
 
@@ -138,8 +137,6 @@ namespace Greaseweazle
                 txtUpdateCommandLine.Text += " --bootloader";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtUpdateCommandLine.Text += " --device=" + m_sUSBPort;
-            if (chkBootLoader.Checked == false)
-                txtUpdateCommandLine.Text += " \"" + m_sUpdateFolder + "\\" + m_sUpdateFilename + "\"";
         }
         #endregion
 

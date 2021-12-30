@@ -63,7 +63,7 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        public static string m_sStatusLine = "for Host Tools v0.33";
+        public static string m_sStatusLine = "for Host Tools v0.34";
         public static Color cChocolate = Color.FromArgb(100, 82, 72);
         public static Color cLightBrown = Color.FromArgb(150, 114, 93);
         public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
