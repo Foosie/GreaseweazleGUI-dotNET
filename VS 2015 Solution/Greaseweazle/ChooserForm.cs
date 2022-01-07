@@ -441,18 +441,8 @@ namespace Greaseweazle
             if (m.Msg == WM_CLOSE)
             {
                 // only allow one instance at a time
-                Process[] processlist = Process.GetProcesses();
-                foreach (Process theprocess in processlist)
-                {
-                    if (theprocess.Id > 0)
-                    {
-                        if (ChooserForm.m_ProcessId == theprocess.Id)
-                        {
-                            System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
-                            return;
-                        }
-                    }
-                }
+                if (existsGWProcess())
+                    return;
 
                 // write inifile
                 iniWriteFile();
@@ -473,18 +463,8 @@ namespace Greaseweazle
         private void btnClose_Click(object sender, EventArgs e)
         {
             // only allow one instance at a time
-            Process[] processlist = Process.GetProcesses();
-            foreach (Process theprocess in processlist)
-            {
-                if (theprocess.Id > 0)
-                {
-                    if (ChooserForm.m_ProcessId == theprocess.Id)
-                    {
-                        System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
-                        return;
-                    }
-                }
-            }
+            if (existsGWProcess())
+                return;
 
             // save our profile
             iniWriteFile();
@@ -996,7 +976,10 @@ namespace Greaseweazle
         #region mnuUseCmdConsole_Click
         private void mnuUseCmdConsole_Click(object sender, EventArgs e)
         {
-            m_bUseCmdConsole = mnuUseCmdConsole.Checked = !mnuUseCmdConsole.Checked;
+            if (existsGWProcess())
+                return;
+            else
+                m_bUseCmdConsole = mnuUseCmdConsole.Checked = !mnuUseCmdConsole.Checked;
         }
         #endregion
 
@@ -1049,6 +1032,72 @@ namespace Greaseweazle
                         writer.WriteLine(lb.Items[i].ToString());
                 }
             }
+        }
+        #endregion
+
+        #region existsGWProcess
+        public static Boolean existsGWProcess()
+        {
+            // only allow one instance at a time
+            Process[] processlist = Process.GetProcesses();
+            foreach (Process theprocess in processlist)
+            {
+                if (theprocess.Id > 0)
+                {
+                    if (ChooserForm.m_ProcessId == theprocess.Id)
+                    {
+                        if (m_bUseCmdConsole)
+                            System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
+                        else
+                            System.Windows.Forms.MessageBox.Show("You must let the disk operation complete", "Oops!");
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        #endregion
+
+        #region createCmdConsole
+        public static void createCmdConsole(string args)
+        {
+            // hide main form
+            if (m_frmChooser.Visible == true)
+                m_frmChooser.Hide();
+
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.CreateNoWindow = false;
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = "C:\\WINDOWS\\SYSTEM32\\cmd.exe";
+            startInfo.WindowStyle = ProcessWindowStyle.Normal;
+            startInfo.Arguments = args;
+            try
+            {
+                Process exeProcess = Process.Start(startInfo);
+                ChooserForm.m_ProcessId = exeProcess.Id;
+            }
+            catch (Exception e)
+            {
+                string sMessage = e.Message.ToString();
+                MessageBox.Show("An error has occured\n" + sMessage, "Oops!");
+            }
+        }
+        #endregion
+
+        #region confirmCloseProcess
+        public static Boolean confirmCloseProcess(Button btnLaunch)
+        {
+            // hide main form
+            if (m_frmChooser.Visible == true)
+                m_frmChooser.Hide();
+
+            // the process thread is running if eithger button is disabled
+            if (btnLaunch.Enabled == true)
+                return true; // allow close
+
+            // abort close
+            System.Windows.Forms.MessageBox.Show("You must let the disk operation complete", "Oops!");
+            return false;
         }
         #endregion
     }

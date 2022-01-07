@@ -52,7 +52,7 @@ namespace Greaseweazle
         private void btnBack_Click(object sender, EventArgs e)
         {
             iniWriteFile();
-            m_frmChooser.Show();
+            //m_frmChooser.Show();
             this.Close();
         }
         #endregion
@@ -133,36 +133,11 @@ namespace Greaseweazle
         private void LaunchPython()
         {
             // only allow one instance at a time
-            Process[] processlist = Process.GetProcesses();
-            foreach (Process theprocess in processlist)
-            {
-                if (theprocess.Id > 0)
-                {
-                    if (ChooserForm.m_ProcessId == theprocess.Id)
-                    {
-                        System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
-                        return;
-                    }
-                }
-            }
+            if (ChooserForm.existsGWProcess())
+                return;
 
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.CreateNoWindow = false;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = "C:\\WINDOWS\\SYSTEM32\\cmd.exe";
-            startInfo.WindowStyle = ProcessWindowStyle.Normal;
-            txtCommandLine.Text = txtCommandLine.Text.Trim(); // remove empty usb port if it exists
-            startInfo.Arguments = "/K " + "\"" + txtCommandLine.Text + "\"";
-            try
-            {
-                Process exeProcess = Process.Start(startInfo);
-                ChooserForm.m_ProcessId = exeProcess.Id;
-            }
-            catch (Exception e)
-            {
-                string sMessage = e.Message.ToString();
-                MessageBox.Show(this, "An error has occured\n" + sMessage, "Oops!");
-            }
+            // create the command console
+            ChooserForm.createCmdConsole("/K " + "\"" + txtCommandLine.Text + "\"");
         }
         #endregion
 
@@ -203,6 +178,7 @@ namespace Greaseweazle
             proc.OutputDataReceived += new DataReceivedEventHandler(process_OutputDataReceived);
 
             proc.Start();
+            ChooserForm.m_ProcessId = proc.Id;
 
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();

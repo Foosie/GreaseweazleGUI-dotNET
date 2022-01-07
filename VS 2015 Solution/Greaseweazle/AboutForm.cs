@@ -53,7 +53,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked.");
+                MessageBox.Show("Unable to open link that was clicked");
             }
         }
 
@@ -66,7 +66,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked.");
+                MessageBox.Show("Unable to open link that was clicked");
             }
         }
 
@@ -79,7 +79,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked.");
+                MessageBox.Show("Unable to open link that was clicked");
             }
         }
 
@@ -92,7 +92,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked.");
+                MessageBox.Show("Unable to open link that was clicked");
             }
         }
 
@@ -105,7 +105,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked.");
+                MessageBox.Show("Unable to open link that was clicked");
             }
         }
         #region ProcessCmdKey

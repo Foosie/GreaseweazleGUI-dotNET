@@ -698,14 +698,14 @@ namespace Greaseweazle
             this.ctxClearOutput,
             this.ctxSaveOutput});
             this.ctxOutput.Name = "ctxOutput";
-            this.ctxOutput.Size = new System.Drawing.Size(176, 80);
+            this.ctxOutput.Size = new System.Drawing.Size(163, 52);
             // 
             // ctxClearOutput
             // 
             this.ctxClearOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ctxClearOutput.ForeColor = System.Drawing.Color.White;
             this.ctxClearOutput.Name = "ctxClearOutput";
-            this.ctxClearOutput.Size = new System.Drawing.Size(175, 24);
+            this.ctxClearOutput.Size = new System.Drawing.Size(162, 24);
             this.ctxClearOutput.Text = "Clear Output";
             this.ctxClearOutput.Click += new System.EventHandler(this.ctxClearOutput_Click);
             // 
@@ -714,7 +714,7 @@ namespace Greaseweazle
             this.ctxSaveOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ctxSaveOutput.ForeColor = System.Drawing.Color.White;
             this.ctxSaveOutput.Name = "ctxSaveOutput";
-            this.ctxSaveOutput.Size = new System.Drawing.Size(175, 24);
+            this.ctxSaveOutput.Size = new System.Drawing.Size(162, 24);
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
