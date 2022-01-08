@@ -36,6 +36,8 @@ namespace Greaseweazle
         private Form m_frmInfo = null;
         private Form m_frmClean = null;
         private Form m_frmSeek = null;
+        private Form m_frmRPM = null;
+        private Form m_frmConvert = null;
         private Form m_frmPicture = null;
         public static string m_sExeDir = "";
         public string m_action = "read";
@@ -44,7 +46,8 @@ namespace Greaseweazle
         public static Boolean m_bWindowsEXE = false;
         public static Boolean m_bElapsedTime = false;
         public static Boolean m_bUseCmdConsole = true;
-        public static string m_sConsoleMsg = "            Using CMD Console mode";
+        //public static string m_sConsoleMsg = "            Using CMD Console mode";
+        public static string m_sConsoleMsg = "     Enhancement due Host Tools v0.37";
         public static string m_sGWscript = "gw.py";
         public static string m_sUSBPort = "UNKNOWN";
         public static string m_sIniFile = ".\\GreaseweazleGUI.ini";
@@ -55,7 +58,7 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        public static string m_sStatusLine = "for Host Tools v0.35";
+        public static string m_sStatusLine = "for Host Tools v0.36";
         public static Color cChocolate = Color.FromArgb(100, 82, 72);
         public static Color cLightBrown = Color.FromArgb(150, 114, 93);
         public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
@@ -110,6 +113,8 @@ namespace Greaseweazle
             m_frmInfo = new InfoForm(this);
             m_frmClean = new CleanForm(this);
             m_frmSeek = new SeekForm(this);
+            m_frmRPM = new RPMForm(this);
+            m_frmConvert = new ConvertForm(this);
             m_frmPicture = new PictureForm(this);
 
             // get version from Project, GreaseweaselGUI Properties, Assembly Information
@@ -284,6 +289,16 @@ namespace Greaseweazle
                 if (sRet == "True")
                     rbSeekCyl.Checked = true;
             }
+            if ((sRet = (m_Ini.IniReadValue("gbAction", "rbConvert", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbConvert.Checked = true;
+            }
+            if ((sRet = (m_Ini.IniReadValue("gbAction", "rbRPMspindle", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    rbRPMspindle.Checked = true;
+            }
 
             // usb port
             if ((sRet = (m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -376,6 +391,8 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbAction", "rbInfo", (rbInfo.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbCleanHeads", (rbCleanHeads.Checked == true).ToString());
             m_Ini.IniWriteValue("gbAction", "rbSeekCyl", (rbSeekCyl.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbAction", "rbConvert", (rbConvert.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbAction", "rbRPMspindle", (rbRPMspindle.Checked == true).ToString());
 
             // usb port
             m_Ini.IniWriteValue("gbUSBPorts", "mnuUSBSupport", (mnuUSBSupport.Checked == true).ToString());
@@ -690,6 +707,32 @@ namespace Greaseweazle
                         m_frmSeek.ShowDialog(this);
                     }
                     break;
+                case "rpm":
+                    if (m_frmRPM.Visible)
+                    {
+                        m_frmRPM.WindowState = FormWindowState.Normal;
+                        m_frmRPM.BringToFront();
+                    }
+                    else
+                    {
+                        m_frmRPM.Dispose();
+                        m_frmRPM = new RPMForm(this);
+                        m_frmRPM.ShowDialog(this);
+                    }
+                    break;
+                case "convert":
+                    if (m_frmConvert.Visible)
+                    {
+                        m_frmConvert.WindowState = FormWindowState.Normal;
+                        m_frmConvert.BringToFront();
+                    }
+                    else
+                    {
+                        m_frmConvert.Dispose();
+                        m_frmConvert = new ConvertForm(this);
+                        m_frmConvert.ShowDialog(this);
+                    }
+                    break;
             }
         }
         #endregion
@@ -995,8 +1038,8 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region mnuCreateShortcut_Click_1
-        private void mnuCreateShortcut_Click_1(object sender, EventArgs e)
+        #region mnuCreateShortcut_Click
+        private void mnuCreateShortcut_Click(object sender, EventArgs e)
         {
             CreateShortcut("GreaseweazleGUI", Environment.GetFolderPath(Environment.SpecialFolder.Desktop), Assembly.GetExecutingAssembly().Location);
         }
@@ -1098,6 +1141,22 @@ namespace Greaseweazle
             // abort close
             System.Windows.Forms.MessageBox.Show("You must let the disk operation complete", "Oops!");
             return false;
+        }
+        #endregion
+
+        #region rbRPMspindle_CheckedChanged
+        private void rbRPMspindle_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbRPMspindle.Checked == true)
+                m_action = "rpm";
+        }
+        #endregion
+
+        #region rbConvert_CheckedChanged
+        private void rbConvert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbConvert.Checked == true)
+                m_action = "convert";
         }
         #endregion
     }

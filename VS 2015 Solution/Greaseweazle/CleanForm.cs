@@ -16,12 +16,14 @@ namespace Greaseweazle
 {
     public partial class CleanForm : Form
     {
+        #region declarations
         private const int WM_CLOSE = 0x0010;
         private Form m_frmChooser = null;
         private string m_sUSBPort = "UNKNOWN";
         private bool m_bUSBSupport = false;
         private bool m_bWindowsEXE = false;
         private bool m_bElapsedTime = false;
+        #endregion
 
         #region ResetForm
         public CleanForm(ChooserForm newForm)
@@ -151,8 +153,8 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region CreateCommandLine
-        private void CreateCommandLine()
+        #region OldCreateCommandLine
+        private void OldCreateCommandLine()
         {
 
             if (true == m_bWindowsEXE)
@@ -167,11 +169,51 @@ namespace Greaseweazle
         }
         #endregion
 
+        #region CreateCommandLine
+        private void CreateCommandLine()
+        {
+            string sTracks = " --tracks=";
+
+            if (true == m_bWindowsEXE)
+                txtCleanCommandLine.Text = "gw.exe";
+            else
+                txtCleanCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
+            if (true == m_bElapsedTime)
+                txtCleanCommandLine.Text += " --time";
+            txtCleanCommandLine.Text += " erase";
+            if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
+                txtCleanCommandLine.Text += " --drive=" + txtDriveSelect.Text;
+            if (chkPasses.Checked == true)
+                txtCleanCommandLine.Text += " --passes=" + txtPasses.Text;
+            if (chkLinger.Checked == true)
+                txtCleanCommandLine.Text += " --linger=" + txtLinger.Text;
+            if (chkCylSet.Checked == true)
+                sTracks += " c=" + txtCylSet.Text + ":";
+            if (sTracks != " --tracks=")
+            {
+                if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
+                    sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
+                txtCleanCommandLine.Text += sTracks;
+            }
+
+            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+                txtCleanCommandLine.Text += " --device=" + m_sUSBPort;
+        }
+        #endregion
+
         #region iniWriteFile
         public void iniWriteFile()
         {
             // reset controller
             ChooserForm.m_Ini.IniWriteValue("gbClean", "txtCleanCommandLine", txtCleanCommandLine.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "chkCylSet", (chkCylSet.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "txtCylSet", txtCylSet.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "txtDriveSelect", txtDriveSelect.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "txtPasses", txtPasses.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "chkPasses", (chkPasses.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "txtLinger", txtLinger.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbClean", "chkLinger", (chkLinger.Checked == true).ToString());
         }
         #endregion
 
@@ -179,6 +221,35 @@ namespace Greaseweazle
         public void iniReadFile()
         {
             string sRet;
+
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "chkCylSet", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkCylSet.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "txtCylSet", "garbage").Trim())) != "garbage")
+                txtCylSet.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "txtDriveSelect", "garbage").Trim())) != "garbage")
+                txtDriveSelect.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "chkDriveSelect", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDriveSelect.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "chkPasses", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkPasses.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "txtPasses", "garbage").Trim())) != "garbage")
+                txtPasses.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "chkLinger", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkLinger.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbClean", "txtLinger", "garbage").Trim())) != "garbage")
+                txtLinger.Text = sRet;
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -222,6 +293,10 @@ namespace Greaseweazle
             iniReadFile();
 
             // set colors
+            this.txtPasses.BackColor = ChooserForm.cLightBrown;
+            this.txtLinger.BackColor = ChooserForm.cLightBrown;
+            this.txtCylSet.BackColor = ChooserForm.cLightBrown;
+            this.txtDriveSelect.BackColor = ChooserForm.cLightBrown;
             this.lbOutput.BackColor = ChooserForm.cLightBrown;
             this.ctxClearOutput.BackColor = ChooserForm.cDarkBrown;
             this.ctxSaveOutput.BackColor = ChooserForm.cDarkBrown;
@@ -273,6 +348,50 @@ namespace Greaseweazle
             if ((btnLaunch.Enabled == true) && (ChooserForm.m_bUseCmdConsole == false))
                 ChooserForm.saveLbItemsToFile(lbOutput);
         }
+        #endregion
+
+        #region Changed
+
+        private void chkCylSet_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtCylSet_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkLinger_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtLinger_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkDriveSelect_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtDriveSelect_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkPasses_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtPasses_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
     }
 }

@@ -86,6 +86,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkFlippyOffset", (chkFlippyOffset.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbFlippyPanasonic", (rbFlippyPanasonic.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbFlippyTeac", (rbFlippyTeac.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
         }
         #endregion
 
@@ -167,6 +168,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     rbFlippyTeac.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkHeadSwap", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkHeadSwap.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -185,7 +191,7 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            string sTrack = " --track=";
+            string sTracks = " --tracks=";
             if (true == m_bWindowsEXE)
                 txtWTDCommandLine.Text = "gw.exe";
             else
@@ -193,34 +199,36 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtWTDCommandLine.Text += " --time";
             txtWTDCommandLine.Text += " write";
+            if (cbFormat.Text.Length > 0)
+                txtWTDCommandLine.Text += " --format " + cbFormat.Text;
             if (chkRetries.Checked == true)
                 txtWTDCommandLine.Text += " --retries=" + txtRetries.Text;
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
                 txtWTDCommandLine.Text += " --drive=" + txtDriveSelectWTD.Text;
             if (chkPrecomp.Checked == true)
                 txtWTDCommandLine.Text += " --precomp=" + txtPrecomp.Text;
-            if (cbFormat.Text.Length > 0)
-                txtWTDCommandLine.Text += " --format " + cbFormat.Text;
             if (chkDoubleStep.Checked == true)
-                sTrack += "step=" + txtDoubleStep.Text + ":";
+                sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkEraseEmpty.Checked == true)
                 txtWTDCommandLine.Text += " --erase-empty";
-            if (chkHeadsSet.Checked == true)
-                sTrack += "h=" + txtHeadsSet.Text + ":";
             if (chkCylSet.Checked == true)
-                sTrack += "c=" + txtCylSet.Text + ":";
+                sTracks += "c=" + txtCylSet.Text + ":";
+            if (chkHeadsSet.Checked == true)
+                sTracks += "h=" + txtHeadsSet.Text + ":";
+            if (chkHeadSwap.Checked == true)
+                sTracks += "hswap:";
             if (chkFlippyOffset.Checked == true)
             {
                 if (rbFlippyTeac.Checked == true)
-                    sTrack += "h0.off=+8:";
+                    sTracks += "h0.off=+8:";
                 else if (rbFlippyPanasonic.Checked == true)
-                    sTrack += "h1.off=-8:";
+                    sTracks += "h1.off=-8:";
             }
-            if (sTrack != " --track=")
+            if (sTracks != " --tracks=")
             {
-                if (sTrack.Substring(sTrack.Length - 1, 1) == ":") // remove trailing colon
-                    sTrack = sTrack.Remove(sTrack.Length - 1, 1); ;
-                txtWTDCommandLine.Text += sTrack;
+                if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
+                    sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
+                txtWTDCommandLine.Text += sTracks;
             }
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtWTDCommandLine.Text += " --device=" + m_sUSBPort;
@@ -408,7 +416,6 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-
         private void chkWTDAdjustSpeed_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
@@ -506,13 +513,17 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-
         private void chkRetries_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
 
         private void txtRetries_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkHeadSwap_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

@@ -158,7 +158,6 @@ namespace Greaseweazle
             this.gbEraseDisk.Size = new System.Drawing.Size(512, 143);
             this.gbEraseDisk.TabIndex = 2;
             this.gbEraseDisk.TabStop = false;
-            this.gbEraseDisk.Enter += new System.EventHandler(this.gbEraseDisk_Enter);
             // 
             // chkMotorOn
             // 

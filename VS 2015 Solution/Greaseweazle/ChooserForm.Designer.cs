@@ -62,6 +62,7 @@ namespace Greaseweazle
             this.rbSeekCyl = new System.Windows.Forms.RadioButton();
             this.pbGWsmall = new System.Windows.Forms.PictureBox();
             this.rbCleanHeads = new System.Windows.Forms.RadioButton();
+            this.rbRPMspindle = new System.Windows.Forms.RadioButton();
             this.gbActionSelect = new System.Windows.Forms.GroupBox();
             this.rbReadDisk = new System.Windows.Forms.RadioButton();
             this.rbUpdateFirmware = new System.Windows.Forms.RadioButton();
@@ -73,6 +74,7 @@ namespace Greaseweazle
             this.lbUSBPorts = new System.Windows.Forms.ListBox();
             this.gbAction = new System.Windows.Forms.GroupBox();
             this.lblHostTools = new System.Windows.Forms.Label();
+            this.rbConvert = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGWsmall)).BeginInit();
             this.gbActionSelect.SuspendLayout();
@@ -112,7 +114,7 @@ namespace Greaseweazle
             this.mnuProfileNew.BackColor = System.Drawing.SystemColors.Control;
             this.mnuProfileNew.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mnuProfileNew.Name = "mnuProfileNew";
-            this.mnuProfileNew.Size = new System.Drawing.Size(181, 26);
+            this.mnuProfileNew.Size = new System.Drawing.Size(140, 26);
             this.mnuProfileNew.Text = "-New-";
             this.mnuProfileNew.Click += new System.EventHandler(this.mnuProfileNew_Click);
             // 
@@ -121,7 +123,7 @@ namespace Greaseweazle
             this.mnuDelete.BackColor = System.Drawing.SystemColors.Control;
             this.mnuDelete.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(181, 26);
+            this.mnuDelete.Size = new System.Drawing.Size(140, 26);
             this.mnuDelete.Text = "-Delete-";
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
@@ -197,12 +199,12 @@ namespace Greaseweazle
             this.mnuCreateShortcut.Name = "mnuCreateShortcut";
             this.mnuCreateShortcut.Size = new System.Drawing.Size(123, 24);
             this.mnuCreateShortcut.Text = "Create Shortcut";
-            this.mnuCreateShortcut.Click += new System.EventHandler(this.mnuCreateShortcut_Click_1);
+            this.mnuCreateShortcut.Click += new System.EventHandler(this.mnuCreateShortcut_Click);
             // 
             // rbSetDelays
             // 
             this.rbSetDelays.AutoSize = true;
-            this.rbSetDelays.Location = new System.Drawing.Point(342, 48);
+            this.rbSetDelays.Location = new System.Drawing.Point(342, 75);
             this.rbSetDelays.Name = "rbSetDelays";
             this.rbSetDelays.Size = new System.Drawing.Size(97, 21);
             this.rbSetDelays.TabIndex = 12;
@@ -280,7 +282,7 @@ namespace Greaseweazle
             // rbSeekCyl
             // 
             this.rbSeekCyl.AutoSize = true;
-            this.rbSeekCyl.Location = new System.Drawing.Point(342, 21);
+            this.rbSeekCyl.Location = new System.Drawing.Point(342, 48);
             this.rbSeekCyl.Name = "rbSeekCyl";
             this.rbSeekCyl.Size = new System.Drawing.Size(116, 21);
             this.rbSeekCyl.TabIndex = 11;
@@ -315,8 +317,23 @@ namespace Greaseweazle
             this.rbCleanHeads.UseVisualStyleBackColor = true;
             this.rbCleanHeads.CheckedChanged += new System.EventHandler(this.rbCleanHeads_CheckedChanged);
             // 
+            // rbRPMspindle
+            // 
+            this.rbRPMspindle.AutoSize = true;
+            this.rbRPMspindle.Location = new System.Drawing.Point(342, 21);
+            this.rbRPMspindle.Name = "rbRPMspindle";
+            this.rbRPMspindle.Size = new System.Drawing.Size(126, 21);
+            this.rbRPMspindle.TabIndex = 14;
+            this.rbRPMspindle.TabStop = true;
+            this.rbRPMspindle.Text = "RPM of Spindle";
+            this.toolTipChooser.SetToolTip(this.rbRPMspindle, "Host Tools v0.21 or later");
+            this.rbRPMspindle.UseVisualStyleBackColor = true;
+            this.rbRPMspindle.CheckedChanged += new System.EventHandler(this.rbRPMspindle_CheckedChanged);
+            // 
             // gbActionSelect
             // 
+            this.gbActionSelect.Controls.Add(this.rbConvert);
+            this.gbActionSelect.Controls.Add(this.rbRPMspindle);
             this.gbActionSelect.Controls.Add(this.rbCleanHeads);
             this.gbActionSelect.Controls.Add(this.rbSeekCyl);
             this.gbActionSelect.Controls.Add(this.rbInfo);
@@ -331,7 +348,7 @@ namespace Greaseweazle
             this.gbActionSelect.ForeColor = System.Drawing.Color.White;
             this.gbActionSelect.Location = new System.Drawing.Point(24, 176);
             this.gbActionSelect.Name = "gbActionSelect";
-            this.gbActionSelect.Size = new System.Drawing.Size(510, 137);
+            this.gbActionSelect.Size = new System.Drawing.Size(510, 164);
             this.gbActionSelect.TabIndex = 2;
             this.gbActionSelect.TabStop = false;
             this.gbActionSelect.Text = "Action";
@@ -351,7 +368,7 @@ namespace Greaseweazle
             // rbUpdateFirmware
             // 
             this.rbUpdateFirmware.AutoSize = true;
-            this.rbUpdateFirmware.Location = new System.Drawing.Point(342, 75);
+            this.rbUpdateFirmware.Location = new System.Drawing.Point(342, 102);
             this.rbUpdateFirmware.Name = "rbUpdateFirmware";
             this.rbUpdateFirmware.Size = new System.Drawing.Size(136, 21);
             this.rbUpdateFirmware.TabIndex = 13;
@@ -376,7 +393,7 @@ namespace Greaseweazle
             // 
             this.btnClose.BackColor = System.Drawing.Color.Maroon;
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(313, 464);
+            this.btnClose.Location = new System.Drawing.Point(313, 494);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(108, 29);
             this.btnClose.TabIndex = 19;
@@ -388,7 +405,7 @@ namespace Greaseweazle
             // 
             this.btnSelect.BackColor = System.Drawing.Color.Maroon;
             this.btnSelect.ForeColor = System.Drawing.Color.White;
-            this.btnSelect.Location = new System.Drawing.Point(135, 464);
+            this.btnSelect.Location = new System.Drawing.Point(135, 494);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(108, 29);
             this.btnSelect.TabIndex = 18;
@@ -401,7 +418,7 @@ namespace Greaseweazle
             this.gbUSBPorts.Controls.Add(this.btnRefreshUSB);
             this.gbUSBPorts.Controls.Add(this.lbUSBPorts);
             this.gbUSBPorts.ForeColor = System.Drawing.Color.White;
-            this.gbUSBPorts.Location = new System.Drawing.Point(23, 320);
+            this.gbUSBPorts.Location = new System.Drawing.Point(23, 350);
             this.gbUSBPorts.Name = "gbUSBPorts";
             this.gbUSBPorts.Size = new System.Drawing.Size(511, 130);
             this.gbUSBPorts.TabIndex = 14;
@@ -442,7 +459,7 @@ namespace Greaseweazle
             this.gbAction.ForeColor = System.Drawing.Color.White;
             this.gbAction.Location = new System.Drawing.Point(12, 31);
             this.gbAction.Name = "gbAction";
-            this.gbAction.Size = new System.Drawing.Size(557, 507);
+            this.gbAction.Size = new System.Drawing.Size(557, 540);
             this.gbAction.TabIndex = 1;
             this.gbAction.TabStop = false;
             // 
@@ -450,19 +467,32 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(125, 544);
+            this.lblHostTools.Location = new System.Drawing.Point(125, 575);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(334, 31);
             this.lblHostTools.TabIndex = 24;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // rbConvert
+            // 
+            this.rbConvert.AutoSize = true;
+            this.rbConvert.Location = new System.Drawing.Point(36, 129);
+            this.rbConvert.Name = "rbConvert";
+            this.rbConvert.Size = new System.Drawing.Size(111, 21);
+            this.rbConvert.TabIndex = 15;
+            this.rbConvert.TabStop = true;
+            this.rbConvert.Text = "Convert Files";
+            this.toolTipChooser.SetToolTip(this.rbConvert, "Host Tools v0.14 or later");
+            this.rbConvert.UseVisualStyleBackColor = true;
+            this.rbConvert.CheckedChanged += new System.EventHandler(this.rbConvert_CheckedChanged);
+            // 
             // ChooserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(585, 582);
+            this.ClientSize = new System.Drawing.Size(585, 611);
             this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gbAction);
             this.Controls.Add(this.menuStrip1);
@@ -519,5 +549,7 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolStripMenuItem mnuElapsedTime;
         private System.Windows.Forms.ToolStripMenuItem mnuUseCmdConsole;
         private System.Windows.Forms.ToolStripMenuItem mnuCreateShortcut;
+        private System.Windows.Forms.RadioButton rbRPMspindle;
+        private System.Windows.Forms.RadioButton rbConvert;
     }
 }

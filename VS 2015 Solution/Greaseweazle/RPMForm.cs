@@ -1,4 +1,4 @@
-﻿// SeekForm.cs
+﻿// RPMForm.cs
 //
 // Greaseweazle GUI Wrapper
 //
@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace Greaseweazle
 {
-    public partial class SeekForm : Form
+    public partial class RPMForm : Form
     {
         #region declarations
         private const int WM_CLOSE = 0x0010;
@@ -27,8 +27,8 @@ namespace Greaseweazle
         private bool m_bElapsedTime = false;
         #endregion
 
-        #region SeekForm
-        public SeekForm(ChooserForm newForm)
+        #region EraseForm
+        public RPMForm(ChooserForm newForm)
         {
             m_frmChooser = newForm;
             InitializeComponent();
@@ -60,12 +60,11 @@ namespace Greaseweazle
         #region iniWriteFile
         public void iniWriteFile()
         {
-            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtSeekCyl", txtSeekCyl.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtDriveSelect", txtDriveSelect.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "chkMotorOn", (chkMotorOn.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "chkForce", (chkForce.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbSeekCyl", "txtCommandLine", txtCommandLine.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbRPM", "txtIterations", txtIterations.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbRPM", "txtDriveSelect", txtDriveSelect.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbRPM", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbRPM", "chkIterations", (chkIterations.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbRPM", "txCommandLine", txtCommandLine.Text);
         }
         #endregion
 
@@ -74,24 +73,19 @@ namespace Greaseweazle
         {
             string sRet;
 
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "txtSeekCyl", "garbage").Trim())) != "garbage")
-                    txtSeekCyl.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "txtDriveSelect", "garbage").Trim())) != "garbage")
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbRPM", "txtIterations", "garbage").Trim())) != "garbage")
+                    txtIterations.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbRPM", "txtDriveSelect", "garbage").Trim())) != "garbage")
                 txtDriveSelect.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "chkDriveSelect", "garbage").Trim())) != "garbage")
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbRPM", "chkDriveSelect", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
                     chkDriveSelect.Checked = true;
             }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "chkMotorOn", "garbage").Trim())) != "garbage")
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbRPM", "chkIterations", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
-                    chkMotorOn.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSeekCyl", "chkForce", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkForce.Checked = true;
+                    chkIterations.Checked = true;
             }
 
             // usb port
@@ -117,13 +111,11 @@ namespace Greaseweazle
                 txtCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
             if (true == m_bElapsedTime)
                 txtCommandLine.Text += " --time";
-            txtCommandLine.Text += " seek" + " " + txtSeekCyl.Text;
+            txtCommandLine.Text += " rpm";
+            if (chkIterations.Checked == true)
+                txtCommandLine.Text += " --nr  " + txtIterations.Text;
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtCommandLine.Text += " --drive=" + txtDriveSelect.Text;
-            if (chkMotorOn.Checked == true)
-                txtCommandLine.Text += " --motor-on";
-            if (chkForce.Checked == true)
-                txtCommandLine.Text += " --force";
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtCommandLine.Text += " --device=" + m_sUSBPort;
         }
@@ -232,8 +224,8 @@ namespace Greaseweazle
 
         #endregion
 
-        #region SeekForm_Load
-        private void SeekForm_Load(object sender, EventArgs e)
+        #region RPMForm_Load
+        private void RPMForm_Load(object sender, EventArgs e)
         {
             // read inifile
             iniReadFile();
@@ -244,7 +236,7 @@ namespace Greaseweazle
             this.ctxSaveOutput.BackColor = ChooserForm.cDarkBrown;
             this.lblHostTools.Text = ChooserForm.m_sStatusLine;
             this.BackColor = ChooserForm.cChocolate;
-            this.txtSeekCyl.BackColor = ChooserForm.cLightBrown;
+            this.txtIterations.BackColor = ChooserForm.cLightBrown;
             this.txtDriveSelect.BackColor = ChooserForm.cLightBrown;
             this.txtCommandLine.BackColor = ChooserForm.cLightBrown;
             this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
@@ -292,6 +284,11 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+       private void gbEraseDisk_Enter(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         private void rbWriteSingleSided_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
@@ -317,7 +314,7 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void chkForce_CheckedChanged(object sender, EventArgs e)
+        private void chkIterations_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

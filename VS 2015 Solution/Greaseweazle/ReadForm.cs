@@ -80,8 +80,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveSelectRFD", (chkDriveSelectRFD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sReadDiskFolder", m_sReadDiskFolder);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtRFDCommandLine", txtRFDCommandLine.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRateRFD", (chkDriveRateRFD.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRateRFD", txtDriveRateRFD.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkBitrateRFD", (chkBitrateRFD.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtBitrateRFD", txtBitrateRFD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRpmRFD", (chkDriveRpmRFD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRpmRFD", txtDriveRpmRFD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRetriesRFD", (chkDriveRetriesRFD.Checked == true).ToString());
@@ -94,6 +94,9 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkFlippyOffset", (chkFlippyOffset.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbFlippyPanasonic", (rbFlippyPanasonic.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbFlippyTeac", (rbFlippyTeac.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRaw", (chkRaw.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkNoClobber", (chkNoClobber.Checked == true).ToString());
         }
         #endregion
 
@@ -139,12 +142,12 @@ namespace Greaseweazle
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDoubleStep", "garbage").Trim())) != "garbage")
                 txtDoubleStep.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDriveRateRFD", "garbage").Trim())) != "garbage")
-                txtDriveRateRFD.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkDriveRateRFD", "garbage").Trim())) != "garbage")
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtBitrateRFD", "garbage").Trim())) != "garbage")
+                txtBitrateRFD.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkBitrateRFD", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
-                    chkDriveRateRFD.Checked = true;
+                    chkBitrateRFD.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDriveRpmRFD", "garbage").Trim())) != "garbage")
                 txtDriveRpmRFD.Text = sRet;
@@ -194,6 +197,21 @@ namespace Greaseweazle
                 if (sRet == "True")
                     rbFlippyTeac.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkHeadSwap", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkHeadSwap.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkRaw", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkRaw.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkNoClobber", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkNoClobber.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -212,7 +230,7 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            string sTrack = " --track=";
+            string sTracks = " --tracks=";
 
             if (true == m_bWindowsEXE)
                 txtRFDCommandLine.Text = "gw.exe";
@@ -221,47 +239,59 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtRFDCommandLine.Text += " --time";
             txtRFDCommandLine.Text += " read";
+            if (cbFormat.Text.Length > 0)
+                txtRFDCommandLine.Text += " --format " + cbFormat.Text;
             if (chkDriveRetriesRFD.Checked == true)
                 txtRFDCommandLine.Text += " --retries=" + txtDriveRetriesRFD.Text;
+            if (chkNoClobber.Checked == true)
+                txtRFDCommandLine.Text += " --no-clobber";
             if (chkRevsPerTrack.Checked == true)
                 txtRFDCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
-            if (chkDriveRateRFD.Checked == true)
-                txtRFDCommandLine.Text += " --rate=" + txtDriveRateRFD.Text;
             if (chkDriveRpmRFD.Checked == true)
                 txtRFDCommandLine.Text += " --rpm=" + txtDriveRpmRFD.Text;
+            if (chkRaw.Checked == true)
+                txtRFDCommandLine.Text += " --raw";
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
             if (chkDoubleStep.Checked == true)
-                    sTrack += "step=" + txtDoubleStep.Text + ":";
-            if (chkHeadsSet.Checked == true)
-                sTrack += "h=" + txtHeadsSet.Text + ":";
+                    sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkCylSet.Checked == true)
-                sTrack += "c=" + txtCylSet.Text + ":";
+                sTracks += "c=" + txtCylSet.Text + ":";
+            if (chkHeadsSet.Checked == true)
+                sTracks += "h=" + txtHeadsSet.Text + ":";
+            if (chkHeadSwap.Checked == true)
+                sTracks += "hswap:";
             if (chkFlippyOffset.Checked == true)
             {
                 if (rbFlippyTeac.Checked == true)
-                    sTrack += "h0.off=+8:";
+                    sTracks += "h0.off=+8:";
                 else if (rbFlippyPanasonic.Checked == true)
-                    sTrack += "h1.off=-8:";
+                    sTracks += "h1.off=-8:";
             }
-            if (sTrack != " --track=")
+            if (sTracks != " --tracks=")
             {
-                if (sTrack.Substring(sTrack.Length - 1, 1) == ":") // remove trailing colon
-                    sTrack = sTrack.Remove(sTrack.Length - 1, 1); ;
-                txtRFDCommandLine.Text += sTrack;
+                if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
+                    sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
+                txtRFDCommandLine.Text += sTracks;
             }
-            if (cbFormat.Text.Length > 0)
-                txtRFDCommandLine.Text += " --format " + cbFormat.Text;
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtRFDCommandLine.Text += " --device=" + m_sUSBPort;
             txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + tbFilename.Text.Trim();
             if (chkLegacySS.Checked == true)
                 txtRFDCommandLine.Text += "::legacy_ss";
+            if (chkBitrateRFD.Checked == true)
+            {
+                txtRFDCommandLine.Text += "::bitrate=" + txtBitrateRFD.Text;
+
+                int iIndex = cbExtension.FindString(".hfe");
+                cbExtension.SelectedIndex = iIndex;
+            }
             txtRFDCommandLine.Text += "\"";
         }
         #endregion
 
         #region CheckedChanged
+
         private void chkRevsPerTrack_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
@@ -277,7 +307,7 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void chkDriveRateRFD_CheckedChanged(object sender, EventArgs e)
+        private void chkBitrateRFD_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
@@ -292,7 +322,7 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void txtDriveRateRFD_TextChanged(object sender, EventArgs e)
+        private void txtBitrateRFD_TextChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
@@ -354,7 +384,6 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-
         private void rbFlippyPanasonic_CheckedChanged(object sender, EventArgs e)
         {
             // turn off heads checkmark and set heads
@@ -398,6 +427,22 @@ namespace Greaseweazle
         {
             CreateCommandLine();
         }
+
+        private void chkHeadSwap_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkNoClobber_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkRaw_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
 
         #region ReadForm_Load
@@ -412,7 +457,7 @@ namespace Greaseweazle
             this.txtDoubleStep.BackColor = ChooserForm.cLightBrown;
             this.txtRevsPerTrack.BackColor = ChooserForm.cLightBrown;
             this.txtDriveSelectRFD.BackColor = ChooserForm.cLightBrown;
-            this.txtDriveRateRFD.BackColor = ChooserForm.cLightBrown;
+            this.txtBitrateRFD.BackColor = ChooserForm.cLightBrown;
             this.txtDriveRetriesRFD.BackColor = ChooserForm.cLightBrown;
             this.txtDriveRpmRFD.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;

@@ -114,7 +114,7 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            string sTrack = " --track=";
+            string sTracks = " --tracks=";
 
             if (true == m_bWindowsEXE)
                 txtEraseCommandLine.Text = "gw.exe";
@@ -126,14 +126,14 @@ namespace Greaseweazle
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtEraseCommandLine.Text += " --drive=" + txtDriveSelect.Text;
             if (chkHeadsSet.Checked == true)
-                sTrack += "h=" + txtHeadsSet.Text + ":";
+                sTracks += "h=" + txtHeadsSet.Text + ":";
             if (chkCylSet.Checked == true)
-                sTrack += "c=" + txtCylSet.Text + ":";
-            if (sTrack != " --track=")
+                sTracks += "c=" + txtCylSet.Text + ":";
+            if (sTracks != " --tracks=")
             {
-                if (sTrack.Substring(sTrack.Length - 1, 1) == ":") // remove trailing colon
-                    sTrack = sTrack.Remove(sTrack.Length - 1, 1); ;
-                txtEraseCommandLine.Text += sTrack;
+                if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
+                    sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
+                txtEraseCommandLine.Text += sTracks;
             }
 
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
