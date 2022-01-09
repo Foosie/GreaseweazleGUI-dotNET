@@ -70,14 +70,13 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkDriveSelect", (chkRPM.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtDoubleStep", txtDoubleStep.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkRPM", (chkRPM.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtRPM", txtRPM.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbFormat", cbFormat.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkCylSet", (chkCylSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtCylSet", txtCylSet.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkHeadsSet", (chkHeadsSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtHeadsSet", txtHeadsSet.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkFlippyOffset", (chkFlippyOffset.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "rbFlippyPanasonic", (rbFlippyPanasonic.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "rbFlippyTeac", (rbFlippyTeac.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtConvertCommandLine", txtConvertCommandLine.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkNoClobber", (chkNoClobber.Checked == true).ToString());
@@ -122,21 +121,6 @@ namespace Greaseweazle
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtHeadsSet", "garbage").Trim())) != "garbage")
                 txtHeadsSet.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkFlippyOffset", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    chkFlippyOffset.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "rbFlippyPanasonic", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    rbFlippyPanasonic.Checked = true;
-            }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "rbFlippyTeac", "garbage").Trim())) != "garbage")
-            {
-                if (sRet == "True")
-                    rbFlippyTeac.Checked = true;
-            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkHeadSwap", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -196,13 +180,6 @@ namespace Greaseweazle
                 sTracks += "hswap:";
             if (chkCylSet.Checked == true)
                 sTracks += "c=" + txtCylSet.Text + ":";
-            if (chkFlippyOffset.Checked == true)
-            {
-                if (rbFlippyTeac.Checked == true)
-                    sTracks += "h0.off=+8:";
-                else if (rbFlippyPanasonic.Checked == true)
-                    sTracks += "h1.off=-8:";
-            }
             if (sTracks != " --tracks=")
             {
                 if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon

@@ -715,7 +715,6 @@ namespace Greaseweazle
         {
             int pos = -1;
             int n = -1;
-            //string sFN = Path.GetFileNameWithoutExtension(tbFilename.Text);
             string sFN = removeDiskType(tbFilename.Text, true); // remove extension as well
             string sExt = Path.GetExtension(tbFilename.Text);
             if ((pos = sFN.IndexOf(m_sSeperator)) == -1)

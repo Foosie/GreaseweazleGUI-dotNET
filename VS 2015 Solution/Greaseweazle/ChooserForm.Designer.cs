@@ -63,6 +63,7 @@ namespace Greaseweazle
             this.pbGWsmall = new System.Windows.Forms.PictureBox();
             this.rbCleanHeads = new System.Windows.Forms.RadioButton();
             this.rbRPMspindle = new System.Windows.Forms.RadioButton();
+            this.rbConvert = new System.Windows.Forms.RadioButton();
             this.gbActionSelect = new System.Windows.Forms.GroupBox();
             this.rbReadDisk = new System.Windows.Forms.RadioButton();
             this.rbUpdateFirmware = new System.Windows.Forms.RadioButton();
@@ -74,7 +75,6 @@ namespace Greaseweazle
             this.lbUSBPorts = new System.Windows.Forms.ListBox();
             this.gbAction = new System.Windows.Forms.GroupBox();
             this.lblHostTools = new System.Windows.Forms.Label();
-            this.rbConvert = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGWsmall)).BeginInit();
             this.gbActionSelect.SuspendLayout();
@@ -330,6 +330,19 @@ namespace Greaseweazle
             this.rbRPMspindle.UseVisualStyleBackColor = true;
             this.rbRPMspindle.CheckedChanged += new System.EventHandler(this.rbRPMspindle_CheckedChanged);
             // 
+            // rbConvert
+            // 
+            this.rbConvert.AutoSize = true;
+            this.rbConvert.Location = new System.Drawing.Point(36, 129);
+            this.rbConvert.Name = "rbConvert";
+            this.rbConvert.Size = new System.Drawing.Size(111, 21);
+            this.rbConvert.TabIndex = 15;
+            this.rbConvert.TabStop = true;
+            this.rbConvert.Text = "Convert Files";
+            this.toolTipChooser.SetToolTip(this.rbConvert, "Host Tools v0.14 or later");
+            this.rbConvert.UseVisualStyleBackColor = true;
+            this.rbConvert.CheckedChanged += new System.EventHandler(this.rbConvert_CheckedChanged);
+            // 
             // gbActionSelect
             // 
             this.gbActionSelect.Controls.Add(this.rbConvert);
@@ -473,19 +486,6 @@ namespace Greaseweazle
             this.lblHostTools.TabIndex = 24;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // rbConvert
-            // 
-            this.rbConvert.AutoSize = true;
-            this.rbConvert.Location = new System.Drawing.Point(36, 129);
-            this.rbConvert.Name = "rbConvert";
-            this.rbConvert.Size = new System.Drawing.Size(111, 21);
-            this.rbConvert.TabIndex = 15;
-            this.rbConvert.TabStop = true;
-            this.rbConvert.Text = "Convert Files";
-            this.toolTipChooser.SetToolTip(this.rbConvert, "Host Tools v0.14 or later");
-            this.rbConvert.UseVisualStyleBackColor = true;
-            this.rbConvert.CheckedChanged += new System.EventHandler(this.rbConvert_CheckedChanged);
             // 
             // ChooserForm
             // 

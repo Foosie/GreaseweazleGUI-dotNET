@@ -42,6 +42,7 @@ namespace Greaseweazle
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConvertForm));
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.chkRPM = new System.Windows.Forms.CheckBox();
+            this.lbOutput = new System.Windows.Forms.ListBox();
             this.threadWorker = new System.ComponentModel.BackgroundWorker();
             this.ctxOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,10 +64,6 @@ namespace Greaseweazle
             this.chkHeadSwap = new System.Windows.Forms.CheckBox();
             this.txtDoubleStep = new System.Windows.Forms.TextBox();
             this.chkDoubleStep = new System.Windows.Forms.CheckBox();
-            this.gbFlippy = new System.Windows.Forms.GroupBox();
-            this.chkFlippyOffset = new System.Windows.Forms.CheckBox();
-            this.rbFlippyPanasonic = new System.Windows.Forms.RadioButton();
-            this.rbFlippyTeac = new System.Windows.Forms.RadioButton();
             this.chkNoClobber = new System.Windows.Forms.CheckBox();
             this.cbFormat = new System.Windows.Forms.ComboBox();
             this.chkHeadsSet = new System.Windows.Forms.CheckBox();
@@ -74,13 +71,11 @@ namespace Greaseweazle
             this.chkCylSet = new System.Windows.Forms.CheckBox();
             this.txtCylSet = new System.Windows.Forms.TextBox();
             this.txtRPM = new System.Windows.Forms.TextBox();
-            this.lbOutput = new System.Windows.Forms.ListBox();
             this.ctxOutput.SuspendLayout();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gb2.SuspendLayout();
             this.gbConvert.SuspendLayout();
-            this.gbFlippy.SuspendLayout();
             this.SuspendLayout();
             // 
             // chkRPM
@@ -94,6 +89,20 @@ namespace Greaseweazle
             this.toolTip.SetToolTip(this.chkRPM, "Host Tools v0.18 or later\r\nRequires F7 type");
             this.chkRPM.UseVisualStyleBackColor = true;
             this.chkRPM.CheckedChanged += new System.EventHandler(this.chkRPM_CheckedChanged);
+            // 
+            // lbOutput
+            // 
+            this.lbOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lbOutput.ForeColor = System.Drawing.Color.White;
+            this.lbOutput.FormattingEnabled = true;
+            this.lbOutput.HorizontalScrollbar = true;
+            this.lbOutput.ItemHeight = 16;
+            this.lbOutput.Location = new System.Drawing.Point(588, 27);
+            this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbOutput.Name = "lbOutput";
+            this.lbOutput.Size = new System.Drawing.Size(290, 532);
+            this.lbOutput.TabIndex = 54;
+            this.toolTip.SetToolTip(this.lbOutput, "Right click for options");
             // 
             // threadWorker
             // 
@@ -134,7 +143,7 @@ namespace Greaseweazle
             this.gb1.Controls.Add(this.groupBox2);
             this.gb1.Location = new System.Drawing.Point(12, 7);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(898, 644);
+            this.gb1.Size = new System.Drawing.Size(898, 577);
             this.gb1.TabIndex = 1;
             this.gb1.TabStop = false;
             // 
@@ -142,7 +151,7 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(100, 598);
+            this.lblHostTools.Location = new System.Drawing.Point(103, 539);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(369, 23);
             this.lblHostTools.TabIndex = 29;
@@ -159,7 +168,7 @@ namespace Greaseweazle
             this.groupBox2.Controls.Add(this.gbConvert);
             this.groupBox2.Location = new System.Drawing.Point(19, 20);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(551, 564);
+            this.groupBox2.Size = new System.Drawing.Size(551, 508);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
@@ -169,7 +178,7 @@ namespace Greaseweazle
             this.gb2.Controls.Add(this.txtInputFile);
             this.gb2.Controls.Add(this.btnOutputFile);
             this.gb2.Controls.Add(this.btnInputFile);
-            this.gb2.Location = new System.Drawing.Point(20, 236);
+            this.gb2.Location = new System.Drawing.Point(20, 180);
             this.gb2.Name = "gb2";
             this.gb2.Size = new System.Drawing.Size(511, 108);
             this.gb2.TabIndex = 19;
@@ -222,7 +231,7 @@ namespace Greaseweazle
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(332, 519);
+            this.btnBack.Location = new System.Drawing.Point(332, 464);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 28;
@@ -233,7 +242,7 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(111, 519);
+            this.btnLaunch.Location = new System.Drawing.Point(111, 464);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 27;
@@ -245,7 +254,7 @@ namespace Greaseweazle
             // 
             this.txtConvertCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtConvertCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtConvertCommandLine.Location = new System.Drawing.Point(19, 377);
+            this.txtConvertCommandLine.Location = new System.Drawing.Point(19, 322);
             this.txtConvertCommandLine.Multiline = true;
             this.txtConvertCommandLine.Name = "txtConvertCommandLine";
             this.txtConvertCommandLine.Size = new System.Drawing.Size(512, 131);
@@ -254,7 +263,7 @@ namespace Greaseweazle
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(225, 353);
+            this.lblStaticCL.Location = new System.Drawing.Point(225, 298);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
             this.lblStaticCL.TabIndex = 24;
@@ -266,7 +275,6 @@ namespace Greaseweazle
             this.gbConvert.Controls.Add(this.chkHeadSwap);
             this.gbConvert.Controls.Add(this.txtDoubleStep);
             this.gbConvert.Controls.Add(this.chkDoubleStep);
-            this.gbConvert.Controls.Add(this.gbFlippy);
             this.gbConvert.Controls.Add(this.chkNoClobber);
             this.gbConvert.Controls.Add(this.cbFormat);
             this.gbConvert.Controls.Add(this.chkHeadsSet);
@@ -277,7 +285,7 @@ namespace Greaseweazle
             this.gbConvert.Controls.Add(this.chkRPM);
             this.gbConvert.Location = new System.Drawing.Point(19, 21);
             this.gbConvert.Name = "gbConvert";
-            this.gbConvert.Size = new System.Drawing.Size(512, 206);
+            this.gbConvert.Size = new System.Drawing.Size(512, 151);
             this.gbConvert.TabIndex = 2;
             this.gbConvert.TabStop = false;
             // 
@@ -323,50 +331,6 @@ namespace Greaseweazle
             this.chkDoubleStep.Text = "Double-Step [0-9]";
             this.chkDoubleStep.UseVisualStyleBackColor = true;
             this.chkDoubleStep.CheckedChanged += new System.EventHandler(this.chkDoubleStep_CheckedChanged);
-            // 
-            // gbFlippy
-            // 
-            this.gbFlippy.Controls.Add(this.chkFlippyOffset);
-            this.gbFlippy.Controls.Add(this.rbFlippyPanasonic);
-            this.gbFlippy.Controls.Add(this.rbFlippyTeac);
-            this.gbFlippy.Location = new System.Drawing.Point(17, 142);
-            this.gbFlippy.Name = "gbFlippy";
-            this.gbFlippy.Size = new System.Drawing.Size(480, 48);
-            this.gbFlippy.TabIndex = 15;
-            this.gbFlippy.TabStop = false;
-            // 
-            // chkFlippyOffset
-            // 
-            this.chkFlippyOffset.AutoSize = true;
-            this.chkFlippyOffset.Location = new System.Drawing.Point(88, 18);
-            this.chkFlippyOffset.Name = "chkFlippyOffset";
-            this.chkFlippyOffset.Size = new System.Drawing.Size(106, 21);
-            this.chkFlippyOffset.TabIndex = 16;
-            this.chkFlippyOffset.Text = "Flippy offset";
-            this.chkFlippyOffset.UseVisualStyleBackColor = true;
-            this.chkFlippyOffset.CheckedChanged += new System.EventHandler(this.chkFlippyOffset_CheckedChanged);
-            // 
-            // rbFlippyPanasonic
-            // 
-            this.rbFlippyPanasonic.AutoSize = true;
-            this.rbFlippyPanasonic.Location = new System.Drawing.Point(210, 18);
-            this.rbFlippyPanasonic.Name = "rbFlippyPanasonic";
-            this.rbFlippyPanasonic.Size = new System.Drawing.Size(95, 21);
-            this.rbFlippyPanasonic.TabIndex = 17;
-            this.rbFlippyPanasonic.Text = "Panasonic";
-            this.rbFlippyPanasonic.UseVisualStyleBackColor = true;
-            this.rbFlippyPanasonic.CheckedChanged += new System.EventHandler(this.rbFlippyPanasonic_CheckedChanged);
-            // 
-            // rbFlippyTeac
-            // 
-            this.rbFlippyTeac.AutoSize = true;
-            this.rbFlippyTeac.Location = new System.Drawing.Point(335, 18);
-            this.rbFlippyTeac.Name = "rbFlippyTeac";
-            this.rbFlippyTeac.Size = new System.Drawing.Size(61, 21);
-            this.rbFlippyTeac.TabIndex = 18;
-            this.rbFlippyTeac.Text = "Teac";
-            this.rbFlippyTeac.UseVisualStyleBackColor = true;
-            this.rbFlippyTeac.CheckedChanged += new System.EventHandler(this.rbFlippyTeac_CheckedChanged);
             // 
             // chkNoClobber
             // 
@@ -472,26 +436,12 @@ namespace Greaseweazle
             this.txtRPM.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRPM.TextChanged += new System.EventHandler(this.txtRPM_TextChanged);
             // 
-            // lbOutput
-            // 
-            this.lbOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lbOutput.ForeColor = System.Drawing.Color.White;
-            this.lbOutput.FormattingEnabled = true;
-            this.lbOutput.HorizontalScrollbar = true;
-            this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(588, 27);
-            this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 596);
-            this.lbOutput.TabIndex = 54;
-            this.toolTip.SetToolTip(this.lbOutput, "Right click for options");
-            // 
             // ConvertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(931, 669);
+            this.ClientSize = new System.Drawing.Size(931, 602);
             this.Controls.Add(this.gb1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -508,8 +458,6 @@ namespace Greaseweazle
             this.gb2.PerformLayout();
             this.gbConvert.ResumeLayout(false);
             this.gbConvert.PerformLayout();
-            this.gbFlippy.ResumeLayout(false);
-            this.gbFlippy.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -541,10 +489,6 @@ namespace Greaseweazle
         private System.Windows.Forms.TextBox txtOutputFile;
         private System.Windows.Forms.ComboBox cbFormat;
         private System.Windows.Forms.CheckBox chkNoClobber;
-        private System.Windows.Forms.GroupBox gbFlippy;
-        private System.Windows.Forms.CheckBox chkFlippyOffset;
-        private System.Windows.Forms.RadioButton rbFlippyPanasonic;
-        private System.Windows.Forms.RadioButton rbFlippyTeac;
         private System.Windows.Forms.TextBox txtDoubleStep;
         private System.Windows.Forms.CheckBox chkDoubleStep;
         private System.Windows.Forms.CheckBox chkHeadSwap;
