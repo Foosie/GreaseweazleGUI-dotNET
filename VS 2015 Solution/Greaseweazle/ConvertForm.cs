@@ -84,6 +84,10 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "sOutputFolder", sOutputFolder);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtInputFile", txtInputFile.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtOutputFile", txtOutputFile.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkOutTracks", (chkOutTracks.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkOTDoubleStep", (chkOTDoubleStep.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtOTDoubleStep", txtOTDoubleStep.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkOTHeadSwap", (chkOTHeadSwap.Checked == true).ToString());
         }
         #endregion
 
@@ -139,6 +143,23 @@ namespace Greaseweazle
                 sOutputFolder = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtOutputFile", "garbage").Trim())) != "garbage")
                 txtOutputFile.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkOutTracks", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkOutTracks.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkOTDoubleStep", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkOTDoubleStep.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtOTDoubleStep", "garbage").Trim())) != "garbage")
+                txtOTDoubleStep.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkOTHeadSwap", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkOTHeadSwap.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -158,6 +179,7 @@ namespace Greaseweazle
         private void CreateCommandLine()
         {
             string sTracks = " --tracks=";
+            string sOutputTracks = " --out-tracks=";
 
             if (true == m_bWindowsEXE)
                 txtConvertCommandLine.Text = "gw.exe";
@@ -168,25 +190,41 @@ namespace Greaseweazle
             txtConvertCommandLine.Text += " convert";
             if ((chkRPM.Enabled == true) && (chkRPM.Checked == true))
                 txtConvertCommandLine.Text += " --rpm=" + txtRPM.Text;
-            if (chkDoubleStep.Checked == true)
-                sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkNoClobber.Checked == true)
                 txtConvertCommandLine.Text += " --no-clobber";
             if (cbFormat.Text.Length > 0)
                 txtConvertCommandLine.Text += " --format " + cbFormat.Text;
+            if (chkCylSet.Checked == true)
+            {
+                sTracks += "c=" + txtCylSet.Text + ":";
+                sOutputTracks += "c=" + txtCylSet.Text + ":";
+            }
             if (chkHeadsSet.Checked == true)
+            {
                 sTracks += "h=" + txtHeadsSet.Text + ":";
+                sOutputTracks += "h=" + txtHeadsSet.Text + ":";
+            }
+            if (chkDoubleStep.Checked == true)
+                sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkHeadSwap.Checked == true)
                 sTracks += "hswap:";
-            if (chkCylSet.Checked == true)
-                sTracks += "c=" + txtCylSet.Text + ":";
+
             if (sTracks != " --tracks=")
             {
                 if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
                     sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
                 txtConvertCommandLine.Text += sTracks;
             }
-
+            if (chkOutTracks.Checked == true)
+            {
+                if (chkOTDoubleStep.Checked == true)
+                    sOutputTracks += "step=" + txtOTDoubleStep.Text + ":";
+                if (chkOTHeadSwap.Checked == true)
+                    sOutputTracks += "hswap:";
+                if (sOutputTracks.Substring(sOutputTracks.Length - 1, 1) == ":") // remove trailing colon
+                    sOutputTracks = sOutputTracks.Remove(sOutputTracks.Length - 1, 1); ;
+                txtConvertCommandLine.Text += sOutputTracks;
+            }
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtConvertCommandLine.Text += " --device=" + m_sUSBPort;
 
@@ -308,6 +346,7 @@ namespace Greaseweazle
         private void threadWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             btnLaunch.Enabled = true;
+            btnBack.Enabled = true;
         }
         #endregion
 
@@ -324,6 +363,7 @@ namespace Greaseweazle
             this.txtDoubleStep.BackColor = ChooserForm.cLightBrown;
             this.txtInputFile.BackColor = ChooserForm.cLightBrown;
             this.txtOutputFile.BackColor = ChooserForm.cLightBrown;
+            this.txtOTDoubleStep.BackColor = ChooserForm.cLightBrown;
             this.txtConvertCommandLine.BackColor = ChooserForm.cLightBrown;
             this.cbFormat.BackColor = ChooserForm.cLightBrown;
             this.ctxSaveOutput.BackColor = ChooserForm.cDarkBrown;
@@ -354,6 +394,7 @@ namespace Greaseweazle
             else
             {
                 btnLaunch.Enabled = false;
+                btnBack.Enabled = false;
                 threadWorker.RunWorkerAsync();
             }
         }
@@ -388,6 +429,10 @@ namespace Greaseweazle
         {
             if (m.Msg == WM_CLOSE)
             {
+                // confirm close if windowed process is still running
+                if (!ChooserForm.confirmCloseProcess(this.btnLaunch))
+                    return;
+
                 // write inifile
                 iniWriteFile();
 
@@ -529,7 +574,6 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-
         private void chkFlippyOffset_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
@@ -541,6 +585,26 @@ namespace Greaseweazle
         }
 
         private void rbFlippyTeac_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkOutTracks_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkOTDoubleStep_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtOTDoubleStep_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkOTHeadSwap_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

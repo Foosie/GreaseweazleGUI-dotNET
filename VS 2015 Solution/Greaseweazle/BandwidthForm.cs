@@ -188,6 +188,7 @@ namespace Greaseweazle
             else
             {
                 btnLaunch.Enabled = false;
+                btnBack.Enabled = false;
                 threadWorker.RunWorkerAsync();
             }
         }
@@ -238,6 +239,10 @@ namespace Greaseweazle
         {
             if (m.Msg == WM_CLOSE)
             {
+                // confirm close if windowed process is still running
+                if (!ChooserForm.confirmCloseProcess(this.btnLaunch))
+                    return;
+
                 // write inifile
                 iniWriteFile();
 
@@ -259,6 +264,7 @@ namespace Greaseweazle
         private void threadWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             btnLaunch.Enabled = true;
+            btnBack.Enabled = true;
         }
         #endregion
 

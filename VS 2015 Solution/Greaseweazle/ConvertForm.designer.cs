@@ -50,6 +50,12 @@ namespace Greaseweazle
             this.gb1 = new System.Windows.Forms.GroupBox();
             this.lblHostTools = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gb3 = new System.Windows.Forms.GroupBox();
+            this.chkOutTracks = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkOTHeadSwap = new System.Windows.Forms.CheckBox();
+            this.txtOTDoubleStep = new System.Windows.Forms.TextBox();
+            this.chkOTDoubleStep = new System.Windows.Forms.CheckBox();
             this.gb2 = new System.Windows.Forms.GroupBox();
             this.txtOutputFile = new System.Windows.Forms.TextBox();
             this.txtInputFile = new System.Windows.Forms.TextBox();
@@ -74,6 +80,8 @@ namespace Greaseweazle
             this.ctxOutput.SuspendLayout();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.gb3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.gb2.SuspendLayout();
             this.gbConvert.SuspendLayout();
             this.SuspendLayout();
@@ -97,11 +105,11 @@ namespace Greaseweazle
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
             this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(588, 27);
+            this.lbOutput.Location = new System.Drawing.Point(568, 21);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 532);
-            this.lbOutput.TabIndex = 54;
+            this.lbOutput.Size = new System.Drawing.Size(290, 596);
+            this.lbOutput.TabIndex = 31;
             this.toolTip.SetToolTip(this.lbOutput, "Right click for options");
             // 
             // threadWorker
@@ -141,9 +149,9 @@ namespace Greaseweazle
             this.gb1.Controls.Add(this.lbOutput);
             this.gb1.Controls.Add(this.lblHostTools);
             this.gb1.Controls.Add(this.groupBox2);
-            this.gb1.Location = new System.Drawing.Point(12, 7);
+            this.gb1.Location = new System.Drawing.Point(11, 3);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(898, 577);
+            this.gb1.Size = new System.Drawing.Size(874, 632);
             this.gb1.TabIndex = 1;
             this.gb1.TabStop = false;
             // 
@@ -151,26 +159,93 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(103, 539);
+            this.lblHostTools.Location = new System.Drawing.Point(103, 597);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(369, 23);
-            this.lblHostTools.TabIndex = 29;
+            this.lblHostTools.TabIndex = 30;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.gb3);
             this.groupBox2.Controls.Add(this.gb2);
             this.groupBox2.Controls.Add(this.btnBack);
             this.groupBox2.Controls.Add(this.btnLaunch);
             this.groupBox2.Controls.Add(this.txtConvertCommandLine);
             this.groupBox2.Controls.Add(this.lblStaticCL);
             this.groupBox2.Controls.Add(this.gbConvert);
-            this.groupBox2.Location = new System.Drawing.Point(19, 20);
+            this.groupBox2.Location = new System.Drawing.Point(15, 14);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(551, 508);
+            this.groupBox2.Size = new System.Drawing.Size(541, 578);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
+            // 
+            // gb3
+            // 
+            this.gb3.Controls.Add(this.chkOutTracks);
+            this.gb3.Controls.Add(this.groupBox1);
+            this.gb3.Location = new System.Drawing.Point(14, 170);
+            this.gb3.Name = "gb3";
+            this.gb3.Size = new System.Drawing.Size(512, 100);
+            this.gb3.TabIndex = 15;
+            this.gb3.TabStop = false;
+            // 
+            // chkOutTracks
+            // 
+            this.chkOutTracks.AutoSize = true;
+            this.chkOutTracks.Location = new System.Drawing.Point(17, 25);
+            this.chkOutTracks.Name = "chkOutTracks";
+            this.chkOutTracks.Size = new System.Drawing.Size(120, 21);
+            this.chkOutTracks.TabIndex = 16;
+            this.chkOutTracks.Text = "Output Tracks";
+            this.chkOutTracks.UseVisualStyleBackColor = true;
+            this.chkOutTracks.CheckedChanged += new System.EventHandler(this.chkOutTracks_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkOTHeadSwap);
+            this.groupBox1.Controls.Add(this.txtOTDoubleStep);
+            this.groupBox1.Controls.Add(this.chkOTDoubleStep);
+            this.groupBox1.Location = new System.Drawing.Point(157, 21);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(334, 59);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            // 
+            // chkOTHeadSwap
+            // 
+            this.chkOTHeadSwap.AutoSize = true;
+            this.chkOTHeadSwap.Location = new System.Drawing.Point(219, 22);
+            this.chkOTHeadSwap.Name = "chkOTHeadSwap";
+            this.chkOTHeadSwap.Size = new System.Drawing.Size(102, 21);
+            this.chkOTHeadSwap.TabIndex = 20;
+            this.chkOTHeadSwap.Text = "Head Swap";
+            this.chkOTHeadSwap.UseVisualStyleBackColor = true;
+            this.chkOTHeadSwap.CheckedChanged += new System.EventHandler(this.chkOTHeadSwap_CheckedChanged);
+            // 
+            // txtOTDoubleStep
+            // 
+            this.txtOTDoubleStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtOTDoubleStep.ForeColor = System.Drawing.Color.White;
+            this.txtOTDoubleStep.Location = new System.Drawing.Point(162, 20);
+            this.txtOTDoubleStep.Name = "txtOTDoubleStep";
+            this.txtOTDoubleStep.Size = new System.Drawing.Size(38, 22);
+            this.txtOTDoubleStep.TabIndex = 19;
+            this.txtOTDoubleStep.Text = "2";
+            this.txtOTDoubleStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtOTDoubleStep.TextChanged += new System.EventHandler(this.txtOTDoubleStep_TextChanged);
+            // 
+            // chkOTDoubleStep
+            // 
+            this.chkOTDoubleStep.AutoSize = true;
+            this.chkOTDoubleStep.Location = new System.Drawing.Point(17, 21);
+            this.chkOTDoubleStep.Name = "chkOTDoubleStep";
+            this.chkOTDoubleStep.Size = new System.Drawing.Size(142, 21);
+            this.chkOTDoubleStep.TabIndex = 18;
+            this.chkOTDoubleStep.Text = "Double-Step [0-9]";
+            this.chkOTDoubleStep.UseVisualStyleBackColor = true;
+            this.chkOTDoubleStep.CheckedChanged += new System.EventHandler(this.chkOTDoubleStep_CheckedChanged);
             // 
             // gb2
             // 
@@ -178,10 +253,10 @@ namespace Greaseweazle
             this.gb2.Controls.Add(this.txtInputFile);
             this.gb2.Controls.Add(this.btnOutputFile);
             this.gb2.Controls.Add(this.btnInputFile);
-            this.gb2.Location = new System.Drawing.Point(20, 180);
+            this.gb2.Location = new System.Drawing.Point(14, 275);
             this.gb2.Name = "gb2";
-            this.gb2.Size = new System.Drawing.Size(511, 108);
-            this.gb2.TabIndex = 19;
+            this.gb2.Size = new System.Drawing.Size(512, 108);
+            this.gb2.TabIndex = 21;
             this.gb2.TabStop = false;
             // 
             // txtOutputFile
@@ -191,7 +266,7 @@ namespace Greaseweazle
             this.txtOutputFile.Location = new System.Drawing.Point(156, 65);
             this.txtOutputFile.Name = "txtOutputFile";
             this.txtOutputFile.Size = new System.Drawing.Size(336, 22);
-            this.txtOutputFile.TabIndex = 23;
+            this.txtOutputFile.TabIndex = 25;
             this.txtOutputFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtOutputFile.TextChanged += new System.EventHandler(this.txtOutputFile_TextChanged);
             // 
@@ -202,7 +277,7 @@ namespace Greaseweazle
             this.txtInputFile.Location = new System.Drawing.Point(156, 24);
             this.txtInputFile.Name = "txtInputFile";
             this.txtInputFile.Size = new System.Drawing.Size(336, 22);
-            this.txtInputFile.TabIndex = 21;
+            this.txtInputFile.TabIndex = 23;
             this.txtInputFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtInputFile.TextChanged += new System.EventHandler(this.txtInputFile_TextChanged);
             // 
@@ -212,7 +287,7 @@ namespace Greaseweazle
             this.btnOutputFile.Location = new System.Drawing.Point(18, 62);
             this.btnOutputFile.Name = "btnOutputFile";
             this.btnOutputFile.Size = new System.Drawing.Size(108, 29);
-            this.btnOutputFile.TabIndex = 22;
+            this.btnOutputFile.TabIndex = 24;
             this.btnOutputFile.Text = "Output File";
             this.btnOutputFile.UseVisualStyleBackColor = false;
             this.btnOutputFile.Click += new System.EventHandler(this.btnOutputFile_Click);
@@ -223,7 +298,7 @@ namespace Greaseweazle
             this.btnInputFile.Location = new System.Drawing.Point(18, 21);
             this.btnInputFile.Name = "btnInputFile";
             this.btnInputFile.Size = new System.Drawing.Size(108, 29);
-            this.btnInputFile.TabIndex = 20;
+            this.btnInputFile.TabIndex = 22;
             this.btnInputFile.Text = "Input File";
             this.btnInputFile.UseVisualStyleBackColor = false;
             this.btnInputFile.Click += new System.EventHandler(this.btnInputFile_Click);
@@ -231,10 +306,10 @@ namespace Greaseweazle
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(332, 464);
+            this.btnBack.Location = new System.Drawing.Point(332, 536);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 28;
+            this.btnBack.TabIndex = 29;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -242,10 +317,10 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(111, 464);
+            this.btnLaunch.Location = new System.Drawing.Point(111, 536);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 27;
+            this.btnLaunch.TabIndex = 28;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -254,19 +329,19 @@ namespace Greaseweazle
             // 
             this.txtConvertCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtConvertCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtConvertCommandLine.Location = new System.Drawing.Point(19, 322);
+            this.txtConvertCommandLine.Location = new System.Drawing.Point(14, 412);
             this.txtConvertCommandLine.Multiline = true;
             this.txtConvertCommandLine.Name = "txtConvertCommandLine";
-            this.txtConvertCommandLine.Size = new System.Drawing.Size(512, 131);
-            this.txtConvertCommandLine.TabIndex = 25;
+            this.txtConvertCommandLine.Size = new System.Drawing.Size(512, 114);
+            this.txtConvertCommandLine.TabIndex = 27;
             // 
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(225, 298);
+            this.lblStaticCL.Location = new System.Drawing.Point(225, 390);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
-            this.lblStaticCL.TabIndex = 24;
+            this.lblStaticCL.TabIndex = 26;
             this.lblStaticCL.Text = "Command Line";
             // 
             // gbConvert
@@ -283,7 +358,7 @@ namespace Greaseweazle
             this.gbConvert.Controls.Add(this.txtCylSet);
             this.gbConvert.Controls.Add(this.txtRPM);
             this.gbConvert.Controls.Add(this.chkRPM);
-            this.gbConvert.Location = new System.Drawing.Point(19, 21);
+            this.gbConvert.Location = new System.Drawing.Point(14, 14);
             this.gbConvert.Name = "gbConvert";
             this.gbConvert.Size = new System.Drawing.Size(512, 151);
             this.gbConvert.TabIndex = 2;
@@ -441,7 +516,7 @@ namespace Greaseweazle
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(931, 602);
+            this.ClientSize = new System.Drawing.Size(898, 648);
             this.Controls.Add(this.gb1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -454,6 +529,10 @@ namespace Greaseweazle
             this.gb1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.gb3.ResumeLayout(false);
+            this.gb3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.gb2.ResumeLayout(false);
             this.gb2.PerformLayout();
             this.gbConvert.ResumeLayout(false);
@@ -494,5 +573,11 @@ namespace Greaseweazle
         private System.Windows.Forms.CheckBox chkHeadSwap;
         private System.Windows.Forms.Label lblFormat;
         private System.Windows.Forms.ListBox lbOutput;
+        private System.Windows.Forms.GroupBox gb3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox chkOTHeadSwap;
+        private System.Windows.Forms.TextBox txtOTDoubleStep;
+        private System.Windows.Forms.CheckBox chkOTDoubleStep;
+        private System.Windows.Forms.CheckBox chkOutTracks;
     }
 }

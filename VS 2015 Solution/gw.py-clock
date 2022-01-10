@@ -4,7 +4,7 @@ if os.environ.get('OS','') == 'Windows_NT':
     oldStdout = sys.stdout
     sys.stdout = sys.stderr
 
-while True:    
+for x in range(10):
     localtime = time.localtime()
     result = time.strftime("%I:%M:%S %p", localtime)
     print(result, end="", flush=True)

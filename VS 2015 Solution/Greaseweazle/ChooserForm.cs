@@ -46,8 +46,7 @@ namespace Greaseweazle
         public static Boolean m_bWindowsEXE = false;
         public static Boolean m_bElapsedTime = false;
         public static Boolean m_bUseCmdConsole = true;
-        //public static string m_sConsoleMsg = "            Using CMD Console mode";
-        public static string m_sConsoleMsg = "    Enhancement due Host Tools v0.37";
+        public static string m_sConsoleMsg = "             Using CMD Console mode";
         public static string m_sGWscript = "gw.py";
         public static string m_sUSBPort = "UNKNOWN";
         public static string m_sIniFile = ".\\GreaseweazleGUI.ini";
@@ -58,7 +57,7 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        public static string m_sStatusLine = "for Host Tools v0.36";
+        public static string m_sStatusLine = "for Host Tools v0.37";
         public static Color cChocolate = Color.FromArgb(100, 82, 72);
         public static Color cLightBrown = Color.FromArgb(150, 114, 93);
         public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
@@ -178,11 +177,7 @@ namespace Greaseweazle
             if (System.IO.File.Exists(m_sExeDir + "\\gw.exe"))
             {
                 if (!mnuWindowsEXE.Checked)
-                {
-                    AutoClosingMessageBox.Show("Found gw.exe in folder.\n\nWindows Self-contained Executable mode auto-selected", this.Text, 10000);
-                    mnuWindowsEXE.Checked = true;
-                    m_bWindowsEXE = true;
-                }
+                    AutoClosingMessageBox.Show("Found gw.exe in folder\n\nChange 'Globals\\Windows Self-contained Executable' to enable", this.Text, 10000);
             }
             else if (mnuWindowsEXE.Checked)
             {
@@ -1092,7 +1087,7 @@ namespace Greaseweazle
                         if (m_bUseCmdConsole)
                             System.Windows.Forms.MessageBox.Show("You must first close the previous Greaseweazle command console", "Oops!");
                         else
-                            System.Windows.Forms.MessageBox.Show("You must let the disk operation complete", "Oops!");
+                            System.Windows.Forms.MessageBox.Show("You must let the current operation complete", "Oops!");
                         return true;
                     }
                 }

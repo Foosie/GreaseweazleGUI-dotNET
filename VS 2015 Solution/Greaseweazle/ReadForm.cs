@@ -537,6 +537,7 @@ namespace Greaseweazle
             else
             {
                 btnLaunch.Enabled = false;
+                btnBack.Enabled = false;
                 threadWorker.RunWorkerAsync();
             }
         }
@@ -819,6 +820,7 @@ namespace Greaseweazle
         private void threadWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             btnLaunch.Enabled = true;
+            btnBack.Enabled = true;
         }
         #endregion
 
