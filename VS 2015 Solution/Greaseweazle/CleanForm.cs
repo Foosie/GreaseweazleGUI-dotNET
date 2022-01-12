@@ -154,22 +154,6 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region OldCreateCommandLine
-        private void OldCreateCommandLine()
-        {
-
-            if (true == m_bWindowsEXE)
-                txtCleanCommandLine.Text = "gw.exe";
-            else
-                txtCleanCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
-            if (true == m_bElapsedTime)
-                txtCleanCommandLine.Text += " --time";
-            txtCleanCommandLine.Text += " clean";
-            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
-                txtCleanCommandLine.Text += " --device=" + m_sUSBPort;
-        }
-        #endregion
-
         #region CreateCommandLine
         private void CreateCommandLine()
         {
@@ -181,7 +165,7 @@ namespace Greaseweazle
                 txtCleanCommandLine.Text = "python.exe " + ChooserForm.m_sGWscript;
             if (true == m_bElapsedTime)
                 txtCleanCommandLine.Text += " --time";
-            txtCleanCommandLine.Text += " erase";
+            txtCleanCommandLine.Text += " clean";
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtCleanCommandLine.Text += " --drive=" + txtDriveSelect.Text;
             if (chkPasses.Checked == true)
