@@ -62,6 +62,7 @@ namespace Greaseweazle
         public static Color cLightBrown = Color.FromArgb(150, 114, 93);
         public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
         public static Color cWhite = Color.FromArgb(0, 0, 0);
+        public static Color cBrown = Color.FromArgb(128, 64, 64);
         private string m_sInfo = "The GUI executable only supports the Host Tools version identified in the GUI's status bar. The GUI will always use the Host Tools from the folder from which the executable was placed. Use the 'info' Greaseweazle option to determine the firmware's current version.";
         private ToolStripMenuItem[] m_mnuItems;
         #endregion

@@ -239,7 +239,7 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtRFDCommandLine.Text += " --time";
             txtRFDCommandLine.Text += " read";
-            if (cbFormat.Text.Length > 0)
+            if ((cbFormat.Text.Length > 0) && (cbFormat.ForeColor != Color.Black))  // black means disabled
                 txtRFDCommandLine.Text += " --format " + cbFormat.Text;
             if (chkDriveRetriesRFD.Checked == true)
                 txtRFDCommandLine.Text += " --retries=" + txtDriveRetriesRFD.Text;
@@ -280,12 +280,7 @@ namespace Greaseweazle
             if (chkLegacySS.Checked == true)
                 txtRFDCommandLine.Text += "::legacy_ss";
             if (chkBitrateRFD.Checked == true)
-            {
                 txtRFDCommandLine.Text += "::bitrate=" + txtBitrateRFD.Text;
-
-                int iIndex = cbExtension.FindString(".hfe");
-                cbExtension.SelectedIndex = iIndex;
-            }
             txtRFDCommandLine.Text += "\"";
         }
         #endregion
@@ -417,14 +412,19 @@ namespace Greaseweazle
 
         private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbFilename.Text = removeDiskType(this.tbFilename.Text, true) + cbExtension.Text;
-            //if (cbExtension.Text != ".ipf")
-                //cbFormat.SelectedIndex = 0;
+            string sFn = removeDiskType(this.tbFilename.Text, true);
+            tbFilename.Text = sFn + cbExtension.Text;
+            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbFormat.SelectedIndex != 0))
+                cbFormat.ForeColor = Color.Black;
+            else
+                cbFormat.ForeColor = Color.White;
             CreateCommandLine();
         }
 
         private void cbFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbExtension.SelectedIndex != 0))
+                cbExtension.Text = "";
             CreateCommandLine();
         }
 

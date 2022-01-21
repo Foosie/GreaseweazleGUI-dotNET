@@ -10,6 +10,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -199,8 +200,8 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtWTDCommandLine.Text += " --time";
             txtWTDCommandLine.Text += " write";
-            if (cbFormat.Text.Length > 0)
-                txtWTDCommandLine.Text += " --format " + cbFormat.Text;
+            if ((cbFormat.Text.Length > 0) && (cbFormat.ForeColor != Color.Black))  // black means disabled
+                    txtWTDCommandLine.Text += " --format " + cbFormat.Text;
             if (chkRetries.Checked == true)
                 txtWTDCommandLine.Text += " --retries=" + txtRetries.Text;
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
@@ -580,9 +581,12 @@ namespace Greaseweazle
         #region cbExtension_SelectedIndexChanged
         private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
         {
-            m_sWTDFilename = removeDiskType(m_sWTDFilename, true) + cbExtension.Text;
-            //if (cbExtension.Text != ".ipf")
-                //cbFormat.SelectedIndex = 0;
+             string sFn = removeDiskType(this.m_sWTDFilename, true);
+            m_sWTDFilename = sFn + cbExtension.Text;
+            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbFormat.SelectedIndex != 0))
+                cbFormat.ForeColor = Color.Black;
+            else
+                cbFormat.ForeColor = Color.White;
             CreateCommandLine();
         }
         #endregion 
@@ -590,6 +594,8 @@ namespace Greaseweazle
         #region cbFormat_SelectedIndexChanged
         private void cbFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbExtension.SelectedIndex != 0))
+                cbExtension.Text = "";
             CreateCommandLine();
         }
         #endregion
