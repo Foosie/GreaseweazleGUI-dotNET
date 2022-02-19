@@ -67,6 +67,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtDriveSelect", txtDriveSelect.Text);
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtEraseCommandLine", txtEraseCommandLine.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkHighFreq", (chkHighFreq.Checked == true).ToString());
         }
         #endregion
 
@@ -96,6 +98,16 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkDriveSelect.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "chkFakeIndex", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkFakeIndex.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "chkHighFreq", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkHighFreq.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -123,6 +135,10 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtEraseCommandLine.Text += " --time";
             txtEraseCommandLine.Text += " erase";
+            if (chkFakeIndex.Checked == true)
+                txtEraseCommandLine.Text += " --fake-index";
+            if (chkHighFreq.Checked == true)
+                txtEraseCommandLine.Text += " --hfreq";
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
                 txtEraseCommandLine.Text += " --drive=" + txtDriveSelect.Text;
             if (chkHeadsSet.Checked == true)
@@ -329,6 +345,36 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void chkCylSet_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtCylSet_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkHeadsSet_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtHeadsSet_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkFakeIndex_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkHighFreq_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion // changed
 
         #region WndProc
@@ -347,34 +393,6 @@ namespace Greaseweazle
                 ChooserForm.m_frmChooser.Show();
             }
             base.WndProc(ref m);
-        }
-        #endregion
-
-        #region chkCylSet_CheckedChanged
-        private void chkCylSet_CheckedChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region txtCylSet_TextChanged
-        private void txtCylSet_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region chkHeadsSet_CheckedChanged
-        private void chkHeadsSet_CheckedChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region txtHeadsSet_TextChanged
-        private void txtHeadsSet_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
         }
         #endregion
 

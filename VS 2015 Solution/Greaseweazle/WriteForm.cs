@@ -72,6 +72,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkEraseEmpty", (chkEraseEmpty.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDriveSelectWTD", txtDriveSelectWTD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDriveSelectWTD", (chkDriveSelectWTD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtPrecomp", txtPrecomp.Text);
@@ -117,6 +118,11 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkEraseEmpty.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkFakeIndex", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkFakeIndex.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtDriveSelectWTD", "garbage").Trim())) != "garbage")
                 txtDriveSelectWTD.Text = sRet;
@@ -201,7 +207,7 @@ namespace Greaseweazle
                 txtWTDCommandLine.Text += " --time";
             txtWTDCommandLine.Text += " write";
             if ((cbFormat.Text.Length > 0) && (cbFormat.ForeColor != Color.Black))  // black means disabled
-                    txtWTDCommandLine.Text += " --format " + cbFormat.Text;
+                    txtWTDCommandLine.Text += " --format=" + cbFormat.Text;
             if (chkRetries.Checked == true)
                 txtWTDCommandLine.Text += " --retries=" + txtRetries.Text;
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
@@ -212,6 +218,8 @@ namespace Greaseweazle
                 sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkEraseEmpty.Checked == true)
                 txtWTDCommandLine.Text += " --erase-empty";
+            if (chkFakeIndex.Checked == true)
+                txtWTDCommandLine.Text += " --fake-index";
             if (chkCylSet.Checked == true)
                 sTracks += "c=" + txtCylSet.Text + ":";
             if (chkHeadsSet.Checked == true)
@@ -526,6 +534,11 @@ namespace Greaseweazle
         }
 
         private void chkHeadSwap_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkFakeIndex_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

@@ -68,12 +68,12 @@ namespace Greaseweazle
         #region iniWriteFile
         public void iniWriteFile()
         {
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sRFDFilename",tbFilename.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "m_sRFDFilename", tbFilename.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbExtension", cbExtension.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbFormat", cbFormat.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDoubleStep", txtDoubleStep.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());          
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkLegacySS", (chkLegacySS.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtRevsPerTrack", txtRevsPerTrack.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRevsPerTrack", (chkRevsPerTrack.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveSelectRFD", txtDriveSelectRFD.Text);
@@ -82,8 +82,9 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtRFDCommandLine", txtRFDCommandLine.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkBitrateRFD", (chkBitrateRFD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtBitrateRFD", txtBitrateRFD.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRpmRFD", (chkDriveRpmRFD.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRpmRFD", txtDriveRpmRFD.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkAdjustSpeed", (chkAdjustSpeed.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtAdjustSpeed", txtAdjustSpeed.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbAdjustSpeed", cbAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkDriveRetriesRFD", (chkDriveRetriesRFD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtDriveRetriesRFD", txtDriveRetriesRFD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkAutoInc", (chkAutoInc.Checked == true).ToString());
@@ -97,6 +98,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRaw", (chkRaw.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkNoClobber", (chkNoClobber.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
         }
         #endregion
 
@@ -112,8 +114,8 @@ namespace Greaseweazle
             {
                 tbFilename.Text = sRet;
                 SetFNSuffix();
-                CreateCommandLine();           
-            }          
+                CreateCommandLine();
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkLegacySS", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -149,13 +151,15 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkBitrateRFD.Checked = true;
             }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDriveRpmRFD", "garbage").Trim())) != "garbage")
-                txtDriveRpmRFD.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkDriveRpmRFD", "garbage").Trim())) != "garbage")
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtAdjustSpeed", "garbage").Trim())) != "garbage")
+                txtAdjustSpeed.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkAdjustSpeed", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
-                    chkDriveRpmRFD.Checked = true;
+                    chkAdjustSpeed.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "cbAdjustSpeed", "garbage").Trim())) != "garbage")
+                cbAdjustSpeed.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtDriveRetriesRFD", "garbage").Trim())) != "garbage")
                 txtDriveRetriesRFD.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkDriveRetriesRFD", "garbage").Trim())) != "garbage")
@@ -207,6 +211,13 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkRaw.Checked = true;
             }
+
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkFakeIndex", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkFakeIndex.Checked = true;
+            }
+
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkNoClobber", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -240,21 +251,23 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --time";
             txtRFDCommandLine.Text += " read";
             if ((cbFormat.Text.Length > 0) && (cbFormat.ForeColor != Color.Black))  // black means disabled
-                txtRFDCommandLine.Text += " --format " + cbFormat.Text;
+                txtRFDCommandLine.Text += " --format=" + cbFormat.Text;
             if (chkDriveRetriesRFD.Checked == true)
                 txtRFDCommandLine.Text += " --retries=" + txtDriveRetriesRFD.Text;
             if (chkNoClobber.Checked == true)
                 txtRFDCommandLine.Text += " --no-clobber";
             if (chkRevsPerTrack.Checked == true)
                 txtRFDCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
-            if (chkDriveRpmRFD.Checked == true)
-                txtRFDCommandLine.Text += " --rpm=" + txtDriveRpmRFD.Text;
+            if (chkAdjustSpeed.Checked == true)
+                txtRFDCommandLine.Text += " --adjust-speed=" + txtAdjustSpeed.Text + cbAdjustSpeed.Text;
             if (chkRaw.Checked == true)
                 txtRFDCommandLine.Text += " --raw";
+            if (chkFakeIndex.Checked == true)
+                txtRFDCommandLine.Text += " --fake-index";
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
             if (chkDoubleStep.Checked == true)
-                    sTracks += "step=" + txtDoubleStep.Text + ":";
+                sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkCylSet.Checked == true)
                 sTracks += "c=" + txtCylSet.Text + ":";
             if (chkHeadsSet.Checked == true)
@@ -307,7 +320,7 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void chkDriveRpmRFD_CheckedChanged(object sender, EventArgs e)
+        private void chkAdjustSpeed_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
@@ -443,6 +456,21 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void txtAdjustSpeed_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void cbAdjustSpeed_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkFakeIndex_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
 
         #region ReadForm_Load
@@ -459,13 +487,15 @@ namespace Greaseweazle
             this.txtDriveSelectRFD.BackColor = ChooserForm.cLightBrown;
             this.txtBitrateRFD.BackColor = ChooserForm.cLightBrown;
             this.txtDriveRetriesRFD.BackColor = ChooserForm.cLightBrown;
-            this.txtDriveRpmRFD.BackColor = ChooserForm.cLightBrown;
+            this.txtAdjustSpeed.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;
             this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
             this.tbFilename.BackColor = ChooserForm.cLightBrown;
             this.tbSuffix.BackColor = ChooserForm.cLightBrown;
             this.cbExtension.ForeColor = Color.White;
             this.cbExtension.BackColor = ChooserForm.cLightBrown;
+            this.cbAdjustSpeed.ForeColor = Color.White;
+            this.cbAdjustSpeed.BackColor = ChooserForm.cLightBrown;
             this.cbFormat.ForeColor = Color.White;
             this.cbFormat.BackColor = ChooserForm.cLightBrown;
             this.btnInc.BackColor = ChooserForm.cDarkBrown;
@@ -612,7 +642,8 @@ namespace Greaseweazle
         {
             if (lbOutput.InvokeRequired)
             {
-                lbOutput.Invoke((MethodInvoker)delegate {
+                lbOutput.Invoke((MethodInvoker)delegate
+                {
                     // Running on the UI thread
                     lbOutputDoUpdate(lineOutput);
                 });
@@ -633,7 +664,8 @@ namespace Greaseweazle
         {
             if (lbOutput.InvokeRequired)
             {
-                lbOutput.Invoke((MethodInvoker)delegate {
+                lbOutput.Invoke((MethodInvoker)delegate
+                {
                     // Running on the UI thread
                     lbOutput.Items.Clear();
                 });
@@ -720,7 +752,7 @@ namespace Greaseweazle
             string sExt = Path.GetExtension(tbFilename.Text);
             if ((pos = sFN.IndexOf(m_sSeperator)) == -1)
                 return;
-            String sSuffix = sFN.Substring(pos+2);
+            String sSuffix = sFN.Substring(pos + 2);
             Int32.TryParse(sSuffix, out n);
             tbSuffix.Text = n.ToString();
         }

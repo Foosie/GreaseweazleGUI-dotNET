@@ -66,12 +66,14 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtCylSet", txtCylSet.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkHeadsSet", (chkHeadsSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtHeadsSet", txtHeadsSet.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtDriveSelect", txtRPM.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkDriveSelect", (chkRPM.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtAdjustSpeed", txtAdjustSpeed.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkAdjustSpeed", chkAdjustSpeed.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbAdjustSpeed", txtAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtDoubleStep", txtDoubleStep.Text);
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkRPM", (chkRPM.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtRPM", txtRPM.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkAdjustSpeed", (chkAdjustSpeed.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtAdjustSpeed", txtAdjustSpeed.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbAdjustSpeed", cbAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbFormat", cbFormat.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkCylSet", (chkCylSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtCylSet", txtCylSet.Text);
@@ -104,13 +106,15 @@ namespace Greaseweazle
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtDoubleStep", "garbage").Trim())) != "garbage")
                 txtDoubleStep.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtRPM", "garbage").Trim())) != "garbage")
-                txtRPM.Text = sRet;
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkRPM", "garbage").Trim())) != "garbage")
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtAdjustSpeed", "garbage").Trim())) != "garbage")
+                txtAdjustSpeed.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkAdjustSpeed", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
-                    chkRPM.Checked = true;
+                    chkAdjustSpeed.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "cbAdjustSpeed", "garbage").Trim())) != "garbage")
+                cbAdjustSpeed.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkCylSet", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -188,12 +192,12 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtConvertCommandLine.Text += " --time";
             txtConvertCommandLine.Text += " convert";
-            if ((chkRPM.Enabled == true) && (chkRPM.Checked == true))
-                txtConvertCommandLine.Text += " --rpm=" + txtRPM.Text;
+            if ((chkAdjustSpeed.Enabled == true) && (chkAdjustSpeed.Checked == true))
+                txtConvertCommandLine.Text += " --adjust-speed=" + cbAdjustSpeed.Text + txtAdjustSpeed.Text;
             if (chkNoClobber.Checked == true)
                 txtConvertCommandLine.Text += " --no-clobber";
             if (cbFormat.Text.Length > 0)
-                txtConvertCommandLine.Text += " --format " + cbFormat.Text;
+                txtConvertCommandLine.Text += " --format=" + cbFormat.Text;
             if (chkCylSet.Checked == true)
             {
                 sTracks += "c=" + txtCylSet.Text + ":";
@@ -359,7 +363,8 @@ namespace Greaseweazle
             this.lbOutput.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;
             this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
-            this.txtRPM.BackColor = ChooserForm.cLightBrown;
+            this.txtAdjustSpeed.BackColor = ChooserForm.cLightBrown;
+            this.cbAdjustSpeed.BackColor = ChooserForm.cLightBrown;
             this.txtDoubleStep.BackColor = ChooserForm.cLightBrown;
             this.txtInputFile.BackColor = ChooserForm.cLightBrown;
             this.txtOutputFile.BackColor = ChooserForm.cLightBrown;
@@ -412,12 +417,17 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void chkRPM_CheckedChanged(object sender, EventArgs e)
+        private void chkAdjustSpeed_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
 
-        private void txtRPM_TextChanged(object sender, EventArgs e)
+        private void txtAdjustSpeed_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void cbAdjustSpeed_SelectedIndexChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
