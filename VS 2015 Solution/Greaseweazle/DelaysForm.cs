@@ -149,7 +149,7 @@ namespace Greaseweazle
             if (chkDelayMotorOn.Checked == true)
                 txtDelaysCommandLine.Text += " --motor=" + txtDelayMotorOn.Text;
             if (chkDelayAutoDeselect.Checked == true)
-                txtDelaysCommandLine.Text += " --auto-off=" + txtDelayAutoDeselect.Text;
+                txtDelaysCommandLine.Text += " --watchdog=" + txtDelayAutoDeselect.Text;
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtDelaysCommandLine.Text += " --device=" + m_sUSBPort;
         }

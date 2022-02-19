@@ -46,7 +46,7 @@ namespace Greaseweazle
         public static Boolean m_bWindowsEXE = false;
         public static Boolean m_bElapsedTime = false;
         public static Boolean m_bUseCmdConsole = true;
-        public static string m_sConsoleMsg = "             Using CMD Console mode";
+        public static string m_sConsoleMsg = "Using CMD Console mode";
         public static string m_sGWscript = "gw.py";
         public static string m_sUSBPort = "UNKNOWN";
         public static string m_sIniFile = ".\\GreaseweazleGUI.ini";

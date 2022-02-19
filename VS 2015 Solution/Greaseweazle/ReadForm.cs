@@ -99,6 +99,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRaw", (chkRaw.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkNoClobber", (chkNoClobber.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtFakeIndex", txtFakeIndex.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbFakeIndex", cbFakeIndex.Text);
         }
         #endregion
 
@@ -217,7 +219,14 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkFakeIndex.Checked = true;
             }
-
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtFakeIndex", "garbage").Trim())) != "garbage")
+            {
+                txtFakeIndex.Text = sRet;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "cbFakeIndex", "garbage").Trim())) != "garbage")
+            {
+                cbFakeIndex.Text = sRet;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkNoClobber", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -263,7 +272,7 @@ namespace Greaseweazle
             if (chkRaw.Checked == true)
                 txtRFDCommandLine.Text += " --raw";
             if (chkFakeIndex.Checked == true)
-                txtRFDCommandLine.Text += " --fake-index";
+                txtRFDCommandLine.Text += " --fake-index=" + txtFakeIndex.Text + cbFakeIndex.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
             if (chkDoubleStep.Checked == true)
@@ -471,6 +480,16 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void txtFakeIndex_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void cbFakeIndex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
 
         #region ReadForm_Load
@@ -488,12 +507,16 @@ namespace Greaseweazle
             this.txtBitrateRFD.BackColor = ChooserForm.cLightBrown;
             this.txtDriveRetriesRFD.BackColor = ChooserForm.cLightBrown;
             this.txtAdjustSpeed.BackColor = ChooserForm.cLightBrown;
+            this.txtFakeIndex.BackColor = ChooserForm.cLightBrown;
+            this.cbFakeIndex.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;
             this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
             this.tbFilename.BackColor = ChooserForm.cLightBrown;
             this.tbSuffix.BackColor = ChooserForm.cLightBrown;
             this.cbExtension.ForeColor = Color.White;
             this.cbExtension.BackColor = ChooserForm.cLightBrown;
+            this.txtAdjustSpeed.ForeColor = Color.White;
+            this.txtAdjustSpeed.BackColor = ChooserForm.cLightBrown;
             this.cbAdjustSpeed.ForeColor = Color.White;
             this.cbAdjustSpeed.BackColor = ChooserForm.cLightBrown;
             this.cbFormat.ForeColor = Color.White;

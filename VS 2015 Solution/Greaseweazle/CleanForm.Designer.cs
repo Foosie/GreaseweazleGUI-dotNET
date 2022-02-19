@@ -41,10 +41,17 @@ namespace Greaseweazle
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CleanForm));
             this.gb1 = new System.Windows.Forms.GroupBox();
-            this.btnBack = new System.Windows.Forms.Button();
+            this.gbEraseDisk = new System.Windows.Forms.GroupBox();
+            this.chkLinger = new System.Windows.Forms.CheckBox();
+            this.txtLinger = new System.Windows.Forms.TextBox();
+            this.chkPasses = new System.Windows.Forms.CheckBox();
+            this.txtPasses = new System.Windows.Forms.TextBox();
+            this.chkCylSet = new System.Windows.Forms.CheckBox();
+            this.txtCylSet = new System.Windows.Forms.TextBox();
+            this.txtDriveSelect = new System.Windows.Forms.TextBox();
+            this.chkDriveSelect = new System.Windows.Forms.CheckBox();
             this.txtCleanCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
-            this.btnLaunch = new System.Windows.Forms.Button();
             this.lblHostTools = new System.Windows.Forms.Label();
             this.threadWorker = new System.ComponentModel.BackgroundWorker();
             this.lbOutput = new System.Windows.Forms.ListBox();
@@ -52,43 +59,132 @@ namespace Greaseweazle
             this.ctxOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbEraseDisk = new System.Windows.Forms.GroupBox();
-            this.chkPasses = new System.Windows.Forms.CheckBox();
-            this.txtPasses = new System.Windows.Forms.TextBox();
-            this.chkCylSet = new System.Windows.Forms.CheckBox();
-            this.txtCylSet = new System.Windows.Forms.TextBox();
-            this.txtDriveSelect = new System.Windows.Forms.TextBox();
-            this.chkDriveSelect = new System.Windows.Forms.CheckBox();
-            this.chkLinger = new System.Windows.Forms.CheckBox();
-            this.txtLinger = new System.Windows.Forms.TextBox();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnLaunch = new System.Windows.Forms.Button();
             this.gb1.SuspendLayout();
-            this.ctxOutput.SuspendLayout();
             this.gbEraseDisk.SuspendLayout();
+            this.ctxOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb1
             // 
             this.gb1.Controls.Add(this.gbEraseDisk);
-            this.gb1.Controls.Add(this.btnBack);
             this.gb1.Controls.Add(this.txtCleanCommandLine);
             this.gb1.Controls.Add(this.lblStaticCL);
-            this.gb1.Controls.Add(this.btnLaunch);
-            this.gb1.Location = new System.Drawing.Point(12, 12);
+            this.gb1.Location = new System.Drawing.Point(15, 12);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(543, 321);
+            this.gb1.Size = new System.Drawing.Size(543, 289);
             this.gb1.TabIndex = 0;
             this.gb1.TabStop = false;
             // 
-            // btnBack
+            // gbEraseDisk
             // 
-            this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(311, 279);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 13;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.gbEraseDisk.Controls.Add(this.chkLinger);
+            this.gbEraseDisk.Controls.Add(this.txtLinger);
+            this.gbEraseDisk.Controls.Add(this.chkPasses);
+            this.gbEraseDisk.Controls.Add(this.txtPasses);
+            this.gbEraseDisk.Controls.Add(this.chkCylSet);
+            this.gbEraseDisk.Controls.Add(this.txtCylSet);
+            this.gbEraseDisk.Controls.Add(this.txtDriveSelect);
+            this.gbEraseDisk.Controls.Add(this.chkDriveSelect);
+            this.gbEraseDisk.Location = new System.Drawing.Point(15, 17);
+            this.gbEraseDisk.Name = "gbEraseDisk";
+            this.gbEraseDisk.Size = new System.Drawing.Size(512, 148);
+            this.gbEraseDisk.TabIndex = 1;
+            this.gbEraseDisk.TabStop = false;
+            // 
+            // chkLinger
+            // 
+            this.chkLinger.AutoSize = true;
+            this.chkLinger.Location = new System.Drawing.Point(108, 81);
+            this.chkLinger.Name = "chkLinger";
+            this.chkLinger.Size = new System.Drawing.Size(102, 21);
+            this.chkLinger.TabIndex = 6;
+            this.chkLinger.Text = "Linger (ms)";
+            this.chkLinger.UseVisualStyleBackColor = true;
+            this.chkLinger.CheckedChanged += new System.EventHandler(this.chkLinger_CheckedChanged);
+            // 
+            // txtLinger
+            // 
+            this.txtLinger.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtLinger.ForeColor = System.Drawing.Color.White;
+            this.txtLinger.Location = new System.Drawing.Point(314, 79);
+            this.txtLinger.Name = "txtLinger";
+            this.txtLinger.Size = new System.Drawing.Size(93, 22);
+            this.txtLinger.TabIndex = 7;
+            this.txtLinger.Text = "100";
+            this.txtLinger.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLinger.TextChanged += new System.EventHandler(this.txtLinger_TextChanged);
+            // 
+            // chkPasses
+            // 
+            this.chkPasses.AutoSize = true;
+            this.chkPasses.Location = new System.Drawing.Point(108, 53);
+            this.chkPasses.Name = "chkPasses";
+            this.chkPasses.Size = new System.Drawing.Size(76, 21);
+            this.chkPasses.TabIndex = 4;
+            this.chkPasses.Text = "Passes";
+            this.chkPasses.UseVisualStyleBackColor = true;
+            this.chkPasses.CheckedChanged += new System.EventHandler(this.chkPasses_CheckedChanged);
+            // 
+            // txtPasses
+            // 
+            this.txtPasses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtPasses.ForeColor = System.Drawing.Color.White;
+            this.txtPasses.Location = new System.Drawing.Point(314, 51);
+            this.txtPasses.Name = "txtPasses";
+            this.txtPasses.Size = new System.Drawing.Size(93, 22);
+            this.txtPasses.TabIndex = 5;
+            this.txtPasses.Text = "3";
+            this.txtPasses.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPasses.TextChanged += new System.EventHandler(this.txtPasses_TextChanged);
+            // 
+            // chkCylSet
+            // 
+            this.chkCylSet.AutoSize = true;
+            this.chkCylSet.Location = new System.Drawing.Point(107, 25);
+            this.chkCylSet.Name = "chkCylSet";
+            this.chkCylSet.Size = new System.Drawing.Size(88, 21);
+            this.chkCylSet.TabIndex = 2;
+            this.chkCylSet.Text = "Cylinders";
+            this.chkCylSet.UseVisualStyleBackColor = true;
+            this.chkCylSet.CheckedChanged += new System.EventHandler(this.chkCylSet_CheckedChanged);
+            // 
+            // txtCylSet
+            // 
+            this.txtCylSet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtCylSet.ForeColor = System.Drawing.Color.White;
+            this.txtCylSet.Location = new System.Drawing.Point(313, 23);
+            this.txtCylSet.Name = "txtCylSet";
+            this.txtCylSet.Size = new System.Drawing.Size(93, 22);
+            this.txtCylSet.TabIndex = 3;
+            this.txtCylSet.Text = "80";
+            this.txtCylSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtCylSet.TextChanged += new System.EventHandler(this.txtCylSet_TextChanged);
+            // 
+            // txtDriveSelect
+            // 
+            this.txtDriveSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDriveSelect.ForeColor = System.Drawing.Color.White;
+            this.txtDriveSelect.Location = new System.Drawing.Point(314, 108);
+            this.txtDriveSelect.MaxLength = 1;
+            this.txtDriveSelect.Name = "txtDriveSelect";
+            this.txtDriveSelect.Size = new System.Drawing.Size(93, 22);
+            this.txtDriveSelect.TabIndex = 9;
+            this.txtDriveSelect.Text = "A";
+            this.txtDriveSelect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDriveSelect.TextChanged += new System.EventHandler(this.txtDriveSelect_TextChanged);
+            // 
+            // chkDriveSelect
+            // 
+            this.chkDriveSelect.AutoSize = true;
+            this.chkDriveSelect.Location = new System.Drawing.Point(108, 110);
+            this.chkDriveSelect.Name = "chkDriveSelect";
+            this.chkDriveSelect.Size = new System.Drawing.Size(182, 21);
+            this.chkDriveSelect.TabIndex = 8;
+            this.chkDriveSelect.Text = "F7 Drive Select (AB012)";
+            this.chkDriveSelect.UseVisualStyleBackColor = true;
+            this.chkDriveSelect.CheckedChanged += new System.EventHandler(this.chkDriveSelect_CheckedChanged);
             // 
             // txtCleanCommandLine
             // 
@@ -109,22 +205,11 @@ namespace Greaseweazle
             this.lblStaticCL.TabIndex = 10;
             this.lblStaticCL.Text = "Command Line";
             // 
-            // btnLaunch
-            // 
-            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(124, 279);
-            this.btnLaunch.Name = "btnLaunch";
-            this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 12;
-            this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = false;
-            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
-            // 
             // lblHostTools
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(98, 339);
+            this.lblHostTools.Location = new System.Drawing.Point(103, 541);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 15;
@@ -143,10 +228,10 @@ namespace Greaseweazle
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
             this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(565, 20);
+            this.lbOutput.Location = new System.Drawing.Point(15, 312);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 340);
+            this.lbOutput.Size = new System.Drawing.Size(543, 180);
             this.lbOutput.TabIndex = 14;
             this.toolTipChooser.SetToolTip(this.lbOutput, "Right click for options");
             // 
@@ -177,121 +262,36 @@ namespace Greaseweazle
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
-            // gbEraseDisk
+            // btnBack
             // 
-            this.gbEraseDisk.Controls.Add(this.chkLinger);
-            this.gbEraseDisk.Controls.Add(this.txtLinger);
-            this.gbEraseDisk.Controls.Add(this.chkPasses);
-            this.gbEraseDisk.Controls.Add(this.txtPasses);
-            this.gbEraseDisk.Controls.Add(this.chkCylSet);
-            this.gbEraseDisk.Controls.Add(this.txtCylSet);
-            this.gbEraseDisk.Controls.Add(this.txtDriveSelect);
-            this.gbEraseDisk.Controls.Add(this.chkDriveSelect);
-            this.gbEraseDisk.Location = new System.Drawing.Point(15, 17);
-            this.gbEraseDisk.Name = "gbEraseDisk";
-            this.gbEraseDisk.Size = new System.Drawing.Size(512, 148);
-            this.gbEraseDisk.TabIndex = 1;
-            this.gbEraseDisk.TabStop = false;
+            this.btnBack.BackColor = System.Drawing.Color.Maroon;
+            this.btnBack.Location = new System.Drawing.Point(326, 504);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(108, 29);
+            this.btnBack.TabIndex = 17;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // chkPasses
+            // btnLaunch
             // 
-            this.chkPasses.AutoSize = true;
-            this.chkPasses.Location = new System.Drawing.Point(108, 53);
-            this.chkPasses.Name = "chkPasses";
-            this.chkPasses.Size = new System.Drawing.Size(76, 21);
-            this.chkPasses.TabIndex = 4;
-            this.chkPasses.Text = "Passes";
-            this.chkPasses.UseVisualStyleBackColor = true;
-            this.chkPasses.CheckedChanged += new System.EventHandler(this.chkPasses_CheckedChanged);
-            // 
-            // txtPasses
-            // 
-            this.txtPasses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtPasses.ForeColor = System.Drawing.Color.White;
-            this.txtPasses.Location = new System.Drawing.Point(314, 51);
-            this.txtPasses.Name = "txtPasses";
-            this.txtPasses.Size = new System.Drawing.Size(93, 22);
-            this.txtPasses.TabIndex = 5;
-            this.txtPasses.Text = "3";
-            this.txtPasses.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPasses.TextChanged += new System.EventHandler(this.txtPasses_TextChanged);
-            // 
-            // chkCylSet
-            // 
-            this.chkCylSet.AutoSize = true;
-            this.chkCylSet.Location = new System.Drawing.Point(107, 25);
-            this.chkCylSet.Name = "chkCylSet";
-            this.chkCylSet.Size = new System.Drawing.Size(111, 21);
-            this.chkCylSet.TabIndex = 2;
-            this.chkCylSet.Text = "Cylinder sets";
-            this.chkCylSet.UseVisualStyleBackColor = true;
-            this.chkCylSet.CheckedChanged += new System.EventHandler(this.chkCylSet_CheckedChanged);
-            // 
-            // txtCylSet
-            // 
-            this.txtCylSet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtCylSet.ForeColor = System.Drawing.Color.White;
-            this.txtCylSet.Location = new System.Drawing.Point(313, 23);
-            this.txtCylSet.Name = "txtCylSet";
-            this.txtCylSet.Size = new System.Drawing.Size(93, 22);
-            this.txtCylSet.TabIndex = 3;
-            this.txtCylSet.Text = "0-34,35-79";
-            this.txtCylSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtCylSet.TextChanged += new System.EventHandler(this.txtCylSet_TextChanged);
-            // 
-            // txtDriveSelect
-            // 
-            this.txtDriveSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtDriveSelect.ForeColor = System.Drawing.Color.White;
-            this.txtDriveSelect.Location = new System.Drawing.Point(314, 108);
-            this.txtDriveSelect.MaxLength = 1;
-            this.txtDriveSelect.Name = "txtDriveSelect";
-            this.txtDriveSelect.Size = new System.Drawing.Size(93, 22);
-            this.txtDriveSelect.TabIndex = 9;
-            this.txtDriveSelect.Text = "A";
-            this.txtDriveSelect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtDriveSelect.TextChanged += new System.EventHandler(this.txtDriveSelect_TextChanged);
-            // 
-            // chkDriveSelect
-            // 
-            this.chkDriveSelect.AutoSize = true;
-            this.chkDriveSelect.Location = new System.Drawing.Point(108, 110);
-            this.chkDriveSelect.Name = "chkDriveSelect";
-            this.chkDriveSelect.Size = new System.Drawing.Size(182, 21);
-            this.chkDriveSelect.TabIndex = 8;
-            this.chkDriveSelect.Text = "F7 Drive Select (AB012)";
-            this.chkDriveSelect.UseVisualStyleBackColor = true;
-            this.chkDriveSelect.CheckedChanged += new System.EventHandler(this.chkDriveSelect_CheckedChanged);
-            // 
-            // chkLinger
-            // 
-            this.chkLinger.AutoSize = true;
-            this.chkLinger.Location = new System.Drawing.Point(108, 81);
-            this.chkLinger.Name = "chkLinger";
-            this.chkLinger.Size = new System.Drawing.Size(102, 21);
-            this.chkLinger.TabIndex = 6;
-            this.chkLinger.Text = "Linger (ms)";
-            this.chkLinger.UseVisualStyleBackColor = true;
-            this.chkLinger.CheckedChanged += new System.EventHandler(this.chkLinger_CheckedChanged);
-            // 
-            // txtLinger
-            // 
-            this.txtLinger.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtLinger.ForeColor = System.Drawing.Color.White;
-            this.txtLinger.Location = new System.Drawing.Point(314, 79);
-            this.txtLinger.Name = "txtLinger";
-            this.txtLinger.Size = new System.Drawing.Size(93, 22);
-            this.txtLinger.TabIndex = 7;
-            this.txtLinger.Text = "100";
-            this.txtLinger.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtLinger.TextChanged += new System.EventHandler(this.txtLinger_TextChanged);
+            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
+            this.btnLaunch.Location = new System.Drawing.Point(139, 504);
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.Size = new System.Drawing.Size(108, 29);
+            this.btnLaunch.TabIndex = 16;
+            this.btnLaunch.Text = "Launch";
+            this.btnLaunch.UseVisualStyleBackColor = false;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // CleanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(873, 373);
+            this.ClientSize = new System.Drawing.Size(572, 573);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnLaunch);
             this.Controls.Add(this.lbOutput);
             this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gb1);
@@ -304,9 +304,9 @@ namespace Greaseweazle
             this.Load += new System.EventHandler(this.CleanForm_Load);
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
-            this.ctxOutput.ResumeLayout(false);
             this.gbEraseDisk.ResumeLayout(false);
             this.gbEraseDisk.PerformLayout();
+            this.ctxOutput.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -314,10 +314,8 @@ namespace Greaseweazle
         #endregion
 
         private System.Windows.Forms.GroupBox gb1;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.TextBox txtCleanCommandLine;
         private System.Windows.Forms.Label lblStaticCL;
-        private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.Label lblHostTools;
         private System.ComponentModel.BackgroundWorker threadWorker;
         private System.Windows.Forms.ListBox lbOutput;
@@ -334,5 +332,7 @@ namespace Greaseweazle
         private System.Windows.Forms.TextBox txtCylSet;
         private System.Windows.Forms.TextBox txtDriveSelect;
         private System.Windows.Forms.CheckBox chkDriveSelect;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnLaunch;
     }
 }

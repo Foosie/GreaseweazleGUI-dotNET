@@ -41,11 +41,14 @@ namespace Greaseweazle
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EraseForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbOutput = new System.Windows.Forms.ListBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnLaunch = new System.Windows.Forms.Button();
             this.txtEraseCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.gbEraseDisk = new System.Windows.Forms.GroupBox();
+            this.chkHighFreq = new System.Windows.Forms.CheckBox();
+            this.chkFakeIndex = new System.Windows.Forms.CheckBox();
             this.chkHeadsSet = new System.Windows.Forms.CheckBox();
             this.txtHeadsSet = new System.Windows.Forms.TextBox();
             this.chkCylSet = new System.Windows.Forms.CheckBox();
@@ -53,14 +56,13 @@ namespace Greaseweazle
             this.txtDriveSelect = new System.Windows.Forms.TextBox();
             this.chkDriveSelect = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lbOutput = new System.Windows.Forms.ListBox();
             this.lblHostTools = new System.Windows.Forms.Label();
             this.threadWorker = new System.ComponentModel.BackgroundWorker();
             this.ctxOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkFakeIndex = new System.Windows.Forms.CheckBox();
-            this.chkHighFreq = new System.Windows.Forms.CheckBox();
+            this.txtFakeIndex = new System.Windows.Forms.TextBox();
+            this.cbFakeIndex = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.gbEraseDisk.SuspendLayout();
             this.ctxOutput.SuspendLayout();
@@ -68,6 +70,7 @@ namespace Greaseweazle
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbOutput);
             this.groupBox1.Controls.Add(this.btnBack);
             this.groupBox1.Controls.Add(this.btnLaunch);
             this.groupBox1.Controls.Add(this.txtEraseCommandLine);
@@ -75,14 +78,28 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.gbEraseDisk);
             this.groupBox1.Location = new System.Drawing.Point(13, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(551, 333);
+            this.groupBox1.Size = new System.Drawing.Size(551, 516);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // lbOutput
+            // 
+            this.lbOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lbOutput.ForeColor = System.Drawing.Color.White;
+            this.lbOutput.FormattingEnabled = true;
+            this.lbOutput.HorizontalScrollbar = true;
+            this.lbOutput.ItemHeight = 16;
+            this.lbOutput.Location = new System.Drawing.Point(19, 326);
+            this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbOutput.Name = "lbOutput";
+            this.lbOutput.Size = new System.Drawing.Size(512, 132);
+            this.lbOutput.TabIndex = 17;
+            this.toolTip.SetToolTip(this.lbOutput, "Right click for options");
             // 
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(332, 285);
+            this.btnBack.Location = new System.Drawing.Point(332, 471);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 14;
@@ -93,7 +110,7 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(111, 285);
+            this.btnLaunch.Location = new System.Drawing.Point(111, 471);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 13;
@@ -105,7 +122,7 @@ namespace Greaseweazle
             // 
             this.txtEraseCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtEraseCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtEraseCommandLine.Location = new System.Drawing.Point(19, 197);
+            this.txtEraseCommandLine.Location = new System.Drawing.Point(19, 235);
             this.txtEraseCommandLine.Multiline = true;
             this.txtEraseCommandLine.Name = "txtEraseCommandLine";
             this.txtEraseCommandLine.Size = new System.Drawing.Size(512, 74);
@@ -114,7 +131,7 @@ namespace Greaseweazle
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(225, 172);
+            this.lblStaticCL.Location = new System.Drawing.Point(225, 210);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
             this.lblStaticCL.TabIndex = 11;
@@ -122,6 +139,8 @@ namespace Greaseweazle
             // 
             // gbEraseDisk
             // 
+            this.gbEraseDisk.Controls.Add(this.txtFakeIndex);
+            this.gbEraseDisk.Controls.Add(this.cbFakeIndex);
             this.gbEraseDisk.Controls.Add(this.chkHighFreq);
             this.gbEraseDisk.Controls.Add(this.chkFakeIndex);
             this.gbEraseDisk.Controls.Add(this.chkHeadsSet);
@@ -132,10 +151,32 @@ namespace Greaseweazle
             this.gbEraseDisk.Controls.Add(this.chkDriveSelect);
             this.gbEraseDisk.Location = new System.Drawing.Point(19, 21);
             this.gbEraseDisk.Name = "gbEraseDisk";
-            this.gbEraseDisk.Size = new System.Drawing.Size(512, 145);
+            this.gbEraseDisk.Size = new System.Drawing.Size(512, 182);
             this.gbEraseDisk.TabIndex = 2;
             this.gbEraseDisk.TabStop = false;
             this.gbEraseDisk.Enter += new System.EventHandler(this.gbEraseDisk_Enter);
+            // 
+            // chkHighFreq
+            // 
+            this.chkHighFreq.AutoSize = true;
+            this.chkHighFreq.Location = new System.Drawing.Point(107, 135);
+            this.chkHighFreq.Name = "chkHighFreq";
+            this.chkHighFreq.Size = new System.Drawing.Size(92, 21);
+            this.chkHighFreq.TabIndex = 10;
+            this.chkHighFreq.Text = "High Freq";
+            this.chkHighFreq.UseVisualStyleBackColor = true;
+            this.chkHighFreq.CheckedChanged += new System.EventHandler(this.chkHighFreq_CheckedChanged);
+            // 
+            // chkFakeIndex
+            // 
+            this.chkFakeIndex.AutoSize = true;
+            this.chkFakeIndex.Location = new System.Drawing.Point(107, 108);
+            this.chkFakeIndex.Name = "chkFakeIndex";
+            this.chkFakeIndex.Size = new System.Drawing.Size(98, 21);
+            this.chkFakeIndex.TabIndex = 9;
+            this.chkFakeIndex.Text = "Fake Index";
+            this.chkFakeIndex.UseVisualStyleBackColor = true;
+            this.chkFakeIndex.CheckedChanged += new System.EventHandler(this.chkFakeIndex_CheckedChanged);
             // 
             // chkHeadsSet
             // 
@@ -208,25 +249,11 @@ namespace Greaseweazle
             this.chkDriveSelect.UseVisualStyleBackColor = true;
             this.chkDriveSelect.CheckedChanged += new System.EventHandler(this.chkDriveSelect_CheckedChanged);
             // 
-            // lbOutput
-            // 
-            this.lbOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lbOutput.ForeColor = System.Drawing.Color.White;
-            this.lbOutput.FormattingEnabled = true;
-            this.lbOutput.HorizontalScrollbar = true;
-            this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(580, 16);
-            this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 356);
-            this.lbOutput.TabIndex = 16;
-            this.toolTip.SetToolTip(this.lbOutput, "Right click for options");
-            // 
             // lblHostTools
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(105, 351);
+            this.lblHostTools.Location = new System.Drawing.Point(106, 538);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(369, 23);
             this.lblHostTools.TabIndex = 15;
@@ -265,35 +292,44 @@ namespace Greaseweazle
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
-            // chkFakeIndex
+            // txtFakeIndex
             // 
-            this.chkFakeIndex.AutoSize = true;
-            this.chkFakeIndex.Location = new System.Drawing.Point(107, 108);
-            this.chkFakeIndex.Name = "chkFakeIndex";
-            this.chkFakeIndex.Size = new System.Drawing.Size(98, 21);
-            this.chkFakeIndex.TabIndex = 9;
-            this.chkFakeIndex.Text = "Fake Index";
-            this.chkFakeIndex.UseVisualStyleBackColor = true;
-            this.chkFakeIndex.CheckedChanged += new System.EventHandler(this.chkFakeIndex_CheckedChanged);
+            this.txtFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtFakeIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFakeIndex.ForeColor = System.Drawing.Color.White;
+            this.txtFakeIndex.Location = new System.Drawing.Point(220, 108);
+            this.txtFakeIndex.MaxLength = 3;
+            this.txtFakeIndex.Name = "txtFakeIndex";
+            this.txtFakeIndex.Size = new System.Drawing.Size(73, 22);
+            this.txtFakeIndex.TabIndex = 19;
+            this.txtFakeIndex.Text = "300";
+            this.txtFakeIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtFakeIndex.TextChanged += new System.EventHandler(this.txtFakeIndex_TextChanged);
             // 
-            // chkHighFreq
+            // cbFakeIndex
             // 
-            this.chkHighFreq.AutoSize = true;
-            this.chkHighFreq.Location = new System.Drawing.Point(214, 108);
-            this.chkHighFreq.Name = "chkHighFreq";
-            this.chkHighFreq.Size = new System.Drawing.Size(92, 21);
-            this.chkHighFreq.TabIndex = 10;
-            this.chkHighFreq.Text = "High Freq";
-            this.chkHighFreq.UseVisualStyleBackColor = true;
-            this.chkHighFreq.CheckedChanged += new System.EventHandler(this.chkHighFreq_CheckedChanged);
+            this.cbFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbFakeIndex.ForeColor = System.Drawing.Color.White;
+            this.cbFakeIndex.FormattingEnabled = true;
+            this.cbFakeIndex.Items.AddRange(new object[] {
+            "",
+            "rpm",
+            "ms",
+            "us",
+            "ns",
+            "scp"});
+            this.cbFakeIndex.Location = new System.Drawing.Point(313, 107);
+            this.cbFakeIndex.Name = "cbFakeIndex";
+            this.cbFakeIndex.Size = new System.Drawing.Size(91, 24);
+            this.cbFakeIndex.TabIndex = 20;
+            this.cbFakeIndex.SelectedIndexChanged += new System.EventHandler(this.cbFakeIndex_SelectedIndexChanged);
             // 
             // EraseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(885, 387);
-            this.Controls.Add(this.lbOutput);
+            this.ClientSize = new System.Drawing.Size(580, 572);
             this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.groupBox1);
             this.ForeColor = System.Drawing.Color.White;
@@ -328,11 +364,13 @@ namespace Greaseweazle
         private System.Windows.Forms.TextBox txtCylSet;
         private System.Windows.Forms.Label lblHostTools;
         private System.ComponentModel.BackgroundWorker threadWorker;
-        private System.Windows.Forms.ListBox lbOutput;
         private System.Windows.Forms.ContextMenuStrip ctxOutput;
         private System.Windows.Forms.ToolStripMenuItem ctxClearOutput;
         private System.Windows.Forms.ToolStripMenuItem ctxSaveOutput;
         private System.Windows.Forms.CheckBox chkFakeIndex;
         private System.Windows.Forms.CheckBox chkHighFreq;
+        private System.Windows.Forms.ListBox lbOutput;
+        private System.Windows.Forms.TextBox txtFakeIndex;
+        private System.Windows.Forms.ComboBox cbFakeIndex;
     }
 }

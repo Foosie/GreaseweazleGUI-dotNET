@@ -157,8 +157,6 @@ namespace Greaseweazle
         #region CreateCommandLine
         private void CreateCommandLine()
         {
-            string sTracks = " --tracks=";
-
             if (true == m_bWindowsEXE)
                 txtCleanCommandLine.Text = "gw.exe";
             else
@@ -173,14 +171,7 @@ namespace Greaseweazle
             if (chkLinger.Checked == true)
                 txtCleanCommandLine.Text += " --linger=" + txtLinger.Text;
             if (chkCylSet.Checked == true)
-                sTracks += " c=" + txtCylSet.Text + ":";
-            if (sTracks != " --tracks=")
-            {
-                if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
-                    sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
-                txtCleanCommandLine.Text += sTracks;
-            }
-
+                txtCleanCommandLine.Text += " cyls=" + txtCylSet.Text;
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtCleanCommandLine.Text += " --device=" + m_sUSBPort;
         }

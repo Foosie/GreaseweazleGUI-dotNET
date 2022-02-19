@@ -73,9 +73,9 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.txtCommandLine);
             this.groupBox1.Controls.Add(this.lblStaticCL);
             this.groupBox1.Controls.Add(this.gbEraseDisk);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Location = new System.Drawing.Point(14, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(862, 392);
+            this.groupBox1.Size = new System.Drawing.Size(550, 508);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -86,10 +86,10 @@ namespace Greaseweazle
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
             this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(550, 29);
+            this.lbOutput.Location = new System.Drawing.Point(19, 298);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 340);
+            this.lbOutput.Size = new System.Drawing.Size(512, 116);
             this.lbOutput.TabIndex = 53;
             this.toolTip.SetToolTip(this.lbOutput, "Right click for options");
             // 
@@ -97,7 +97,7 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(95, 344);
+            this.lblHostTools.Location = new System.Drawing.Point(92, 471);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 14;
@@ -107,7 +107,7 @@ namespace Greaseweazle
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(332, 300);
+            this.btnBack.Location = new System.Drawing.Point(332, 427);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 12;
@@ -118,7 +118,7 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(111, 300);
+            this.btnLaunch.Location = new System.Drawing.Point(111, 427);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 11;
@@ -139,7 +139,7 @@ namespace Greaseweazle
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(225, 177);
+            this.lblStaticCL.Location = new System.Drawing.Point(224, 177);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
             this.lblStaticCL.TabIndex = 9;
@@ -267,7 +267,7 @@ namespace Greaseweazle
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(891, 419);
+            this.ClientSize = new System.Drawing.Size(578, 536);
             this.Controls.Add(this.groupBox1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

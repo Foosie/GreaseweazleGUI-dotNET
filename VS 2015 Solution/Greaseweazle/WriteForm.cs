@@ -73,6 +73,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkEraseEmpty", (chkEraseEmpty.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtFakeIndex", txtFakeIndex.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "cbFakeIndex", cbFakeIndex.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtDriveSelectWTD", txtDriveSelectWTD.Text);
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkDriveSelectWTD", (chkDriveSelectWTD.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "txtPrecomp", txtPrecomp.Text);
@@ -123,6 +125,14 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkFakeIndex.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtFakeIndex", "garbage").Trim())) != "garbage")
+            {
+                txtFakeIndex.Text = sRet;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "cbFakeIndex", "garbage").Trim())) != "garbage")
+            {
+                cbFakeIndex.Text = sRet;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "txtDriveSelectWTD", "garbage").Trim())) != "garbage")
                 txtDriveSelectWTD.Text = sRet;
@@ -219,7 +229,7 @@ namespace Greaseweazle
             if (chkEraseEmpty.Checked == true)
                 txtWTDCommandLine.Text += " --erase-empty";
             if (chkFakeIndex.Checked == true)
-                txtWTDCommandLine.Text += " --fake-index";
+                txtWTDCommandLine.Text += " --fake-index=" + txtFakeIndex.Text + cbFakeIndex.Text;
             if (chkCylSet.Checked == true)
                 sTracks += "c=" + txtCylSet.Text + ":";
             if (chkHeadsSet.Checked == true)
@@ -369,6 +379,8 @@ namespace Greaseweazle
             this.btnWTDSelectFile.BackColor = ChooserForm.cDarkBrown;
             this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
             this.btnBack.BackColor = ChooserForm.cDarkBrown;
+            this.txtFakeIndex.BackColor = ChooserForm.cLightBrown;
+            this.cbFakeIndex.BackColor = ChooserForm.cLightBrown;
 
             iniReadFile();
             CreateCommandLine();
@@ -422,11 +434,6 @@ namespace Greaseweazle
         #region changed
 
         private void txtWriteLastCyl_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-
-        private void chkWTDAdjustSpeed_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
@@ -539,6 +546,16 @@ namespace Greaseweazle
         }
 
         private void chkFakeIndex_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtFakeIndex_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void cbFakeIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

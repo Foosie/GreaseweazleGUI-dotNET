@@ -47,6 +47,8 @@ namespace Greaseweazle
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnLaunch = new System.Windows.Forms.Button();
             this.lblHostTools = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gb3 = new System.Windows.Forms.GroupBox();
@@ -60,8 +62,6 @@ namespace Greaseweazle
             this.txtInputFile = new System.Windows.Forms.TextBox();
             this.btnOutputFile = new System.Windows.Forms.Button();
             this.btnInputFile = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnLaunch = new System.Windows.Forms.Button();
             this.txtConvertCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.gbConvert = new System.Windows.Forms.GroupBox();
@@ -94,10 +94,10 @@ namespace Greaseweazle
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
             this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(568, 21);
+            this.lbOutput.Location = new System.Drawing.Point(16, 345);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 628);
+            this.lbOutput.Size = new System.Drawing.Size(1066, 132);
             this.lbOutput.TabIndex = 31;
             this.toolTip.SetToolTip(this.lbOutput, "Right click for options");
             // 
@@ -135,20 +135,44 @@ namespace Greaseweazle
             // 
             // gb1
             // 
+            this.gb1.Controls.Add(this.btnBack);
+            this.gb1.Controls.Add(this.btnLaunch);
             this.gb1.Controls.Add(this.lbOutput);
             this.gb1.Controls.Add(this.lblHostTools);
             this.gb1.Controls.Add(this.groupBox2);
-            this.gb1.Location = new System.Drawing.Point(11, 3);
+            this.gb1.Location = new System.Drawing.Point(13, 3);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(874, 664);
+            this.gb1.Size = new System.Drawing.Size(1097, 557);
             this.gb1.TabIndex = 1;
             this.gb1.TabStop = false;
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.Maroon;
+            this.btnBack.Location = new System.Drawing.Point(605, 487);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(108, 29);
+            this.btnBack.TabIndex = 33;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnLaunch
+            // 
+            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
+            this.btnLaunch.Location = new System.Drawing.Point(384, 487);
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.Size = new System.Drawing.Size(108, 29);
+            this.btnLaunch.TabIndex = 32;
+            this.btnLaunch.Text = "Launch";
+            this.btnLaunch.UseVisualStyleBackColor = false;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // lblHostTools
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(103, 624);
+            this.lblHostTools.Location = new System.Drawing.Point(364, 523);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(369, 23);
             this.lblHostTools.TabIndex = 30;
@@ -159,14 +183,12 @@ namespace Greaseweazle
             // 
             this.groupBox2.Controls.Add(this.gb3);
             this.groupBox2.Controls.Add(this.gb2);
-            this.groupBox2.Controls.Add(this.btnBack);
-            this.groupBox2.Controls.Add(this.btnLaunch);
             this.groupBox2.Controls.Add(this.txtConvertCommandLine);
             this.groupBox2.Controls.Add(this.lblStaticCL);
             this.groupBox2.Controls.Add(this.gbConvert);
-            this.groupBox2.Location = new System.Drawing.Point(15, 14);
+            this.groupBox2.Location = new System.Drawing.Point(17, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(541, 603);
+            this.groupBox2.Size = new System.Drawing.Size(1063, 319);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
@@ -174,16 +196,16 @@ namespace Greaseweazle
             // 
             this.gb3.Controls.Add(this.chkOutTracks);
             this.gb3.Controls.Add(this.groupBox1);
-            this.gb3.Location = new System.Drawing.Point(14, 179);
+            this.gb3.Location = new System.Drawing.Point(536, 14);
             this.gb3.Name = "gb3";
-            this.gb3.Size = new System.Drawing.Size(512, 100);
+            this.gb3.Size = new System.Drawing.Size(512, 158);
             this.gb3.TabIndex = 16;
             this.gb3.TabStop = false;
             // 
             // chkOutTracks
             // 
             this.chkOutTracks.AutoSize = true;
-            this.chkOutTracks.Location = new System.Drawing.Point(17, 42);
+            this.chkOutTracks.Location = new System.Drawing.Point(19, 66);
             this.chkOutTracks.Name = "chkOutTracks";
             this.chkOutTracks.Size = new System.Drawing.Size(120, 21);
             this.chkOutTracks.TabIndex = 17;
@@ -196,7 +218,7 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.chkOTHeadSwap);
             this.groupBox1.Controls.Add(this.txtOTDoubleStep);
             this.groupBox1.Controls.Add(this.chkOTDoubleStep);
-            this.groupBox1.Location = new System.Drawing.Point(157, 21);
+            this.groupBox1.Location = new System.Drawing.Point(155, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(334, 59);
             this.groupBox1.TabIndex = 18;
@@ -242,9 +264,9 @@ namespace Greaseweazle
             this.gb2.Controls.Add(this.txtInputFile);
             this.gb2.Controls.Add(this.btnOutputFile);
             this.gb2.Controls.Add(this.btnInputFile);
-            this.gb2.Location = new System.Drawing.Point(14, 286);
+            this.gb2.Location = new System.Drawing.Point(14, 178);
             this.gb2.Name = "gb2";
-            this.gb2.Size = new System.Drawing.Size(512, 108);
+            this.gb2.Size = new System.Drawing.Size(512, 125);
             this.gb2.TabIndex = 22;
             this.gb2.TabStop = false;
             // 
@@ -292,42 +314,20 @@ namespace Greaseweazle
             this.btnInputFile.UseVisualStyleBackColor = false;
             this.btnInputFile.Click += new System.EventHandler(this.btnInputFile_Click);
             // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(332, 550);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 30;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnLaunch
-            // 
-            this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(111, 550);
-            this.btnLaunch.Name = "btnLaunch";
-            this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 29;
-            this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = false;
-            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
-            // 
             // txtConvertCommandLine
             // 
             this.txtConvertCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtConvertCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtConvertCommandLine.Location = new System.Drawing.Point(14, 423);
+            this.txtConvertCommandLine.Location = new System.Drawing.Point(536, 202);
             this.txtConvertCommandLine.Multiline = true;
             this.txtConvertCommandLine.Name = "txtConvertCommandLine";
-            this.txtConvertCommandLine.Size = new System.Drawing.Size(512, 114);
+            this.txtConvertCommandLine.Size = new System.Drawing.Size(512, 101);
             this.txtConvertCommandLine.TabIndex = 28;
             // 
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(225, 401);
+            this.lblStaticCL.Location = new System.Drawing.Point(754, 178);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
             this.lblStaticCL.TabIndex = 27;
@@ -538,7 +538,7 @@ namespace Greaseweazle
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(898, 681);
+            this.ClientSize = new System.Drawing.Size(1126, 573);
             this.Controls.Add(this.gb1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -571,36 +571,36 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolStripMenuItem ctxSaveOutput;
         private System.Windows.Forms.GroupBox gb1;
         private System.Windows.Forms.Label lblHostTools;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ListBox lbOutput;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnLaunch;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gb3;
+        private System.Windows.Forms.CheckBox chkOutTracks;
+        private System.Windows.Forms.CheckBox chkOTHeadSwap;
+        private System.Windows.Forms.TextBox txtOTDoubleStep;
+        private System.Windows.Forms.CheckBox chkOTDoubleStep;
+        private System.Windows.Forms.GroupBox gb2;
+        private System.Windows.Forms.TextBox txtOutputFile;
+        private System.Windows.Forms.TextBox txtInputFile;
+        private System.Windows.Forms.Button btnOutputFile;
+        private System.Windows.Forms.Button btnInputFile;
         private System.Windows.Forms.TextBox txtConvertCommandLine;
         private System.Windows.Forms.Label lblStaticCL;
         private System.Windows.Forms.GroupBox gbConvert;
+        private System.Windows.Forms.ComboBox cbAdjustSpeed;
+        private System.Windows.Forms.TextBox txtAdjustSpeed;
+        private System.Windows.Forms.CheckBox chkAdjustSpeed;
+        private System.Windows.Forms.Label lblFormat;
+        private System.Windows.Forms.CheckBox chkHeadSwap;
+        private System.Windows.Forms.TextBox txtDoubleStep;
+        private System.Windows.Forms.CheckBox chkDoubleStep;
+        private System.Windows.Forms.CheckBox chkNoClobber;
+        private System.Windows.Forms.ComboBox cbFormat;
         private System.Windows.Forms.CheckBox chkHeadsSet;
         private System.Windows.Forms.TextBox txtHeadsSet;
         private System.Windows.Forms.CheckBox chkCylSet;
         private System.Windows.Forms.TextBox txtCylSet;
-        private System.Windows.Forms.GroupBox gb2;
-        private System.Windows.Forms.Button btnOutputFile;
-        private System.Windows.Forms.Button btnInputFile;
-        private System.Windows.Forms.TextBox txtInputFile;
-        private System.Windows.Forms.TextBox txtOutputFile;
-        private System.Windows.Forms.ComboBox cbFormat;
-        private System.Windows.Forms.CheckBox chkNoClobber;
-        private System.Windows.Forms.TextBox txtDoubleStep;
-        private System.Windows.Forms.CheckBox chkDoubleStep;
-        private System.Windows.Forms.CheckBox chkHeadSwap;
-        private System.Windows.Forms.Label lblFormat;
-        private System.Windows.Forms.ListBox lbOutput;
-        private System.Windows.Forms.GroupBox gb3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox chkOTHeadSwap;
-        private System.Windows.Forms.TextBox txtOTDoubleStep;
-        private System.Windows.Forms.CheckBox chkOTDoubleStep;
-        private System.Windows.Forms.CheckBox chkOutTracks;
-        private System.Windows.Forms.ComboBox cbAdjustSpeed;
-        private System.Windows.Forms.TextBox txtAdjustSpeed;
-        private System.Windows.Forms.CheckBox chkAdjustSpeed;
     }
 }

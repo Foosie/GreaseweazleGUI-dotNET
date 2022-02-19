@@ -68,6 +68,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtEraseCommandLine", txtEraseCommandLine.Text);
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtFakeIndex", txtFakeIndex.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "cbFakeIndex", cbFakeIndex.Text);
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkHighFreq", (chkHighFreq.Checked == true).ToString());
         }
         #endregion
@@ -103,6 +105,10 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkFakeIndex.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "txtFakeIndex", "garbage").Trim())) != "garbage")
+                txtFakeIndex.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "cbFakeIndex", "garbage").Trim())) != "garbage")
+                cbFakeIndex.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "chkHighFreq", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -136,7 +142,7 @@ namespace Greaseweazle
                 txtEraseCommandLine.Text += " --time";
             txtEraseCommandLine.Text += " erase";
             if (chkFakeIndex.Checked == true)
-                txtEraseCommandLine.Text += " --fake-index";
+                txtEraseCommandLine.Text += " --fake-index=" + txtFakeIndex.Text + cbFakeIndex.Text;
             if (chkHighFreq.Checked == true)
                 txtEraseCommandLine.Text += " --hfreq";
             if ((chkDriveSelect.Enabled == true) && (chkDriveSelect.Checked == true))
@@ -290,6 +296,8 @@ namespace Greaseweazle
             this.txtEraseCommandLine.BackColor = ChooserForm.cLightBrown;
             this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
             this.btnBack.BackColor = ChooserForm.cDarkBrown;
+            this.txtFakeIndex.BackColor = ChooserForm.cLightBrown;
+            this.cbFakeIndex.BackColor = ChooserForm.cLightBrown;
 
             iniReadFile();
             CreateCommandLine();
@@ -396,19 +404,28 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region ctxClearOutput_Click
+        #region Changed
+
         private void ctxClearOutput_Click(object sender, EventArgs e)
         {
             if ((btnLaunch.Enabled == true) && (ChooserForm.m_bUseCmdConsole == false))
                 ClearlbOutput();
         }
-        #endregion
 
-        #region ctxSaveOutput_Click
         private void ctxSaveOutput_Click(object sender, EventArgs e)
         {
             if ((btnLaunch.Enabled == true) && (ChooserForm.m_bUseCmdConsole == false))
                 ChooserForm.saveLbItemsToFile(lbOutput);
+        }
+
+        private void txtFakeIndex_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void cbFakeIndex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
         }
         #endregion
     }

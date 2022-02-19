@@ -67,9 +67,9 @@ namespace Greaseweazle
             this.gb1.Controls.Add(this.txtInfoCommandLine);
             this.gb1.Controls.Add(this.lblStaticCL);
             this.gb1.Controls.Add(this.btnLaunch);
-            this.gb1.Location = new System.Drawing.Point(12, 12);
+            this.gb1.Location = new System.Drawing.Point(15, 14);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(853, 304);
+            this.gb1.Size = new System.Drawing.Size(542, 434);
             this.gb1.TabIndex = 0;
             this.gb1.TabStop = false;
             // 
@@ -80,10 +80,10 @@ namespace Greaseweazle
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
             this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(542, 27);
+            this.lbOutput.Location = new System.Drawing.Point(15, 221);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 260);
+            this.lbOutput.Size = new System.Drawing.Size(512, 132);
             this.lbOutput.TabIndex = 54;
             this.toolTip1.SetToolTip(this.lbOutput, "Right click for options");
             // 
@@ -111,7 +111,7 @@ namespace Greaseweazle
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(311, 225);
+            this.btnBack.Location = new System.Drawing.Point(311, 364);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 4;
@@ -123,7 +123,7 @@ namespace Greaseweazle
             // 
             this.txtInfoCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtInfoCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtInfoCommandLine.Location = new System.Drawing.Point(15, 140);
+            this.txtInfoCommandLine.Location = new System.Drawing.Point(15, 133);
             this.txtInfoCommandLine.Multiline = true;
             this.txtInfoCommandLine.Name = "txtInfoCommandLine";
             this.txtInfoCommandLine.Size = new System.Drawing.Size(512, 74);
@@ -132,7 +132,7 @@ namespace Greaseweazle
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(220, 114);
+            this.lblStaticCL.Location = new System.Drawing.Point(220, 107);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
             this.lblStaticCL.TabIndex = 1;
@@ -141,7 +141,7 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(124, 225);
+            this.btnLaunch.Location = new System.Drawing.Point(124, 364);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 3;
@@ -153,7 +153,7 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(103, 275);
+            this.lblHostTools.Location = new System.Drawing.Point(103, 413);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 11;
@@ -172,14 +172,14 @@ namespace Greaseweazle
             this.ctxClearOutput,
             this.ctxSaveOutput});
             this.ctxOutput.Name = "ctxOutput";
-            this.ctxOutput.Size = new System.Drawing.Size(176, 80);
+            this.ctxOutput.Size = new System.Drawing.Size(163, 52);
             // 
             // ctxClearOutput
             // 
             this.ctxClearOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ctxClearOutput.ForeColor = System.Drawing.Color.White;
             this.ctxClearOutput.Name = "ctxClearOutput";
-            this.ctxClearOutput.Size = new System.Drawing.Size(175, 24);
+            this.ctxClearOutput.Size = new System.Drawing.Size(162, 24);
             this.ctxClearOutput.Text = "Clear Output";
             this.ctxClearOutput.Click += new System.EventHandler(this.ctxClearOutput_Click);
             // 
@@ -188,7 +188,7 @@ namespace Greaseweazle
             this.ctxSaveOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ctxSaveOutput.ForeColor = System.Drawing.Color.White;
             this.ctxSaveOutput.Name = "ctxSaveOutput";
-            this.ctxSaveOutput.Size = new System.Drawing.Size(175, 24);
+            this.ctxSaveOutput.Size = new System.Drawing.Size(162, 24);
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
@@ -197,7 +197,7 @@ namespace Greaseweazle
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(883, 332);
+            this.ClientSize = new System.Drawing.Size(572, 462);
             this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.gb1);
             this.ForeColor = System.Drawing.Color.White;

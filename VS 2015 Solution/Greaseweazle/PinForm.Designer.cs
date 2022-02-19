@@ -77,9 +77,9 @@ namespace Greaseweazle
             this.gbPin.Controls.Add(this.txtPinCommandLine);
             this.gbPin.Controls.Add(this.lblStaticCL);
             this.gbPin.Controls.Add(this.btnLaunch);
-            this.gbPin.Location = new System.Drawing.Point(12, 12);
+            this.gbPin.Location = new System.Drawing.Point(16, 12);
             this.gbPin.Name = "gbPin";
-            this.gbPin.Size = new System.Drawing.Size(851, 357);
+            this.gbPin.Size = new System.Drawing.Size(545, 484);
             this.gbPin.TabIndex = 0;
             this.gbPin.TabStop = false;
             // 
@@ -87,7 +87,7 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(88, 318);
+            this.lblHostTools.Location = new System.Drawing.Point(89, 449);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(367, 23);
             this.lblHostTools.TabIndex = 54;
@@ -101,10 +101,10 @@ namespace Greaseweazle
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
             this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(541, 29);
+            this.lbOutput.Location = new System.Drawing.Point(16, 270);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(290, 308);
+            this.lbOutput.Size = new System.Drawing.Size(512, 132);
             this.lbOutput.TabIndex = 53;
             this.toolTipChooser.SetToolTip(this.lbOutput, "Right click for options");
             // 
@@ -114,7 +114,7 @@ namespace Greaseweazle
             this.gb1.Controls.Add(this.gbGetSet);
             this.gb1.Controls.Add(this.lblSelectedPin);
             this.gb1.Controls.Add(this.txtPin);
-            this.gb1.Location = new System.Drawing.Point(15, 21);
+            this.gb1.Location = new System.Drawing.Point(16, 21);
             this.gb1.Name = "gb1";
             this.gb1.Size = new System.Drawing.Size(512, 124);
             this.gb1.TabIndex = 1;
@@ -191,9 +191,9 @@ namespace Greaseweazle
             this.lblSelectedPin.AutoSize = true;
             this.lblSelectedPin.Location = new System.Drawing.Point(107, 22);
             this.lblSelectedPin.Name = "lblSelectedPin";
-            this.lblSelectedPin.Size = new System.Drawing.Size(117, 17);
+            this.lblSelectedPin.Size = new System.Drawing.Size(149, 17);
             this.lblSelectedPin.TabIndex = 2;
-            this.lblSelectedPin.Text = "Selected Pin (22)";
+            this.lblSelectedPin.Text = "Selected Pin (8,26,28)";
             // 
             // txtPin
             // 
@@ -203,14 +203,14 @@ namespace Greaseweazle
             this.txtPin.Name = "txtPin";
             this.txtPin.Size = new System.Drawing.Size(31, 22);
             this.txtPin.TabIndex = 3;
-            this.txtPin.Text = "22";
+            this.txtPin.Text = "26";
             this.txtPin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPin.TextChanged += new System.EventHandler(this.txtPin_TextChanged);
             // 
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(311, 278);
+            this.btnBack.Location = new System.Drawing.Point(312, 413);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
             this.btnBack.TabIndex = 13;
@@ -222,7 +222,7 @@ namespace Greaseweazle
             // 
             this.txtPinCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtPinCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtPinCommandLine.Location = new System.Drawing.Point(15, 190);
+            this.txtPinCommandLine.Location = new System.Drawing.Point(16, 182);
             this.txtPinCommandLine.Multiline = true;
             this.txtPinCommandLine.Name = "txtPinCommandLine";
             this.txtPinCommandLine.Size = new System.Drawing.Size(512, 74);
@@ -231,7 +231,7 @@ namespace Greaseweazle
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(220, 162);
+            this.lblStaticCL.Location = new System.Drawing.Point(221, 154);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
             this.lblStaticCL.TabIndex = 10;
@@ -240,7 +240,7 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(124, 278);
+            this.btnLaunch.Location = new System.Drawing.Point(125, 413);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
             this.btnLaunch.TabIndex = 12;
@@ -285,7 +285,7 @@ namespace Greaseweazle
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(884, 389);
+            this.ClientSize = new System.Drawing.Size(576, 511);
             this.Controls.Add(this.gbPin);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
