@@ -22,5 +22,3 @@ print(str_args)
 print("End of text from gw.py")
 
 sys.stdout = oldStdout
-
-#input("Press Enter to continue...")

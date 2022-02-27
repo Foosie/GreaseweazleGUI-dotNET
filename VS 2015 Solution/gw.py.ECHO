@@ -1,0 +1,24 @@
+import sys
+import os
+#import psutil
+import getopt, sys
+
+#print("")
+#p = psutil.Process(os.getpid())
+
+#print("name = " + p.name())
+#print("pid = "+ str(p.pid))
+
+if os.environ.get('OS','') == 'Windows_NT':
+    oldStdout = sys.stdout
+    sys.stdout = sys.stderr
+
+str_args = "python.exe "
+for i in sys.argv:
+    str_args = str_args + i + " "
+print("")
+print("Begining of text from gw.py")
+print(str_args)
+print("End of text from gw.py")
+
+sys.stdout = oldStdout

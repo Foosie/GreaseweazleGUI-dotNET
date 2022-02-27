@@ -183,6 +183,7 @@ namespace Greaseweazle
             "acorn.adfs.1600",
             "amiga.amigados",
             "amiga.amigados_hd",
+            "atari.90",
             "atarist.360",
             "atarist.400",
             "atarist.440",
@@ -228,13 +229,14 @@ namespace Greaseweazle
             ".hfe",
             ".img",
             ".ima",
+            ".ipf",
+            ".raw",
             ".scp",
             ".scp::disktype=amiga",
             ".scp::disktype=c64",
             ".sf7",
             ".ssd",
-            ".st",
-            ".ipf"});
+            ".st"});
             this.cbExtension.Location = new System.Drawing.Point(104, 53);
             this.cbExtension.Name = "cbExtension";
             this.cbExtension.Size = new System.Drawing.Size(258, 24);

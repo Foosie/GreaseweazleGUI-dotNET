@@ -468,6 +468,7 @@ namespace Greaseweazle
             "acorn.adfs.1600",
             "amiga.amigados",
             "amiga.amigados_hd",
+            "atari.90",
             "atarist.360",
             "atarist.400",
             "atarist.440",

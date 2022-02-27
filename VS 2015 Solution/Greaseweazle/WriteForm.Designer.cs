@@ -67,6 +67,8 @@ namespace Greaseweazle
             this.rbFlippyPanasonic = new System.Windows.Forms.RadioButton();
             this.rbFlippyTeac = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtFakeIndex = new System.Windows.Forms.TextBox();
+            this.cbFakeIndex = new System.Windows.Forms.ComboBox();
             this.chkFakeIndex = new System.Windows.Forms.CheckBox();
             this.txtPrecomp = new System.Windows.Forms.TextBox();
             this.chkPrecomp = new System.Windows.Forms.CheckBox();
@@ -80,8 +82,6 @@ namespace Greaseweazle
             this.ctxOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtFakeIndex = new System.Windows.Forms.TextBox();
-            this.cbFakeIndex = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.gbDiskType.SuspendLayout();
             this.gbWriteToDisk.SuspendLayout();
@@ -170,6 +170,7 @@ namespace Greaseweazle
             "acorn.adfs.1600",
             "amiga.amigados",
             "amiga.amigados_hd",
+            "atari.90",
             "atarist.360",
             "atarist.400",
             "atarist.440",
@@ -215,13 +216,14 @@ namespace Greaseweazle
             ".hfe",
             ".img",
             ".ima",
+            ".ipf",
+            ".raw",
             ".scp",
             ".scp::disktype=amiga",
             ".scp::disktype=c64",
             ".sf7",
             ".ssd",
-            ".st",
-            ".ipf"});
+            ".st"});
             this.cbExtension.Location = new System.Drawing.Point(151, 21);
             this.cbExtension.Name = "cbExtension";
             this.cbExtension.Size = new System.Drawing.Size(177, 24);
@@ -461,6 +463,38 @@ namespace Greaseweazle
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
+            // txtFakeIndex
+            // 
+            this.txtFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtFakeIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFakeIndex.ForeColor = System.Drawing.Color.White;
+            this.txtFakeIndex.Location = new System.Drawing.Point(139, 137);
+            this.txtFakeIndex.MaxLength = 3;
+            this.txtFakeIndex.Name = "txtFakeIndex";
+            this.txtFakeIndex.Size = new System.Drawing.Size(90, 22);
+            this.txtFakeIndex.TabIndex = 17;
+            this.txtFakeIndex.Text = "300";
+            this.txtFakeIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtFakeIndex.TextChanged += new System.EventHandler(this.txtFakeIndex_TextChanged);
+            // 
+            // cbFakeIndex
+            // 
+            this.cbFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbFakeIndex.ForeColor = System.Drawing.Color.White;
+            this.cbFakeIndex.FormattingEnabled = true;
+            this.cbFakeIndex.Items.AddRange(new object[] {
+            "",
+            "rpm",
+            "ms",
+            "us",
+            "ns",
+            "scp"});
+            this.cbFakeIndex.Location = new System.Drawing.Point(260, 136);
+            this.cbFakeIndex.Name = "cbFakeIndex";
+            this.cbFakeIndex.Size = new System.Drawing.Size(84, 24);
+            this.cbFakeIndex.TabIndex = 18;
+            this.cbFakeIndex.SelectedIndexChanged += new System.EventHandler(this.cbFakeIndex_SelectedIndexChanged);
+            // 
             // chkFakeIndex
             // 
             this.chkFakeIndex.AutoSize = true;
@@ -587,38 +621,6 @@ namespace Greaseweazle
             this.ctxSaveOutput.Size = new System.Drawing.Size(162, 24);
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
-            // 
-            // txtFakeIndex
-            // 
-            this.txtFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtFakeIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFakeIndex.ForeColor = System.Drawing.Color.White;
-            this.txtFakeIndex.Location = new System.Drawing.Point(139, 137);
-            this.txtFakeIndex.MaxLength = 3;
-            this.txtFakeIndex.Name = "txtFakeIndex";
-            this.txtFakeIndex.Size = new System.Drawing.Size(90, 22);
-            this.txtFakeIndex.TabIndex = 17;
-            this.txtFakeIndex.Text = "300";
-            this.txtFakeIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFakeIndex.TextChanged += new System.EventHandler(this.txtFakeIndex_TextChanged);
-            // 
-            // cbFakeIndex
-            // 
-            this.cbFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.cbFakeIndex.ForeColor = System.Drawing.Color.White;
-            this.cbFakeIndex.FormattingEnabled = true;
-            this.cbFakeIndex.Items.AddRange(new object[] {
-            "",
-            "rpm",
-            "ms",
-            "us",
-            "ns",
-            "scp"});
-            this.cbFakeIndex.Location = new System.Drawing.Point(260, 136);
-            this.cbFakeIndex.Name = "cbFakeIndex";
-            this.cbFakeIndex.Size = new System.Drawing.Size(84, 24);
-            this.cbFakeIndex.TabIndex = 18;
-            this.cbFakeIndex.SelectedIndexChanged += new System.EventHandler(this.cbFakeIndex_SelectedIndexChanged);
             // 
             // WriteForm
             // 
