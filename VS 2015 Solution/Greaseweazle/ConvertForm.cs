@@ -25,8 +25,8 @@ namespace Greaseweazle
         private bool m_bWindowsEXE = false;
         private Form m_frmChooser = null;
         private bool m_bElapsedTime = false;
-        private string sInputFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        private string sOutputFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private string m_sInputFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private string m_sOutputFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         #endregion
 
         #region ConvertForm
@@ -82,8 +82,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtConvertCommandLine", txtConvertCommandLine.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkNoClobber", (chkNoClobber.Checked == true).ToString());
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "sInputFolder", sInputFolder);
-            ChooserForm.m_Ini.IniWriteValue("gbConvert", "sOutputFolder", sOutputFolder);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "m_sInputFolder", m_sInputFolder);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "m_sOutputFolder", m_sOutputFolder);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtInputFile", txtInputFile.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtOutputFile", txtOutputFile.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkOutTracks", (chkOutTracks.Checked == true).ToString());
@@ -139,12 +139,12 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkNoClobber.Checked = true;
             }
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "sInputFolder", "garbage").Trim())) != "garbage")
-                sInputFolder = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "m_sInputFolder", "garbage").Trim())) != "garbage")
+                m_sInputFolder = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtInputFile", "garbage").Trim())) != "garbage")
                 txtInputFile.Text = sRet;           
-            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "sOutputFolder", "garbage").Trim())) != "garbage")
-                sOutputFolder = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "m_sOutputFolder", "garbage").Trim())) != "garbage")
+                m_sOutputFolder = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtOutputFile", "garbage").Trim())) != "garbage")
                 txtOutputFile.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkOutTracks", "garbage").Trim())) != "garbage")
@@ -193,7 +193,7 @@ namespace Greaseweazle
                 txtConvertCommandLine.Text += " --time";
             txtConvertCommandLine.Text += " convert";
             if ((chkAdjustSpeed.Enabled == true) && (chkAdjustSpeed.Checked == true))
-                txtConvertCommandLine.Text += " --adjust-speed=" + cbAdjustSpeed.Text + txtAdjustSpeed.Text;
+                txtConvertCommandLine.Text += " --adjust-speed=" + txtAdjustSpeed.Text + cbAdjustSpeed.Text;
             if (chkNoClobber.Checked == true)
                 txtConvertCommandLine.Text += " --no-clobber";
             if (cbFormat.Text.Length > 0)
@@ -232,7 +232,7 @@ namespace Greaseweazle
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtConvertCommandLine.Text += " --device=" + m_sUSBPort;
 
-            txtConvertCommandLine.Text += " \"" + sInputFolder + "\\" + txtInputFile.Text + "\" \"" + sOutputFolder + "\\" + txtOutputFile.Text + "\"";
+            txtConvertCommandLine.Text += " \"" + m_sInputFolder + "\\" + txtInputFile.Text + "\" \"" + m_sOutputFolder + "\\" + txtOutputFile.Text + "\"";
         }
         #endregion
 
@@ -394,6 +394,16 @@ namespace Greaseweazle
         #region btnLaunch_Click
         private void btnLaunch_Click(object sender, EventArgs e)
         {
+            if (txtInputFile.Text.Length == 0)
+            {
+                MessageBox.Show(this, "You must first select an input filename", "Oops!");
+                return;
+            }
+            if (txtOutputFile.Text.Length == 0)
+            {
+                MessageBox.Show(this, "You must first select an output filename", "Oops!");
+                return;
+            }
             if (ChooserForm.m_bUseCmdConsole == true)
                 LaunchPython();
             else
@@ -541,7 +551,7 @@ namespace Greaseweazle
             // select file and folder where file is to be read from
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.RestoreDirectory = true; // make sure directory is set to executable path
-            openDialog.InitialDirectory = sInputFolder;
+            openDialog.InitialDirectory = m_sInputFolder;
             openDialog.Multiselect = false;
             openDialog.CheckFileExists = false;
             openDialog.Title = "Select an image";
@@ -550,7 +560,7 @@ namespace Greaseweazle
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 txtInputFile.Text = openDialog.SafeFileName;
-                sInputFolder = Path.GetDirectoryName(openDialog.FileName);
+                m_sInputFolder = Path.GetDirectoryName(openDialog.FileName);
                 CreateCommandLine();
             }
         }
@@ -562,21 +572,17 @@ namespace Greaseweazle
 
         private void btnOutputFile_Click(object sender, EventArgs e)
         {
-            // select file and folder where file is to be read from
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.RestoreDirectory = true; // make sure directory is set to executable path
-            openDialog.InitialDirectory = sOutputFolder;
-            openDialog.Multiselect = false;
-            openDialog.CheckFileExists = false;
-            openDialog.Title = "Select an image";
-            openDialog.Filter = "Images|*.adf;*.adl;*.adm;*.ads;*.dsd;*.dsk;*.hfe;*.ipf;*.raw;*.scp;*.sf7;*.ssd|All files (*.*)|*.*";
+            // select folder where file is to be written to
+            FolderBrowserDialog ofd = new FolderBrowserDialog();
+            ofd.SelectedPath = m_sOutputFolder;
+            DialogResult result = ofd.ShowDialog();
+            if (result == DialogResult.OK)
+                m_sOutputFolder = ofd.SelectedPath;
 
-            if (openDialog.ShowDialog() == DialogResult.OK)
-            {
-                txtOutputFile.Text = openDialog.SafeFileName;
-                sInputFolder = Path.GetDirectoryName(openDialog.FileName);
-                CreateCommandLine();
-            }
+            // make sure directory is set to executable path
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
+            CreateCommandLine();
         }
 
         private void txtOutputFile_TextChanged(object sender, EventArgs e)
