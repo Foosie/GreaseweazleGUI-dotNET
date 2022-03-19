@@ -418,7 +418,7 @@ namespace Greaseweazle
             openDialog.InitialDirectory = m_sWriteDiskFolder;
             openDialog.Multiselect = false;
             openDialog.Title = "Select an image";
-            openDialog.Filter = "Images|*.adf;*.adl;*.adm;*.ads;*.dsd;*.dsk;*.hfe;*.ipf;*.raw;*.scp;*.sf7;*.ssd|All files (*.*)|*.*";
+            openDialog.Filter = ChooserForm.m_sExtFilter;
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 m_sWTDFilename = openDialog.SafeFileName;

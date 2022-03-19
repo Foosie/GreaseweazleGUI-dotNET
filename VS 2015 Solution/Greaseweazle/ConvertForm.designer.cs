@@ -297,9 +297,9 @@ namespace Greaseweazle
             this.btnOutputFile.BackColor = System.Drawing.Color.Maroon;
             this.btnOutputFile.Location = new System.Drawing.Point(18, 62);
             this.btnOutputFile.Name = "btnOutputFile";
-            this.btnOutputFile.Size = new System.Drawing.Size(108, 29);
+            this.btnOutputFile.Size = new System.Drawing.Size(115, 29);
             this.btnOutputFile.TabIndex = 25;
-            this.btnOutputFile.Text = "Output File";
+            this.btnOutputFile.Text = "Output Folder";
             this.btnOutputFile.UseVisualStyleBackColor = false;
             this.btnOutputFile.Click += new System.EventHandler(this.btnOutputFile_Click);
             // 
@@ -308,7 +308,7 @@ namespace Greaseweazle
             this.btnInputFile.BackColor = System.Drawing.Color.Maroon;
             this.btnInputFile.Location = new System.Drawing.Point(18, 21);
             this.btnInputFile.Name = "btnInputFile";
-            this.btnInputFile.Size = new System.Drawing.Size(108, 29);
+            this.btnInputFile.Size = new System.Drawing.Size(115, 29);
             this.btnInputFile.TabIndex = 23;
             this.btnInputFile.Text = "Input File";
             this.btnInputFile.UseVisualStyleBackColor = false;
@@ -482,7 +482,7 @@ namespace Greaseweazle
             "ibm.1200",
             "ibm.1440",
             "sega.sf7000"});
-            this.cbFormat.Location = new System.Drawing.Point(162, 118);
+            this.cbFormat.Location = new System.Drawing.Point(165, 118);
             this.cbFormat.Name = "cbFormat";
             this.cbFormat.Size = new System.Drawing.Size(335, 24);
             this.cbFormat.TabIndex = 15;

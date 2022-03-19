@@ -57,7 +57,7 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        public static string m_sStatusLine = "for Host Tools v0.39";
+        
         public static Color cChocolate = Color.FromArgb(100, 82, 72);
         public static Color cLightBrown = Color.FromArgb(150, 114, 93);
         public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
@@ -65,6 +65,8 @@ namespace Greaseweazle
         public static Color cBrown = Color.FromArgb(128, 64, 64);
         private string m_sInfo = "The GUI executable only supports the Host Tools version identified in the GUI's status bar. The GUI will always use the Host Tools from the folder from which the executable was placed. Use the 'info' Greaseweazle option to determine the firmware's current version.";
         private ToolStripMenuItem[] m_mnuItems;
+        public static string m_sExtFilter = "Images|*.adf;*.ads;*.adm;*.adl;*.dsd;*.d81;*.img;*.ima;*.sf7;*.st;*.dsk;*.ipf;*.hfe;*.scp;*.raw|All files (*.*)|*.*";
+        public static string m_sStatusLine = "for Host Tools v0.39";
         #endregion
 
         #region ChooserForm
