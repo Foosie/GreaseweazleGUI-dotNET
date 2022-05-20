@@ -229,8 +229,6 @@ namespace Greaseweazle
                     sOutputTracks = sOutputTracks.Remove(sOutputTracks.Length - 1, 1); ;
                 txtConvertCommandLine.Text += sOutputTracks;
             }
-            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
-                txtConvertCommandLine.Text += " --device=" + m_sUSBPort;
 
             txtConvertCommandLine.Text += " \"" + m_sInputFolder + "\\" + txtInputFile.Text + "\" \"" + m_sOutputFolder + "\\" + txtOutputFile.Text + "\"";
         }
