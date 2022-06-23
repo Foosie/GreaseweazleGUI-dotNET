@@ -468,6 +468,8 @@ namespace Greaseweazle
             "acorn.adfs.1600",
             "amiga.amigados",
             "amiga.amigados_hd",
+            "akai.800",
+            "akai.1600",
             "atari.90",
             "atarist.360",
             "atarist.400",
@@ -476,11 +478,15 @@ namespace Greaseweazle
             "atarist.800",
             "atarist.880",
             "commodore.1581",
+            "ensoniq.800",
+            "ensoniq.1600",
             "ibm.180",
             "ibm.360",
             "ibm.720",
             "ibm.1200",
             "ibm.1440",
+            "ibm.1680",
+            "ibm.dmf",
             "sega.sf7000"});
             this.cbFormat.Location = new System.Drawing.Point(165, 118);
             this.cbFormat.Name = "cbFormat";
