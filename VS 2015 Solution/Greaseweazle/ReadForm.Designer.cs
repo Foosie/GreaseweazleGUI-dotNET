@@ -202,6 +202,8 @@ namespace Greaseweazle
             "ibm.1440",
             "ibm.1680",
             "ibm.dmf",
+            "pc98.dd",
+            "pc98.hd",
             "sega.sf7000"});
             this.cbFormat.Location = new System.Drawing.Point(483, 53);
             this.cbFormat.Name = "cbFormat";
