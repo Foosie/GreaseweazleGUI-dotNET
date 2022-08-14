@@ -101,6 +101,9 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtFakeIndex", txtFakeIndex.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbFakeIndex", cbFakeIndex.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkPLLSpec", (chkPLLSpec.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtPLLPeriod", txtPLLPeriod.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtPLLPhase", txtPLLPhase.Text);
         }
         #endregion
 
@@ -232,6 +235,19 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkNoClobber.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtPLLPeriod", "garbage").Trim())) != "garbage")
+            {
+                txtPLLPeriod.Text = sRet;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtPLLPhase", "garbage").Trim())) != "garbage")
+            {
+                txtPLLPhase.Text = sRet;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkPLLSpec", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkPLLSpec.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -273,6 +289,8 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --raw";
             if (chkFakeIndex.Checked == true)
                 txtRFDCommandLine.Text += " --fake-index=" + txtFakeIndex.Text + cbFakeIndex.Text;
+            if (chkPLLSpec.Checked == true)
+                txtRFDCommandLine.Text += " --pll=period=" + txtPLLPeriod.Text + ":phase=" + txtPLLPhase.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
             if (chkDoubleStep.Checked == true)
@@ -490,6 +508,21 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void txtPLLPeriod_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtPLLPhase_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void PLLSpec_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
 
         #region ReadForm_Load
@@ -509,6 +542,8 @@ namespace Greaseweazle
             this.txtAdjustSpeed.BackColor = ChooserForm.cLightBrown;
             this.txtFakeIndex.BackColor = ChooserForm.cLightBrown;
             this.cbFakeIndex.BackColor = ChooserForm.cLightBrown;
+            this.txtPLLPeriod.BackColor = ChooserForm.cLightBrown;
+            this.txtPLLPhase.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;
             this.txtHeadsSet.BackColor = ChooserForm.cLightBrown;
             this.tbFilename.BackColor = ChooserForm.cLightBrown;

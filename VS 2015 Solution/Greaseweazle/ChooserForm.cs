@@ -66,7 +66,7 @@ namespace Greaseweazle
         private string m_sInfo = "The GUI executable only supports the Host Tools version identified in the GUI's status bar. The GUI will always use the Host Tools from the folder from which the executable was placed. Use the 'info' Greaseweazle option to determine the firmware's current version.";
         private ToolStripMenuItem[] m_mnuItems;
         public static string m_sExtFilter = "Images|*.adf;*.ads;*.adm;*.adl;*.dsd;*.d81;*.img;*.ima;*.sf7;*.st;*.dsk;*.ipf;*.hfe;*.scp;*.raw|All files (*.*)|*.*";
-        public static string m_sStatusLine = "for Host Tools 1.1";
+        public static string m_sStatusLine = "for Host Tools 1.2";
         #endregion
 
         #region ChooserForm

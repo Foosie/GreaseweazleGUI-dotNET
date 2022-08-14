@@ -202,7 +202,7 @@ namespace Greaseweazle
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(269, 43);
             this.lblText.TabIndex = 4;
-            this.lblText.Text = "Tools and USB interface for accessing a floppy drive at the raw flux level ";
+            this.lblText.Text = "Tools and USB interface for accessing a floppy drive at the raw flux level.";
             // 
             // llGWGH
             // 

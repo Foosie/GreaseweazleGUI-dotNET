@@ -90,6 +90,9 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkOTDoubleStep", (chkOTDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtOTDoubleStep", txtOTDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkOTHeadSwap", (chkOTHeadSwap.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkPLLSpec", (chkPLLSpec.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtPLLPeriod", txtPLLPeriod.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtPLLPhase", txtPLLPhase.Text);
         }
         #endregion
 
@@ -164,6 +167,19 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkOTHeadSwap.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtPLLPeriod", "garbage").Trim())) != "garbage")
+            {
+                txtPLLPeriod.Text = sRet;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "txtPLLPhase", "garbage").Trim())) != "garbage")
+            {
+                txtPLLPhase.Text = sRet;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkPLLSpec", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkPLLSpec.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -194,6 +210,8 @@ namespace Greaseweazle
             txtConvertCommandLine.Text += " convert";
             if ((chkAdjustSpeed.Enabled == true) && (chkAdjustSpeed.Checked == true))
                 txtConvertCommandLine.Text += " --adjust-speed=" + txtAdjustSpeed.Text + cbAdjustSpeed.Text;
+            if (chkPLLSpec.Checked == true)
+                txtConvertCommandLine.Text += " --pll=period=" + txtPLLPeriod.Text + ":phase=" + txtPLLPhase.Text;
             if (chkNoClobber.Checked == true)
                 txtConvertCommandLine.Text += " --no-clobber";
             if (cbFormat.Text.Length > 0)
@@ -375,6 +393,8 @@ namespace Greaseweazle
             this.btnOutputFile.BackColor = ChooserForm.cDarkBrown;
             this.btnInputFile.BackColor = ChooserForm.cDarkBrown;
             this.ctxClearOutput.BackColor = ChooserForm.cDarkBrown;
+            this.txtPLLPeriod.BackColor = ChooserForm.cDarkBrown;
+            this.txtPLLPhase.BackColor = ChooserForm.cDarkBrown;
 
             iniReadFile();
             CreateCommandLine();
@@ -619,6 +639,21 @@ namespace Greaseweazle
         }
 
         private void chkOTHeadSwap_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkPLLSpec_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtPLLPeriod_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtPLLPhase_TextChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
