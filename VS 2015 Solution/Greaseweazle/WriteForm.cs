@@ -51,6 +51,16 @@ namespace Greaseweazle
 
             if (m_sWriteDiskFolder.Length == 0)
                 m_sWriteDiskFolder = sExeDir;
+
+            // load disk formats
+            cbFormat.Items.Clear();
+            cbFormat.Text = "UNSPECIFIED FORMAT";
+            foreach (string desc in ChooserForm.m_listCustomFormats)
+            {
+                // get definition description
+                cbFormat.Items.Add(desc);
+                Console.WriteLine(desc);
+            }
         }
         #endregion
 
@@ -216,7 +226,9 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtWTDCommandLine.Text += " --time";
             txtWTDCommandLine.Text += " write";
-            if ((cbFormat.Text.Length > 0) && (cbFormat.ForeColor != Color.Black))  // black means disabled
+            if ((ChooserForm.m_bUseCustomFormats == true) && (cbFormat.Text != "UNSPECIFIED FORMAT"))
+                txtWTDCommandLine.Text += " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
+            if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT") && (cbFormat.ForeColor != Color.Black))  // black means disabled
                     txtWTDCommandLine.Text += " --format=" + cbFormat.Text;
             if (chkRetries.Checked == true)
                 txtWTDCommandLine.Text += " --retries=" + txtRetries.Text;

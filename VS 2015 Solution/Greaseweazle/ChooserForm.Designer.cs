@@ -75,6 +75,7 @@ namespace Greaseweazle
             this.lbUSBPorts = new System.Windows.Forms.ListBox();
             this.gbAction = new System.Windows.Forms.GroupBox();
             this.lblHostTools = new System.Windows.Forms.Label();
+           this.mnuUseDiskDefs = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGWsmall)).BeginInit();
             this.gbActionSelect.SuspendLayout();
@@ -142,7 +143,8 @@ namespace Greaseweazle
             this.mnuUSBSupport,
             this.mnuWindowsEXE,
             this.mnuElapsedTime,
-            this.mnuUseCmdConsole});
+            this.mnuUseCmdConsole,
+            this.mnuUseDiskDefs});
             this.mnuSettings.ForeColor = System.Drawing.Color.White;
             this.mnuSettings.Name = "mnuSettings";
             this.mnuSettings.Size = new System.Drawing.Size(71, 24);
@@ -487,6 +489,13 @@ namespace Greaseweazle
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // mnuUseDiskDefs
+            // 
+            this.mnuUseDiskDefs.Name = "mnuUseDiskDefs";
+            this.mnuUseDiskDefs.Size = new System.Drawing.Size(257, 26);
+            this.mnuUseDiskDefs.Text = "Use DiskDefs file";
+            this.mnuUseDiskDefs.Click += new System.EventHandler(this.mnuUseDiskDefs_Click);
+            // 
             // ChooserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -551,5 +560,6 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolStripMenuItem mnuCreateShortcut;
         private System.Windows.Forms.RadioButton rbRPMspindle;
         private System.Windows.Forms.RadioButton rbConvert;
+        private System.Windows.Forms.ToolStripMenuItem mnuUseDiskDefs;
     }
 }

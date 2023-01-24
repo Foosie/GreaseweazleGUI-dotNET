@@ -53,6 +53,16 @@ namespace Greaseweazle
 
             if (m_sReadDiskFolder.Length == 0)
                 m_sReadDiskFolder = sExeDir;
+
+            // load disk formats
+            cbFormat.Items.Clear();
+            cbFormat.Text = "UNSPECIFIED FORMAT";
+            foreach (string desc in ChooserForm.m_listCustomFormats)
+            {
+                // get definition description
+                cbFormat.Items.Add(desc);
+                Console.WriteLine(desc);
+            }
         }
         #endregion
 
@@ -275,7 +285,9 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtRFDCommandLine.Text += " --time";
             txtRFDCommandLine.Text += " read";
-            if ((cbFormat.Text.Length > 0) && (cbFormat.ForeColor != Color.Black))  // black means disabled
+            if  ((ChooserForm.m_bUseCustomFormats == true) && (cbFormat.Text != "UNSPECIFIED FORMAT"))
+                txtRFDCommandLine.Text +=  " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
+            if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT") && (cbFormat.ForeColor != Color.Black))  // black means disabled
                 txtRFDCommandLine.Text += " --format=" + cbFormat.Text;
             if (chkDriveRetriesRFD.Checked == true)
                 txtRFDCommandLine.Text += " --retries=" + txtDriveRetriesRFD.Text;

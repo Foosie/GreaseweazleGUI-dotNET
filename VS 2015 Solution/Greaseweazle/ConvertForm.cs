@@ -47,6 +47,16 @@ namespace Greaseweazle
             // set working directory to executable directory
             string sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             Directory.SetCurrentDirectory(sExeDir);
+
+            // load disk formats
+            cbFormat.Items.Clear();
+            cbFormat.Text = "UNSPECIFIED FORMAT";
+            foreach (string desc in ChooserForm.m_listCustomFormats)
+            {
+                // get definition description
+                cbFormat.Items.Add(desc);
+                Console.WriteLine(desc);
+            }
         }
         #endregion
 
@@ -208,13 +218,15 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtConvertCommandLine.Text += " --time";
             txtConvertCommandLine.Text += " convert";
+            if ((ChooserForm.m_bUseCustomFormats == true) && (cbFormat.Text != "UNSPECIFIED FORMAT"))
+                txtConvertCommandLine.Text += " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
             if ((chkAdjustSpeed.Enabled == true) && (chkAdjustSpeed.Checked == true))
                 txtConvertCommandLine.Text += " --adjust-speed=" + txtAdjustSpeed.Text + cbAdjustSpeed.Text;
             if (chkPLLSpec.Checked == true)
                 txtConvertCommandLine.Text += " --pll=period=" + txtPLLPeriod.Text + ":phase=" + txtPLLPhase.Text;
             if (chkNoClobber.Checked == true)
                 txtConvertCommandLine.Text += " --no-clobber";
-            if (cbFormat.Text.Length > 0)
+            if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT"))
                 txtConvertCommandLine.Text += " --format=" + cbFormat.Text;
             if (chkCylSet.Checked == true)
             {

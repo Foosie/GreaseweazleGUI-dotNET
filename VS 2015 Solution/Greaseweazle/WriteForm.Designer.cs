@@ -159,41 +159,6 @@ namespace Greaseweazle
             this.cbFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.cbFormat.ForeColor = System.Drawing.Color.White;
             this.cbFormat.FormattingEnabled = true;
-            this.cbFormat.Items.AddRange(new object[] {
-            "",
-            "acorn.dfs.ss",
-            "acorn.dfs.ds",
-            "acorn.adfs.160",
-            "acorn.adfs.320",
-            "acorn.adfs.640",
-            "acorn.adfs.800",
-            "acorn.adfs.1600",
-            "amiga.amigados",
-            "amiga.amigados_hd",
-            "akai.800",
-            "akai.1600",
-            "atari.90",
-            "atarist.360",
-            "atarist.400",
-            "atarist.440",
-            "atarist.720",
-            "atarist.800",
-            "atarist.880",
-            "commodore.1581",
-            "ensoniq.800",
-            "ensoniq.1600",
-            "ibm.180",
-            "ibm.360",
-            "ibm.720",
-            "ibm.800",
-            "ibm.1200",
-            "ibm.1440",
-            "ibm.1680",
-            "ibm.2880",
-            "ibm.dmf",
-            "pc98.dd",
-            "pc98.hd",
-            "sega.sf7000"});
             this.cbFormat.Location = new System.Drawing.Point(523, 21);
             this.cbFormat.Name = "cbFormat";
             this.cbFormat.Size = new System.Drawing.Size(177, 24);
@@ -215,14 +180,17 @@ namespace Greaseweazle
             this.cbExtension.ForeColor = System.Drawing.Color.White;
             this.cbExtension.FormattingEnabled = true;
             this.cbExtension.Items.AddRange(new object[] {
-            "",
             ".adf",
             ".ads",
             ".adm",
             ".adl",
             ".d81",
+            ".d88",
+            ".dim",
             ".dsd",
             ".dsk",
+            ".fdi",
+            ".hdm",
             ".hfe",
             ".img",
             ".ima",
@@ -234,7 +202,8 @@ namespace Greaseweazle
             ".scp::disktype=c64",
             ".sf7",
             ".ssd",
-            ".st"});
+            ".st",
+            ".xdf"});
             this.cbExtension.Location = new System.Drawing.Point(151, 21);
             this.cbExtension.Name = "cbExtension";
             this.cbExtension.Size = new System.Drawing.Size(177, 24);

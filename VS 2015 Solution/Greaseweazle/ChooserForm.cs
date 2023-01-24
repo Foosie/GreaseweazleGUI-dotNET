@@ -10,6 +10,7 @@
 
 using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Reflection;
@@ -50,6 +51,7 @@ namespace Greaseweazle
         public static string m_sGWscript = "gw.py";
         public static string m_sUSBPort = "UNKNOWN";
         public static string m_sIniFile = ".\\GreaseweazleGUI.ini";
+        public static string m_sDisktDefsFN = ".\\diskdefs.cfg";
         public static IniFile m_Ini = null;
         public string m_sVersion = "";
         public Mutex m_exclusiveMutex = null;
@@ -57,7 +59,6 @@ namespace Greaseweazle
         private string m_sReadDiskFolder = "";
         private string m_sWriteDiskFolder = "";
         private string m_sUpdateFirmwareFolder = "";
-        
         public static Color cChocolate = Color.FromArgb(100, 82, 72);
         public static Color cLightBrown = Color.FromArgb(150, 114, 93);
         public static Color cDarkBrown = Color.FromArgb(74, 61, 53);
@@ -65,8 +66,11 @@ namespace Greaseweazle
         public static Color cBrown = Color.FromArgb(128, 64, 64);
         private string m_sInfo = "The GUI executable only supports the Host Tools version identified in the GUI's status bar. The GUI will always use the Host Tools from the folder from which the executable was placed. Use the 'info' Greaseweazle option to determine the firmware's current version.";
         private ToolStripMenuItem[] m_mnuItems;
-        public static string m_sExtFilter = "Images|*.adf;*.ads;*.adm;*.adl;*.dsd;*.d81;*.img;*.ima;*.mgt;*.sf7;*.st;*.dsk;*.ipf;*.hfe;*.scp;*.raw|All files (*.*)|*.*";
-        public static string m_sStatusLine = "for Host Tools 1.3";
+        public static string m_sExtFilter = "Images|*.adf;*.ads;*.adm;*.adl;*.dim;*.dsd;*.dsk;*.d81;*.d88;*.fdi;*.hdm;*.hfe;*.img;*.ima;*.ipf;*.mgt;*.raw;*.sf7;*.st;*.scp|All files (*.*)|*.*";
+        public static string[] m_sarrDefaultFormats = new string[38] {"amiga.amigados", "amiga.amigados_hd", "acorn.adfs.160", "acorn.adfs.320", "acorn.adfs.640", "acorn.adfs.800", "acorn.adfs.1600", "acorn.dfs.ss", "acorn.dfs.ds", "akai.800", "akai.1600", "atari.90", "atarist.360", "atarist.400", "atarist.440", "atarist.720", "atarist.800", "atarist.880", "commodore.1581", "ensoniq.800", "ensoniq.1600", "ensoniq.mirage", "ibm.180", "ibm.360", "ibm.720", "ibm.800", "ibm.1200", "ibm.1440", "ibm.1680", "ibm.dmf", "ibm.2880", "pc98.2d", "pc98.2dd", "pc98.2hd", "pc98.2hs", "sci.prophet", "sega.sf7000", "zx.trdos.640" };
+        public static List<string> m_listCustomFormats = new List<string>();
+        public static bool m_bUseCustomFormats = false;
+        public static string m_sStatusLine = "for Host Tools 1.5";
         #endregion
 
         #region ChooserForm
@@ -143,6 +147,7 @@ namespace Greaseweazle
             this.mnuSettings.ForeColor = Color.White;
             this.mnuCreateShortcut.ForeColor = Color.White;
             this.mnuUseCmdConsole.ForeColor = Color.White;
+            this.mnuUseDiskDefs.ForeColor = Color.White;
             this.mnuProfileNew.ForeColor = Color.White;
             this.mnuDelete.ForeColor = Color.White;
             this.mnuUSBSupport.ForeColor = Color.White;
@@ -172,6 +177,14 @@ namespace Greaseweazle
 
             // now restore the selected profile
             restoreSelectedProfile();
+
+            // load default disk definitions
+            m_listCustomFormats.Clear();
+            m_listCustomFormats.Add("UNSPECIFIED FORMAT");
+            foreach (string desc in m_sarrDefaultFormats)
+            {
+                m_listCustomFormats.Add(desc);
+            }
 
             // finally read our settings
             iniReadFile();
@@ -371,6 +384,34 @@ namespace Greaseweazle
                     m_bUseCmdConsole = false;
                 }
             }
+
+            // custom disk format definitions
+            if ((sRet = (m_Ini.IniReadValue("gbGlobals", "m_sDisktDefsFN", "garbage").Trim())) != "garbage")
+                m_sDisktDefsFN = sRet;
+            if ((sRet = (m_Ini.IniReadValue("gbGlobals", "mnuUseDiskDefs", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                {
+                    mnuUseDiskDefs.Checked = true;
+                    m_bUseCustomFormats = true;
+                    m_listCustomFormats.Clear();
+                    m_listCustomFormats.Add("UNSPECIFIED FORMAT");
+                    foreach (string line in System.IO.File.ReadLines(m_sDisktDefsFN))
+                    {
+                        // get definition description
+                        if ((line.Length > 4) && ((line.Substring(0, 4) == "disk")))
+                        {
+                            string desc = line.Substring(5);
+                            m_listCustomFormats.Add(desc);
+                        }
+                    }
+                }
+                else
+                {
+                    mnuUseDiskDefs.Checked = false;
+                    m_bUseCustomFormats = false;
+                }
+            }
         }
         #endregion
 
@@ -400,6 +441,8 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbGlobals", "mnuWindowsEXE", (mnuWindowsEXE.Checked == true).ToString());
             m_Ini.IniWriteValue("gbGlobals", "mnuElapsedTime", (mnuElapsedTime.Checked == true).ToString());
             m_Ini.IniWriteValue("gbGlobals", "mnuUseCmdConsole", (mnuUseCmdConsole.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbGlobals", "mnuUseDiskDefs", (mnuUseDiskDefs.Checked == true).ToString());
+            m_Ini.IniWriteValue("gbGlobals", "m_sDisktDefsFN", m_sDisktDefsFN);
         }
         #endregion
 
@@ -1155,6 +1198,61 @@ namespace Greaseweazle
         {
             if (rbConvert.Checked == true)
                 m_action = "convert";
+        }
+        #endregion
+
+        #region mnuUseDiskDefs_Click
+        private void mnuUseDiskDefs_Click(object sender, EventArgs e)
+        {
+            mnuUseDiskDefs.Checked = !mnuUseDiskDefs.Checked;
+            m_bUseCustomFormats = mnuUseDiskDefs.Checked;
+            if (mnuUseDiskDefs.Checked == true)
+            {
+                // select file and folder where file is to be read from
+                string sDiskDefFN = "";
+                string sDiskDefFolder = "";
+                OpenFileDialog openDialog = new OpenFileDialog();
+                openDialog.RestoreDirectory = true; // make sure directory is set to executable path
+                openDialog.InitialDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                openDialog.Multiselect = false;
+                openDialog.Title = "Select a disk definition file";
+                openDialog.Filter = "DiskDefs|*.cfg|All files (*.*)|*.*";
+
+                if (openDialog.ShowDialog() == DialogResult.OK)
+                {
+                    sDiskDefFN = openDialog.SafeFileName;
+                    sDiskDefFolder = Path.GetDirectoryName(openDialog.FileName);
+                    m_sDisktDefsFN = sDiskDefFolder + "\\" + sDiskDefFN;
+                }
+                else
+                {
+                    mnuUseDiskDefs.Checked = false;
+                    return;
+                }
+
+                m_listCustomFormats.Clear();
+                m_listCustomFormats.Add("UNSPECIFIED FORMAT");
+                foreach (string line in System.IO.File.ReadLines(m_sDisktDefsFN))
+                {
+                    // get definition description
+                    if ((line.Length > 4) && ((line.Substring(0, 4) == "disk")))
+                    {
+                        string desc = line.Substring(5);
+                        m_listCustomFormats.Add(desc);
+                    }
+                }
+            }
+            else
+            {
+                // load in defaults
+                m_listCustomFormats.Clear();
+                m_listCustomFormats.Add("UNSPECIFIED FORMAT");
+                foreach (string s in m_sarrDefaultFormats)
+                {
+                    m_listCustomFormats.Add(s);
+                }
+            }
+
         }
         #endregion
     }

@@ -52,6 +52,11 @@ namespace Greaseweazle
             this.lblHostTools = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gb3 = new System.Windows.Forms.GroupBox();
+            this.chkPLLSpec = new System.Windows.Forms.CheckBox();
+            this.txtPLLPhase = new System.Windows.Forms.TextBox();
+            this.lblPLLPhase = new System.Windows.Forms.Label();
+            this.txtPLLPeriod = new System.Windows.Forms.TextBox();
+            this.lblPLLPeriod = new System.Windows.Forms.Label();
             this.chkOutTracks = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkOTHeadSwap = new System.Windows.Forms.CheckBox();
@@ -78,11 +83,6 @@ namespace Greaseweazle
             this.txtHeadsSet = new System.Windows.Forms.TextBox();
             this.chkCylSet = new System.Windows.Forms.CheckBox();
             this.txtCylSet = new System.Windows.Forms.TextBox();
-            this.chkPLLSpec = new System.Windows.Forms.CheckBox();
-            this.txtPLLPhase = new System.Windows.Forms.TextBox();
-            this.lblPLLPhase = new System.Windows.Forms.Label();
-            this.txtPLLPeriod = new System.Windows.Forms.TextBox();
-            this.lblPLLPeriod = new System.Windows.Forms.Label();
             this.ctxOutput.SuspendLayout();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -211,6 +211,63 @@ namespace Greaseweazle
             this.gb3.Size = new System.Drawing.Size(512, 158);
             this.gb3.TabIndex = 16;
             this.gb3.TabStop = false;
+            // 
+            // chkPLLSpec
+            // 
+            this.chkPLLSpec.AutoSize = true;
+            this.chkPLLSpec.Location = new System.Drawing.Point(22, 108);
+            this.chkPLLSpec.Name = "chkPLLSpec";
+            this.chkPLLSpec.Size = new System.Drawing.Size(91, 21);
+            this.chkPLLSpec.TabIndex = 22;
+            this.chkPLLSpec.Text = "PLLSPEC";
+            this.chkPLLSpec.UseVisualStyleBackColor = true;
+            this.chkPLLSpec.CheckedChanged += new System.EventHandler(this.chkPLLSpec_CheckedChanged);
+            // 
+            // txtPLLPhase
+            // 
+            this.txtPLLPhase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtPLLPhase.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPLLPhase.ForeColor = System.Drawing.Color.White;
+            this.txtPLLPhase.Location = new System.Drawing.Point(330, 107);
+            this.txtPLLPhase.MaxLength = 3;
+            this.txtPLLPhase.Name = "txtPLLPhase";
+            this.txtPLLPhase.Size = new System.Drawing.Size(55, 22);
+            this.txtPLLPhase.TabIndex = 26;
+            this.txtPLLPhase.Text = "60";
+            this.txtPLLPhase.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPLLPhase.TextChanged += new System.EventHandler(this.txtPLLPhase_TextChanged);
+            // 
+            // lblPLLPhase
+            // 
+            this.lblPLLPhase.AutoSize = true;
+            this.lblPLLPhase.Location = new System.Drawing.Point(278, 110);
+            this.lblPLLPhase.Name = "lblPLLPhase";
+            this.lblPLLPhase.Size = new System.Drawing.Size(52, 17);
+            this.lblPLLPhase.TabIndex = 25;
+            this.lblPLLPhase.Text = "Phase:";
+            // 
+            // txtPLLPeriod
+            // 
+            this.txtPLLPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtPLLPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPLLPeriod.ForeColor = System.Drawing.Color.White;
+            this.txtPLLPeriod.Location = new System.Drawing.Point(205, 107);
+            this.txtPLLPeriod.MaxLength = 3;
+            this.txtPLLPeriod.Name = "txtPLLPeriod";
+            this.txtPLLPeriod.Size = new System.Drawing.Size(55, 22);
+            this.txtPLLPeriod.TabIndex = 24;
+            this.txtPLLPeriod.Text = "5";
+            this.txtPLLPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPLLPeriod.TextChanged += new System.EventHandler(this.txtPLLPeriod_TextChanged);
+            // 
+            // lblPLLPeriod
+            // 
+            this.lblPLLPeriod.AutoSize = true;
+            this.lblPLLPeriod.Location = new System.Drawing.Point(153, 110);
+            this.lblPLLPeriod.Name = "lblPLLPeriod";
+            this.lblPLLPeriod.Size = new System.Drawing.Size(53, 17);
+            this.lblPLLPeriod.TabIndex = 23;
+            this.lblPLLPeriod.Text = "Period:";
             // 
             // chkOutTracks
             // 
@@ -467,41 +524,6 @@ namespace Greaseweazle
             this.cbFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.cbFormat.ForeColor = System.Drawing.Color.White;
             this.cbFormat.FormattingEnabled = true;
-            this.cbFormat.Items.AddRange(new object[] {
-            "",
-            "acorn.dfs.ss",
-            "acorn.dfs.ds",
-            "acorn.adfs.160",
-            "acorn.adfs.320",
-            "acorn.adfs.640",
-            "acorn.adfs.800",
-            "acorn.adfs.1600",
-            "amiga.amigados",
-            "amiga.amigados_hd",
-            "akai.800",
-            "akai.1600",
-            "atari.90",
-            "atarist.360",
-            "atarist.400",
-            "atarist.440",
-            "atarist.720",
-            "atarist.800",
-            "atarist.880",
-            "commodore.1581",
-            "ensoniq.800",
-            "ensoniq.1600",
-            "ibm.180",
-            "ibm.360",
-            "ibm.720",
-            "ibm.800",
-            "ibm.1200",
-            "ibm.1440",
-            "ibm.1680",
-            "ibm.2880",
-            "ibm.dmf",
-            "pc98.dd",
-            "pc98.hd",
-            "sega.sf7000"});
             this.cbFormat.Location = new System.Drawing.Point(165, 118);
             this.cbFormat.Name = "cbFormat";
             this.cbFormat.Size = new System.Drawing.Size(335, 24);
@@ -553,63 +575,6 @@ namespace Greaseweazle
             this.txtCylSet.Text = "0-34,35-79";
             this.txtCylSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtCylSet.TextChanged += new System.EventHandler(this.txtCylSet_TextChanged_1);
-            // 
-            // chkPLLSpec
-            // 
-            this.chkPLLSpec.AutoSize = true;
-            this.chkPLLSpec.Location = new System.Drawing.Point(22, 108);
-            this.chkPLLSpec.Name = "chkPLLSpec";
-            this.chkPLLSpec.Size = new System.Drawing.Size(91, 21);
-            this.chkPLLSpec.TabIndex = 22;
-            this.chkPLLSpec.Text = "PLLSPEC";
-            this.chkPLLSpec.UseVisualStyleBackColor = true;
-            this.chkPLLSpec.CheckedChanged += new System.EventHandler(this.chkPLLSpec_CheckedChanged);
-            // 
-            // txtPLLPhase
-            // 
-            this.txtPLLPhase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtPLLPhase.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPLLPhase.ForeColor = System.Drawing.Color.White;
-            this.txtPLLPhase.Location = new System.Drawing.Point(330, 107);
-            this.txtPLLPhase.MaxLength = 3;
-            this.txtPLLPhase.Name = "txtPLLPhase";
-            this.txtPLLPhase.Size = new System.Drawing.Size(55, 22);
-            this.txtPLLPhase.TabIndex = 26;
-            this.txtPLLPhase.Text = "60";
-            this.txtPLLPhase.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPLLPhase.TextChanged += new System.EventHandler(this.txtPLLPhase_TextChanged);
-            // 
-            // lblPLLPhase
-            // 
-            this.lblPLLPhase.AutoSize = true;
-            this.lblPLLPhase.Location = new System.Drawing.Point(278, 110);
-            this.lblPLLPhase.Name = "lblPLLPhase";
-            this.lblPLLPhase.Size = new System.Drawing.Size(52, 17);
-            this.lblPLLPhase.TabIndex = 25;
-            this.lblPLLPhase.Text = "Phase:";
-            // 
-            // txtPLLPeriod
-            // 
-            this.txtPLLPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtPLLPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPLLPeriod.ForeColor = System.Drawing.Color.White;
-            this.txtPLLPeriod.Location = new System.Drawing.Point(205, 107);
-            this.txtPLLPeriod.MaxLength = 3;
-            this.txtPLLPeriod.Name = "txtPLLPeriod";
-            this.txtPLLPeriod.Size = new System.Drawing.Size(55, 22);
-            this.txtPLLPeriod.TabIndex = 24;
-            this.txtPLLPeriod.Text = "5";
-            this.txtPLLPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPLLPeriod.TextChanged += new System.EventHandler(this.txtPLLPeriod_TextChanged);
-            // 
-            // lblPLLPeriod
-            // 
-            this.lblPLLPeriod.AutoSize = true;
-            this.lblPLLPeriod.Location = new System.Drawing.Point(153, 110);
-            this.lblPLLPeriod.Name = "lblPLLPeriod";
-            this.lblPLLPeriod.Size = new System.Drawing.Size(53, 17);
-            this.lblPLLPeriod.TabIndex = 23;
-            this.lblPLLPeriod.Text = "Period:";
             // 
             // ConvertForm
             // 
