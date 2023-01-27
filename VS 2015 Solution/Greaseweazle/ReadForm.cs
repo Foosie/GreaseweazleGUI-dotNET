@@ -424,10 +424,13 @@ namespace Greaseweazle
         private void chkFlippyOffset_CheckedChanged(object sender, EventArgs e)
         {
             // uncheck things here
-            chkHeadsSet.Checked = true;
-            txtHeadsSet.Text = "0-1";
-            chkDoubleStep.Checked = true;
-            txtDoubleStep.Text = "2";
+            if (chkHeadsSet.Checked == true)
+            {
+                chkHeadsSet.Checked = true;
+                txtHeadsSet.Text = "0-1";
+                chkDoubleStep.Checked = true;
+                txtDoubleStep.Text = "2";
+            }
             CreateCommandLine();
         }
 
@@ -475,8 +478,16 @@ namespace Greaseweazle
 
         private void cbFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbExtension.SelectedIndex != 0))
-                cbExtension.Text = "";
+            if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT") && (cbFormat.ForeColor != Color.Black))  // black means disabled
+            {
+                chkCylSet.Checked = false;
+                chkHeadsSet.Checked = false;
+                chkDoubleStep.Checked = false;
+                chkHeadSwap.Checked = false;
+                chkLegacySS.Checked = false;
+                chkFlippyOffset.Checked = false;
+                chkAdjustSpeed.Checked = false;
+            }
             CreateCommandLine();
         }
 

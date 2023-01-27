@@ -573,6 +573,14 @@ namespace Greaseweazle
 
         private void cbFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT"))  // black means disabled
+            {
+                chkCylSet.Checked = false;
+                chkHeadsSet.Checked = false;
+                chkDoubleStep.Checked = false;
+                chkHeadSwap.Checked = false;
+                chkAdjustSpeed.Checked = false;
+            }
             CreateCommandLine();
         }
 

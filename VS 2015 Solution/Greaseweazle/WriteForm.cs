@@ -636,8 +636,14 @@ namespace Greaseweazle
         #region cbFormat_SelectedIndexChanged
         private void cbFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbExtension.SelectedIndex != 0))
-                cbExtension.Text = "";
+            if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT") && (cbFormat.ForeColor != Color.Black))  // black means disabled
+            {
+                chkCylSet.Checked = false;
+                chkHeadsSet.Checked = false;
+                chkHeadSwap.Checked = false;
+                chkDoubleStep.Checked = false;
+                chkFlippyOffset.Checked = false;
+            }
             CreateCommandLine();
         }
         #endregion
