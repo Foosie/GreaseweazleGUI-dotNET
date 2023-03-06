@@ -63,6 +63,15 @@ namespace Greaseweazle
                 cbFormat.Items.Add(desc);
                 Console.WriteLine(desc);
             }
+
+            // load file extensions
+            cbExtension.Items.Clear();
+            foreach (string desc in ChooserForm.m_listExtensions)
+            {
+                // get definition description
+                cbExtension.Items.Add(desc);
+                Console.WriteLine(desc);
+            }
         }
         #endregion
 
@@ -903,6 +912,10 @@ namespace Greaseweazle
             if (pos >= 0)
                 return (fn.Substring(0, pos));
             sRemove = ".scp::disktype=c64";
+            pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            sRemove = ".hfe::version=3";
             pos = fn.IndexOf(sRemove);
             if (pos >= 0)
                 return (fn.Substring(0, pos));

@@ -83,6 +83,8 @@ namespace Greaseweazle
             this.txtHeadsSet = new System.Windows.Forms.TextBox();
             this.chkCylSet = new System.Windows.Forms.CheckBox();
             this.txtCylSet = new System.Windows.Forms.TextBox();
+            this.lblDiskType = new System.Windows.Forms.Label();
+            this.cbExtension = new System.Windows.Forms.ComboBox();
             this.ctxOutput.SuspendLayout();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -327,6 +329,8 @@ namespace Greaseweazle
             // 
             // gb2
             // 
+            this.gb2.Controls.Add(this.lblDiskType);
+            this.gb2.Controls.Add(this.cbExtension);
             this.gb2.Controls.Add(this.txtOutputFile);
             this.gb2.Controls.Add(this.txtInputFile);
             this.gb2.Controls.Add(this.btnOutputFile);
@@ -341,7 +345,7 @@ namespace Greaseweazle
             // 
             this.txtOutputFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtOutputFile.ForeColor = System.Drawing.Color.White;
-            this.txtOutputFile.Location = new System.Drawing.Point(156, 65);
+            this.txtOutputFile.Location = new System.Drawing.Point(156, 54);
             this.txtOutputFile.Name = "txtOutputFile";
             this.txtOutputFile.Size = new System.Drawing.Size(336, 22);
             this.txtOutputFile.TabIndex = 31;
@@ -352,7 +356,7 @@ namespace Greaseweazle
             // 
             this.txtInputFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtInputFile.ForeColor = System.Drawing.Color.White;
-            this.txtInputFile.Location = new System.Drawing.Point(156, 24);
+            this.txtInputFile.Location = new System.Drawing.Point(156, 20);
             this.txtInputFile.Name = "txtInputFile";
             this.txtInputFile.Size = new System.Drawing.Size(336, 22);
             this.txtInputFile.TabIndex = 29;
@@ -362,7 +366,7 @@ namespace Greaseweazle
             // btnOutputFile
             // 
             this.btnOutputFile.BackColor = System.Drawing.Color.Maroon;
-            this.btnOutputFile.Location = new System.Drawing.Point(18, 62);
+            this.btnOutputFile.Location = new System.Drawing.Point(18, 51);
             this.btnOutputFile.Name = "btnOutputFile";
             this.btnOutputFile.Size = new System.Drawing.Size(115, 29);
             this.btnOutputFile.TabIndex = 30;
@@ -373,7 +377,7 @@ namespace Greaseweazle
             // btnInputFile
             // 
             this.btnInputFile.BackColor = System.Drawing.Color.Maroon;
-            this.btnInputFile.Location = new System.Drawing.Point(18, 21);
+            this.btnInputFile.Location = new System.Drawing.Point(18, 17);
             this.btnInputFile.Name = "btnInputFile";
             this.btnInputFile.Size = new System.Drawing.Size(115, 29);
             this.btnInputFile.TabIndex = 28;
@@ -576,6 +580,26 @@ namespace Greaseweazle
             this.txtCylSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtCylSet.TextChanged += new System.EventHandler(this.txtCylSet_TextChanged_1);
             // 
+            // lblDiskType
+            // 
+            this.lblDiskType.AutoSize = true;
+            this.lblDiskType.Location = new System.Drawing.Point(18, 91);
+            this.lblDiskType.Name = "lblDiskType";
+            this.lblDiskType.Size = new System.Drawing.Size(118, 17);
+            this.lblDiskType.TabIndex = 49;
+            this.lblDiskType.Text = "Output DiskType:";
+            // 
+            // cbExtension
+            // 
+            this.cbExtension.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbExtension.ForeColor = System.Drawing.Color.White;
+            this.cbExtension.FormattingEnabled = true;
+            this.cbExtension.Location = new System.Drawing.Point(158, 88);
+            this.cbExtension.Name = "cbExtension";
+            this.cbExtension.Size = new System.Drawing.Size(164, 24);
+            this.cbExtension.TabIndex = 50;
+            this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
+            // 
             // ConvertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -650,5 +674,7 @@ namespace Greaseweazle
         private System.Windows.Forms.Label lblPLLPhase;
         private System.Windows.Forms.TextBox txtPLLPeriod;
         private System.Windows.Forms.Label lblPLLPeriod;
+        private System.Windows.Forms.Label lblDiskType;
+        private System.Windows.Forms.ComboBox cbExtension;
     }
 }

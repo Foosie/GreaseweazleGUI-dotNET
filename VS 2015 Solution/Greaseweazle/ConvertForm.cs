@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Greaseweazle
 {
@@ -55,6 +56,15 @@ namespace Greaseweazle
             {
                 // get definition description
                 cbFormat.Items.Add(desc);
+                Console.WriteLine(desc);
+            }
+
+            // load file extensions
+            cbExtension.Items.Clear();
+            foreach (string desc in ChooserForm.m_listExtensions)
+            {
+                // get definition description
+                cbExtension.Items.Add(desc);
                 Console.WriteLine(desc);
             }
         }
@@ -103,6 +113,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkPLLSpec", (chkPLLSpec.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtPLLPeriod", txtPLLPeriod.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtPLLPhase", txtPLLPhase.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbExtension", cbExtension.Text);
         }
         #endregion
 
@@ -190,6 +201,8 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkPLLSpec.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "cbExtension", "garbage").Trim())) != "garbage")
+                cbExtension.SelectedIndex = cbExtension.FindString(sRet);
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -387,6 +400,8 @@ namespace Greaseweazle
         {
             // set colors
             this.BackColor = ChooserForm.cChocolate;
+            this.cbExtension.ForeColor = Color.White;
+            this.cbExtension.BackColor = ChooserForm.cLightBrown;
             this.lblHostTools.Text = ChooserForm.m_sStatusLine;
             this.lbOutput.BackColor = ChooserForm.cLightBrown;
             this.txtCylSet.BackColor = ChooserForm.cLightBrown;
@@ -623,11 +638,6 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
-        private void txtOutputFile_TextChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
-        }
-
         private void chkFlippyOffset_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
@@ -678,6 +688,49 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void txtOutputFile_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void cbExtension_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sFn = removeDiskType(txtOutputFile.Text, true);
+            txtOutputFile.Text = sFn + cbExtension.Text;
+            CreateCommandLine();
+        }
+
+        #endregion
+
+        #region removeDiskType
+        private string removeDiskType(string fn, bool noext)
+        {
+            string sRemove = ".scp::disktype=amiga";
+            int pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            sRemove = ".scp::disktype=c64";
+            pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            sRemove = ".hfe::version=3";
+            pos = fn.IndexOf(sRemove);
+            if (pos >= 0)
+                return (fn.Substring(0, pos));
+            if (noext)
+            {
+                string s = Path.GetFileNameWithoutExtension(fn);
+                if (s.EndsWith("."))
+                    s = s.Remove(s.Length - 1);   // remove period
+                return (s);
+            }
+            else
+            {
+                if (fn.EndsWith("."))
+                    fn = fn.Remove(fn.Length - 1);   // remove period
+                return (fn);
+            }
+        }
         #endregion
     }
 }

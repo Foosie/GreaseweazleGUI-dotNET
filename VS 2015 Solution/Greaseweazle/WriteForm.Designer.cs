@@ -179,34 +179,9 @@ namespace Greaseweazle
             this.cbExtension.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.cbExtension.ForeColor = System.Drawing.Color.White;
             this.cbExtension.FormattingEnabled = true;
-            this.cbExtension.Items.AddRange(new object[] {
-            ".adf",
-            ".ads",
-            ".adm",
-            ".adl",
-            ".d81",
-            ".d88",
-            ".dim",
-            ".dsd",
-            ".dsk",
-            ".fdi",
-            ".hdm",
-            ".hfe",
-            ".img",
-            ".ima",
-            ".ipf",
-            ".mgt",
-            ".raw",
-            ".scp",
-            ".scp::disktype=amiga",
-            ".scp::disktype=c64",
-            ".sf7",
-            ".ssd",
-            ".st",
-            ".xdf"});
             this.cbExtension.Location = new System.Drawing.Point(151, 21);
             this.cbExtension.Name = "cbExtension";
-            this.cbExtension.Size = new System.Drawing.Size(177, 24);
+            this.cbExtension.Size = new System.Drawing.Size(205, 24);
             this.cbExtension.TabIndex = 33;
             this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
             // 
