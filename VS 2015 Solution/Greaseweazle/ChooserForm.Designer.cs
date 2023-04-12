@@ -50,7 +50,9 @@ namespace Greaseweazle
             this.mnuWindowsEXE = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuElapsedTime = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUseCmdConsole = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuUseDiskDefs = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDefaults = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCreateShortcut = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
             this.rbSetDelays = new System.Windows.Forms.RadioButton();
@@ -75,7 +77,6 @@ namespace Greaseweazle
             this.lbUSBPorts = new System.Windows.Forms.ListBox();
             this.gbAction = new System.Windows.Forms.GroupBox();
             this.lblHostTools = new System.Windows.Forms.Label();
-           this.mnuUseDiskDefs = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGWsmall)).BeginInit();
             this.gbActionSelect.SuspendLayout();
@@ -92,6 +93,7 @@ namespace Greaseweazle
             this.mnuInfo,
             this.mnuSettings,
             this.aboutToolStripMenuItem,
+            this.mnuDefaults,
             this.mnuCreateShortcut});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -115,7 +117,7 @@ namespace Greaseweazle
             this.mnuProfileNew.BackColor = System.Drawing.SystemColors.Control;
             this.mnuProfileNew.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mnuProfileNew.Name = "mnuProfileNew";
-            this.mnuProfileNew.Size = new System.Drawing.Size(140, 26);
+            this.mnuProfileNew.Size = new System.Drawing.Size(181, 26);
             this.mnuProfileNew.Text = "-New-";
             this.mnuProfileNew.Click += new System.EventHandler(this.mnuProfileNew_Click);
             // 
@@ -124,7 +126,7 @@ namespace Greaseweazle
             this.mnuDelete.BackColor = System.Drawing.SystemColors.Control;
             this.mnuDelete.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(140, 26);
+            this.mnuDelete.Size = new System.Drawing.Size(181, 26);
             this.mnuDelete.Text = "-Delete-";
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
@@ -185,6 +187,13 @@ namespace Greaseweazle
             this.mnuUseCmdConsole.Text = "Use CMD Console";
             this.mnuUseCmdConsole.Click += new System.EventHandler(this.mnuUseCmdConsole_Click);
             // 
+            // mnuUseDiskDefs
+            // 
+            this.mnuUseDiskDefs.Name = "mnuUseDiskDefs";
+            this.mnuUseDiskDefs.Size = new System.Drawing.Size(257, 26);
+            this.mnuUseDiskDefs.Text = "Use DiskDefs file";
+            this.mnuUseDiskDefs.Click += new System.EventHandler(this.mnuUseDiskDefs_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -193,6 +202,14 @@ namespace Greaseweazle
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // mnuDefaults
+            // 
+            this.mnuDefaults.ForeColor = System.Drawing.Color.White;
+            this.mnuDefaults.Name = "mnuDefaults";
+            this.mnuDefaults.Size = new System.Drawing.Size(76, 24);
+            this.mnuDefaults.Text = "Defaults";
+            this.mnuDefaults.Click += new System.EventHandler(this.mnuDefaults_Click);
             // 
             // mnuCreateShortcut
             // 
@@ -489,13 +506,6 @@ namespace Greaseweazle
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mnuUseDiskDefs
-            // 
-            this.mnuUseDiskDefs.Name = "mnuUseDiskDefs";
-            this.mnuUseDiskDefs.Size = new System.Drawing.Size(257, 26);
-            this.mnuUseDiskDefs.Text = "Use DiskDefs file";
-            this.mnuUseDiskDefs.Click += new System.EventHandler(this.mnuUseDiskDefs_Click);
-            // 
             // ChooserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -561,5 +571,6 @@ namespace Greaseweazle
         private System.Windows.Forms.RadioButton rbRPMspindle;
         private System.Windows.Forms.RadioButton rbConvert;
         private System.Windows.Forms.ToolStripMenuItem mnuUseDiskDefs;
+        private System.Windows.Forms.ToolStripMenuItem mnuDefaults;
     }
 }

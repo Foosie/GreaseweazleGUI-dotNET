@@ -47,6 +47,8 @@ namespace Greaseweazle
             this.txtEraseCommandLine = new System.Windows.Forms.TextBox();
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.gbEraseDisk = new System.Windows.Forms.GroupBox();
+            this.txtFakeIndex = new System.Windows.Forms.TextBox();
+            this.cbFakeIndex = new System.Windows.Forms.ComboBox();
             this.chkHighFreq = new System.Windows.Forms.CheckBox();
             this.chkFakeIndex = new System.Windows.Forms.CheckBox();
             this.chkHeadsSet = new System.Windows.Forms.CheckBox();
@@ -61,8 +63,8 @@ namespace Greaseweazle
             this.ctxOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtFakeIndex = new System.Windows.Forms.TextBox();
-            this.cbFakeIndex = new System.Windows.Forms.ComboBox();
+            this.chkRevsPerTrack = new System.Windows.Forms.CheckBox();
+            this.txtRevsPerTrack = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.gbEraseDisk.SuspendLayout();
             this.ctxOutput.SuspendLayout();
@@ -78,7 +80,7 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.gbEraseDisk);
             this.groupBox1.Location = new System.Drawing.Point(13, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(551, 516);
+            this.groupBox1.Size = new System.Drawing.Size(551, 537);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -89,7 +91,7 @@ namespace Greaseweazle
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
             this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(19, 326);
+            this.lbOutput.Location = new System.Drawing.Point(19, 346);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbOutput.Name = "lbOutput";
             this.lbOutput.Size = new System.Drawing.Size(512, 132);
@@ -99,10 +101,10 @@ namespace Greaseweazle
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(332, 471);
+            this.btnBack.Location = new System.Drawing.Point(332, 491);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 14;
+            this.btnBack.TabIndex = 19;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -110,10 +112,10 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(111, 471);
+            this.btnLaunch.Location = new System.Drawing.Point(111, 491);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 13;
+            this.btnLaunch.TabIndex = 18;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -122,23 +124,25 @@ namespace Greaseweazle
             // 
             this.txtEraseCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtEraseCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtEraseCommandLine.Location = new System.Drawing.Point(19, 235);
+            this.txtEraseCommandLine.Location = new System.Drawing.Point(19, 255);
             this.txtEraseCommandLine.Multiline = true;
             this.txtEraseCommandLine.Name = "txtEraseCommandLine";
             this.txtEraseCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtEraseCommandLine.TabIndex = 12;
+            this.txtEraseCommandLine.TabIndex = 16;
             // 
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(225, 210);
+            this.lblStaticCL.Location = new System.Drawing.Point(225, 230);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
-            this.lblStaticCL.TabIndex = 11;
+            this.lblStaticCL.TabIndex = 15;
             this.lblStaticCL.Text = "Command Line";
             // 
             // gbEraseDisk
             // 
+            this.gbEraseDisk.Controls.Add(this.chkRevsPerTrack);
+            this.gbEraseDisk.Controls.Add(this.txtRevsPerTrack);
             this.gbEraseDisk.Controls.Add(this.txtFakeIndex);
             this.gbEraseDisk.Controls.Add(this.cbFakeIndex);
             this.gbEraseDisk.Controls.Add(this.chkHighFreq);
@@ -151,18 +155,50 @@ namespace Greaseweazle
             this.gbEraseDisk.Controls.Add(this.chkDriveSelect);
             this.gbEraseDisk.Location = new System.Drawing.Point(19, 21);
             this.gbEraseDisk.Name = "gbEraseDisk";
-            this.gbEraseDisk.Size = new System.Drawing.Size(512, 182);
+            this.gbEraseDisk.Size = new System.Drawing.Size(512, 198);
             this.gbEraseDisk.TabIndex = 2;
             this.gbEraseDisk.TabStop = false;
             this.gbEraseDisk.Enter += new System.EventHandler(this.gbEraseDisk_Enter);
             // 
+            // txtFakeIndex
+            // 
+            this.txtFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtFakeIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFakeIndex.ForeColor = System.Drawing.Color.White;
+            this.txtFakeIndex.Location = new System.Drawing.Point(220, 132);
+            this.txtFakeIndex.MaxLength = 3;
+            this.txtFakeIndex.Name = "txtFakeIndex";
+            this.txtFakeIndex.Size = new System.Drawing.Size(73, 22);
+            this.txtFakeIndex.TabIndex = 12;
+            this.txtFakeIndex.Text = "300";
+            this.txtFakeIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtFakeIndex.TextChanged += new System.EventHandler(this.txtFakeIndex_TextChanged);
+            // 
+            // cbFakeIndex
+            // 
+            this.cbFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cbFakeIndex.ForeColor = System.Drawing.Color.White;
+            this.cbFakeIndex.FormattingEnabled = true;
+            this.cbFakeIndex.Items.AddRange(new object[] {
+            "",
+            "rpm",
+            "ms",
+            "us",
+            "ns",
+            "scp"});
+            this.cbFakeIndex.Location = new System.Drawing.Point(313, 131);
+            this.cbFakeIndex.Name = "cbFakeIndex";
+            this.cbFakeIndex.Size = new System.Drawing.Size(93, 24);
+            this.cbFakeIndex.TabIndex = 13;
+            this.cbFakeIndex.SelectedIndexChanged += new System.EventHandler(this.cbFakeIndex_SelectedIndexChanged);
+            // 
             // chkHighFreq
             // 
             this.chkHighFreq.AutoSize = true;
-            this.chkHighFreq.Location = new System.Drawing.Point(107, 135);
+            this.chkHighFreq.Location = new System.Drawing.Point(107, 161);
             this.chkHighFreq.Name = "chkHighFreq";
             this.chkHighFreq.Size = new System.Drawing.Size(92, 21);
-            this.chkHighFreq.TabIndex = 10;
+            this.chkHighFreq.TabIndex = 14;
             this.chkHighFreq.Text = "High Freq";
             this.chkHighFreq.UseVisualStyleBackColor = true;
             this.chkHighFreq.CheckedChanged += new System.EventHandler(this.chkHighFreq_CheckedChanged);
@@ -170,10 +206,10 @@ namespace Greaseweazle
             // chkFakeIndex
             // 
             this.chkFakeIndex.AutoSize = true;
-            this.chkFakeIndex.Location = new System.Drawing.Point(107, 108);
+            this.chkFakeIndex.Location = new System.Drawing.Point(107, 133);
             this.chkFakeIndex.Name = "chkFakeIndex";
             this.chkFakeIndex.Size = new System.Drawing.Size(98, 21);
-            this.chkFakeIndex.TabIndex = 9;
+            this.chkFakeIndex.TabIndex = 11;
             this.chkFakeIndex.Text = "Fake Index";
             this.chkFakeIndex.UseVisualStyleBackColor = true;
             this.chkFakeIndex.CheckedChanged += new System.EventHandler(this.chkFakeIndex_CheckedChanged);
@@ -181,7 +217,7 @@ namespace Greaseweazle
             // chkHeadsSet
             // 
             this.chkHeadsSet.AutoSize = true;
-            this.chkHeadsSet.Location = new System.Drawing.Point(107, 53);
+            this.chkHeadsSet.Location = new System.Drawing.Point(107, 51);
             this.chkHeadsSet.Name = "chkHeadsSet";
             this.chkHeadsSet.Size = new System.Drawing.Size(94, 21);
             this.chkHeadsSet.TabIndex = 5;
@@ -193,7 +229,7 @@ namespace Greaseweazle
             // 
             this.txtHeadsSet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtHeadsSet.ForeColor = System.Drawing.Color.White;
-            this.txtHeadsSet.Location = new System.Drawing.Point(313, 51);
+            this.txtHeadsSet.Location = new System.Drawing.Point(313, 50);
             this.txtHeadsSet.Name = "txtHeadsSet";
             this.txtHeadsSet.Size = new System.Drawing.Size(93, 22);
             this.txtHeadsSet.TabIndex = 6;
@@ -204,7 +240,7 @@ namespace Greaseweazle
             // chkCylSet
             // 
             this.chkCylSet.AutoSize = true;
-            this.chkCylSet.Location = new System.Drawing.Point(107, 25);
+            this.chkCylSet.Location = new System.Drawing.Point(107, 24);
             this.chkCylSet.Name = "chkCylSet";
             this.chkCylSet.Size = new System.Drawing.Size(111, 21);
             this.chkCylSet.TabIndex = 3;
@@ -228,11 +264,11 @@ namespace Greaseweazle
             // 
             this.txtDriveSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDriveSelect.ForeColor = System.Drawing.Color.White;
-            this.txtDriveSelect.Location = new System.Drawing.Point(313, 79);
+            this.txtDriveSelect.Location = new System.Drawing.Point(313, 104);
             this.txtDriveSelect.MaxLength = 1;
             this.txtDriveSelect.Name = "txtDriveSelect";
             this.txtDriveSelect.Size = new System.Drawing.Size(93, 22);
-            this.txtDriveSelect.TabIndex = 8;
+            this.txtDriveSelect.TabIndex = 10;
             this.txtDriveSelect.Text = "A";
             this.txtDriveSelect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDriveSelect.TextChanged += new System.EventHandler(this.txtDriveSelect_TextChanged);
@@ -240,10 +276,10 @@ namespace Greaseweazle
             // chkDriveSelect
             // 
             this.chkDriveSelect.AutoSize = true;
-            this.chkDriveSelect.Location = new System.Drawing.Point(107, 81);
+            this.chkDriveSelect.Location = new System.Drawing.Point(107, 105);
             this.chkDriveSelect.Name = "chkDriveSelect";
             this.chkDriveSelect.Size = new System.Drawing.Size(182, 21);
-            this.chkDriveSelect.TabIndex = 7;
+            this.chkDriveSelect.TabIndex = 9;
             this.chkDriveSelect.Text = "F7 Drive Select (AB012)";
             this.toolTip.SetToolTip(this.chkDriveSelect, "Host Tools v0.18 or later\r\nRequires F7 type");
             this.chkDriveSelect.UseVisualStyleBackColor = true;
@@ -253,10 +289,10 @@ namespace Greaseweazle
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(106, 538);
+            this.lblHostTools.Location = new System.Drawing.Point(106, 553);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(369, 23);
-            this.lblHostTools.TabIndex = 15;
+            this.lblHostTools.TabIndex = 20;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -292,44 +328,35 @@ namespace Greaseweazle
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
-            // txtFakeIndex
+            // chkRevsPerTrack
             // 
-            this.txtFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtFakeIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFakeIndex.ForeColor = System.Drawing.Color.White;
-            this.txtFakeIndex.Location = new System.Drawing.Point(220, 108);
-            this.txtFakeIndex.MaxLength = 3;
-            this.txtFakeIndex.Name = "txtFakeIndex";
-            this.txtFakeIndex.Size = new System.Drawing.Size(73, 22);
-            this.txtFakeIndex.TabIndex = 19;
-            this.txtFakeIndex.Text = "300";
-            this.txtFakeIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFakeIndex.TextChanged += new System.EventHandler(this.txtFakeIndex_TextChanged);
+            this.chkRevsPerTrack.AutoSize = true;
+            this.chkRevsPerTrack.Location = new System.Drawing.Point(107, 78);
+            this.chkRevsPerTrack.Name = "chkRevsPerTrack";
+            this.chkRevsPerTrack.Size = new System.Drawing.Size(122, 21);
+            this.chkRevsPerTrack.TabIndex = 7;
+            this.chkRevsPerTrack.Text = "Revs per track";
+            this.chkRevsPerTrack.UseVisualStyleBackColor = true;
+            this.chkRevsPerTrack.CheckedChanged += new System.EventHandler(this.chkRevsPerTrack_CheckedChanged);
             // 
-            // cbFakeIndex
+            // txtRevsPerTrack
             // 
-            this.cbFakeIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.cbFakeIndex.ForeColor = System.Drawing.Color.White;
-            this.cbFakeIndex.FormattingEnabled = true;
-            this.cbFakeIndex.Items.AddRange(new object[] {
-            "",
-            "rpm",
-            "ms",
-            "us",
-            "ns",
-            "scp"});
-            this.cbFakeIndex.Location = new System.Drawing.Point(313, 107);
-            this.cbFakeIndex.Name = "cbFakeIndex";
-            this.cbFakeIndex.Size = new System.Drawing.Size(91, 24);
-            this.cbFakeIndex.TabIndex = 20;
-            this.cbFakeIndex.SelectedIndexChanged += new System.EventHandler(this.cbFakeIndex_SelectedIndexChanged);
+            this.txtRevsPerTrack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtRevsPerTrack.ForeColor = System.Drawing.Color.White;
+            this.txtRevsPerTrack.Location = new System.Drawing.Point(313, 77);
+            this.txtRevsPerTrack.Name = "txtRevsPerTrack";
+            this.txtRevsPerTrack.Size = new System.Drawing.Size(93, 22);
+            this.txtRevsPerTrack.TabIndex = 8;
+            this.txtRevsPerTrack.Text = "3";
+            this.txtRevsPerTrack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRevsPerTrack.TextChanged += new System.EventHandler(this.txtRevsPerTrack_TextChanged);
             // 
             // EraseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(580, 572);
+            this.ClientSize = new System.Drawing.Size(580, 584);
             this.Controls.Add(this.lblHostTools);
             this.Controls.Add(this.groupBox1);
             this.ForeColor = System.Drawing.Color.White;
@@ -372,5 +399,7 @@ namespace Greaseweazle
         private System.Windows.Forms.ListBox lbOutput;
         private System.Windows.Forms.TextBox txtFakeIndex;
         private System.Windows.Forms.ComboBox cbFakeIndex;
+        private System.Windows.Forms.CheckBox chkRevsPerTrack;
+        private System.Windows.Forms.TextBox txtRevsPerTrack;
     }
 }

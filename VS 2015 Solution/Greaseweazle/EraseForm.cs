@@ -64,6 +64,8 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtCylSet", txtCylSet.Text);
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkHeadsSet", (chkHeadsSet.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtHeadsSet", txtHeadsSet.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkRevsPerTrack", (chkRevsPerTrack.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtRevsPerTrack", txtRevsPerTrack.Text);
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtDriveSelect", txtDriveSelect.Text);
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "chkDriveSelect", (chkDriveSelect.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbEraseDisk", "txtEraseCommandLine", txtEraseCommandLine.Text);
@@ -93,6 +95,13 @@ namespace Greaseweazle
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "txtHeadsSet", "garbage").Trim())) != "garbage")
                 txtHeadsSet.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "chkRevsPerTrack", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkRevsPerTrack.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "txtRevsPerTrack", "garbage").Trim())) != "garbage")
+                txtRevsPerTrack.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "txtDriveSelect", "garbage").Trim())) != "garbage")
                 txtDriveSelect.Text = sRet;
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbEraseDisk", "chkDriveSelect", "garbage").Trim())) != "garbage")
@@ -157,7 +166,8 @@ namespace Greaseweazle
                     sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
                 txtEraseCommandLine.Text += sTracks;
             }
-
+            if (chkRevsPerTrack.Checked == true)
+                txtEraseCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtEraseCommandLine.Text += " --device=" + m_sUSBPort;
         }
@@ -298,6 +308,7 @@ namespace Greaseweazle
             this.btnBack.BackColor = ChooserForm.cDarkBrown;
             this.txtFakeIndex.BackColor = ChooserForm.cLightBrown;
             this.cbFakeIndex.BackColor = ChooserForm.cLightBrown;
+            this.txtRevsPerTrack.BackColor = ChooserForm.cLightBrown;
 
             iniReadFile();
             CreateCommandLine();
@@ -428,5 +439,15 @@ namespace Greaseweazle
             CreateCommandLine();
         }
         #endregion
+
+        private void chkRevsPerTrack_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtRevsPerTrack_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
     }
 }

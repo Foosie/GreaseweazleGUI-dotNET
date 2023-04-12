@@ -67,12 +67,12 @@ namespace Greaseweazle
         private string m_sInfo = "The GUI executable only supports the Host Tools version identified in the GUI's status bar. The GUI will always use the Host Tools from the folder from which the executable was placed. Use the 'info' Greaseweazle option to determine the firmware's current version.";
         private ToolStripMenuItem[] m_mnuItems;
         public static string m_sExtFilter = "Images|*.adf;*.ads;*.adm;*.adl;*.dim;*.dsd;*.dsk;*.d81;*.d88;*.fdi;*.hdm;*.hfe;*.img;*.ima;*.imd;*.ipf;*.mgt;*.raw;*.sf7;*.st;*.scp|All files (*.*)|*.*";
-        public static string[] m_sarrDefaultFormats = new string[38] {"amiga.amigados", "amiga.amigados_hd", "acorn.adfs.160", "acorn.adfs.320", "acorn.adfs.640", "acorn.adfs.800", "acorn.adfs.1600", "acorn.dfs.ss", "acorn.dfs.ds", "akai.800", "akai.1600", "atari.90", "atarist.360", "atarist.400", "atarist.440", "atarist.720", "atarist.800", "atarist.880", "commodore.1581", "ensoniq.800", "ensoniq.1600", "ensoniq.mirage", "ibm.180", "ibm.360", "ibm.720", "ibm.800", "ibm.1200", "ibm.1440", "ibm.1680", "ibm.dmf", "ibm.2880", "pc98.2d", "pc98.2dd", "pc98.2hd", "pc98.2hs", "sci.prophet", "sega.sf7000", "zx.trdos.640" };
+        public static string[] m_sarrDefaultFormats = new string[39] {"amiga.amigados", "amiga.amigados_hd", "acorn.adfs.160", "acorn.adfs.320", "acorn.adfs.640", "acorn.adfs.800", "acorn.adfs.1600", "acorn.dfs.ss", "acorn.dfs.ds", "akai.800", "akai.1600", "atari.90", "atarist.360", "atarist.400", "atarist.440", "atarist.720", "atarist.800", "atarist.880", "commodore.1581", "ensoniq.800", "ensoniq.1600", "ensoniq.mirage", "ibm.160", "ibm.180", "ibm.360", "ibm.720", "ibm.800", "ibm.1200", "ibm.1440", "ibm.1680", "ibm.dmf", "ibm.2880", "pc98.2d", "pc98.2dd", "pc98.2hd", "pc98.2hs", "sci.prophet", "sega.sf7000", "zx.trdos.640" };
         public static string[] m_sarrExtensions = new string[26] {".adf",".ads",".adm",".adl",".d81",".d88",".dim",".dsd",".dsk",".fdi",".hdm", ".hfe::version=3", ".hfe",".img",".ima",".imd",".ipf",".mgt",".0.raw",".scp",".scp::disktype=amiga",".scp::disktype=c64",".sf7",".ssd",".st",".xdf"};
         public static List<string> m_listCustomFormats = new List<string>();
         public static List<string> m_listExtensions = new List<string>();
         public static bool m_bUseCustomFormats = false;
-        public static string m_sStatusLine = "for Host Tools 1.9";
+        public static string m_sStatusLine = "for Host Tools 1.10";
         #endregion
 
         #region ChooserForm
@@ -155,6 +155,7 @@ namespace Greaseweazle
             this.mnuUSBSupport.ForeColor = Color.White;
             this.mnuWindowsEXE.ForeColor = Color.White;
             this.mnuElapsedTime.ForeColor = Color.White;
+            this.mnuDefaults.ForeColor = Color.White;
 
             // set working directory to executable directory
             m_sExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -1262,6 +1263,35 @@ namespace Greaseweazle
                 }
             }
 
+        }
+        #endregion
+
+        #region mnuDefaults_Click
+        private void mnuDefaults_Click(object sender, EventArgs e)
+        {
+            DialogResult drRet = MessageBox.Show("This will reset all changes back to defaults!\nAre you sure?", "Selected Profile = " + Path.GetFileNameWithoutExtension(m_sIniFile), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (drRet != DialogResult.OK)
+                return;
+
+            m_Ini.IniWriteValue("gbAction", null, null);
+            m_Ini.IniWriteValue("gbUSBPorts", null, null);
+            m_Ini.IniWriteValue("gbGlobals", null, null);
+            m_Ini.IniWriteValue("gbReadFromDisk", null, null);
+            m_Ini.IniWriteValue("gbWriteToDisk", null, null);
+            m_Ini.IniWriteValue("gbClean", null, null);
+            m_Ini.IniWriteValue("gbEraseDisk", null, null);
+            m_Ini.IniWriteValue("gbConvert", null, null);
+            m_Ini.IniWriteValue("gbInfo", null, null);
+            m_Ini.IniWriteValue("gbReset", null, null);
+            m_Ini.IniWriteValue("gbPinLevel", null, null);
+            m_Ini.IniWriteValue("gbRPM", null, null);
+            m_Ini.IniWriteValue("gbSeekCyl", null, null);
+            m_Ini.IniWriteValue("gbSetDelays", null, null);
+            m_Ini.IniWriteValue("gbUpdateFirmware", null, null);
+
+            AutoClosingMessageBox.Show("Settings were reset\n\nApplication will restart", "", 5000);
+
+            Application.Restart();
         }
         #endregion
     }
