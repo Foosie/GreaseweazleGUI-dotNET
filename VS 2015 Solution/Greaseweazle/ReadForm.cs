@@ -117,6 +117,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRaw", (chkRaw.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkNoClobber", (chkNoClobber.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkPin2High", (chkPin2High.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkFakeIndex", (chkFakeIndex.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtFakeIndex", txtFakeIndex.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "cbFakeIndex", cbFakeIndex.Text);
@@ -254,6 +255,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkNoClobber.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkPin2High", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkPin2High.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "txtPLLPeriod", "garbage").Trim())) != "garbage")
             {
                 txtPLLPeriod.Text = sRet;
@@ -302,6 +308,8 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --retries=" + txtDriveRetriesRFD.Text;
             if (chkNoClobber.Checked == true)
                 txtRFDCommandLine.Text += " --no-clobber";
+            if (chkPin2High.Checked == true)
+                txtRFDCommandLine.Text += " --dd";
             if (chkRevsPerTrack.Checked == true)
                 txtRFDCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
             if (chkAdjustSpeed.Checked == true)
@@ -815,6 +823,13 @@ namespace Greaseweazle
         private void tbSuffix_TextChanged(object sender, EventArgs e)
         {
             ChgFilenameSuffix();
+            CreateCommandLine();
+        }
+        #endregion
+
+        #region chkPin2High_CheckedChanged
+        private void chkPin2High_CheckedChanged(object sender, EventArgs e)
+        {
             CreateCommandLine();
         }
         #endregion

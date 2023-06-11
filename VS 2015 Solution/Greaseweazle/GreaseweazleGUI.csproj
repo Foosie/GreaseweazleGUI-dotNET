@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MsgboxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MsgboxForm.Designer.cs">
+      <DependentUpon>MsgboxForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,9 @@
     <Compile Include="WriteForm.Designer.cs">
       <DependentUpon>WriteForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MsgboxForm.resx">
+      <DependentUpon>MsgboxForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
