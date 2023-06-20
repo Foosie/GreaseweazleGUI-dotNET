@@ -11,7 +11,7 @@
   
   prerequsites: Visual Studio 2015
   
-  GreaseweazleGUI.exe must be moved to same folder where the controllers CURRENT firmware 'Host Tools' support files were extracted. This folder is the one with the gw.py file in it.
+  GreaseweazleGUI.exe must be moved to same folder where the controllers CURRENT firmware 'Host Tools' support files were extracted. This folder is the one with the gw.py or gw.exe file in it.
   If you run GreaseweazleGUI from a folder that contains a different Host Tools distribution than the controllers currently burned firmware, there will be issues.
   
   This is a work in progress.
