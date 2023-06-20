@@ -124,6 +124,9 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkPLLSpec", (chkPLLSpec.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtPLLPeriod", txtPLLPeriod.Text);
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "txtPLLPhase", txtPLLPhase.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkPin2High", (chkPin2High.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbHigh", (rbHigh.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbLow", (rbLow.Checked == true).ToString());
         }
         #endregion
 
@@ -274,6 +277,22 @@ namespace Greaseweazle
                     chkPLLSpec.Checked = true;
             }
 
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkPin2High", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkPin2High.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbHigh", "garbage").Trim())) != "garbage")
+            {
+                if ((sRet == "True") && (chkPin2High.Checked == true))
+                    rbHigh.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "rbLow", "garbage").Trim())) != "garbage")
+            {
+                if ((sRet == "True") && (chkPin2High.Checked == true))
+                    rbLow.Checked = true;
+            }
+
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
@@ -309,7 +328,12 @@ namespace Greaseweazle
             if (chkNoClobber.Checked == true)
                 txtRFDCommandLine.Text += " --no-clobber";
             if (chkPin2High.Checked == true)
-                txtRFDCommandLine.Text += " --dd";
+            {
+                if (rbHigh.Checked == true)
+                    txtRFDCommandLine.Text += " --dd H";
+                else if (rbLow.Checked == true)
+                    txtRFDCommandLine.Text += " --dd L";
+            }
             if (chkRevsPerTrack.Checked == true)
                 txtRFDCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
             if (chkAdjustSpeed.Checked == true)
@@ -563,6 +587,43 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void rbHigh_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void rbLow_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void tbFilename_TextChanged(object sender, EventArgs e)
+        {
+            GetFNSuffix();
+            CreateCommandLine();
+        }
+
+        private void btnInc_Click(object sender, EventArgs e)
+        {
+            ChgSuffix(1);
+        }
+
+        private void btnDec_Click(object sender, EventArgs e)
+        {
+            ChgSuffix(2);
+        }
+
+        private void tbSuffix_TextChanged(object sender, EventArgs e)
+        {
+            ChgFilenameSuffix();
+            CreateCommandLine();
+        }
+
+        private void chkPin2High_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
 
         #region ReadForm_Load
@@ -794,43 +855,6 @@ namespace Greaseweazle
 
             // continue
             base.WndProc(ref m);
-        }
-        #endregion
-
-        #region tbFilename_TextChanged
-        private void tbFilename_TextChanged(object sender, EventArgs e)
-        {
-            GetFNSuffix();
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region btnInc_Click
-        private void btnInc_Click(object sender, EventArgs e)
-        {
-            ChgSuffix(1);
-        }
-        #endregion
-
-        #region btnDec_Click
-        private void btnDec_Click(object sender, EventArgs e)
-        {
-            ChgSuffix(2);
-        }
-        #endregion
-
-        #region tbSuffix_TextChanged
-        private void tbSuffix_TextChanged(object sender, EventArgs e)
-        {
-            ChgFilenameSuffix();
-            CreateCommandLine();
-        }
-        #endregion
-
-        #region chkPin2High_CheckedChanged
-        private void chkPin2High_CheckedChanged(object sender, EventArgs e)
-        {
-            CreateCommandLine();
         }
         #endregion
 
