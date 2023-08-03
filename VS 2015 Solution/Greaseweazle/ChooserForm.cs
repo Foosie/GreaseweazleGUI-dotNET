@@ -72,7 +72,7 @@ namespace Greaseweazle
         public static List<string> m_listCustomFormats = new List<string>();
         public static List<string> m_listExtensions = new List<string>();
         public static bool m_bUseCustomFormats = false;
-        public static string m_sStatusLine = "for Host Tools 1.13";
+        public static string m_sStatusLine = "for Host Tools 1.15";
         #endregion
 
         #region ChooserForm
