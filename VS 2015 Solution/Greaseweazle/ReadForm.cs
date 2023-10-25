@@ -946,18 +946,10 @@ namespace Greaseweazle
         #region removeDiskType
         private string removeDiskType(string fn, bool noext)
         {
-            string sRemove = ".scp::disktype=amiga";
+            string sRemove = "::";
             int pos = fn.IndexOf(sRemove);
             if (pos >= 0)
-                return (fn.Substring(0, pos));
-            sRemove = ".scp::disktype=c64";
-            pos = fn.IndexOf(sRemove);
-            if (pos >= 0)
-                return (fn.Substring(0, pos));
-            sRemove = ".hfe::version=3";
-            pos = fn.IndexOf(sRemove);
-            if (pos >= 0)
-                return (fn.Substring(0, pos));
+                fn = fn.Substring(0, pos);
             if (noext)
             {
                 string s = Path.GetFileNameWithoutExtension(fn);

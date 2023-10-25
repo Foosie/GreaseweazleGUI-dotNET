@@ -30,6 +30,7 @@ namespace Greaseweazle
             this.StartPosition = FormStartPosition.CenterParent;
             this.ControlBox = false;
             this.BackColor = ChooserForm.cChocolate;
+            this.lblText.BackColor = ChooserForm.cLightBrown;
             this.btnOK.BackColor = ChooserForm.cDarkBrown;
         }
 
