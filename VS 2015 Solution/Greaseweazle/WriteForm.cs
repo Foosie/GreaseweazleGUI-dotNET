@@ -111,6 +111,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbFlippyTeac", (rbFlippyTeac.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkPin2High", (chkPin2High.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkTG43", (chkTG43.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbHigh", (rbHigh.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbLow", (rbLow.Checked == true).ToString());
         }
@@ -217,6 +218,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkPin2High.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkTG43", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkTG43.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "rbHigh", "garbage").Trim())) != "garbage")
             {
                 if ((sRet == "True") && (chkPin2High.Checked == true))
@@ -257,6 +263,8 @@ namespace Greaseweazle
                 txtWTDCommandLine.Text += " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
             if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT") && (cbFormat.ForeColor != Color.Black))  // black means disabled
                     txtWTDCommandLine.Text += " --format=" + cbFormat.Text;
+            if (chkTG43.Checked == true)
+                txtWTDCommandLine.Text += " --gen-tg43";
             if (chkRetries.Checked == true)
                 txtWTDCommandLine.Text += " --retries=" + txtRetries.Text;
             if ((chkDriveSelectWTD.Enabled == true) && (chkDriveSelectWTD.Checked == true))
@@ -270,9 +278,9 @@ namespace Greaseweazle
             if (chkPin2High.Checked == true)
             {
                 if (rbHigh.Checked == true)
-                    txtWTDCommandLine.Text += " --dd H";
+                    txtWTDCommandLine.Text += " --densel H";
                 else if (rbLow.Checked == true)
-                    txtWTDCommandLine.Text += " --dd L";
+                    txtWTDCommandLine.Text += " --densel L";
             }
             if (chkFakeIndex.Checked == true)
                 txtWTDCommandLine.Text += " --fake-index=" + txtFakeIndex.Text + cbFakeIndex.Text;
@@ -617,6 +625,11 @@ namespace Greaseweazle
         }
 
         private void rbLow_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkTG43_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

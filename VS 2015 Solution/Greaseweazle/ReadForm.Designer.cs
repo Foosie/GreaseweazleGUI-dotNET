@@ -662,7 +662,7 @@ namespace Greaseweazle
             // rbLow
             // 
             this.rbLow.AutoSize = true;
-            this.rbLow.Location = new System.Drawing.Point(207, 11);
+            this.rbLow.Location = new System.Drawing.Point(200, 11);
             this.rbLow.Margin = new System.Windows.Forms.Padding(2);
             this.rbLow.Name = "rbLow";
             this.rbLow.Size = new System.Drawing.Size(45, 17);

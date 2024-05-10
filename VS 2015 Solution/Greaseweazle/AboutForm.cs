@@ -53,6 +53,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
+                ex = ex; // stub out unused declaration warning
                 MessageBox.Show("Unable to open link that was clicked");
             }
         }

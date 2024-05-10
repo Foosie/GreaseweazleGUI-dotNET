@@ -330,9 +330,9 @@ namespace Greaseweazle
             if (chkPin2High.Checked == true)
             {
                 if (rbHigh.Checked == true)
-                    txtRFDCommandLine.Text += " --dd H";
+                    txtRFDCommandLine.Text += " --densel H";
                 else if (rbLow.Checked == true)
-                    txtRFDCommandLine.Text += " --dd L";
+                    txtRFDCommandLine.Text += " --densel L";
             }
             if (chkRevsPerTrack.Checked == true)
                 txtRFDCommandLine.Text += " --revs=" + txtRevsPerTrack.Text;
