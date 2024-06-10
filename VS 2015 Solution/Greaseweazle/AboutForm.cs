@@ -89,7 +89,7 @@ namespace Greaseweazle
             try
             {
                 //Open the default browser with a URL:
-                System.Diagnostics.Process.Start("https://github.com/keirf/FlashFloppy/wiki/");
+                System.Diagnostics.Process.Start("https://github.com/keirf/flashfloppy/");
             }
             catch (Exception ex)
             {
