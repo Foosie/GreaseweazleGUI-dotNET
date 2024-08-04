@@ -111,6 +111,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtOTDoubleStep", txtOTDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkOTHeadSwap", (chkOTHeadSwap.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkPLLSpec", (chkPLLSpec.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkHardSectors", (chkHardSectors.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtPLLPeriod", txtPLLPeriod.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtPLLPhase", txtPLLPhase.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbExtension", cbExtension.Text);
@@ -162,6 +163,11 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkNoClobber.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkHardSectors", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkHardSectors.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "m_sInputFolder", "garbage").Trim())) != "garbage")
                 m_sInputFolder = sRet;
@@ -237,6 +243,8 @@ namespace Greaseweazle
                 txtConvertCommandLine.Text += " --adjust-speed=" + txtAdjustSpeed.Text + cbAdjustSpeed.Text;
             if (chkPLLSpec.Checked == true)
                 txtConvertCommandLine.Text += " --pll=period=" + txtPLLPeriod.Text + ":phase=" + txtPLLPhase.Text;
+            if (chkHardSectors.Checked == true)
+                txtConvertCommandLine.Text += " -hard-sectors";
             if (chkNoClobber.Checked == true)
                 txtConvertCommandLine.Text += " --no-clobber";
             if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT"))
@@ -674,6 +682,11 @@ namespace Greaseweazle
         }
 
         private void chkPLLSpec_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkHardSectors_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
