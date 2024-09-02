@@ -115,6 +115,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbFlippyPanasonic", (rbFlippyPanasonic.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbFlippyTeac", (rbFlippyTeac.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRevTrkData", (chkRevTrkData.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkRaw", (chkRaw.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkNoClobber", (chkNoClobber.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkPin2High", (chkPin2High.Checked == true).ToString());
@@ -234,6 +235,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkHeadSwap.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkRevTrkData", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkRevTrkData.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkRaw", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -312,6 +318,7 @@ namespace Greaseweazle
         {
             string sTracks = " --tracks=";
 
+            // txtRFDCommandLine
             if (true == m_bWindowsEXE)
                 txtRFDCommandLine.Text = "gw.exe";
             else
@@ -346,6 +353,10 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --pll=period=" + txtPLLPeriod.Text + ":phase=" + txtPLLPhase.Text;
             if ((chkDriveSelectRFD.Enabled == true) && (chkDriveSelectRFD.Checked == true))
                 txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
+            if (chkRevTrkData.Checked == true)
+                txtRFDCommandLine.Text += " --reverse";
+
+            // sTracks
             if (chkDoubleStep.Checked == true)
                 sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkCylSet.Checked == true)
@@ -361,12 +372,14 @@ namespace Greaseweazle
                 else if (rbFlippyPanasonic.Checked == true)
                     sTracks += "h1.off=-8:";
             }
+
             if (sTracks != " --tracks=")
             {
                 if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
                     sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
                 txtRFDCommandLine.Text += sTracks;
             }
+
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtRFDCommandLine.Text += " --device=" + m_sUSBPort;
             txtRFDCommandLine.Text += " " + "\"" + m_sReadDiskFolder + "\\" + tbFilename.Text.Trim();
@@ -620,6 +633,12 @@ namespace Greaseweazle
         }
 
         private void chkPin2High_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+
+        private void chkRevTrkData_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

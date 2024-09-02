@@ -87,6 +87,7 @@ namespace Greaseweazle
             this.ctxOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkRevTrkData = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbDiskType.SuspendLayout();
             this.gbWriteToDisk.SuspendLayout();
@@ -272,6 +273,7 @@ namespace Greaseweazle
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkRevTrkData);
             this.groupBox3.Controls.Add(this.chkHeadSwap);
             this.groupBox3.Controls.Add(this.txtRetries);
             this.groupBox3.Controls.Add(this.chkRetries);
@@ -688,6 +690,19 @@ namespace Greaseweazle
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
+            // chkRevTrkData
+            // 
+            this.chkRevTrkData.AutoSize = true;
+            this.chkRevTrkData.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkRevTrkData.Location = new System.Drawing.Point(106, 89);
+            this.chkRevTrkData.Margin = new System.Windows.Forms.Padding(2);
+            this.chkRevTrkData.Name = "chkRevTrkData";
+            this.chkRevTrkData.Size = new System.Drawing.Size(103, 17);
+            this.chkRevTrkData.TabIndex = 26;
+            this.chkRevTrkData.Text = "Rev Track Data";
+            this.chkRevTrkData.UseVisualStyleBackColor = true;
+            this.chkRevTrkData.CheckedChanged += new System.EventHandler(this.chkRevTrkData_CheckedChanged);
+            // 
             // WriteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -769,5 +784,6 @@ namespace Greaseweazle
         private System.Windows.Forms.RadioButton rbHigh;
         private System.Windows.Forms.RadioButton rbLow;
         private System.Windows.Forms.CheckBox chkTG43;
+        private System.Windows.Forms.CheckBox chkRevTrkData;
     }
 }

@@ -110,6 +110,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbFlippyPanasonic", (rbFlippyPanasonic.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbFlippyTeac", (rbFlippyTeac.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkHeadSwap", (chkHeadSwap.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkRevTrkData", (chkRevTrkData.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkPin2High", (chkPin2High.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkTG43", (chkTG43.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbHigh", (rbHigh.Checked == true).ToString());
@@ -213,6 +214,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkHeadSwap.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkRevTrkData", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkRevTrkData.Checked = true;
+            }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkPin2High", "garbage").Trim())) != "garbage")
             {
                 if (sRet == "True")
@@ -252,6 +258,8 @@ namespace Greaseweazle
         private void CreateCommandLine()
         {
             string sTracks = " --tracks=";
+
+            // txtWTDCommandLine
             if (true == m_bWindowsEXE)
                 txtWTDCommandLine.Text = "gw.exe";
             else
@@ -271,8 +279,6 @@ namespace Greaseweazle
                 txtWTDCommandLine.Text += " --drive=" + txtDriveSelectWTD.Text;
             if (chkPrecomp.Checked == true)
                 txtWTDCommandLine.Text += " --precomp=" + txtPrecomp.Text;
-            if (chkDoubleStep.Checked == true)
-                sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkEraseEmpty.Checked == true)
                 txtWTDCommandLine.Text += " --erase-empty";
             if (chkPin2High.Checked == true)
@@ -284,6 +290,12 @@ namespace Greaseweazle
             }
             if (chkFakeIndex.Checked == true)
                 txtWTDCommandLine.Text += " --fake-index=" + txtFakeIndex.Text + cbFakeIndex.Text;
+            if (chkRevTrkData.Checked == true)
+                txtWTDCommandLine.Text += " --reverse";
+
+            // sTracks
+            if (chkDoubleStep.Checked == true)
+                sTracks += "step=" + txtDoubleStep.Text + ":";
             if (chkCylSet.Checked == true)
                 sTracks += "c=" + txtCylSet.Text + ":";
             if (chkHeadsSet.Checked == true)
@@ -297,14 +309,17 @@ namespace Greaseweazle
                 else if (rbFlippyPanasonic.Checked == true)
                     sTracks += "h1.off=-8:";
             }
+
             if (sTracks != " --tracks=")
             {
                 if (sTracks.Substring(sTracks.Length - 1, 1) == ":") // remove trailing colon
                     sTracks = sTracks.Remove(sTracks.Length - 1, 1); ;
                 txtWTDCommandLine.Text += sTracks;
             }
-            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
+
+            if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN")) // put at end
                 txtWTDCommandLine.Text += " --device=" + m_sUSBPort;
+
             txtWTDCommandLine.Text += " " + "\"" + m_sWriteDiskFolder + "\\" + m_sWTDFilename + "\"";
         }
         #endregion
@@ -630,6 +645,11 @@ namespace Greaseweazle
         }
 
         private void chkTG43_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkRevTrkData_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

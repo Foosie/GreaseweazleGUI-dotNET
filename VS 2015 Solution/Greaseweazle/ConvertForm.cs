@@ -88,10 +88,13 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtHeadsSet", txtHeadsSet.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtAdjustSpeed", txtAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkAdjustSpeed", chkAdjustSpeed.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkRevTrkData", chkRevTrkData.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbAdjustSpeed", txtAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbAdjustSpeed", txtAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkDoubleStep", (chkDoubleStep.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtDoubleStep", txtDoubleStep.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkAdjustSpeed", (chkAdjustSpeed.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbConvert", "chkRevTrkData", (chkRevTrkData.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "txtAdjustSpeed", txtAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbAdjustSpeed", cbAdjustSpeed.Text);
             ChooserForm.m_Ini.IniWriteValue("gbConvert", "cbFormat", cbFormat.Text);
@@ -137,6 +140,11 @@ namespace Greaseweazle
             {
                 if (sRet == "True")
                     chkAdjustSpeed.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "chkRevTrkData", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkRevTrkData.Checked = true;
             }
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbConvert", "cbAdjustSpeed", "garbage").Trim())) != "garbage")
                 cbAdjustSpeed.Text = sRet;
@@ -241,6 +249,8 @@ namespace Greaseweazle
                 txtConvertCommandLine.Text += " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
             if ((chkAdjustSpeed.Enabled == true) && (chkAdjustSpeed.Checked == true))
                 txtConvertCommandLine.Text += " --adjust-speed=" + txtAdjustSpeed.Text + cbAdjustSpeed.Text;
+            if (chkRevTrkData.Checked == true)
+                txtConvertCommandLine.Text += " --reverse";
             if (chkPLLSpec.Checked == true)
                 txtConvertCommandLine.Text += " --pll=period=" + txtPLLPeriod.Text + ":phase=" + txtPLLPhase.Text;
             if (chkHardSectors.Checked == true)
@@ -713,6 +723,11 @@ namespace Greaseweazle
             CreateCommandLine();
         }
 
+        private void chkRevTrkData_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
         #endregion
 
         #region removeDiskType
@@ -745,5 +760,6 @@ namespace Greaseweazle
             }
         }
         #endregion
+
     }
 }
