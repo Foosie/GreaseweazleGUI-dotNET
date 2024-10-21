@@ -70,6 +70,12 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "chkDelayDriveSelect", (chkDelayDriveSelect.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "txtDelayHeadSteps", txtDelayHeadSteps.Text);
             ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "chkDelayHeadSteps", (chkDelayHeadSteps.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "txtDelayTrkChgToWrite", txtDelayTrkChgToWrite.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "chkDelayTrkChgToWrite", (chkDelayTrkChgToWrite.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "txtDelayTrkWriteToChg", txtDelayTrkWriteToChg.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "chkDelayTrkWriteToChg", (chkDelayTrkWriteToChg.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "txtIdxMaskTime", txtIdxMaskTime.Text);
+            ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "chkIdxMaskTime", (chkIdxMaskTime.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbSetDelays", "txtDelaysCommandLine", txtDelaysCommandLine.Text);
         }
         #endregion
@@ -115,6 +121,27 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkDelayHeadSteps.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSetDelays", "txtDelayTrkChgToWrite", "garbage").Trim())) != "garbage")
+                txtDelayTrkChgToWrite.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSetDelays", "chkDelayTrkChgToWrite", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDelayTrkChgToWrite.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSetDelays", "txtDelayTrkWriteToChg", "garbage").Trim())) != "garbage")
+                txtDelayTrkWriteToChg.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSetDelays", "chkDelayTrkWriteToChg", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkDelayTrkWriteToChg.Checked = true;
+            }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSetDelays", "txtIdxMaskTime", "garbage").Trim())) != "garbage")
+                txtIdxMaskTime.Text = sRet;
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbSetDelays", "chkIdxMaskTime", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkIdxMaskTime.Checked = true;
+            }
 
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
@@ -150,6 +177,12 @@ namespace Greaseweazle
                 txtDelaysCommandLine.Text += " --motor=" + txtDelayMotorOn.Text;
             if (chkDelayAutoDeselect.Checked == true)
                 txtDelaysCommandLine.Text += " --watchdog=" + txtDelayAutoDeselect.Text;
+            if (chkDelayTrkChgToWrite.Checked == true)
+                txtDelaysCommandLine.Text += " --pre-write=" + txtDelayTrkChgToWrite.Text;
+            if (chkDelayTrkWriteToChg.Checked == true)
+                txtDelaysCommandLine.Text += " --post-write=" + txtDelayTrkWriteToChg.Text;
+            if (chkIdxMaskTime.Checked == true)
+                txtDelaysCommandLine.Text += "  --index-mask=" + txtIdxMaskTime.Text;
             if ((m_bUSBSupport == true) && (m_sUSBPort != "UNKNOWN"))
                 txtDelaysCommandLine.Text += " --device=" + m_sUSBPort;
         }
@@ -173,6 +206,9 @@ namespace Greaseweazle
             this.btnLaunch.BackColor = ChooserForm.cDarkBrown;
             this.btnDelaysDefaults.BackColor = ChooserForm.cDarkBrown;
             this.btnBack.BackColor = ChooserForm.cDarkBrown;
+            this.txtDelayTrkChgToWrite.BackColor = ChooserForm.cLightBrown;
+            this.txtDelayTrkWriteToChg.BackColor = ChooserForm.cLightBrown;
+            this.txtIdxMaskTime.BackColor = ChooserForm.cLightBrown;
 
             if (ChooserForm.m_bUseCmdConsole == true)
             {
@@ -235,6 +271,35 @@ namespace Greaseweazle
         }
 
         private void txtDelayAutoDeselect_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkDelayTrkChgToWrite_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkDelayTrkWriteToChg_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkIdxMaskTime_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+        private void txtDelayTrkWriteToChg_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtDelayTrkChgToWrite_TextChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void txtIdxMaskTime_TextChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }
@@ -418,5 +483,6 @@ namespace Greaseweazle
                 ChooserForm.saveLbItemsToFile(lbOutput);
         }
         #endregion
+
     }
 }

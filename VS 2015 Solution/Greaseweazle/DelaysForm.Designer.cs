@@ -64,6 +64,12 @@ namespace Greaseweazle
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipChooser = new System.Windows.Forms.ToolTip(this.components);
+            this.txtIdxMaskTime = new System.Windows.Forms.TextBox();
+            this.chkIdxMaskTime = new System.Windows.Forms.CheckBox();
+            this.txtDelayTrkWriteToChg = new System.Windows.Forms.TextBox();
+            this.chkDelayTrkWriteToChg = new System.Windows.Forms.CheckBox();
+            this.txtDelayTrkChgToWrite = new System.Windows.Forms.TextBox();
+            this.chkDelayTrkChgToWrite = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbSetDelays.SuspendLayout();
             this.ctxOutput.SuspendLayout();
@@ -79,9 +85,11 @@ namespace Greaseweazle
             this.groupBox1.Controls.Add(this.txtDelaysCommandLine);
             this.groupBox1.Controls.Add(this.lblStaticCL);
             this.groupBox1.Controls.Add(this.gbSetDelays);
-            this.groupBox1.Location = new System.Drawing.Point(14, 14);
+            this.groupBox1.Location = new System.Drawing.Point(10, 15);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(544, 561);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(408, 480);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -91,32 +99,33 @@ namespace Greaseweazle
             this.lbOutput.ForeColor = System.Drawing.Color.White;
             this.lbOutput.FormattingEnabled = true;
             this.lbOutput.HorizontalScrollbar = true;
-            this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(16, 347);
-            this.lbOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbOutput.Location = new System.Drawing.Point(12, 330);
+            this.lbOutput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(513, 132);
-            this.lbOutput.TabIndex = 53;
+            this.lbOutput.Size = new System.Drawing.Size(386, 82);
+            this.lbOutput.TabIndex = 20;
             this.toolTipChooser.SetToolTip(this.lbOutput, "Right click for options");
             // 
             // lblHostTools
             // 
             this.lblHostTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHostTools.ForeColor = System.Drawing.Color.White;
-            this.lblHostTools.Location = new System.Drawing.Point(89, 531);
+            this.lblHostTools.Location = new System.Drawing.Point(67, 450);
+            this.lblHostTools.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHostTools.Name = "lblHostTools";
-            this.lblHostTools.Size = new System.Drawing.Size(367, 23);
-            this.lblHostTools.TabIndex = 17;
+            this.lblHostTools.Size = new System.Drawing.Size(275, 19);
+            this.lblHostTools.TabIndex = 24;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Maroon;
-            this.btnBack.Location = new System.Drawing.Point(356, 495);
+            this.btnBack.Location = new System.Drawing.Point(267, 421);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(108, 29);
-            this.btnBack.TabIndex = 16;
+            this.btnBack.Size = new System.Drawing.Size(81, 24);
+            this.btnBack.TabIndex = 23;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -124,10 +133,11 @@ namespace Greaseweazle
             // btnLaunch
             // 
             this.btnLaunch.BackColor = System.Drawing.Color.Maroon;
-            this.btnLaunch.Location = new System.Drawing.Point(80, 495);
+            this.btnLaunch.Location = new System.Drawing.Point(60, 421);
+            this.btnLaunch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLaunch.Name = "btnLaunch";
-            this.btnLaunch.Size = new System.Drawing.Size(108, 29);
-            this.btnLaunch.TabIndex = 14;
+            this.btnLaunch.Size = new System.Drawing.Size(81, 24);
+            this.btnLaunch.TabIndex = 21;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -135,10 +145,11 @@ namespace Greaseweazle
             // btnDelaysDefaults
             // 
             this.btnDelaysDefaults.BackColor = System.Drawing.Color.Maroon;
-            this.btnDelaysDefaults.Location = new System.Drawing.Point(218, 495);
+            this.btnDelaysDefaults.Location = new System.Drawing.Point(164, 421);
+            this.btnDelaysDefaults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDelaysDefaults.Name = "btnDelaysDefaults";
-            this.btnDelaysDefaults.Size = new System.Drawing.Size(108, 29);
-            this.btnDelaysDefaults.TabIndex = 15;
+            this.btnDelaysDefaults.Size = new System.Drawing.Size(81, 24);
+            this.btnDelaysDefaults.TabIndex = 22;
             this.btnDelaysDefaults.Text = "Defaults";
             this.btnDelaysDefaults.UseVisualStyleBackColor = false;
             this.btnDelaysDefaults.Click += new System.EventHandler(this.btnDelaysDefaults_Click);
@@ -147,23 +158,31 @@ namespace Greaseweazle
             // 
             this.txtDelaysCommandLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDelaysCommandLine.ForeColor = System.Drawing.Color.White;
-            this.txtDelaysCommandLine.Location = new System.Drawing.Point(16, 260);
+            this.txtDelaysCommandLine.Location = new System.Drawing.Point(12, 259);
+            this.txtDelaysCommandLine.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDelaysCommandLine.Multiline = true;
             this.txtDelaysCommandLine.Name = "txtDelaysCommandLine";
-            this.txtDelaysCommandLine.Size = new System.Drawing.Size(512, 74);
-            this.txtDelaysCommandLine.TabIndex = 13;
+            this.txtDelaysCommandLine.Size = new System.Drawing.Size(385, 61);
+            this.txtDelaysCommandLine.TabIndex = 19;
             // 
             // lblStaticCL
             // 
             this.lblStaticCL.AutoSize = true;
-            this.lblStaticCL.Location = new System.Drawing.Point(221, 232);
+            this.lblStaticCL.Location = new System.Drawing.Point(166, 240);
+            this.lblStaticCL.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStaticCL.Name = "lblStaticCL";
-            this.lblStaticCL.Size = new System.Drawing.Size(102, 17);
-            this.lblStaticCL.TabIndex = 12;
+            this.lblStaticCL.Size = new System.Drawing.Size(77, 13);
+            this.lblStaticCL.TabIndex = 18;
             this.lblStaticCL.Text = "Command Line";
             // 
             // gbSetDelays
             // 
+            this.gbSetDelays.Controls.Add(this.txtIdxMaskTime);
+            this.gbSetDelays.Controls.Add(this.chkIdxMaskTime);
+            this.gbSetDelays.Controls.Add(this.txtDelayTrkWriteToChg);
+            this.gbSetDelays.Controls.Add(this.chkDelayTrkWriteToChg);
+            this.gbSetDelays.Controls.Add(this.txtDelayTrkChgToWrite);
+            this.gbSetDelays.Controls.Add(this.chkDelayTrkChgToWrite);
             this.gbSetDelays.Controls.Add(this.txtDelayAutoDeselect);
             this.gbSetDelays.Controls.Add(this.chkDelayAutoDeselect);
             this.gbSetDelays.Controls.Add(this.txtDelayMotorOn);
@@ -174,9 +193,11 @@ namespace Greaseweazle
             this.gbSetDelays.Controls.Add(this.chkDelayDriveSelect);
             this.gbSetDelays.Controls.Add(this.txtDelayHeadSteps);
             this.gbSetDelays.Controls.Add(this.chkDelayHeadSteps);
-            this.gbSetDelays.Location = new System.Drawing.Point(16, 21);
+            this.gbSetDelays.Location = new System.Drawing.Point(12, 17);
+            this.gbSetDelays.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbSetDelays.Name = "gbSetDelays";
-            this.gbSetDelays.Size = new System.Drawing.Size(512, 204);
+            this.gbSetDelays.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbSetDelays.Size = new System.Drawing.Size(384, 214);
             this.gbSetDelays.TabIndex = 1;
             this.gbSetDelays.TabStop = false;
             // 
@@ -184,9 +205,10 @@ namespace Greaseweazle
             // 
             this.txtDelayAutoDeselect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDelayAutoDeselect.ForeColor = System.Drawing.Color.White;
-            this.txtDelayAutoDeselect.Location = new System.Drawing.Point(395, 161);
+            this.txtDelayAutoDeselect.Location = new System.Drawing.Point(301, 111);
+            this.txtDelayAutoDeselect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDelayAutoDeselect.Name = "txtDelayAutoDeselect";
-            this.txtDelayAutoDeselect.Size = new System.Drawing.Size(54, 22);
+            this.txtDelayAutoDeselect.Size = new System.Drawing.Size(42, 20);
             this.txtDelayAutoDeselect.TabIndex = 11;
             this.txtDelayAutoDeselect.Text = "10000";
             this.txtDelayAutoDeselect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -195,9 +217,10 @@ namespace Greaseweazle
             // chkDelayAutoDeselect
             // 
             this.chkDelayAutoDeselect.AutoSize = true;
-            this.chkDelayAutoDeselect.Location = new System.Drawing.Point(64, 161);
+            this.chkDelayAutoDeselect.Location = new System.Drawing.Point(42, 111);
+            this.chkDelayAutoDeselect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkDelayAutoDeselect.Name = "chkDelayAutoDeselect";
-            this.chkDelayAutoDeselect.Size = new System.Drawing.Size(297, 21);
+            this.chkDelayAutoDeselect.Size = new System.Drawing.Size(224, 17);
             this.chkDelayAutoDeselect.TabIndex = 10;
             this.chkDelayAutoDeselect.Text = "Quiescent time until auto deselect (msecs)";
             this.chkDelayAutoDeselect.UseVisualStyleBackColor = true;
@@ -207,9 +230,10 @@ namespace Greaseweazle
             // 
             this.txtDelayMotorOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDelayMotorOn.ForeColor = System.Drawing.Color.White;
-            this.txtDelayMotorOn.Location = new System.Drawing.Point(395, 128);
+            this.txtDelayMotorOn.Location = new System.Drawing.Point(301, 88);
+            this.txtDelayMotorOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDelayMotorOn.Name = "txtDelayMotorOn";
-            this.txtDelayMotorOn.Size = new System.Drawing.Size(54, 22);
+            this.txtDelayMotorOn.Size = new System.Drawing.Size(42, 20);
             this.txtDelayMotorOn.TabIndex = 9;
             this.txtDelayMotorOn.Text = "750";
             this.txtDelayMotorOn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -218,9 +242,10 @@ namespace Greaseweazle
             // chkDelayMotorOn
             // 
             this.chkDelayMotorOn.AutoSize = true;
-            this.chkDelayMotorOn.Location = new System.Drawing.Point(64, 128);
+            this.chkDelayMotorOn.Location = new System.Drawing.Point(42, 88);
+            this.chkDelayMotorOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkDelayMotorOn.Name = "chkDelayMotorOn";
-            this.chkDelayMotorOn.Size = new System.Drawing.Size(213, 21);
+            this.chkDelayMotorOn.Size = new System.Drawing.Size(160, 17);
             this.chkDelayMotorOn.TabIndex = 8;
             this.chkDelayMotorOn.Text = "Delay after motor on (msecs)";
             this.chkDelayMotorOn.UseVisualStyleBackColor = true;
@@ -230,9 +255,10 @@ namespace Greaseweazle
             // 
             this.txtDelaySeekSettle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDelaySeekSettle.ForeColor = System.Drawing.Color.White;
-            this.txtDelaySeekSettle.Location = new System.Drawing.Point(395, 95);
+            this.txtDelaySeekSettle.Location = new System.Drawing.Point(301, 65);
+            this.txtDelaySeekSettle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDelaySeekSettle.Name = "txtDelaySeekSettle";
-            this.txtDelaySeekSettle.Size = new System.Drawing.Size(54, 22);
+            this.txtDelaySeekSettle.Size = new System.Drawing.Size(42, 20);
             this.txtDelaySeekSettle.TabIndex = 7;
             this.txtDelaySeekSettle.Text = "15";
             this.txtDelaySeekSettle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -241,9 +267,10 @@ namespace Greaseweazle
             // chkDelaySeekSettle
             // 
             this.chkDelaySeekSettle.AutoSize = true;
-            this.chkDelaySeekSettle.Location = new System.Drawing.Point(64, 95);
+            this.chkDelaySeekSettle.Location = new System.Drawing.Point(42, 65);
+            this.chkDelaySeekSettle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkDelaySeekSettle.Name = "chkDelaySeekSettle";
-            this.chkDelaySeekSettle.Size = new System.Drawing.Size(225, 21);
+            this.chkDelaySeekSettle.Size = new System.Drawing.Size(170, 17);
             this.chkDelaySeekSettle.TabIndex = 6;
             this.chkDelaySeekSettle.Text = "Settle delay after seek (msecs)";
             this.chkDelaySeekSettle.UseVisualStyleBackColor = true;
@@ -253,9 +280,10 @@ namespace Greaseweazle
             // 
             this.txtDelayDriveSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDelayDriveSelect.ForeColor = System.Drawing.Color.White;
-            this.txtDelayDriveSelect.Location = new System.Drawing.Point(395, 29);
+            this.txtDelayDriveSelect.Location = new System.Drawing.Point(301, 17);
+            this.txtDelayDriveSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDelayDriveSelect.Name = "txtDelayDriveSelect";
-            this.txtDelayDriveSelect.Size = new System.Drawing.Size(54, 22);
+            this.txtDelayDriveSelect.Size = new System.Drawing.Size(42, 20);
             this.txtDelayDriveSelect.TabIndex = 3;
             this.txtDelayDriveSelect.Text = "10";
             this.txtDelayDriveSelect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -264,9 +292,10 @@ namespace Greaseweazle
             // chkDelayDriveSelect
             // 
             this.chkDelayDriveSelect.AutoSize = true;
-            this.chkDelayDriveSelect.Location = new System.Drawing.Point(64, 29);
+            this.chkDelayDriveSelect.Location = new System.Drawing.Point(42, 17);
+            this.chkDelayDriveSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkDelayDriveSelect.Name = "chkDelayDriveSelect";
-            this.chkDelayDriveSelect.Size = new System.Drawing.Size(226, 21);
+            this.chkDelayDriveSelect.Size = new System.Drawing.Size(171, 17);
             this.chkDelayDriveSelect.TabIndex = 2;
             this.chkDelayDriveSelect.Text = "Delay after drive select (usecs)";
             this.chkDelayDriveSelect.UseVisualStyleBackColor = true;
@@ -276,9 +305,10 @@ namespace Greaseweazle
             // 
             this.txtDelayHeadSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtDelayHeadSteps.ForeColor = System.Drawing.Color.White;
-            this.txtDelayHeadSteps.Location = new System.Drawing.Point(395, 62);
+            this.txtDelayHeadSteps.Location = new System.Drawing.Point(301, 41);
+            this.txtDelayHeadSteps.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDelayHeadSteps.Name = "txtDelayHeadSteps";
-            this.txtDelayHeadSteps.Size = new System.Drawing.Size(54, 22);
+            this.txtDelayHeadSteps.Size = new System.Drawing.Size(42, 20);
             this.txtDelayHeadSteps.TabIndex = 5;
             this.txtDelayHeadSteps.Text = "3000";
             this.txtDelayHeadSteps.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -287,9 +317,10 @@ namespace Greaseweazle
             // chkDelayHeadSteps
             // 
             this.chkDelayHeadSteps.AutoSize = true;
-            this.chkDelayHeadSteps.Location = new System.Drawing.Point(64, 62);
+            this.chkDelayHeadSteps.Location = new System.Drawing.Point(42, 41);
+            this.chkDelayHeadSteps.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkDelayHeadSteps.Name = "chkDelayHeadSteps";
-            this.chkDelayHeadSteps.Size = new System.Drawing.Size(248, 21);
+            this.chkDelayHeadSteps.Size = new System.Drawing.Size(189, 17);
             this.chkDelayHeadSteps.TabIndex = 4;
             this.chkDelayHeadSteps.Text = "Delay between head steps (usecs)";
             this.chkDelayHeadSteps.UseVisualStyleBackColor = true;
@@ -307,14 +338,14 @@ namespace Greaseweazle
             this.ctxClearOutput,
             this.ctxSaveOutput});
             this.ctxOutput.Name = "ctxOutput";
-            this.ctxOutput.Size = new System.Drawing.Size(163, 52);
+            this.ctxOutput.Size = new System.Drawing.Size(143, 48);
             // 
             // ctxClearOutput
             // 
             this.ctxClearOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ctxClearOutput.ForeColor = System.Drawing.Color.White;
             this.ctxClearOutput.Name = "ctxClearOutput";
-            this.ctxClearOutput.Size = new System.Drawing.Size(162, 24);
+            this.ctxClearOutput.Size = new System.Drawing.Size(142, 22);
             this.ctxClearOutput.Text = "Clear Output";
             this.ctxClearOutput.Click += new System.EventHandler(this.ctxClearOutput_Click);
             // 
@@ -323,20 +354,96 @@ namespace Greaseweazle
             this.ctxSaveOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ctxSaveOutput.ForeColor = System.Drawing.Color.White;
             this.ctxSaveOutput.Name = "ctxSaveOutput";
-            this.ctxSaveOutput.Size = new System.Drawing.Size(162, 24);
+            this.ctxSaveOutput.Size = new System.Drawing.Size(142, 22);
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
+            // txtIdxMaskTime
+            // 
+            this.txtIdxMaskTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtIdxMaskTime.ForeColor = System.Drawing.Color.White;
+            this.txtIdxMaskTime.Location = new System.Drawing.Point(300, 180);
+            this.txtIdxMaskTime.Margin = new System.Windows.Forms.Padding(2);
+            this.txtIdxMaskTime.Name = "txtIdxMaskTime";
+            this.txtIdxMaskTime.Size = new System.Drawing.Size(42, 20);
+            this.txtIdxMaskTime.TabIndex = 17;
+            this.txtIdxMaskTime.Text = "15";
+            this.txtIdxMaskTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtIdxMaskTime.TextChanged += new System.EventHandler(this.txtIdxMaskTime_TextChanged);
+            // 
+            // chkIdxMaskTime
+            // 
+            this.chkIdxMaskTime.AutoSize = true;
+            this.chkIdxMaskTime.Location = new System.Drawing.Point(41, 180);
+            this.chkIdxMaskTime.Margin = new System.Windows.Forms.Padding(2);
+            this.chkIdxMaskTime.Name = "chkIdxMaskTime";
+            this.chkIdxMaskTime.Size = new System.Drawing.Size(196, 17);
+            this.chkIdxMaskTime.TabIndex = 16;
+            this.chkIdxMaskTime.Text = "Index post-trigger mask time (msecs)";
+            this.chkIdxMaskTime.UseVisualStyleBackColor = true;
+            this.chkIdxMaskTime.CheckedChanged += new System.EventHandler(this.chkIdxMaskTime_CheckedChanged);
+            // 
+            // txtDelayTrkWriteToChg
+            // 
+            this.txtDelayTrkWriteToChg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelayTrkWriteToChg.ForeColor = System.Drawing.Color.White;
+            this.txtDelayTrkWriteToChg.Location = new System.Drawing.Point(300, 157);
+            this.txtDelayTrkWriteToChg.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDelayTrkWriteToChg.Name = "txtDelayTrkWriteToChg";
+            this.txtDelayTrkWriteToChg.Size = new System.Drawing.Size(42, 20);
+            this.txtDelayTrkWriteToChg.TabIndex = 15;
+            this.txtDelayTrkWriteToChg.Text = "15";
+            this.txtDelayTrkWriteToChg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDelayTrkWriteToChg.TextChanged += new System.EventHandler(this.txtDelayTrkWriteToChg_TextChanged);
+            // 
+            // chkDelayTrkWriteToChg
+            // 
+            this.chkDelayTrkWriteToChg.AutoSize = true;
+            this.chkDelayTrkWriteToChg.Location = new System.Drawing.Point(41, 157);
+            this.chkDelayTrkWriteToChg.Margin = new System.Windows.Forms.Padding(2);
+            this.chkDelayTrkWriteToChg.Name = "chkDelayTrkWriteToChg";
+            this.chkDelayTrkWriteToChg.Size = new System.Drawing.Size(254, 17);
+            this.chkDelayTrkWriteToChg.TabIndex = 14;
+            this.chkDelayTrkWriteToChg.Text = "Min. time from write end to track change (msecs)";
+            this.chkDelayTrkWriteToChg.UseVisualStyleBackColor = true;
+            this.chkDelayTrkWriteToChg.CheckedChanged += new System.EventHandler(this.chkDelayTrkWriteToChg_CheckedChanged);
+            // 
+            // txtDelayTrkChgToWrite
+            // 
+            this.txtDelayTrkChgToWrite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtDelayTrkChgToWrite.ForeColor = System.Drawing.Color.White;
+            this.txtDelayTrkChgToWrite.Location = new System.Drawing.Point(300, 134);
+            this.txtDelayTrkChgToWrite.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDelayTrkChgToWrite.Name = "txtDelayTrkChgToWrite";
+            this.txtDelayTrkChgToWrite.Size = new System.Drawing.Size(42, 20);
+            this.txtDelayTrkChgToWrite.TabIndex = 13;
+            this.txtDelayTrkChgToWrite.Text = "15";
+            this.txtDelayTrkChgToWrite.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDelayTrkChgToWrite.TextChanged += new System.EventHandler(this.txtDelayTrkChgToWrite_TextChanged);
+            // 
+            // chkDelayTrkChgToWrite
+            // 
+            this.chkDelayTrkChgToWrite.AutoSize = true;
+            this.chkDelayTrkChgToWrite.Location = new System.Drawing.Point(41, 134);
+            this.chkDelayTrkChgToWrite.Margin = new System.Windows.Forms.Padding(2);
+            this.chkDelayTrkChgToWrite.Name = "chkDelayTrkChgToWrite";
+            this.chkDelayTrkChgToWrite.Size = new System.Drawing.Size(256, 17);
+            this.chkDelayTrkChgToWrite.TabIndex = 12;
+            this.chkDelayTrkChgToWrite.Text = "Min. time from track change to write start (msecs)";
+            this.chkDelayTrkChgToWrite.UseVisualStyleBackColor = true;
+            this.chkDelayTrkChgToWrite.CheckedChanged += new System.EventHandler(this.chkDelayTrkChgToWrite_CheckedChanged);
+            // 
             // DelaysForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(573, 587);
+            this.ClientSize = new System.Drawing.Size(430, 506);
             this.Controls.Add(this.groupBox1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "DelaysForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Set Delays";
@@ -376,5 +483,11 @@ namespace Greaseweazle
         private System.Windows.Forms.ToolStripMenuItem ctxClearOutput;
         private System.Windows.Forms.ToolStripMenuItem ctxSaveOutput;
         private System.Windows.Forms.ToolTip toolTipChooser;
+        private System.Windows.Forms.TextBox txtIdxMaskTime;
+        private System.Windows.Forms.CheckBox chkIdxMaskTime;
+        private System.Windows.Forms.TextBox txtDelayTrkWriteToChg;
+        private System.Windows.Forms.CheckBox chkDelayTrkWriteToChg;
+        private System.Windows.Forms.TextBox txtDelayTrkChgToWrite;
+        private System.Windows.Forms.CheckBox chkDelayTrkChgToWrite;
     }
 }

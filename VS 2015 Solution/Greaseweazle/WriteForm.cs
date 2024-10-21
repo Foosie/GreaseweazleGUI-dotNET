@@ -115,6 +115,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkTG43", (chkTG43.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbHigh", (rbHigh.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "rbLow", (rbLow.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbWriteToDisk", "chkHardSectors", (chkHardSectors.Checked == true).ToString());
         }
         #endregion
 
@@ -229,6 +230,11 @@ namespace Greaseweazle
                 if (sRet == "True")
                     chkTG43.Checked = true;
             }
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "chkHardSectors", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkHardSectors.Checked = true;
+            }       
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbWriteToDisk", "rbHigh", "garbage").Trim())) != "garbage")
             {
                 if ((sRet == "True") && (chkPin2High.Checked == true))
@@ -292,6 +298,8 @@ namespace Greaseweazle
                 txtWTDCommandLine.Text += " --fake-index=" + txtFakeIndex.Text + cbFakeIndex.Text;
             if (chkRevTrkData.Checked == true)
                 txtWTDCommandLine.Text += " --reverse";
+            if (chkHardSectors.Checked == true)
+                txtWTDCommandLine.Text += " --hard-sectors";
 
             // sTracks
             if (chkDoubleStep.Checked == true)
@@ -650,6 +658,11 @@ namespace Greaseweazle
         }
 
         private void chkRevTrkData_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+        private void chkHardSectors_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

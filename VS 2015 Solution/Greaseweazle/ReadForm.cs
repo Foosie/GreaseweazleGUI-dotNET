@@ -128,6 +128,7 @@ namespace Greaseweazle
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkPin2High", (chkPin2High.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbHigh", (rbHigh.Checked == true).ToString());
             ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "rbLow", (rbLow.Checked == true).ToString());
+            ChooserForm.m_Ini.IniWriteValue("gbReadFromDisk", "chkHardSectors", (chkHardSectors.Checked == true).ToString());
         }
         #endregion
 
@@ -299,6 +300,12 @@ namespace Greaseweazle
                     rbLow.Checked = true;
             }
 
+            if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbReadFromDisk", "chkHardSectors", "garbage").Trim())) != "garbage")
+            {
+                if (sRet == "True")
+                    chkHardSectors.Checked = true;
+            }
+
             // usb port
             if ((sRet = (ChooserForm.m_Ini.IniReadValue("gbUSBPorts", "m_sUSBPort", "garbage").Trim())) != "garbage")
                 m_sUSBPort = sRet;
@@ -355,6 +362,8 @@ namespace Greaseweazle
                 txtRFDCommandLine.Text += " --drive=" + txtDriveSelectRFD.Text;
             if (chkRevTrkData.Checked == true)
                 txtRFDCommandLine.Text += " --reverse";
+            if (chkHardSectors.Checked == true)
+                txtRFDCommandLine.Text += " --hard-sectors";
 
             // sTracks
             if (chkDoubleStep.Checked == true)
@@ -639,6 +648,12 @@ namespace Greaseweazle
 
 
         private void chkRevTrkData_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateCommandLine();
+        }
+
+
+        private void chkHardSectors_CheckedChanged(object sender, EventArgs e)
         {
             CreateCommandLine();
         }

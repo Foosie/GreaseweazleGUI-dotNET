@@ -55,7 +55,7 @@ namespace Greaseweazle
             this.lblStaticCL = new System.Windows.Forms.Label();
             this.gbWriteToDisk = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chkHeadSwap = new System.Windows.Forms.CheckBox();
+            this.chkRevTrkData = new System.Windows.Forms.CheckBox();
             this.txtRetries = new System.Windows.Forms.TextBox();
             this.chkRetries = new System.Windows.Forms.CheckBox();
             this.chkHeadsSet = new System.Windows.Forms.CheckBox();
@@ -87,7 +87,8 @@ namespace Greaseweazle
             this.ctxOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxClearOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkRevTrkData = new System.Windows.Forms.CheckBox();
+            this.chkHeadSwap = new System.Windows.Forms.CheckBox();
+            this.chkHardSectors = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbDiskType.SuspendLayout();
             this.gbWriteToDisk.SuspendLayout();
@@ -125,7 +126,7 @@ namespace Greaseweazle
             this.lblHostTools.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHostTools.Name = "lblHostTools";
             this.lblHostTools.Size = new System.Drawing.Size(275, 19);
-            this.lblHostTools.TabIndex = 41;
+            this.lblHostTools.TabIndex = 43;
             this.lblHostTools.Text = "for Host Tools v0.00";
             this.lblHostTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -139,7 +140,7 @@ namespace Greaseweazle
             this.lbOutput.Margin = new System.Windows.Forms.Padding(2);
             this.lbOutput.Name = "lbOutput";
             this.lbOutput.Size = new System.Drawing.Size(566, 134);
-            this.lbOutput.TabIndex = 37;
+            this.lbOutput.TabIndex = 39;
             this.toolTipWTD.SetToolTip(this.lbOutput, "Right click for options");
             // 
             // gbDiskType
@@ -153,7 +154,7 @@ namespace Greaseweazle
             this.gbDiskType.Name = "gbDiskType";
             this.gbDiskType.Padding = new System.Windows.Forms.Padding(2);
             this.gbDiskType.Size = new System.Drawing.Size(565, 50);
-            this.gbDiskType.TabIndex = 30;
+            this.gbDiskType.TabIndex = 32;
             this.gbDiskType.TabStop = false;
             // 
             // lblFormat
@@ -163,7 +164,7 @@ namespace Greaseweazle
             this.lblFormat.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFormat.Name = "lblFormat";
             this.lblFormat.Size = new System.Drawing.Size(42, 13);
-            this.lblFormat.TabIndex = 33;
+            this.lblFormat.TabIndex = 35;
             this.lblFormat.Text = "Format:";
             // 
             // cbFormat
@@ -175,7 +176,7 @@ namespace Greaseweazle
             this.cbFormat.Margin = new System.Windows.Forms.Padding(2);
             this.cbFormat.Name = "cbFormat";
             this.cbFormat.Size = new System.Drawing.Size(191, 21);
-            this.cbFormat.TabIndex = 34;
+            this.cbFormat.TabIndex = 36;
             this.cbFormat.SelectedIndexChanged += new System.EventHandler(this.cbFormat_SelectedIndexChanged);
             // 
             // lblDiskType
@@ -185,7 +186,7 @@ namespace Greaseweazle
             this.lblDiskType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDiskType.Name = "lblDiskType";
             this.lblDiskType.Size = new System.Drawing.Size(55, 13);
-            this.lblDiskType.TabIndex = 31;
+            this.lblDiskType.TabIndex = 33;
             this.lblDiskType.Text = "DiskType:";
             // 
             // cbExtension
@@ -197,7 +198,7 @@ namespace Greaseweazle
             this.cbExtension.Margin = new System.Windows.Forms.Padding(2);
             this.cbExtension.Name = "cbExtension";
             this.cbExtension.Size = new System.Drawing.Size(191, 21);
-            this.cbExtension.TabIndex = 32;
+            this.cbExtension.TabIndex = 34;
             this.cbExtension.SelectedIndexChanged += new System.EventHandler(this.cbExtension_SelectedIndexChanged);
             // 
             // btnBack
@@ -207,7 +208,7 @@ namespace Greaseweazle
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(81, 24);
-            this.btnBack.TabIndex = 40;
+            this.btnBack.TabIndex = 42;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -219,7 +220,7 @@ namespace Greaseweazle
             this.btnLaunch.Margin = new System.Windows.Forms.Padding(2);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(81, 24);
-            this.btnLaunch.TabIndex = 39;
+            this.btnLaunch.TabIndex = 41;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = false;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
@@ -231,7 +232,7 @@ namespace Greaseweazle
             this.btnWTDSelectFile.Margin = new System.Windows.Forms.Padding(2);
             this.btnWTDSelectFile.Name = "btnWTDSelectFile";
             this.btnWTDSelectFile.Size = new System.Drawing.Size(81, 24);
-            this.btnWTDSelectFile.TabIndex = 38;
+            this.btnWTDSelectFile.TabIndex = 40;
             this.btnWTDSelectFile.Text = "Select File";
             this.toolTipWTD.SetToolTip(this.btnWTDSelectFile, "HFE & IPF require Host Tools v0.13 or later");
             this.btnWTDSelectFile.UseVisualStyleBackColor = false;
@@ -246,7 +247,7 @@ namespace Greaseweazle
             this.txtWTDCommandLine.Multiline = true;
             this.txtWTDCommandLine.Name = "txtWTDCommandLine";
             this.txtWTDCommandLine.Size = new System.Drawing.Size(566, 46);
-            this.txtWTDCommandLine.TabIndex = 36;
+            this.txtWTDCommandLine.TabIndex = 38;
             // 
             // lblStaticCL
             // 
@@ -255,7 +256,7 @@ namespace Greaseweazle
             this.lblStaticCL.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStaticCL.Name = "lblStaticCL";
             this.lblStaticCL.Size = new System.Drawing.Size(77, 13);
-            this.lblStaticCL.TabIndex = 35;
+            this.lblStaticCL.TabIndex = 37;
             this.lblStaticCL.Text = "Command Line";
             // 
             // gbWriteToDisk
@@ -273,6 +274,7 @@ namespace Greaseweazle
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkHardSectors);
             this.groupBox3.Controls.Add(this.chkRevTrkData);
             this.groupBox3.Controls.Add(this.chkHeadSwap);
             this.groupBox3.Controls.Add(this.txtRetries);
@@ -290,18 +292,18 @@ namespace Greaseweazle
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             // 
-            // chkHeadSwap
+            // chkRevTrkData
             // 
-            this.chkHeadSwap.AutoSize = true;
-            this.chkHeadSwap.Location = new System.Drawing.Point(16, 89);
-            this.chkHeadSwap.Margin = new System.Windows.Forms.Padding(2);
-            this.chkHeadSwap.Name = "chkHeadSwap";
-            this.chkHeadSwap.Size = new System.Drawing.Size(82, 17);
-            this.chkHeadSwap.TabIndex = 25;
-            this.chkHeadSwap.Text = "Head Swap";
-            this.toolTipWTD.SetToolTip(this.chkHeadSwap, "Host Tools v0.22 or later");
-            this.chkHeadSwap.UseVisualStyleBackColor = true;
-            this.chkHeadSwap.CheckedChanged += new System.EventHandler(this.chkHeadSwap_CheckedChanged);
+            this.chkRevTrkData.AutoSize = true;
+            this.chkRevTrkData.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkRevTrkData.Location = new System.Drawing.Point(106, 89);
+            this.chkRevTrkData.Margin = new System.Windows.Forms.Padding(2);
+            this.chkRevTrkData.Name = "chkRevTrkData";
+            this.chkRevTrkData.Size = new System.Drawing.Size(103, 17);
+            this.chkRevTrkData.TabIndex = 26;
+            this.chkRevTrkData.Text = "Rev Track Data";
+            this.chkRevTrkData.UseVisualStyleBackColor = true;
+            this.chkRevTrkData.CheckedChanged += new System.EventHandler(this.chkRevTrkData_CheckedChanged);
             // 
             // txtRetries
             // 
@@ -388,12 +390,12 @@ namespace Greaseweazle
             this.gbFlippy.Controls.Add(this.chkFlippyOffset);
             this.gbFlippy.Controls.Add(this.rbFlippyPanasonic);
             this.gbFlippy.Controls.Add(this.rbFlippyTeac);
-            this.gbFlippy.Location = new System.Drawing.Point(9, 110);
+            this.gbFlippy.Location = new System.Drawing.Point(9, 125);
             this.gbFlippy.Margin = new System.Windows.Forms.Padding(2);
             this.gbFlippy.Name = "gbFlippy";
             this.gbFlippy.Padding = new System.Windows.Forms.Padding(2);
             this.gbFlippy.Size = new System.Drawing.Size(254, 39);
-            this.gbFlippy.TabIndex = 26;
+            this.gbFlippy.TabIndex = 28;
             this.gbFlippy.TabStop = false;
             this.toolTipWTD.SetToolTip(this.gbFlippy, "C64 flippy\r\nc=0-39:h=0,1:step=2:h1.off=-8\r\n");
             // 
@@ -404,7 +406,7 @@ namespace Greaseweazle
             this.chkFlippyOffset.Margin = new System.Windows.Forms.Padding(2);
             this.chkFlippyOffset.Name = "chkFlippyOffset";
             this.chkFlippyOffset.Size = new System.Drawing.Size(82, 17);
-            this.chkFlippyOffset.TabIndex = 27;
+            this.chkFlippyOffset.TabIndex = 29;
             this.chkFlippyOffset.Text = "Flippy offset";
             this.toolTipWTD.SetToolTip(this.chkFlippyOffset, "Host Tools v0.22 or later");
             this.chkFlippyOffset.UseVisualStyleBackColor = true;
@@ -417,7 +419,7 @@ namespace Greaseweazle
             this.rbFlippyPanasonic.Margin = new System.Windows.Forms.Padding(2);
             this.rbFlippyPanasonic.Name = "rbFlippyPanasonic";
             this.rbFlippyPanasonic.Size = new System.Drawing.Size(75, 17);
-            this.rbFlippyPanasonic.TabIndex = 28;
+            this.rbFlippyPanasonic.TabIndex = 30;
             this.rbFlippyPanasonic.Text = "Panasonic";
             this.toolTipWTD.SetToolTip(this.rbFlippyPanasonic, "Host Tools v0.22 or later");
             this.rbFlippyPanasonic.UseVisualStyleBackColor = true;
@@ -430,7 +432,7 @@ namespace Greaseweazle
             this.rbFlippyTeac.Margin = new System.Windows.Forms.Padding(2);
             this.rbFlippyTeac.Name = "rbFlippyTeac";
             this.rbFlippyTeac.Size = new System.Drawing.Size(50, 17);
-            this.rbFlippyTeac.TabIndex = 29;
+            this.rbFlippyTeac.TabIndex = 31;
             this.rbFlippyTeac.Text = "Teac";
             this.toolTipWTD.SetToolTip(this.rbFlippyTeac, "Host Tools v0.22 or later");
             this.rbFlippyTeac.UseVisualStyleBackColor = true;
@@ -690,18 +692,31 @@ namespace Greaseweazle
             this.ctxSaveOutput.Text = "Save Output";
             this.ctxSaveOutput.Click += new System.EventHandler(this.ctxSaveOutput_Click);
             // 
-            // chkRevTrkData
+            // chkHeadSwap
             // 
-            this.chkRevTrkData.AutoSize = true;
-            this.chkRevTrkData.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkRevTrkData.Location = new System.Drawing.Point(106, 89);
-            this.chkRevTrkData.Margin = new System.Windows.Forms.Padding(2);
-            this.chkRevTrkData.Name = "chkRevTrkData";
-            this.chkRevTrkData.Size = new System.Drawing.Size(103, 17);
-            this.chkRevTrkData.TabIndex = 26;
-            this.chkRevTrkData.Text = "Rev Track Data";
-            this.chkRevTrkData.UseVisualStyleBackColor = true;
-            this.chkRevTrkData.CheckedChanged += new System.EventHandler(this.chkRevTrkData_CheckedChanged);
+            this.chkHeadSwap.AutoSize = true;
+            this.chkHeadSwap.Location = new System.Drawing.Point(16, 89);
+            this.chkHeadSwap.Margin = new System.Windows.Forms.Padding(2);
+            this.chkHeadSwap.Name = "chkHeadSwap";
+            this.chkHeadSwap.Size = new System.Drawing.Size(82, 17);
+            this.chkHeadSwap.TabIndex = 25;
+            this.chkHeadSwap.Text = "Head Swap";
+            this.toolTipWTD.SetToolTip(this.chkHeadSwap, "Host Tools v0.22 or later");
+            this.chkHeadSwap.UseVisualStyleBackColor = true;
+            this.chkHeadSwap.CheckedChanged += new System.EventHandler(this.chkHeadSwap_CheckedChanged);
+            // 
+            // chkHardSectors
+            // 
+            this.chkHardSectors.AutoSize = true;
+            this.chkHardSectors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkHardSectors.Location = new System.Drawing.Point(16, 111);
+            this.chkHardSectors.Margin = new System.Windows.Forms.Padding(2);
+            this.chkHardSectors.Name = "chkHardSectors";
+            this.chkHardSectors.Size = new System.Drawing.Size(88, 17);
+            this.chkHardSectors.TabIndex = 27;
+            this.chkHardSectors.Text = "Hard Sectors";
+            this.chkHardSectors.UseVisualStyleBackColor = true;
+            this.chkHardSectors.CheckedChanged += new System.EventHandler(this.chkHardSectors_CheckedChanged);
             // 
             // WriteForm
             // 
@@ -775,7 +790,6 @@ namespace Greaseweazle
         private System.Windows.Forms.ContextMenuStrip ctxOutput;
         private System.Windows.Forms.ToolStripMenuItem ctxClearOutput;
         private System.Windows.Forms.ToolStripMenuItem ctxSaveOutput;
-        private System.Windows.Forms.CheckBox chkHeadSwap;
         private System.Windows.Forms.CheckBox chkFakeIndex;
         private System.Windows.Forms.TextBox txtFakeIndex;
         private System.Windows.Forms.ComboBox cbFakeIndex;
@@ -785,5 +799,7 @@ namespace Greaseweazle
         private System.Windows.Forms.RadioButton rbLow;
         private System.Windows.Forms.CheckBox chkTG43;
         private System.Windows.Forms.CheckBox chkRevTrkData;
+        private System.Windows.Forms.CheckBox chkHeadSwap;
+        private System.Windows.Forms.CheckBox chkHardSectors;
     }
 }
