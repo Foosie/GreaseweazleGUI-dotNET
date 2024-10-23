@@ -25,6 +25,7 @@ namespace Greaseweazle
         public MsgboxForm()
         {
             InitializeComponent();
+            this.TopMost = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.StartPosition = FormStartPosition.CenterParent;
@@ -47,7 +48,7 @@ namespace Greaseweazle
             try
             {
                 //Open the default browser with a URL:
-                System.Diagnostics.Process.Start("https://github.com/keirf/greaseweazle/blob/master/src/greaseweazle/data/diskdefs.cfg");
+                System.Diagnostics.Process.Start("https://github.com/keirf/greaseweazle/blob/master/src/greaseweazle/data");
             }
             catch (Exception ex)
             {

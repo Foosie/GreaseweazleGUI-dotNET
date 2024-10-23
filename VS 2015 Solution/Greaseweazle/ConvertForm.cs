@@ -245,7 +245,7 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtConvertCommandLine.Text += " --time";
             txtConvertCommandLine.Text += " convert";
-            if ((ChooserForm.m_bUseCustomFormats == true) && (cbFormat.Text != "UNSPECIFIED FORMAT"))
+            if (cbFormat.Text != "UNSPECIFIED FORMAT")
                 txtConvertCommandLine.Text += " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
             if ((chkAdjustSpeed.Enabled == true) && (chkAdjustSpeed.Checked == true))
                 txtConvertCommandLine.Text += " --adjust-speed=" + txtAdjustSpeed.Text + cbAdjustSpeed.Text;

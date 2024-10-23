@@ -333,7 +333,7 @@ namespace Greaseweazle
             if (true == m_bElapsedTime)
                 txtRFDCommandLine.Text += " --time";
             txtRFDCommandLine.Text += " read";
-            if  ((ChooserForm.m_bUseCustomFormats == true) && (cbFormat.Text != "UNSPECIFIED FORMAT"))
+            if  (cbFormat.Text != "UNSPECIFIED FORMAT")
                 txtRFDCommandLine.Text +=  " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
             if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT") && (cbFormat.ForeColor != Color.Black))  // black means disabled
                 txtRFDCommandLine.Text += " --format=" + cbFormat.Text;

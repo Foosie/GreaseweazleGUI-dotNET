@@ -66,12 +66,10 @@ namespace Greaseweazle
         public static Color cBrown = Color.FromArgb(128, 64, 64);
         private string m_sInfo = "The GUI executable only supports the Host Tools version identified in the GUI's status bar. The GUI will always use the Host Tools from the folder from which the executable was placed. Use the 'info' Greaseweazle option to determine the firmware's current version.";
         private ToolStripMenuItem[] m_mnuItems;
-        public static string m_sExtFilter = "Images|*.a2r;*.adf;*.ads;*.adm;*.adl;*.ctr;*.dim;*.dmk;*.dsd;*.dsk;*.d64;*.d71;*.d81;*.d88;*.edsk;*.fdi;*.fd;*.gcr;*.hdm;*.hfe;*.img;*.ima;*.imd;*.ipf;*.mgt;*.sf7;*.st;*.scp;*.td0|All files (*.*)|*.*";
-        public static string[] m_sarrDefaultFormats = new string[71] {"acorn.adfs.160","acorn.adfs.320","acorn.adfs.640","acorn.adfs.800","acorn.adfs.1600","acorn.dfs.ss","acorn.dfs.ds","akai.800","akai.1600","amiga.amigados","amiga.amigados_hd","apple2.appledos.140","apple2.prodos.140","apple2.nofs.140","atari.90","atarist.360","atarist.400","atarist.440","atarist.720","atarist.800","atarist.880","commodore.1541","commodore.1571","commodore.1581","dec.rx01","dec.rx02","ensoniq.800", "ensoniq.1600", "ensoniq.mirage","epson.qx10.logo","epson.qx10.booter","epson.qx10.400","epson.qx10.399","epson.qx10.396","epson.qx10.320","gem.1600","hp.mmfm.9885","hp.mmfm.9895","ibm.160","ibm.180","ibm.320","ibm.360","ibm.720", "ibm.800", "ibm.1200", "ibm.1440", "ibm.1680","ibm.2880", "ibm.dmf","ibm.scan", "mac.400","mac.800","msx.1d","msx.1dd","msx.2d","msx.2dd","northstar.fm.ss","northstar.fm.ds","northstar.mfm.ss","northstar.mfm.ds","occ1.sd","occ1.dd","pc98.2d","pc98.2dd","pc98.2hd","pc98.2hs","pc98.n88basic.hd","sci.prophet","sega.sf7000","zx.trdos.640","zx.quorum.800"};
-        public static string[] m_sarrExtensions = new string[38] {".a2r", ".adf",".ads",".adm",".adl",".ctr",".d64",".d71",".d81",".d88",".dim", ".dmk",".dsd",".dsk",".edsk",".fdi",".fd",".gcr", ".hdm", ".hfe::version=3", ".hfe",".img",".ima",".imd",".ipf",".mgt",".0.raw",".ctr::revs=3",".scp",".scp::disktype=amiga", ".scp::disktype=c64",".scp::revs=3",".sf7",".ssd",".st",".st",".td0",".xdf"};
+        public static string m_sExtFilter = "Images|*.a2r;*.adf;*.ads;*.adm;*.adl;*.ctr;*.d1m;*.d2m;*.d4m;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.dmk;*.do;*.dsd;*.dsk;*.eds;*.fd;*.fdi;*.hd;*.hfe;*.ima;*.img;*.imd;*.ipf;*.mgt;*.msa;*.nfd;*.nsi;*.po;*.raw;*.sf7;*.scp;*.ssd;*.st;*.td0;*.xdf;";
+        public static string[] m_sarrExtensions = new string[40] { ".a2r", ".adf", ".ads", ".adm", ".adl", ".ctr", ".d1m", ".d2m", ".d4m", ".d64", ".d71", ".d81", ".d88", ".dcp", ".dim", ".dmk", ".do", ".dsd", ".dsk", ".eds", ".fd", ".fdi", ".hd", ".hfe", ".ima", ".img", ".imd", ".ipf", ".mgt", ".msa", ".nfd", ".nsi", ".po", ".raw", ".sf7", ".scp", ".ssd", ".st", ".td0", ".xdf" };
         public static List<string> m_listCustomFormats = new List<string>();
         public static List<string> m_listExtensions = new List<string>();
-        public static bool m_bUseCustomFormats = false;
         public static string m_sStatusLine = "for Host Tools 1.20";
         #endregion
 
@@ -149,7 +147,7 @@ namespace Greaseweazle
             this.mnuSettings.ForeColor = Color.White;
             this.mnuCreateShortcut.ForeColor = Color.White;
             this.mnuUseCmdConsole.ForeColor = Color.White;
-            this.mnuUseDiskDefs.ForeColor = Color.White;
+            this.mnuOpenDiskdefs.ForeColor = Color.White;
             this.mnuProfileNew.ForeColor = Color.White;
             this.mnuDelete.ForeColor = Color.White;
             this.mnuUSBSupport.ForeColor = Color.White;
@@ -181,23 +179,16 @@ namespace Greaseweazle
             // now restore the selected profile
             restoreSelectedProfile();
 
-            // load default disk definitions
-            m_listCustomFormats.Clear();
-            m_listCustomFormats.Add("UNSPECIFIED FORMAT");
-            foreach (string desc in m_sarrDefaultFormats)
-            {
-                m_listCustomFormats.Add(desc);
-            }
+            // finally read our settings
+            iniReadFile();
+
+            // load disk definitions
+            loadDiskDefs();
 
             // load list of extensions
             m_listExtensions.Clear();
             foreach (string desc in m_sarrExtensions)
-            {
                 m_listExtensions.Add(desc);
-            }
-
-            // finally read our settings
-            iniReadFile();
 
             // if compiled windows version check it
             if (System.IO.File.Exists(m_sExeDir + "\\gw.exe"))
@@ -395,35 +386,94 @@ namespace Greaseweazle
                 }
             }
 
-            // custom disk format definitions
+            // diskdefs.cfg file location
             if ((sRet = (m_Ini.IniReadValue("gbGlobals", "m_sDisktDefsFN", "garbage").Trim())) != "garbage")
-                m_sDisktDefsFN = sRet;
-            if ((sRet = (m_Ini.IniReadValue("gbGlobals", "mnuUseDiskDefs", "garbage").Trim())) != "garbage")
+                m_sDisktDefsFN = sRet;    
+        }
+        #endregion
+
+        #region loadDiskDefs
+        private void loadDiskDefs()
+        {
+            if (System.IO.File.Exists(m_sDisktDefsFN))
             {
-                if ((sRet == "True") && (System.IO.File.Exists(m_sDisktDefsFN)))
+                m_listCustomFormats.Clear();
+                m_listCustomFormats.Add("UNSPECIFIED FORMAT");
+
+                List<string> importlist = getDiskImports(m_sDisktDefsFN);
+                getDiskCfgs(importlist);
+            }
+            else
+            {
+                // display where to get diskdefs.cfg 
+                Form m_frmMsgBox = new MsgboxForm();
+                m_frmMsgBox.ShowDialog(m_frmChooser);
+
+                // get correct diskdefs.cfg folder
+                diskdefsDialog();
+            }
+        }
+        #endregion
+
+        #region getDiskCfgs
+        private void getDiskCfgs(List<string> importlist) // get definition imports from diskdefs.cfg
+        {
+            string sPrefix;
+            string sCfgFile;
+            string sDirectoryName = Path.GetDirectoryName(m_sDisktDefsFN);
+
+            String[] strimports = importlist.ToArray();
+            foreach (string importline in strimports)
+            {
+                sPrefix = "";
+                sCfgFile = "";
+                string[] args = importline.Split(' ');
+                if (args[0].Length > 0)
+                    sPrefix = args[0];
+                if (args[1].Length > 0)
+                    sCfgFile = sDirectoryName + "\\" + args[1].Replace("\"", "");
+                if ((sPrefix.Length != 0) && (sCfgFile.Length != 0))
+                    loadCfgFile(sPrefix, sCfgFile);  // process config file
+            }
+        }
+        #endregion
+
+        #region loadCfgFile
+        private void loadCfgFile(string sPrefix, string sCfgFile)
+        {
+            if (System.IO.File.Exists(sCfgFile))
+            {
+                foreach (string line in System.IO.File.ReadLines(sCfgFile))
                 {
-                    mnuUseDiskDefs.Checked = true;
-                    m_bUseCustomFormats = true;
-                    m_listCustomFormats.Clear();
-                    m_listCustomFormats.Add("UNSPECIFIED FORMAT");
-                    foreach (string line in System.IO.File.ReadLines(m_sDisktDefsFN))
+                    // get definition description
+                    if ((line.Length > 4) && ((line.Substring(0, 4) == "disk")))
                     {
-                        // get definition description
-                        if ((line.Length > 4) && ((line.Substring(0, 4) == "disk")))
-                        {
-                            string desc = line.Substring(5);
-                            m_listCustomFormats.Add(desc);
-                        }
+                        string disktype = line.Substring(5);
+                        m_listCustomFormats.Add(sPrefix + disktype);
                     }
                 }
-                else
+            }
+        }
+        #endregion
+
+        #region getDiskImports
+        private List<string> getDiskImports(string fname) // get definition imports from diskdefs.cfg
+        {
+            List<string> importlist = new List<string>();
+            // String[] str = importlist.ToArray();
+
+            if (System.IO.File.Exists(fname))
+            {
+                foreach (string importline in System.IO.File.ReadLines(m_sDisktDefsFN))
                 {
-                    Form m_frmMsgBox = new MsgboxForm();
-                    m_frmMsgBox.ShowDialog(m_frmChooser);
-                    mnuUseDiskDefs.Checked = false;
-                    m_bUseCustomFormats = false;
+                    // get prefix and config filename
+                    if ((importline.Length > 6) && ((importline.Substring(0, 6) == "import")))
+                    {
+                        importlist.Add(importline.Substring(7));
+                    }
                 }
             }
+            return importlist;
         }
         #endregion
 
@@ -453,7 +503,6 @@ namespace Greaseweazle
             m_Ini.IniWriteValue("gbGlobals", "mnuWindowsEXE", (mnuWindowsEXE.Checked == true).ToString());
             m_Ini.IniWriteValue("gbGlobals", "mnuElapsedTime", (mnuElapsedTime.Checked == true).ToString());
             m_Ini.IniWriteValue("gbGlobals", "mnuUseCmdConsole", (mnuUseCmdConsole.Checked == true).ToString());
-            m_Ini.IniWriteValue("gbGlobals", "mnuUseDiskDefs", (mnuUseDiskDefs.Checked == true).ToString());
             m_Ini.IniWriteValue("gbGlobals", "m_sDisktDefsFN", m_sDisktDefsFN);
         }
         #endregion
@@ -1213,58 +1262,30 @@ namespace Greaseweazle
         }
         #endregion
 
-        #region mnuUseDiskDefs_Click
-        private void mnuUseDiskDefs_Click(object sender, EventArgs e)
+        #region diskdefsDialog
+        private void diskdefsDialog()   // change to open if cfg file not found
         {
-            mnuUseDiskDefs.Checked = !mnuUseDiskDefs.Checked;
-            m_bUseCustomFormats = mnuUseDiskDefs.Checked;
-            if (mnuUseDiskDefs.Checked == true)
+
+            // select file and folder where file is to be read from
+            string sDiskDefFN = "";
+            string sDiskDefFolder = "";
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.RestoreDirectory = true; // make sure directory is set to executable path
+            openDialog.InitialDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            openDialog.Multiselect = false;
+            openDialog.Title = "Select a disk definition file";
+            openDialog.Filter = "DiskDefs|*.cfg|All files (*.*)|*.*";
+
+            if (openDialog.ShowDialog() == DialogResult.OK)
             {
-                // select file and folder where file is to be read from
-                string sDiskDefFN = "";
-                string sDiskDefFolder = "";
-                OpenFileDialog openDialog = new OpenFileDialog();
-                openDialog.RestoreDirectory = true; // make sure directory is set to executable path
-                openDialog.InitialDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                openDialog.Multiselect = false;
-                openDialog.Title = "Select a disk definition file";
-                openDialog.Filter = "DiskDefs|*.cfg|All files (*.*)|*.*";
+                sDiskDefFN = openDialog.SafeFileName;
+                sDiskDefFolder = Path.GetDirectoryName(openDialog.FileName);
+                m_sDisktDefsFN = sDiskDefFolder + "\\" + sDiskDefFN;
+                m_Ini.IniWriteValue("gbGlobals", "m_sDisktDefsFN", m_sDisktDefsFN);
 
-                if (openDialog.ShowDialog() == DialogResult.OK)
-                {
-                    sDiskDefFN = openDialog.SafeFileName;
-                    sDiskDefFolder = Path.GetDirectoryName(openDialog.FileName);
-                    m_sDisktDefsFN = sDiskDefFolder + "\\" + sDiskDefFN;
-                }
-                else
-                {
-                    mnuUseDiskDefs.Checked = false;
-                    return;
-                }
-
-                m_listCustomFormats.Clear();
-                m_listCustomFormats.Add("UNSPECIFIED FORMAT");
-                foreach (string line in System.IO.File.ReadLines(m_sDisktDefsFN))
-                {
-                    // get definition description
-                    if ((line.Length > 4) && ((line.Substring(0, 4) == "disk")))
-                    {
-                        string desc = line.Substring(5);
-                        m_listCustomFormats.Add(desc);
-                    }
-                }
+                // load disk definitions
+                loadDiskDefs();
             }
-            else
-            {
-                // load in defaults
-                m_listCustomFormats.Clear();
-                m_listCustomFormats.Add("UNSPECIFIED FORMAT");
-                foreach (string s in m_sarrDefaultFormats)
-                {
-                    m_listCustomFormats.Add(s);
-                }
-            }
-
         }
         #endregion
 
@@ -1294,6 +1315,13 @@ namespace Greaseweazle
             AutoClosingMessageBox.Show("Settings were reset\n\nApplication will restart", "", 5000);
 
             Application.Restart();
+        }
+        #endregion
+
+        #region mnuOpenDiskdefs_Click
+        private void mnuOpenDiskdefs_Click(object sender, EventArgs e)
+        {
+            diskdefsDialog();
         }
         #endregion
     }
