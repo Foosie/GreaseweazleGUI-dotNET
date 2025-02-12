@@ -716,10 +716,10 @@ namespace Greaseweazle
         {
              string sFn = removeDiskType(this.m_sWTDFilename, true);
             m_sWTDFilename = sFn + cbExtension.Text;
-            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbFormat.SelectedIndex != 0))
-                cbFormat.ForeColor = Color.Black;
-            else
-                cbFormat.ForeColor = Color.White;
+            //if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbFormat.SelectedIndex != 0))
+            //    cbFormat.ForeColor = Color.Black;
+            //else
+            //    cbFormat.ForeColor = Color.White;
             CreateCommandLine();
         }
         #endregion 

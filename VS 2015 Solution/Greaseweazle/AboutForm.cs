@@ -53,8 +53,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                ex = ex; // stub out unused declaration warning
-                MessageBox.Show("Unable to open link that was clicked");
+                MessageBox.Show("Unable to open link that was clicked - "+ ex.Message);
             }
         }
 
@@ -67,7 +66,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked");
+                MessageBox.Show("Unable to open link that was clicked - " + ex.Message);
             }
         }
 
@@ -80,7 +79,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked");
+                MessageBox.Show("Unable to open link that was clicked - " + ex.Message);
             }
         }
 
@@ -93,7 +92,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked");
+                MessageBox.Show("Unable to open link that was clicked - " + ex.Message);
             }
         }
 
@@ -106,7 +105,7 @@ namespace Greaseweazle
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to open link that was clicked");
+                MessageBox.Show("Unable to open link that was clicked - " + ex.Message);
             }
         }
         #region ProcessCmdKey

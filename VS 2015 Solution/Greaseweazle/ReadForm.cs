@@ -336,7 +336,7 @@ namespace Greaseweazle
             if  (cbFormat.Text != "UNSPECIFIED FORMAT")
                 txtRFDCommandLine.Text +=  " --diskdefs " + "\"" + ChooserForm.m_sDisktDefsFN + "\"";
             if ((cbFormat.Text.Length > 0) && (cbFormat.Text != "UNSPECIFIED FORMAT") && (cbFormat.ForeColor != Color.Black))  // black means disabled
-                txtRFDCommandLine.Text += " --format=" + cbFormat.Text;
+                    txtRFDCommandLine.Text += " --format=" + cbFormat.Text;
             if (chkDriveRetriesRFD.Checked == true)
                 txtRFDCommandLine.Text += " --retries=" + txtDriveRetriesRFD.Text;
             if (chkNoClobber.Checked == true)
@@ -532,10 +532,10 @@ namespace Greaseweazle
         {
             string sFn = removeDiskType(this.tbFilename.Text, true);
             tbFilename.Text = sFn + cbExtension.Text;
-            if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbFormat.SelectedIndex != 0))
-                cbFormat.ForeColor = Color.Black;
-            else
-                cbFormat.ForeColor = Color.White;
+            //if (((cbExtension.Text == ".ipf") || (cbExtension.Text == ".dsk")) && (cbFormat.SelectedIndex != 0))
+            //    cbFormat.ForeColor = Color.Black;
+            //else
+            //    cbFormat.ForeColor = Color.White;
             CreateCommandLine();
         }
 
@@ -896,7 +896,6 @@ namespace Greaseweazle
         private void SetFNSuffix()
         {
             int pos = -1;
-            int n = -1;
             if (tbFilename.Text.Trim().Length > 0)
             {
                 string sFN = removeDiskType(tbFilename.Text, true); // remove extension as well

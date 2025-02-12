@@ -70,7 +70,7 @@ namespace Greaseweazle
         public static string[] m_sarrExtensions = new string[40] { ".a2r", ".adf", ".ads", ".adm", ".adl", ".ctr", ".d1m", ".d2m", ".d4m", ".d64", ".d71", ".d81", ".d88", ".dcp", ".dim", ".dmk", ".do", ".dsd", ".dsk", ".eds", ".fd", ".fdi", ".hd", ".hfe", ".ima", ".img", ".imd", ".ipf", ".mgt", ".msa", ".nfd", ".nsi", ".po", ".raw", ".sf7", ".scp", ".ssd", ".st", ".td0", ".xdf" };
         public static List<string> m_listCustomFormats = new List<string>();
         public static List<string> m_listExtensions = new List<string>();
-        public static string m_sStatusLine = "for Host Tools 1.20";
+        public static string m_sStatusLine = "for Host Tools 1.21";
         #endregion
 
         #region ChooserForm
