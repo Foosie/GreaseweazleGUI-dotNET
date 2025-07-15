@@ -449,6 +449,9 @@ namespace Greaseweazle
                     if ((line.Length > 4) && ((line.Substring(0, 4) == "disk")))
                     {
                         string disktype = line.Substring(5);
+                        int index = disktype.IndexOf("#");
+                        if (index >= 0)
+                            disktype = disktype.Substring(0, index);
                         m_listCustomFormats.Add(sPrefix + disktype);
                     }
                 }
