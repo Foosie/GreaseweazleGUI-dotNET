@@ -983,6 +983,9 @@ namespace Greaseweazle
             int pos = fn.IndexOf(sRemove);
             if (pos >= 0)
                 fn = fn.Substring(0, pos);
+            string e = Path.GetExtension(fn);
+            if (e.Equals(".0") || e.Equals(".1"))
+                return (fn);
             if (noext)
             {
                 string s = Path.GetFileNameWithoutExtension(fn);
